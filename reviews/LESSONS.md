@@ -14,7 +14,7 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
-### v2, 2026-11-13 18:45 UTC review: no rule change (plumbing: quote-token diagnostics)
+### v2, 2026-11-13 18:35 UTC review: no rule change (plumbing: quote-token diagnostics)
 
 **Health.** 54 cycles since 13:43 UTC. Since the external scheduler started at 14:18 there have been 51 cycles with a median gap of 5.0 minutes and a longest gap of 5.2 minutes (one 26-minute gap before that). The newest cycle was under 2 minutes old at review time, so no `.kick` was needed. Errors in 2 of 54 runs, both GeckoTerminal 429s from before the 2-pages-per-cycle fix; none in the last 51 runs. `batch_miss` is 2 to 7 per cycle out of about 290 tokens fetched (about 2%), and 6 of the 7 are tokens DexScreener has no Solana pair for (`no_data`); they drop off after 24 hours. RugCheck ran once (for WEALTH): the saved sample has `score_normalised` 1, `risks` [] and `lpLockedPct` 99.75, and `compact()`/`assess()` read all three correctly. No `safety:rugcheck_*` rejections.
 
@@ -24,7 +24,7 @@ The running record of what paper results have shown and why each rulebook versio
 
 - Universe: `universe_ok` is 6 to 8 per run, and it was the same 8 tokens all session (mihao, FLOAT, Leonida, NIO, WEALTH, :3, paws, WASTED). `u:too_young` (about 18 per run) is the biggest block. In the latest snapshot 9 of those young tokens pass every other universe number (ages 0.2 to 2.0 days; the quote token is unknown), so the universe should grow by itself from tomorrow if they keep their liquidity.
 - Entry: of 369 universe-token checks, `h1_weak` blocked 241 (65%), `buy_pressure` 46, `h6_down` 28, `volume_accel` 16, `h1_overheated` 13, `m5_dropping` 8, `h24_dumped` 3, and 13 were the held token; 1 signal. Only 33% of observations had a 1-hour change of +2% or more (median -1.2%) on an afternoon when SOL slid from $81.2 to $80.0. That is the filter working in a soft market, not a bug.
-- Quote-token exclusion is bigger than it looked. Replaying the snapshots through the rulebook and matching the per-run funnel counts (an exact match on all 53 v2 runs) shows five tokens that pass every other universe filter are rejected on every run for their quote token: BIG, STANK, AMD, DacityCoin and CHOO. That is 5 of 13 otherwise-eligible tokens. Four of the five have pump.fun mint addresses, and such tokens normally trade against SOL (an inference, not confirmed). The bot judges each token by its deepest pool only, so a deeper pool quoted in TTWO, STONK, AMD, NVDAX or WBTC would hide an ordinary SOL pool. The repo data cannot show whether those SOL pools exist or how deep they are. In the replay CHOO met the entry rules 6 times and DacityCoin once, but on exotic-pool numbers, so that is only indicative.
+- Quote-token exclusion is bigger than it looked. Replaying the snapshots through the rulebook and matching the per-run funnel counts (an exact match on all 53 v2 runs) shows five tokens that pass every other universe filter are rejected on every run for their quote token: BIG, STANK, AMD, DacityCoin and CHOO. That is 5 of 13 otherwise-eligible tokens. Four of the five have pump.fun mint addresses, so I suspected an ordinary SOL pool was being hidden: the bot judges each token by its deepest pool only. The first live samples (below) say that suspicion is wrong. In the replay CHOO met the entry rules 6 times and DacityCoin once, but on exotic-pool numbers, so that is only indicative.
 - Hint from one open trade (n=1, not a finding): the WEALTH signal came from a single +5.4% five-minute candle in a thin token (125 trades and $14k volume in the hour, `volume_accel` 1.21 against a 1.2 bar). The 1-hour change had been -4.9% thirty minutes earlier. By 18:30 `volume_accel` was 0.44 and sells outnumbered buys.
 
 **Changed.** Rulebook: nothing, v2 stays. Plumbing only, no version bump, no decision changed:
@@ -32,11 +32,20 @@ The running record of what paper results have shown and why each rulebook versio
 1. `data/debug/quote_reject_pairs.json`: for up to 8 quote-rejected tokens, once per token and one extra DexScreener call per cycle, the bot records every pool of that token (quote, liquidity, 24h volume, trades) and how many pairs the batch call returned for it.
 2. Snapshot rows gain a 21st field, `quote_symbol`, so a review can replay the universe filter exactly instead of inferring it.
 
-Test added: `test_quote_rejected_token_has_its_pools_recorded_once`. 18 tests pass.
+Test added: `test_quote_rejected_token_has_its_pools_recorded_once`. 18 tests pass. Live from the 18:40 UTC cycle; the 18:40 and 18:45 cycles both ran with no errors and 21-field snapshot rows.
+
+**First live samples (18:40 and 18:45 UTC).** The exotic pool is the token's real market, not a mask over a SOL pool:
+
+| Token | Main pool | Liquidity | Best SOL/USDC pool | Liquidity |
+|---|---|---|---|---|
+| BIG | pumpswap, quoted in TTWO | $103,075 | meteora, SOL | $3,870 |
+| HUNG | pumpswap, quoted in NVDAX | $46,619 | meteora, SOL | $7,686 |
+
+Both SOL pools are far under the $50k universe floor, so these two are correctly excluded whichever pool is picked. The batch call returned one pair per token (`pairs_in_batch` 1). In the 18:40 snapshot 14 of 44 watchlist rows were quoted in something other than SOL, USDC or USDT (TTWO 4, STONK 2, NVDAX 2, WBTC, AMD, MIHAO, PUMP), so PumpSwap pools paired against tokenized stocks and other tokens are a real slice of this market. Trading them would mean adding quote symbols to the `universe` section, which is a rule change that needs its own evidence (the P&L would also carry the quote token's price moves); not done.
 
 **For the next review.**
 
-- Read `data/debug/quote_reject_pairs.json`. If those tokens have a SOL, USDC or USDT pool that passes the universe thresholds by itself, pool selection is hiding eligible tokens: make `best_pairs` prefer the deepest allowed-quote pool (plumbing; no threshold or safety rule changes) and note the time it went live, because it changes which trades v2 takes. `pairs_in_batch` shows whether the batch call already returns those pools or a per-token lookup is needed. If their only real pools are the exotic ones, the exclusion is right and stays.
+- Read the rest of `data/debug/quote_reject_pairs.json` (up to 8 tokens, filled one per cycle). If every sample looks like BIG and HUNG (SOL pool under $50k), the exclusion is right and the question is closed. Only if a sampled token has a SOL, USDC or USDT pool that passes the universe thresholds by itself is pool selection hiding an eligible token: then make `best_pairs` prefer the deepest allowed-quote pool (plumbing; no threshold or safety rule changes) and note when it went live, because it changes which trades v2 takes.
 - If the first closed trades repeat the WEALTH pattern (the 5-minute move makes up most of the 1-hour move, low `txns_h1`), the entry section is the candidate, for example a higher `min_txns_h1`. Not before there are closed trades to show it.
 
 **Would prove this review wrong.** Leaving the rules alone is wrong if, at the 24-hour mark (about 13:45 UTC on 14 Nov), `universe_ok` is still under 10 per run after the young tokens have aged in, or if 12 hours pass with cycles arriving and no signal: then relax one threshold as the review rules allow. The plumbing change is wrong if a `quote sample` error starts repeating in `data/runs`: remove it.
