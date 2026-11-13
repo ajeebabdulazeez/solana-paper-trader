@@ -47,6 +47,7 @@ class FakeDex:
 
     def __init__(self):
         self.market, self.feed, self.calls, self.fail = {}, [], 0, False
+        self.all_pools = {}  # token -> every pool, when the single lookup should show more than one
 
     def boosts_top(self):
         return [{"chainId": "solana", "tokenAddress": t} for t in self.feed]
@@ -77,8 +78,10 @@ class FakeDex:
 
     def pairs_for_token(self, chain, addr):
         self.calls += 1
-        if self.fail:
+        if self.fail or getattr(self, "fail_single", False):
             raise RuntimeError("outage")
+        if addr in self.all_pools:
+            return self.all_pools[addr]
         return [self.market[addr]] if self.market.get(addr) else []
 
 
@@ -351,7 +354,8 @@ class Cycle(unittest.TestCase):
         snaps = list((self.tmp / "data" / "snapshots").rglob("*.jsonl"))
         self.assertTrue(snaps)
         row = store.read_jsonl(snaps[0])[0]["rows"][0]
-        self.assertEqual(len(row), 20)
+        self.assertEqual(len(row), 21)
+        self.assertEqual(row[20], "SOL")                # quote symbol, so reviews can replay the universe filter
 
     def test_gecko_discovery_filters_and_throttles(self):
         from bot.geckoterminal import pick_tokens
@@ -373,6 +377,30 @@ class Cycle(unittest.TestCase):
         self.assertEqual(self.gecko.calls, 10)          # rotates through all 9 pages, then wraps
         meta = store.read_json(self.tmp / "data" / "state" / "meta.json", {})
         self.assertEqual(meta["gecko_idx"], 1)
+
+    def test_quote_rejected_token_has_its_pools_recorded_once(self):
+        self.list_token("OK")
+        self.list_token("EXO", liq=150_000, quote="TTWO")      # deepest pool is quoted in an exotic token
+        sol_pool = make_pair("EXO", "EXO", 1.0, 90_000, self.now)
+        sol_pool["pairAddress"] = "PAIRSOL"
+        other = make_pair("ELSE", "ELSE", 1.0, 500_000, self.now)
+        self.dex.all_pools["EXO"] = [sol_pool, self.dex.market["EXO"], other]
+        s = self.step()
+        self.assertEqual(s["opened"], ["OK"])                  # the diagnostic changes no decision
+        self.assertEqual(s["funnel"].get("u:quote_token:TTWO"), 1)
+        self.assertEqual(s["errors"], ["takeovers_latest: feed down"])
+        f = self.tmp / "data" / "debug" / "quote_reject_pairs.json"
+        d = store.read_json(f, {})["EXO"]
+        self.assertEqual([(p["quote"], p["liq_usd"]) for p in d["pools"]], [("TTWO", 150_000), ("SOL", 90_000)])
+        self.assertEqual((d["chosen_quote"], d["pairs_in_batch"], d["pools_returned"]), ("TTWO", 1, 3))
+        calls = self.dex.calls
+        self.step()
+        self.assertEqual(self.dex.calls, calls + 1)            # each token is looked up once, not every cycle
+        self.dex.fail_single = True                            # a failing lookup is logged, never fatal
+        self.list_token("EXO2", quote="WBTC")
+        s = self.step()
+        self.assertTrue(any(e.startswith("quote sample") for e in s["errors"]))
+        self.assertEqual(len(self.state()["positions"]), 1)
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")

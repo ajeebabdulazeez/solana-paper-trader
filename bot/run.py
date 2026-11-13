@@ -18,6 +18,7 @@ from .rugcheck import RugCheck, assess, compact
 
 CHAIN = "solana"
 FMT = "%Y-%m-%dT%H:%M:%SZ"
+QUOTE_SAMPLES = 8  # how many quote-rejected tokens to record in data/debug/quote_reject_pairs.json
 
 
 def iso(dt) -> str:
@@ -139,6 +140,7 @@ def snapshot_row(v):
         r(v["vol_m5"]), r(v["vol_h1"]), r(v["vol_h6"]), r(v["vol_h24"]),
         v["buys_m5"], v["sells_m5"], v["buys_h1"], v["sells_h1"], v["buys_h24"], v["sells_h24"],
         v["chg_m5"], v["chg_h1"], v["chg_h6"], v["chg_h24"], r(v["age_days"], 2),
+        v["quote_symbol"],
     ]
 
 
@@ -251,7 +253,7 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         state["day"] = {"date": today, "start_equity": eq, "opens": 0}
 
     # 5. Screen the watchlist.
-    wl, candidates, snap = rules["watchlist"], [], []
+    wl, candidates, snap, quote_rejected = rules["watchlist"], [], [], []
     for t in list(watch):
         w, v = watch[t], views.get(t)
         if v is None:
@@ -271,6 +273,8 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         ur = S.universe_reject(v, rules["universe"])
         if ur:
             funnel["u:" + ur + (":" + v["quote_symbol"][:10] if ur == "quote_token" else "")] += 1
+            if ur == "quote_token":
+                quote_rejected.append(t)
             continue
         funnel["universe_ok"] += 1
         if t in held:
@@ -289,6 +293,25 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
             continue
         funnel["signal"] += 1
         candidates.append(v)
+
+    # 5b. Diagnostic for reviews (changes no decision): a token rejected for its quote token
+    # may also have a SOL or stablecoin pool that the deepest-pool choice hides. Record every
+    # pool of a few such tokens, one extra lookup per cycle, each token once.
+    if quote_rejected:
+        try:
+            qfile = dd / "debug" / "quote_reject_pairs.json"
+            qdbg = store.read_json(qfile, {})
+            todo = [t for t in quote_rejected if t not in qdbg]
+            if todo and len(qdbg) < QUOTE_SAMPLES:
+                t = todo[0]
+                in_batch = sum(1 for p in raw if (p.get("baseToken") or {}).get("address") == t)
+                pools = dex.pairs_for_token(CHAIN, t)
+                qdbg[t] = {"ts": now_iso, "symbol": views[t]["symbol"],
+                           "chosen_quote": views[t]["quote_symbol"], "pairs_in_batch": in_batch,
+                           "pools_returned": len(pools), "pools": S.pool_briefs(pools, t, now_ms, CHAIN)}
+                store.write_json(qfile, qdbg)
+        except Exception as e:  # a diagnostic must never stop the run
+            errors.append(f"quote sample: {e}")
 
     # 6. Open new paper positions, best score first, behind the safety check.
     day_chg = (eq / state["day"]["start_equity"] - 1.0) * 100.0 if state["day"]["start_equity"] else 0.0

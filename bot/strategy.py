@@ -78,6 +78,25 @@ def best_pairs(pairs: list, now_ms: int, chain: str = "solana") -> dict:
     return best
 
 
+def pool_briefs(pairs: list, token: str, now_ms: int, chain: str = "solana", limit: int = 12) -> list:
+    """Diagnostics only: the pools where `token` is the base token, deepest first."""
+    out = []
+    for p in pairs:
+        if p.get("chainId") != chain:
+            continue
+        v = pair_view(p, now_ms)
+        if v["token"] != token:
+            continue
+        out.append({
+            "pair": v["pair"], "dex": v["dex"], "quote": v["quote_symbol"],
+            "liq_usd": round(v["liq_usd"] or 0), "vol_h24": round(v["vol_h24"]),
+            "txns_h24": v["buys_h24"] + v["sells_h24"], "price_usd": v["price_usd"],
+            "age_days": round(v["age_days"], 2) if v["age_days"] is not None else None,
+        })
+    out.sort(key=lambda b: b["liq_usd"], reverse=True)
+    return out[:limit]
+
+
 def sol_usd_from(pairs: list):
     """SOL price implied by SOL-quoted pairs: priceUsd / priceNative (median)."""
     vals = []
