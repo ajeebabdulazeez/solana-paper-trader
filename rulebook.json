@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "notes": "v1 = starting hypotheses, untested. Every threshold here is a guess to be confirmed or killed by paper results. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+
+  "portfolio": {
+    "starting_sol": 5.0,
+    "position_size_sol": 0.5,
+    "max_position_pct_equity": 10,
+    "max_open_positions": 5,
+    "max_new_trades_per_day": 10,
+    "token_cooldown_hours": 12,
+    "daily_loss_limit_pct": 10
+  },
+
+  "costs": {
+    "swap_fee_pct": 0.5,
+    "base_slippage_pct": 0.5,
+    "fixed_fee_sol": 0.002,
+    "price_impact": true
+  },
+
+  "discovery": {
+    "boosts_latest": true,
+    "boosts_top": true,
+    "profiles_latest": true,
+    "takeovers_latest": true,
+    "trending_metas": true,
+    "max_metas": 6,
+    "search_queries": [],
+    "max_watchlist": 300,
+    "batch_size": 30,
+    "max_single_lookups": 15
+  },
+
+  "watchlist": {
+    "min_liquidity_usd": 30000,
+    "max_age_days": 35,
+    "drop_after_hours_unseen": 24,
+    "max_snapshot_rows": 120
+  },
+
+  "universe": {
+    "min_age_days": 3,
+    "max_age_days": 30,
+    "min_liquidity_usd": 50000,
+    "min_volume_h24_usd": 100000,
+    "min_market_cap_usd": 300000,
+    "max_market_cap_usd": 50000000,
+    "min_txns_h24": 500,
+    "min_liq_to_mcap": 0.03,
+    "allowed_quote_symbols": ["SOL", "USDC", "USDT"]
+  },
+
+  "safety": {
+    "use_rugcheck": true,
+    "max_score_normalised": 30,
+    "block_risk_levels": ["danger"],
+    "on_error": "skip",
+    "cache_hours": 6,
+    "max_checks_per_run": 5
+  },
+
+  "entry": {
+    "h1_change_min_pct": 2,
+    "h1_change_max_pct": 25,
+    "h6_change_min_pct": 0,
+    "h24_change_min_pct": -30,
+    "m5_change_min_pct": -3,
+    "min_txns_h1": 50,
+    "min_buy_sell_ratio_h1": 1.2,
+    "min_volume_accel": 1.2,
+    "max_liquidity_drop_pct_1h": 10
+  },
+
+  "exit": {
+    "stop_loss_pct": 12,
+    "take_profit_1_pct": 20,
+    "take_profit_1_fraction": 0.5,
+    "trailing_stop_pct": 10,
+    "max_hold_hours": 6,
+    "liquidity_drop_exit_pct": 30,
+    "missing_data_runs_to_write_off": 6
+  }
+}
