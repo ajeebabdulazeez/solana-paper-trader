@@ -27,5 +27,104 @@
   "pools_returned": 2,
   "symbol": "BIG",
   "ts": "2026-11-13T18:40:11Z"
+ },
+ "4xgqefa5WcdHWKXzqvM9MRJqWYGaHVEUnpUL4Vq5pump": {
+  "chosen_quote": "NVDAX",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 4.61,
+    "dex": "pumpswap",
+    "liq_usd": 46619,
+    "pair": "2ULaeaUQWkid31cVKyFEujx9ReF7cdGepPxuoptz57m5",
+    "price_usd": 0.0001778,
+    "quote": "NVDAX",
+    "txns_h24": 22744,
+    "vol_h24": 1828563
+   },
+   {
+    "age_days": 1.85,
+    "dex": "meteora",
+    "liq_usd": 7686,
+    "pair": "cyif7J8nYYYRDuc2ocyagB6s7Wygaho8RNB22E6QyiA",
+    "price_usd": 0.0001808,
+    "quote": "SOL",
+    "txns_h24": 2819,
+    "vol_h24": 275203
+   },
+   {
+    "age_days": 1.71,
+    "dex": "meteora",
+    "liq_usd": 4103,
+    "pair": "EUNbWXJwWhk8YgxbQa2Vf1Fzr7GDKG9cLRVDyz3iyjQG",
+    "price_usd": 0.0001835,
+    "quote": "SOL",
+    "txns_h24": 2583,
+    "vol_h24": 169248
+   },
+   {
+    "age_days": 1.15,
+    "dex": "meteora",
+    "liq_usd": 1030,
+    "pair": "9395ZeXu3A9MwiPkRFKTdgduGeF6RVhLhUYzFnzNZMuS",
+    "price_usd": 0.0001828,
+    "quote": "USDC",
+    "txns_h24": 3572,
+    "vol_h24": 200181
+   },
+   {
+    "age_days": 1.77,
+    "dex": "meteora",
+    "liq_usd": 413,
+    "pair": "J9vd5ucv6eMaNurQ6sN161f8NpG2Sa3T7AmHNPJD2MNn",
+    "price_usd": 0.0002836,
+    "quote": "SOL",
+    "txns_h24": 1045,
+    "vol_h24": 17305
+   },
+   {
+    "age_days": 1.78,
+    "dex": "meteora",
+    "liq_usd": 104,
+    "pair": "Ci5PxReSAxFgN6Q4tHKrvrVa3QFFD9chH6uX3cvgh1GP",
+    "price_usd": 0.0001936,
+    "quote": "SOL",
+    "txns_h24": 1637,
+    "vol_h24": 22099
+   },
+   {
+    "age_days": 0.97,
+    "dex": "meteora",
+    "liq_usd": 44,
+    "pair": "9Y2emS6inoxfZQgA8xrF7cQ9JFJ1xossy9PCyRZotnd8",
+    "price_usd": 0.0006966,
+    "quote": "SOL",
+    "txns_h24": 133,
+    "vol_h24": 694
+   },
+   {
+    "age_days": 0.97,
+    "dex": "pumpswap",
+    "liq_usd": 0,
+    "pair": "AeYSBvP28wC6zrhjwRRdTzqzB1AebyRQheZ1QRVvEh1g",
+    "price_usd": 0.0002222,
+    "quote": "SOL",
+    "txns_h24": 130,
+    "vol_h24": 29
+   },
+   {
+    "age_days": 0.95,
+    "dex": "raydium",
+    "liq_usd": 0,
+    "pair": "6P8rSnfkRh9zpcPr6TPuPZRw8kAAE7xqLfrvKaqNJ77q",
+    "price_usd": 0.0003252,
+    "quote": "USDC",
+    "txns_h24": 370,
+    "vol_h24": 158
+   }
+  ],
+  "pools_returned": 30,
+  "symbol": "HUNG",
+  "ts": "2026-11-13T18:45:11Z"
  }
 }
