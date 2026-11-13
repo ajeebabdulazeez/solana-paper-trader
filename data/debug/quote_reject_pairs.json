@@ -323,5 +323,64 @@
   "pools_returned": 12,
   "symbol": "DacityCoin",
   "ts": "2026-11-13T19:00:20Z"
+ },
+ "EJAxERvKU4kEVXn3NarjvRtgaMaJyP9ZuMeKA7JJpump": {
+  "chosen_quote": "WBTC",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 23.01,
+    "dex": "pumpswap",
+    "liq_usd": 108946,
+    "pair": "3unG5b7czBspnmjFRZzzNyQVpk8q3LERr6BAYnFohdfz",
+    "price_usd": 0.001191,
+    "quote": "WBTC",
+    "txns_h24": 2625,
+    "vol_h24": 212832
+   },
+   {
+    "age_days": 22.98,
+    "dex": "meteora",
+    "liq_usd": 73681,
+    "pair": "9JZrcAScnGQp7DSV4kBWfmGH2ao31sz5JbJ8cnpZ9uwv",
+    "price_usd": 0.00119,
+    "quote": "SOL",
+    "txns_h24": 1300,
+    "vol_h24": 192387
+   },
+   {
+    "age_days": 22.95,
+    "dex": "meteora",
+    "liq_usd": 6915,
+    "pair": "FikewCvB73bgdUtmpxuDNSCkDMA9U4SGkSrGsPyqLYPz",
+    "price_usd": 0.001214,
+    "quote": "WBTC",
+    "txns_h24": 70,
+    "vol_h24": 3987
+   },
+   {
+    "age_days": 10.07,
+    "dex": "meteora",
+    "liq_usd": 3854,
+    "pair": "C3knzSKcepDmFTCoWsotE9hQicpDuo8y7qDN1hytLXKJ",
+    "price_usd": 0.001175,
+    "quote": "SOL",
+    "txns_h24": 1008,
+    "vol_h24": 6270
+   },
+   {
+    "age_days": 12.04,
+    "dex": "meteora",
+    "liq_usd": 2994,
+    "pair": "FkrquuXKw6TCTEkouFp95hjBpUzwrpG4RkiAVgThZz42",
+    "price_usd": 0.001925,
+    "quote": "USDC",
+    "txns_h24": 3,
+    "vol_h24": 0
+   }
+  ],
+  "pools_returned": 8,
+  "symbol": "CHOO",
+  "ts": "2026-11-13T19:05:08Z"
  }
 }
