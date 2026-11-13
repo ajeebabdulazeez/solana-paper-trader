@@ -80,7 +80,7 @@ def build_status(state: dict, run_summary: dict, trades: list) -> str:
     out = [
         "# Paper trading status", "",
         f"Updated {run_summary['ts']} (UTC), rulebook v{run_summary['rulebook_version']}. "
-        "**Simulated trades only. No real money.**", "",
+        "**Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).", "",
         f"- Equity: **{eq:.4f} SOL** (started with {start} SOL, {((eq / start) - 1) * 100:+.2f}%)",
         f"- Cash: {state['cash_sol']:.4f} SOL, open positions: {len(state['positions'])}, "
         f"closed trades: {state['closed_count']}",

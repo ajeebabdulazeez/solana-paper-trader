@@ -12,6 +12,7 @@ from . import store
 from . import strategy as S
 from . import geckoterminal as GT
 from .dexscreener import DexScreener
+from .ledger import write_csv
 from .report import build_status
 from .rugcheck import RugCheck, assess, compact
 
@@ -398,8 +399,9 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     store.write_json(sdir / "liq_history.json", liq_hist, indent=None)
     store.write_json(sdir / "rugcheck_cache.json", rug_cache)
     store.write_json(sdir / "meta.json", meta)
-    (dd / "STATUS.md").write_text(build_status(state, summary, store.read_jsonl(dd / "journal" / "trades.jsonl")),
-                                  encoding="utf-8")
+    all_trades = store.read_jsonl(dd / "journal" / "trades.jsonl")
+    write_csv(dd / "trades.csv", state, all_trades, sol_usd)
+    (dd / "STATUS.md").write_text(build_status(state, summary, all_trades), encoding="utf-8")
     return summary
 
 

@@ -234,6 +234,8 @@ class Cycle(unittest.TestCase):
         t = self.trades()[0]
         self.assertGreater(t["pnl_sol"], 0)
         self.assertEqual(t["max_gain_pct"], 50.0)
+        self.assertTrue(1.2 < t["avg_sell_usd"] < 1.33)   # half sold near 1.25, half near 1.33, minus slippage
+        self.assertAlmostEqual(t["usd_in"], 0.5 * SOL_USD, places=2)
         st = self.state()
         self.assertAlmostEqual(st["cash_sol"], 5.0 + t["pnl_sol"], places=5)
 
@@ -335,6 +337,17 @@ class Cycle(unittest.TestCase):
         self.assertIn("By exit reason", r)
         self.assertEqual(stats(self.trades())["n"], len(self.trades()))
         self.assertTrue((self.tmp / "data" / "STATUS.md").exists())
+        import csv
+        with open(self.tmp / "data" / "trades.csv", newline="") as f:
+            rows = list(csv.DictReader(f))
+        self.assertEqual(len(rows), len(self.trades()) + len(st["positions"]))
+        self.assertEqual(sum(r["status"] == "OPEN" for r in rows), len(st["positions"]))
+        done = [r for r in rows if r["status"] == "CLOSED"]
+        self.assertAlmostEqual(sum(float(r["pnl_sol"]) for r in done), closed, places=4)
+        for r in done:
+            self.assertAlmostEqual(float(r["pnl_pct"]), float(r["pnl_sol"]) / float(r["sol_in"]) * 100, places=1)
+            self.assertAlmostEqual(float(r["sol_out"]) - float(r["sol_in"]), float(r["pnl_sol"]), places=5)
+        self.assertGreater(float(rows[0]["trade_no"]), float(rows[-1]["trade_no"]))
         snaps = list((self.tmp / "data" / "snapshots").rglob("*.jsonl"))
         self.assertTrue(snaps)
         row = store.read_jsonl(snaps[0])[0]["rows"][0]

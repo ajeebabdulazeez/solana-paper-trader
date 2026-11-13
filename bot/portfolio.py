@@ -92,7 +92,9 @@ def open_position(state, v, sol_amount, sol_usd, costs, now_iso, rulebook_versio
 def sell(state, pos, fraction, price_usd, liq_usd, sol_usd, costs):
     """Sell `fraction` of what remains. Returns SOL received."""
     qty = pos["tokens_remaining"] * fraction
-    net, _exec, fee = sell_fill(qty, price_usd, liq_usd, sol_usd, costs)
+    net, exec_price, fee = sell_fill(qty, price_usd, liq_usd, sol_usd, costs)
+    pos["sold_tokens"] = pos.get("sold_tokens", 0.0) + qty
+    pos["sold_usd"] = pos.get("sold_usd", 0.0) + qty * exec_price
     pos["tokens_remaining"] -= qty
     pos["sol_returned"] += net
     pos["fees_sol"] += fee
@@ -114,6 +116,8 @@ def close_record(state, pos, reason, now_iso, exit_price_usd, hold_minutes):
         "opened": pos["opened"], "closed": now_iso, "hold_minutes": round(hold_minutes, 1),
         "exit_reason": reason, "tp1_hit": pos["tp1_done"],
         "sol_in": round(pos["sol_in"], 6), "sol_out": round(pos["sol_returned"], 6),
+        "usd_in": round(pos["sol_in"] * pos["entry_sol_usd"], 2),
+        "avg_sell_usd": (pos["sold_usd"] / pos["sold_tokens"]) if pos.get("sold_tokens") else 0.0,
         "pnl_sol": round(pnl, 6), "pnl_pct": round(pnl / pos["sol_in"] * 100.0, 2),
         "fees_sol": round(pos["fees_sol"], 6),
         "entry_mid_usd": mid, "entry_exec_usd": pos["entry_exec_usd"],

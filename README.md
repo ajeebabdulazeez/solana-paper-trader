@@ -18,6 +18,7 @@ The bot never edits the rules. Reviews never place trades. That separation is wh
 ## Where to look
 
 - `data/STATUS.md`: current equity, open positions, last trades. Rewritten every run.
+- `data/trades.csv`: the trade ledger as a spreadsheet, one row per paper trade (open and closed), newest first. Rewritten every run.
 - `data/journal/trades.jsonl`: one line per closed trade, with the market conditions at entry.
 - `reviews/LESSONS.md`: what has been learned so far and why each rule changed.
 
