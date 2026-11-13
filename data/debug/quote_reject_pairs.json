@@ -127,6 +127,45 @@
   "symbol": "HUNG",
   "ts": "2026-11-13T18:45:11Z"
  },
+ "55A3VxMBfzw6uSe64zms5iMPw9k6kx9WzzusbCU6pump": {
+  "chosen_quote": "PUMP",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 28.04,
+    "dex": "pumpswap",
+    "liq_usd": 37024,
+    "pair": "H4wp14QGkt3YextGrQXDqF1c3EPZVMxufgGcUhxSRJN4",
+    "price_usd": 0.0001186,
+    "quote": "PUMP",
+    "txns_h24": 916,
+    "vol_h24": 55770
+   },
+   {
+    "age_days": 27.23,
+    "dex": "meteora",
+    "liq_usd": 2537,
+    "pair": "L1Ap44oYq8C1ickyQktabsH9XE3hz2X6owAPSh6cTsc",
+    "price_usd": 0.0001175,
+    "quote": "SOL",
+    "txns_h24": 193,
+    "vol_h24": 650
+   },
+   {
+    "age_days": 27.49,
+    "dex": "meteora",
+    "liq_usd": 68,
+    "pair": "5FShx12Scgyed1RnqNTf4bQ6YSBk6RpJJxJiEkbbWe3y",
+    "price_usd": 0.0001159,
+    "quote": "SOL",
+    "txns_h24": 45,
+    "vol_h24": 26
+   }
+  ],
+  "pools_returned": 5,
+  "symbol": "Gato",
+  "ts": "2026-11-13T23:55:10Z"
+ },
  "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": {
   "chosen_quote": "STONK",
   "pairs_in_batch": 1,
