@@ -126,5 +126,54 @@
   "pools_returned": 30,
   "symbol": "HUNG",
   "ts": "2026-11-13T18:45:11Z"
+ },
+ "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": {
+  "chosen_quote": "STONK",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 8.93,
+    "dex": "meteora",
+    "liq_usd": 119708,
+    "pair": "91iHWaWXneUyoNDJhSno7ezxQg1VW5P6PdarNGyFfPCz",
+    "price_usd": 0.002175,
+    "quote": "SOL",
+    "txns_h24": 1442,
+    "vol_h24": 284459
+   },
+   {
+    "age_days": 15.2,
+    "dex": "raydium",
+    "liq_usd": 88162,
+    "pair": "6hYFMyE2BYYScTErqUeCKhihQ5X9j2WD2z9waTdwy38N",
+    "price_usd": 0.002197,
+    "quote": "STONK",
+    "txns_h24": 3816,
+    "vol_h24": 291181
+   },
+   {
+    "age_days": 14.92,
+    "dex": "meteora",
+    "liq_usd": 99,
+    "pair": "FQLhvXa1BAJQiUrUT2npptfd8tGHuFguPHFRtZBB6LMj",
+    "price_usd": 0.002336,
+    "quote": "SOL",
+    "txns_h24": 108,
+    "vol_h24": 34
+   },
+   {
+    "age_days": 2.83,
+    "dex": "orca",
+    "liq_usd": 19,
+    "pair": "CzCYusHW79bEmsZEkxShddpN5FxmtudBmoKQUp6T9ZhR",
+    "price_usd": 0.002244,
+    "quote": "SOL",
+    "txns_h24": 232,
+    "vol_h24": 13
+   }
+  ],
+  "pools_returned": 6,
+  "symbol": "STANK",
+  "ts": "2026-11-13T18:50:10Z"
  }
 }

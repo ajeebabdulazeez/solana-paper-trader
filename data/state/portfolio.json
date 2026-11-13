@@ -1,13 +1,13 @@
 {
- "cash_sol": 4.5,
+ "cash_sol": 4.004550659105411,
  "closed_count": 0,
  "day": {
   "date": "2026-11-13",
-  "opens": 1,
+  "opens": 2,
   "start_equity": 5.0
  },
  "last_exit": {},
- "last_sol_usd": 79.8937784522003,
+ "last_sol_usd": 79.88422575976844,
  "positions": [
   {
    "entry_exec_usd": 0.0006274344073355444,
@@ -35,7 +35,7 @@
    },
    "fees_sol": 0.0045000000000000005,
    "id": 1,
-   "last_price_usd": 0.0005913,
+   "last_price_usd": 0.0005778,
    "missing_runs": 0,
    "opened": "2026-11-13T17:25:08Z",
    "pair": "5n8V68fCaNTRQvaXzrmBryDe5jFLrgm65pFfsmia6Nro",
@@ -54,10 +54,57 @@
    "tokens": 62836.36913561784,
    "tokens_remaining": 62836.36913561784,
    "tp1_done": false,
-   "trough_usd": 0.0005822
+   "trough_usd": 0.0005778
+  },
+  {
+   "entry_exec_usd": 0.002774499026473532,
+   "entry_liq_usd": 311264.33,
+   "entry_mid_usd": 0.00276,
+   "entry_sol_usd": 79.88422575976844,
+   "features": {
+    "age_days": 15.86,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.5,
+    "chg_h1": 4.13,
+    "chg_h24": -18.74,
+    "chg_h6": 1.06,
+    "chg_m5": 1.84,
+    "dex": "raydium",
+    "liq_to_mcap": 0.1129,
+    "liq_usd": 311264,
+    "mcap": 2757720,
+    "quote": "SOL",
+    "score": 2.33,
+    "txns_h1": 160,
+    "vol_h1": 19174,
+    "vol_h24": 475073,
+    "volume_accel": 1.56
+   },
+   "fees_sol": 0.004477246704472943,
+   "id": 2,
+   "last_price_usd": 0.00276,
+   "missing_runs": 0,
+   "opened": "2026-11-13T18:50:10Z",
+   "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
+   "peak_usd": 0.00276,
+   "rugcheck": {
+    "lp_locked_pct": 61.600524018249935,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 2,
+   "sol_in": 0.4954493408945887,
+   "sol_returned": 0.0,
+   "symbol": "FLOAT",
+   "token": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
+   "tokens": 14136.218913682742,
+   "tokens_remaining": 14136.218913682742,
+   "tp1_done": false,
+   "trough_usd": 0.00276
   }
  ],
  "realized_pnl_sol": 0.0,
  "starting_sol": 5.0,
- "trade_seq": 1
+ "trade_seq": 2
 }
