@@ -382,5 +382,74 @@
   "pools_returned": 8,
   "symbol": "CHOO",
   "ts": "2026-11-13T19:05:08Z"
+ },
+ "SCGBBnSwnekytGFHgyeHHxPMiN7xDxsWFGg9JgFSTNK": {
+  "chosen_quote": "STONK",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 11.32,
+    "dex": "raydium",
+    "liq_usd": 31115,
+    "pair": "HPeXruE5Msv7paz5WPViwScLeSYWgZr8vhDakuiEp5ku",
+    "price_usd": 0.000225,
+    "quote": "STONK",
+    "txns_h24": 2221,
+    "vol_h24": 133776
+   },
+   {
+    "age_days": 11.31,
+    "dex": "meteora",
+    "liq_usd": 22494,
+    "pair": "fMKswmDKwstG3jm6V5PKeXE5LkcW3ny84QrhDCKtc7A",
+    "price_usd": 0.0002196,
+    "quote": "SOL",
+    "txns_h24": 675,
+    "vol_h24": 6544
+   },
+   {
+    "age_days": 10.21,
+    "dex": "meteora",
+    "liq_usd": 897,
+    "pair": "G8we6pD1uBveWBHvtyML4X399VW7Pvus4P6iLybYFv9K",
+    "price_usd": 0.0002259,
+    "quote": "SOL",
+    "txns_h24": 1053,
+    "vol_h24": 13899
+   },
+   {
+    "age_days": 8.73,
+    "dex": "pumpswap",
+    "liq_usd": 6,
+    "pair": "EYMwaVrpJTc7FRiTL2YEzsTSpWKFtVAEPLUkCmRuTVYn",
+    "price_usd": 0.0002258,
+    "quote": "FORK",
+    "txns_h24": 258,
+    "vol_h24": 23
+   },
+   {
+    "age_days": 11.31,
+    "dex": "meteora",
+    "liq_usd": 1,
+    "pair": "9CwYshMMvf2aCi5HUecVPhaFsBon4utqACuugNng6upe",
+    "price_usd": 0.0002771,
+    "quote": "SOL",
+    "txns_h24": 9,
+    "vol_h24": 0
+   },
+   {
+    "age_days": 11.31,
+    "dex": "meteora",
+    "liq_usd": 0,
+    "pair": "ByMB8vDiD2URhLmKufj1MRDtayVF3CbQwvtY1JDHf6yo",
+    "price_usd": 0.0002546,
+    "quote": "USDC",
+    "txns_h24": 8,
+    "vol_h24": 0
+   }
+  ],
+  "pools_returned": 9,
+  "symbol": "MAMESUKE",
+  "ts": "2026-11-13T19:10:10Z"
  }
 }
