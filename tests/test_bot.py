@@ -96,6 +96,26 @@ class FakeRug:
         return {"score": 300, "score_normalised": 5, "lpLockedPct": 100, "risks": []}
 
 
+class FakeGecko:
+    def __init__(self):
+        self.calls, self.pools = 0, []
+
+    def trending(self, page):
+        self.calls += 1
+        return self.pools if page == 1 else []
+
+    def top(self, sort, page):
+        self.calls += 1
+        return []
+
+
+def gecko_pool(base, quote, reserve, created):
+    return {"id": "solana_POOL" + base, "type": "pool",
+            "attributes": {"reserve_in_usd": str(reserve), "pool_created_at": created},
+            "relationships": {"base_token": {"data": {"id": "solana_" + base}},
+                              "quote_token": {"data": {"id": "solana_" + quote}}}}
+
+
 class Fills(unittest.TestCase):
     def test_buy_then_sell_flat_price_loses_exactly_the_costs(self):
         tokens, exec_price, fee = P.buy_fill(0.5, 1.0, 100_000, SOL_USD, COSTS)
@@ -170,14 +190,14 @@ class Cycle(unittest.TestCase):
         shutil.copy(REPO / "rulebook.json", self.tmp / "rulebook.json")
         os.environ["BOT_ROOT"] = str(self.tmp)
         os.environ.pop("BOT_DATA", None)
-        self.dex, self.rug, self.now = FakeDex(), FakeRug(), T0
+        self.dex, self.rug, self.gecko, self.now = FakeDex(), FakeRug(), FakeGecko(), T0
 
     def tearDown(self):
         os.environ.pop("BOT_ROOT", None)
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def step(self, minutes=5):
-        s = run(self.now, self.dex, self.rug)
+        s = run(self.now, self.dex, self.rug, self.gecko)
         self.now += timedelta(minutes=minutes)
         return s
 
@@ -319,6 +339,27 @@ class Cycle(unittest.TestCase):
         self.assertTrue(snaps)
         row = store.read_jsonl(snaps[0])[0]["rows"][0]
         self.assertEqual(len(row), 20)
+
+    def test_gecko_discovery_filters_and_throttles(self):
+        from bot.geckoterminal import pick_tokens
+        week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        old = (self.now - timedelta(days=90)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        usdc = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        pools = [gecko_pool("GOOD", S.WSOL, 80_000, week), gecko_pool("THIN", S.WSOL, 900, week),
+                 gecko_pool("OLD", S.WSOL, 500_000, old), gecko_pool(S.WSOL, "FLIP", 90_000, week),
+                 gecko_pool(S.WSOL, usdc, 9e7, week), {"junk": 1}]
+        self.assertEqual(pick_tokens(pools, self.now, 30_000, 35), ["GOOD", "FLIP"])
+        self.gecko.pools = pools
+        self.set("GOOD", 1.0)
+        s = self.step()
+        self.assertEqual(s["opened"], ["GOOD"])        # found only via GeckoTerminal
+        self.assertEqual(s["funnel"].get("discovered_gecko"), 2)
+        calls = self.gecko.calls
+        self.step()                                     # 5 minutes later: throttled, no new calls
+        self.assertEqual(self.gecko.calls, calls)
+        self.now += timedelta(minutes=20)
+        self.step()
+        self.assertGreater(self.gecko.calls, calls)
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")

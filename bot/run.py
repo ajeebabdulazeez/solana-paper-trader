@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from . import portfolio as P
 from . import store
 from . import strategy as S
+from . import geckoterminal as GT
 from .dexscreener import DexScreener
 from .report import build_status
 from .rugcheck import RugCheck, assess, compact
@@ -30,9 +31,9 @@ def hours_since(now, stamp) -> float:
     return (now - parse_iso(stamp)).total_seconds() / 3600.0
 
 
-def discover(dex, d, errors):
-    """Collect Solana token addresses from DexScreener's public feeds."""
-    found, pairs = {}, []
+def discover(dex, d, errors, gecko=None, meta=None, now=None):
+    """Collect Solana token addresses from DexScreener's feeds and GeckoTerminal's pool lists."""
+    found, pairs, gecko_sample = {}, [], None
     feeds = [
         ("boosts_top", dex.boosts_top), ("boosts_latest", dex.boosts_latest),
         ("profiles_latest", dex.profiles_latest), ("takeovers_latest", dex.takeovers_latest),
@@ -73,7 +74,26 @@ def discover(dex, d, errors):
             take(dex.search(q), "search:" + q[:30])
         except Exception as e:
             errors.append(f"search {q}: {e}")
-    return found, pairs
+
+    g = d.get("geckoterminal") or {}
+    if g.get("enabled") and gecko is not None and meta is not None:
+        last = meta.get("gecko_last")
+        if not last or hours_since(now, last) * 60 >= g.get("every_minutes", 20):
+            meta["gecko_last"] = iso(now)
+            jobs = [("trending", p) for p in range(1, g.get("trending_pages", 0) + 1)]
+            jobs += [("h24_volume_usd_desc", p) for p in range(1, g.get("top_volume_pages", 0) + 1)]
+            jobs += [("h24_tx_count_desc", p) for p in range(1, g.get("top_tx_pages", 0) + 1)]
+            pools = []
+            for kind, page in jobs:
+                try:
+                    pools += gecko.trending(page) if kind == "trending" else gecko.top(kind, page)
+                except Exception as e:
+                    errors.append(f"gecko {kind} p{page}: {e}")
+                    break  # do not hammer a failing API
+            gecko_sample = pools[0] if pools else None
+            for t in GT.pick_tokens(pools, now, g["min_reserve_usd"], g["max_age_days"]):
+                found.setdefault(t, "gecko")
+    return found, pairs, gecko_sample
 
 
 def fetch_views(dex, tokens, must_have, d, now_ms, errors):
@@ -117,7 +137,7 @@ def snapshot_row(v):
     ]
 
 
-def run(now=None, dex=None, rug=None) -> dict:
+def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     now = now or datetime.now(timezone.utc)
     now_iso, now_ts, now_ms = iso(now), now.timestamp(), int(now.timestamp() * 1000)
     rules = store.read_json(store.root() / "rulebook.json", None)
@@ -131,16 +151,22 @@ def run(now=None, dex=None, rug=None) -> dict:
     watch = store.read_json(sdir / "watchlist.json", {})
     liq_hist = store.read_json(sdir / "liq_history.json", {})
     rug_cache = store.read_json(sdir / "rugcheck_cache.json", {})
+    meta = store.read_json(sdir / "meta.json", {})
     dex = dex or DexScreener()
     rug = rug or RugCheck()
+    gecko = gecko or GT.GeckoTerminal()
     errors, funnel, opened, closed = [], Counter(), [], []
 
     # 1. Discover new tokens for the watchlist.
-    found, meta_pairs = discover(dex, rules["discovery"], errors)
+    found, meta_pairs, gecko_sample = discover(dex, rules["discovery"], errors, gecko, meta, now)
     for t, src in found.items():
         if t != S.WSOL and t not in watch:
             watch[t] = {"first_seen": now_iso, "source": src, "last_ok": None, "low_since": None}
             funnel["discovered_new"] += 1
+            if src == "gecko":
+                funnel["discovered_gecko"] += 1
+    if gecko_sample and not (dd / "debug" / "gecko_sample.json").exists():
+        store.write_json(dd / "debug" / "gecko_sample.json", gecko_sample)
 
     # 2. Fetch current data for held tokens and the watchlist.
     held = {p["token"] for p in state["positions"]}
@@ -359,6 +385,7 @@ def run(now=None, dex=None, rug=None) -> dict:
         "open": len(state["positions"]), "closed_total": state["closed_count"],
         "watchlist": len(watch), "with_data": len(views), "batch_miss": batch_miss,
         "api_calls": getattr(dex, "calls", None), "rugcheck_calls": getattr(rug, "calls", None),
+        "gecko_calls": getattr(gecko, "calls", None),
         "funnel": dict(sorted(funnel.items())), "opened": opened,
         "closed": [[c["symbol"], c["exit_reason"], c["pnl_pct"]] for c in closed],
         "errors": [e[:160] for e in errors[:10]],
@@ -370,6 +397,7 @@ def run(now=None, dex=None, rug=None) -> dict:
     store.write_json(sdir / "watchlist.json", watch)
     store.write_json(sdir / "liq_history.json", liq_hist, indent=None)
     store.write_json(sdir / "rugcheck_cache.json", rug_cache)
+    store.write_json(sdir / "meta.json", meta)
     (dd / "STATUS.md").write_text(build_status(state, summary, store.read_jsonl(dd / "journal" / "trades.jsonl")),
                                   encoding="utf-8")
     return summary

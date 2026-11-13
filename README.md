@@ -8,7 +8,7 @@ The aim is to find out, with evidence, whether a rule-based strategy for establi
 
 | Part | What it does | Where |
 |---|---|---|
-| Bot | Every 5 minutes: pulls DexScreener data, records a snapshot, applies the rulebook mechanically, opens and closes paper trades | `bot/`, run by `.github/workflows/bot.yml` |
+| Bot | Every 5 minutes: discovers tokens (DexScreener feeds, GeckoTerminal pool lists), pulls DexScreener data, records a snapshot, applies the rulebook mechanically, opens and closes paper trades | `bot/`, run by `.github/workflows/bot.yml` |
 | Rulebook | Every threshold the bot uses. Versioned; each trade records the version that produced it | `rulebook.json` |
 | Data | Snapshots, trade journal, portfolio state | `data/` |
 | Reviews | A few times a day Claude reads the results, writes up what worked and what did not, and changes the rulebook | `reviews/` |
@@ -31,7 +31,7 @@ Only tokens 3 to 30 days old with real liquidity, volume and trading activity, t
 - Stops fill at the price seen when the bot runs, not at the stop level, so gaps between runs cost what they would really cost.
 - A drained pool returns almost nothing. A token that disappears from the data is written off at zero.
 - If the safety check cannot be completed, the trade is skipped.
-- Known blind spots: prices are sampled every 5 minutes or slower, real fills can be worse, and tokens are discovered mainly from DexScreener's boost and profile feeds, which favour tokens whose teams paid for visibility.
+- Known blind spots: prices are sampled every 5 minutes or slower, real fills can be worse, and tokens are discovered from DexScreener's boost and profile feeds (which favour tokens whose teams paid for visibility) and GeckoTerminal's trending and most-traded pool lists, so anything outside those lists is never seen.
 
 ## Proof gate before real money
 
