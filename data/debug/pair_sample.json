@@ -1,0 +1,76 @@
+{
+ "baseToken": {
+  "address": "DtcicPCKTKeAh7TDEzTym3hXeoHAoMiBdYJhMYxZpump",
+  "name": "Cartoon Money",
+  "symbol": "CBUCKS"
+ },
+ "boosts": {
+  "active": 500
+ },
+ "chainId": "solana",
+ "dexId": "pumpswap",
+ "fdv": 3385456,
+ "info": {
+  "header": "https://cdn.dexscreener.com/cms/images/dQ4E_XBvLaPRg67y?width=1500&height=500&quality=95&format=auto",
+  "imageUrl": "https://cdn.dexscreener.com/cms/images/2bajn2a05AdQGV-4?width=800&height=800&quality=95&format=auto",
+  "openGraph": "https://cdn.dexscreener.com/token-images/og/solana/DtcicPCKTKeAh7TDEzTym3hXeoHAoMiBdYJhMYxZpump?timestamp=1794577200000",
+  "socials": [
+   {
+    "type": "twitter",
+    "url": "https://x.com/cartoonmoney_ai"
+   }
+  ],
+  "websites": [
+   {
+    "label": "Website",
+    "url": "https://cartoon-money.com/"
+   }
+  ]
+ },
+ "liquidity": {
+  "base": 29379090,
+  "quote": 102189,
+  "usd": 207708.08
+ },
+ "marketCap": 3385456,
+ "pairAddress": "B4Cp45PGifVM5FAXfh6AeV8QZ3eUNQnqGBw7KuC7MHnB",
+ "pairCreatedAt": 1791311393000,
+ "priceChange": {
+  "h1": -4.07,
+  "h24": -15.71,
+  "h6": 18.44,
+  "m5": 0.94
+ },
+ "priceNative": "0.003591",
+ "priceUsd": "0.003591",
+ "quoteToken": {
+  "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+  "name": "USD Coin",
+  "symbol": "USDC"
+ },
+ "txns": {
+  "h1": {
+   "buys": 25,
+   "sells": 30
+  },
+  "h24": {
+   "buys": 1356,
+   "sells": 1139
+  },
+  "h6": {
+   "buys": 176,
+   "sells": 108
+  },
+  "m5": {
+   "buys": 1,
+   "sells": 2
+  }
+ },
+ "url": "https://dexscreener.com/solana/b4cp45pgifvm5faxfh6aev8qz3eunqnqgbw7kuc7mhnb",
+ "volume": {
+  "h1": 6132.19,
+  "h24": 504813.46,
+  "h6": 33521.46,
+  "m5": 452.41
+ }
+}
