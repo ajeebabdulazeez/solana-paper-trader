@@ -1,15 +1,63 @@
 {
- "cash_sol": 5.0,
+ "cash_sol": 4.5,
  "closed_count": 0,
  "day": {
   "date": "2026-11-13",
-  "opens": 0,
+  "opens": 1,
   "start_equity": 5.0
  },
  "last_exit": {},
- "last_sol_usd": 79.51948721676257,
- "positions": [],
+ "last_sol_usd": 79.56750762406432,
+ "positions": [
+  {
+   "entry_exec_usd": 0.0006274344073355444,
+   "entry_liq_usd": 68979.74,
+   "entry_mid_usd": 0.0006236,
+   "entry_sol_usd": 79.56750762406432,
+   "features": {
+    "age_days": 8.1,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.84,
+    "chg_h1": 4.26,
+    "chg_h24": 16.16,
+    "chg_h6": 12.36,
+    "chg_m5": 5.44,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.1114,
+    "liq_usd": 68980,
+    "mcap": 619307,
+    "quote": "SOL",
+    "score": 2.22,
+    "txns_h1": 125,
+    "vol_h1": 14151,
+    "vol_h24": 195920,
+    "volume_accel": 1.21
+   },
+   "fees_sol": 0.0045000000000000005,
+   "id": 1,
+   "last_price_usd": 0.0006236,
+   "missing_runs": 0,
+   "opened": "2026-11-13T17:25:08Z",
+   "pair": "5n8V68fCaNTRQvaXzrmBryDe5jFLrgm65pFfsmia6Nro",
+   "peak_usd": 0.0006236,
+   "rugcheck": {
+    "lp_locked_pct": 99.75490982628827,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 2,
+   "sol_in": 0.5,
+   "sol_returned": 0.0,
+   "symbol": "WEALTH",
+   "token": "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump",
+   "tokens": 62836.36913561784,
+   "tokens_remaining": 62836.36913561784,
+   "tp1_done": false,
+   "trough_usd": 0.0006236
+  }
+ ],
  "realized_pnl_sol": 0.0,
  "starting_sol": 5.0,
- "trade_seq": 0
+ "trade_seq": 1
 }
