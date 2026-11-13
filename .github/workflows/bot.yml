@@ -1,15 +1,25 @@
 name: paper-bot
 
-# Runs the paper-trading bot on a timer and commits what it recorded to data/.
-# GitHub's scheduler is best-effort: runs can start several minutes late.
+# Runs the paper-trading bot and commits what it recorded to data/.
+#
+# GitHub's own timer is unreliable for short intervals (runs start late or are
+# skipped), so one run works as a session: it loops a bot cycle every
+# CYCLE_SECONDS for SESSION_MINUTES, then starts the next session itself.
+# The schedule below is only a safety net that restarts the chain if it breaks.
+# Pushing a change to the .kick file also starts a session.
 on:
   schedule:
-    - cron: "2-59/5 * * * *"   # every 5 minutes
+    - cron: "7,37 * * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".kick"]
 
 permissions:
   contents: write
+  actions: write
 
+# Never two sessions at once: a second one waits for the first to finish.
 concurrency:
   group: paper-bot
   cancel-in-progress: false
@@ -17,31 +27,53 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 75
     env:
-      BRANCH: ${{ github.event.repository.default_branch }}
+      BRANCH: main
+      GH_TOKEN: ${{ github.token }}
+      CYCLE_SECONDS: 300
+      SESSION_MINUTES: 50
     steps:
       - name: Clone
         run: |
           git clone --quiet --depth 1 --branch "$BRANCH" \
             "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" repo
 
-      - name: Run one bot cycle
-        working-directory: repo
-        run: python3 -m bot.run
-
-      - name: Commit data
+      - name: Run bot cycles, then hand over to the next session
         working-directory: repo
         run: |
           git config user.name "paper-bot"
           git config user.email "paper-bot@users.noreply.github.com"
-          git add -A data
-          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
-          git commit --quiet -m "bot: run $(date -u +%Y-%m-%dT%H:%MZ)"
-          for attempt in 1 2 3; do
-            if git pull --quiet --rebase origin "$BRANCH" && git push --quiet origin "HEAD:$BRANCH"; then
-              exit 0
+
+          sync() {
+            if ! git pull --quiet --rebase origin "$BRANCH"; then
+              git rebase --abort 2>/dev/null || true
+              return 1
             fi
-            sleep 5
+          }
+
+          save() {
+            git add -A data
+            if git diff --cached --quiet; then return 0; fi
+            git commit --quiet -m "bot: run $(date -u +%Y-%m-%dT%H:%MZ)"
+            for attempt in 1 2 3; do
+              if sync && git push --quiet origin "HEAD:$BRANCH"; then return 0; fi
+              sleep 5
+            done
+            echo "::warning::push failed; will retry on the next cycle"
+          }
+
+          END=$(( $(date +%s) + SESSION_MINUTES * 60 ))
+          while :; do
+            START=$(date +%s)
+            sync || echo "::warning::could not pull latest rules"   # picks up rulebook and code changes
+            python3 -m bot.run || echo "::warning::bot cycle failed"
+            save
+            NOW=$(date +%s)
+            if [ "$NOW" -ge "$END" ]; then break; fi
+            WAIT=$(( CYCLE_SECONDS - (NOW - START) ))
+            if [ "$WAIT" -gt 0 ]; then sleep "$WAIT"; fi
           done
-          echo "push failed after 3 attempts"; exit 1
+
+          gh workflow run bot.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH" \
+            || echo "::warning::handover failed; the schedule will restart the bot"
