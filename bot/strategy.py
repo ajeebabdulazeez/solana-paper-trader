@@ -63,18 +63,43 @@ def pair_view(pair: dict, now_ms: int) -> dict:
     }
 
 
-def best_pairs(pairs: list, now_ms: int, chain: str = "solana") -> dict:
-    """token address -> view of its deepest-liquidity pair on `chain`."""
-    best = {}
+# Mint addresses of the quote tokens the rulebook names. A pool is only preferred for its quote
+# symbol when the address matches, so a look-alike token called "SOL" or "USDC" cannot pose as one.
+QUOTE_MINTS = {
+    "SOL": WSOL,
+    "USDC": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "USDT": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+}
+
+
+def allowed_pool(v: dict, allowed_quotes, min_liq: float = 0.0) -> bool:
+    """Is this view a pool quoted in a genuine allowed token with at least `min_liq` of liquidity?"""
+    q = v["quote_symbol"]
+    if not allowed_quotes or q not in allowed_quotes:
+        return False
+    if q in QUOTE_MINTS and v.get("quote_addr") != QUOTE_MINTS[q]:
+        return False
+    return (v["liq_usd"] or 0) >= min_liq
+
+
+def best_pairs(pairs: list, now_ms: int, chain: str = "solana", allowed_quotes=None,
+               min_allowed_liq: float = 0.0) -> dict:
+    """token address -> view of the pool that token is judged by, on `chain`.
+
+    The deepest pool wins. When `allowed_quotes` is given, a pool quoted in one of them with at
+    least `min_allowed_liq` of liquidity beats every pool that is not, because that is the pool
+    the rulebook lets the bot trade.
+    """
+    best, rank = {}, {}
     for p in pairs:
         if p.get("chainId") != chain:
             continue
         v = pair_view(p, now_ms)
         if not v["token"] or v["price_usd"] is None or v["price_usd"] <= 0:
             continue
-        cur = best.get(v["token"])
-        if cur is None or (v["liq_usd"] or 0) > (cur["liq_usd"] or 0):
-            best[v["token"]] = v
+        r = (allowed_pool(v, allowed_quotes, min_allowed_liq), v["liq_usd"] or 0)
+        if v["token"] not in best or r > rank[v["token"]]:
+            best[v["token"]], rank[v["token"]] = v, r
     return best
 
 

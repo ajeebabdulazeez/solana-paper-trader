@@ -170,6 +170,16 @@ class Rules(unittest.TestCase):
         self.assertEqual(S.entry_reject(self.view(vol_h1=10_000), e, 0), "volume_accel")
         self.assertEqual(S.entry_reject(self.view(), e, 25.0), "liquidity_falling")
 
+    def test_best_pairs_prefers_a_deep_enough_allowed_quote_pool(self):
+        deep = make_pair("TOK", "TOK", 1.0, 300_000, T0, quote="TTWO")
+        sol = make_pair("TOK", "TOK", 1.0, 80_000, T0)
+        thin = make_pair("TOK", "TOK", 1.0, 5_000, T0)
+        allowed = RULES["universe"]["allowed_quote_symbols"]
+        pick = lambda pairs, **kw: S.best_pairs(pairs, int(T0.timestamp() * 1000), "solana", **kw)["TOK"]  # noqa: E731
+        self.assertEqual(pick([deep, sol])["quote_symbol"], "TTWO")                 # old behaviour: deepest
+        self.assertEqual(pick([deep, sol, thin], allowed_quotes=allowed, min_allowed_liq=30_000)["liq_usd"], 80_000)
+        self.assertEqual(pick([deep, thin], allowed_quotes=allowed, min_allowed_liq=30_000)["quote_symbol"], "TTWO")
+
     def test_sol_price_from_sol_pairs(self):
         pairs = [make_pair("A", "A", 2.0, 1e5, T0), make_pair("B", "B", 0.01, 1e5, T0),
                  make_pair("C", "C", 5.0, 1e5, T0, quote="USDC")]
@@ -338,6 +348,7 @@ class Cycle(unittest.TestCase):
         self.assertGreater(len(self.trades()), 3)
         r = review(self.trades(), [s], 5.0)
         self.assertIn("By exit reason", r)
+        self.assertIn("| raydium | %d |" % len(self.trades()), r)   # results split by the entry pool's DEX
         self.assertEqual(stats(self.trades())["n"], len(self.trades()))
         self.assertTrue((self.tmp / "data" / "STATUS.md").exists())
         import csv
@@ -381,26 +392,75 @@ class Cycle(unittest.TestCase):
     def test_quote_rejected_token_has_its_pools_recorded_once(self):
         self.list_token("OK")
         self.list_token("EXO", liq=150_000, quote="TTWO")      # deepest pool is quoted in an exotic token
-        sol_pool = make_pair("EXO", "EXO", 1.0, 90_000, self.now)
+        sol_pool = make_pair("EXO", "EXO", 1.0, 20_000, self.now)   # its SOL pool is too thin to matter
         sol_pool["pairAddress"] = "PAIRSOL"
         other = make_pair("ELSE", "ELSE", 1.0, 500_000, self.now)
         self.dex.all_pools["EXO"] = [sol_pool, self.dex.market["EXO"], other]
         s = self.step()
-        self.assertEqual(s["opened"], ["OK"])                  # the diagnostic changes no decision
+        self.assertEqual(s["opened"], ["OK"])                  # a thin SOL pool does not make it tradable
         self.assertEqual(s["funnel"].get("u:quote_token:TTWO"), 1)
+        self.assertNotIn("allowed_pool_used", s["funnel"])
         self.assertEqual(s["errors"], ["takeovers_latest: feed down"])
         f = self.tmp / "data" / "debug" / "quote_reject_pairs.json"
         d = store.read_json(f, {})["EXO"]
-        self.assertEqual([(p["quote"], p["liq_usd"]) for p in d["pools"]], [("TTWO", 150_000), ("SOL", 90_000)])
+        self.assertEqual([(p["quote"], p["liq_usd"]) for p in d["pools"]], [("TTWO", 150_000), ("SOL", 20_000)])
         self.assertEqual((d["chosen_quote"], d["pairs_in_batch"], d["pools_returned"]), ("TTWO", 1, 3))
         calls = self.dex.calls
         self.step()
-        self.assertEqual(self.dex.calls, calls + 1)            # each token is looked up once, not every cycle
+        # One batch call and one pool lookup for EXO; the debug sample itself is taken once, not every cycle.
+        self.assertEqual(self.dex.calls, calls + 2)
+        self.assertEqual(store.read_json(f, {})["EXO"]["ts"], d["ts"])
         self.dex.fail_single = True                            # a failing lookup is logged, never fatal
         self.list_token("EXO2", quote="WBTC")
         s = self.step()
         self.assertTrue(any(e.startswith("quote sample") for e in s["errors"]))
+        self.assertTrue(any(e.startswith("pool lookup") for e in s["errors"]))
         self.assertEqual(len(self.state()["positions"]), 1)
+
+    def hidden_sol_pool(self, token="EXO", sol_liq=90_000, exotic_liq=150_000, sol_age=7, exotic_age=7):
+        """Batch call shows only an exotic-quoted pool; the full lookup also shows a SOL pool."""
+        if "REF" not in self.dex.market:   # a quiet SOL-quoted token, so the run can derive the SOL price
+            self.list_token("REF", chg=(0.0, 0.0, 0.0, 0.0))
+        self.list_token(token, liq=exotic_liq, quote="TTWO", age_days=exotic_age)
+        sol_pool = make_pair(token, token, 1.0, sol_liq, self.now, age_days=sol_age)
+        sol_pool["pairAddress"] = "PAIRSOL" + token
+        self.dex.all_pools[token] = [self.dex.market[token], sol_pool]
+        return sol_pool
+
+    def test_token_is_traded_on_its_allowed_quote_pool_and_the_position_follows_that_pool(self):
+        sol_pool = self.hidden_sol_pool()
+        s = self.step()
+        self.assertEqual(s["opened"], ["EXO"])
+        self.assertEqual(s["funnel"].get("allowed_pool_used"), 1)
+        self.assertNotIn("u:quote_token:TTWO", s["funnel"])
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["pair"], pos["entry_liq_usd"], pos["features"]["quote"]), ("PAIRSOLEXO", 90_000, "SOL"))
+        # The SOL pool is drained while the exotic pool the batch call returns still looks healthy.
+        sol_pool["liquidity"]["usd"] = 20
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "liquidity_drop")
+        self.assertLess(self.trades()[0]["pnl_pct"], -85)      # filled against the drained pool, not the deep one
+
+    def test_failed_pool_lookup_is_not_a_liquidity_drop_but_the_price_stop_still_works(self):
+        self.hidden_sol_pool(sol_liq=90_000, exotic_liq=55_000)   # the batch pool is 39% thinner than ours
+        self.assertEqual(self.step()["opened"], ["EXO"])
+        self.dex.fail_single = True
+        s = self.step()
+        self.assertEqual(s["closed"], [])                      # another pool's liquidity proves nothing
+        self.assertTrue(any(e.startswith("pool lookup") for e in s["errors"]))
+        self.dex.market["EXO"]["priceUsd"] = "0.70"            # price is still watched through the batch pool
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+
+    def test_allowed_pool_must_be_genuine_and_does_not_make_an_old_token_young(self):
+        fake = self.hidden_sol_pool("FAKE")
+        fake["quoteToken"]["address"] = "LookAlikeMint1111111111111111111111111111111"
+        self.hidden_sol_pool("OLD", sol_age=10, exotic_age=33)   # token is 33 days old, its SOL pool 10
+        s = self.step()
+        self.assertEqual(s["opened"], [])
+        self.assertEqual(s["funnel"].get("u:quote_token:TTWO"), 1)   # FAKE: a token merely called SOL
+        self.assertEqual(s["funnel"].get("u:too_old"), 1)            # OLD: judged by its oldest pool
+        self.assertEqual(s["funnel"].get("allowed_pool_used"), 1)
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")

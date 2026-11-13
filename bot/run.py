@@ -19,6 +19,7 @@ from .rugcheck import RugCheck, assess, compact
 CHAIN = "solana"
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 QUOTE_SAMPLES = 8  # how many quote-rejected tokens to record in data/debug/quote_reject_pairs.json
+POOL_LOOKUPS = 12  # per cycle: full pool lookups for tokens whose batch pool has a quote we do not trade
 
 
 def iso(dt) -> str:
@@ -133,6 +134,59 @@ def fetch_views(dex, tokens, must_have, d, now_ms, errors):
     return views, raw, len(missing), absent
 
 
+def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors):
+    """Correct the one-pool-per-token view that the batch call gives. Changes `views` in place.
+
+    The batch call returns a single pool per token and not always the deepest one (STANK on
+    2026-11-13: an $88k STONK-quoted pool came back while a $120k SOL pool existed), so:
+
+    1. A token good enough for the watchlist whose pool is quoted in something the rulebook does
+       not allow gets one full pool lookup. If it has a pool quoted in an allowed token with at
+       least the watchlist's minimum liquidity, the token is judged and traded on that pool, and
+       its age is that of its oldest pool. Otherwise nothing changes and it stays rejected.
+    2. An open position is priced on the pool it was opened on whenever the data has that pool.
+
+    Returns (tokens switched to an allowed-quote pool, held tokens whose own pool could not be
+    checked because the lookup failed).
+    """
+    by_pair = {p.get("pairAddress"): p for p in raw if p.get("chainId") == CHAIN}
+    held = {pos["token"]: pos.get("pair") for pos in positions}
+    urgent = [t for t, pair in held.items() if pair and pair not in by_pair]
+    exotic = [t for t, v in views.items() if t not in held
+              and not S.allowed_pool(v, allowed) and S.watch_reject(v, wl) is None]
+    exotic.sort(key=lambda t: views[t]["liq_usd"] or 0, reverse=True)
+    switched, unverified = 0, set()
+    for t in urgent + exotic[:POOL_LOOKUPS]:
+        try:
+            pools = dex.pairs_for_token(CHAIN, t)
+        except Exception as e:  # keep the batch view this cycle; never stop the run
+            errors.append(f"pool lookup {t[:8]}: {e}")
+            if t in held:
+                unverified.add(t)
+            continue
+        for p in pools:
+            if p.get("chainId") == CHAIN:
+                by_pair.setdefault(p.get("pairAddress"), p)
+        mine = [S.pair_view(p, now_ms) for p in pools if p.get("chainId") == CHAIN]
+        mine = [v for v in mine if v["token"] == t]
+        cur = views.get(t)
+        pick = S.best_pairs(pools, now_ms, CHAIN, allowed, wl["min_liquidity_usd"]).get(t)
+        if pick and S.allowed_pool(pick, allowed, wl["min_liquidity_usd"]) \
+                and not (cur and S.allowed_pool(cur, allowed)):
+            ages = [v["age_days"] for v in mine + ([cur] if cur else []) if v["age_days"] is not None]
+            if ages:
+                pick["age_days"] = max(ages)  # the token is as old as its oldest pool
+            views[t] = pick
+            switched += 1
+    for t, pair in held.items():
+        p = by_pair.get(pair) if pair else None
+        if p:
+            v = S.pair_view(p, now_ms)
+            if v["token"] == t and v["price_usd"] is not None and v["price_usd"] > 0:
+                views[t] = v
+    return switched, unverified
+
+
 def snapshot_row(v):
     r = lambda x, n=0: None if x is None else round(x, n)  # noqa: E731
     return [
@@ -179,6 +233,11 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     held = {p["token"] for p in state["positions"]}
     tokens = sorted(held) + [t for t in watch if t not in held]
     views, raw, batch_miss, absent = fetch_views(dex, tokens, held, rules["discovery"], now_ms, errors)
+    switched, pool_unverified = refine_pools(
+        dex, views, raw, state["positions"], rules["universe"]["allowed_quote_symbols"],
+        rules["watchlist"], now_ms, errors)
+    if switched:
+        funnel["allowed_pool_used"] = switched
     raw += meta_pairs
     sol_usd = S.sol_usd_from(raw)
     if sol_usd is None:
@@ -217,6 +276,8 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         held_h = hours_since(now, pos["opened"])
         entry_liq = pos.get("entry_liq_usd") or 0.0
         liq_drop = (1.0 - (liq or 0.0) / entry_liq) * 100.0 if entry_liq > 0 else 0.0
+        if pos["token"] in pool_unverified:
+            liq_drop = 0.0  # this view is another pool; an unanswered lookup is not a drained pool
 
         reason = None
         if liq_drop >= ex["liquidity_drop_exit_pct"]:

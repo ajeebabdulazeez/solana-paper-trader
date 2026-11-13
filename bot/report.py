@@ -117,6 +117,10 @@ def review(trades: list, runs: list, starting_sol: float) -> str:
     out += ["", "## By exit reason", "", HEAD]
     for reason, ts in sorted(group(trades, lambda t: t["exit_reason"]).items()):
         out.append(_line(reason, stats(ts, starting_sol)))
+    # Pool fees and depth differ by DEX and the cost model is flat, so keep these apart.
+    out += ["", "## By DEX of the entry pool", "", HEAD]
+    for dex, ts in sorted(group(trades, lambda t: str((t.get("features") or {}).get("dex"))).items()):
+        out.append(_line(dex, stats(ts, starting_sol)))
     out += ["", "## Entry features (median split, expectancy % per trade)", "",
             "| Feature | Median | Low half (n) | High half (n) |", "|---|---|---|---|"]
     for f in ["age_days", "liq_usd", "mcap", "vol_h24", "chg_h1", "chg_h6", "chg_h24",

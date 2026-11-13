@@ -14,6 +14,64 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v2, 2026-11-13 23:40 UTC review: no rule change (plumbing: trade a token on its SOL pool when the batch call hides it)
+
+**Health.** 116 cycles since 13:43 UTC. Over the last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2 minutes. The newest cycle was 1.4 minutes old at review time, so no `.kick`. Errors in 2 of 116 runs, the same two early GeckoTerminal 429s; none in the last 113. `batch_miss` is 7 to 11 per cycle out of about 280 tokens (about 4%): 7 are `no_data` (6 of them never had a Solana pair and drop off after 24 hours) and the rest are recovered by the single lookup. RugCheck has run 3 times (WEALTH, FLOAT, Leonida): each returned `score_normalised` 1, no risks, and LP locked 99.8%, 61.6% and 75.7%, all parsed correctly. No `safety:rugcheck_*` or `skip:*` rows in the funnel.
+
+**Strategy: 3 closed trades on v2, all losses. That is a hint, not a finding.** Equity 4.7553 SOL (-4.89%), no open positions.
+
+| Trade | Opened | Best price while held | Last cycle before the stop | Stop cycle (price) | Net result |
+|---|---|---|---|---|---|
+| WEALTH | 17:25 | +0.5% | -11.9% | -15.8% | -18.84% |
+| FLOAT | 18:50 | +2.4% | -7.3% | -13.8% | -13.55% |
+| Leonida | 18:55 | 0.0% | -4.1% | -14.3% | -16.84% |
+
+- All three exits were `stop_loss`, average -16.41%. A stop filled exactly at -12% would cost about -15% after costs, so the overshoot is about 1.4 points per trade. Cycles were on time, so this is not a late-trigger problem: each stop was crossed by a fall of 4 to 10 points between two consecutive cycles, and the price was 1.8 to 3.8 points past the stop level when the bot saw it.
+- The stops were not shaken out. At 23:30 UTC, about four hours after their stops, WEALTH was about 25% under its entry and Leonida about 23% under; FLOAT was still at -13% 15 minutes after its stop. Nothing here says the stop is too tight.
+- No trade ever got above +2.4%, so nothing was left on the table. The entries were the problem, not the exits.
+- Leonida (hint, n=1): the buy came 5 minutes after an -11.5% five-minute candle. The 1-hour change had fallen from +25.9% to +9.0% in 15 minutes, so the token still read as "moderate momentum" while it was already reversing from a spike. The entry rule only looks at the current 5-minute change (-1.0% at the signal).
+- WEALTH (hint, n=1, from the last review): the signal was one +5.4% candle in a thin token (125 trades in the hour).
+- Market: SOL fell from $80.8 to $77.4 over the session (-4%), most of it after 21:30 UTC. FLOAT sat between -1% and -7% for four hours and was stopped during that slide.
+
+**Funnel since the last review (62 runs).** Signals: 2 (18:50 and 18:55). The last signal was 4.7 hours before this review, so the 12-hour zero-signal rule is not met and no threshold was relaxed. Of 374 universe-token checks, 177 (47%) were a token already held or in its 12-hour cooldown, 112 were `h1_weak`, 49 `buy_pressure`, 15 `h6_down`, 9 `h1_overheated`, 6 `m5_dropping`, 4 `volume_accel`. The universe is 6 or 7 tokens (mihao, FLOAT, NIO, WASTED, paws, Leonida, WEALTH), and three of them are now on cooldown until 07:35, 07:55 and 11:15 UTC on 14 Nov. That leaves 4 tokens the bot can actually buy. Universe size is the bottleneck, ahead of any entry threshold.
+
+**Correction to the last review.** It expected the universe to grow "from tomorrow" as young tokens aged in. Ten tokens under 3 days old pass every other universe number now, but the oldest is 2.1 days (Max, eligible about 21:00 UTC on 14 Nov) and the next is 1.55 days. So ageing adds almost nothing before the 24-hour mark.
+
+**Pool selection: the question from the last review is answered, and it was a real bug.** `data/debug/quote_reject_pairs.json` now has 7 tokens, sampled between 18:40 and 19:10 UTC. In all 7 the batch call returned exactly one pool for the token, and it is not always the deepest one:
+
+| Token | Pool the bot saw | Best SOL pool | Verdict on the SOL pool |
+|---|---|---|---|
+| STANK | raydium, STONK, $88k | meteora, $120k (deeper than the one the bot saw) | passes the universe by itself |
+| CHOO | pumpswap, WBTC, $109k | meteora, $74k | passes the universe by itself |
+| DacityCoin | pumpswap, TTWO, $313k | meteora, $103k | fails `liq_to_mcap` (2.3% against a 3% floor) |
+| AMD | pumpswap, AMD, $95k | meteora, $24k | too thin |
+| MAMESUKE | raydium, STONK, $31k | meteora, $22k | too thin |
+| BIG | pumpswap, TTWO, $103k | meteora, $4k | too thin |
+| HUNG | pumpswap, NVDAX, $47k | meteora, $8k | too thin |
+
+The last review set the test in advance: change pool selection only if a sampled token has a SOL, USDC or USDT pool that passes the universe thresholds by itself. Two of seven do, and for STANK the bot was not even looking at the deepest pool.
+
+**Changed.** Rulebook: nothing, v2 stays, no threshold touched. Bot code (plumbing, no version bump):
+
+1. Each cycle, a token that is good enough for the watchlist but whose pool is quoted in something other than SOL, USDC or USDT gets one full pool lookup (at most 12 tokens per cycle, about 9 today; the endpoint is the one the debug sampler already used live). If the token has a pool quoted in a genuine allowed token (the mint address is checked, not only the symbol) with at least the watchlist's $30k minimum, the token is judged and traded on that pool. Liquidity, volume, trade counts, price impact and stops all come from that pool, not from the bigger exotic pool. The token's age is taken from its oldest pool, so a young SOL pool cannot make an old token eligible. If there is no such pool, nothing changes and the token stays rejected under `u:quote_token:*`.
+2. An open position is always priced on the pool it was opened on. If that pool's data cannot be fetched in a cycle, the price stop still runs on the token's other pool, but another pool's liquidity is not read as a liquidity drop (same principle as "an outage is not a rug").
+3. New funnel row `allowed_pool_used`: how many tokens were switched to an allowed-quote pool that cycle. New error prefix `pool lookup`.
+4. `python3 -m bot.report` gains a "By DEX of the entry pool" table.
+
+An offline dry run of two cycles on a copy of the live state (latest snapshot plus the sampled pools) gave: no errors, STANK and CHOO join the universe (7 to 9), DacityCoin moves from `u:quote_token:TTWO` to `u:liq_to_mcap`, AMD, BIG and HUNG stay rejected. Tests: 4 added, 2 adjusted, 22 pass.
+
+**This changes which trades v2 takes.** Pushed at about 23:45 UTC on 13 Nov; trades opened after that can be on a pool the bot could not see before. They are recognisable in the journal: `features.dex` and `pair` name the pool.
+
+**Blind spot this makes more relevant (not fixed, cannot be from this data).** The SOL pools of STANK and CHOO are Meteora pools. Meteora pool fees vary by pool and can be well above the flat 0.5% swap fee the cost model charges; DexScreener does not report the fee. The bot could already buy tokens whose main pool is on Meteora, so this is not new, but more trades may now land there. The costs section was not touched. Judge Meteora-pool trades separately (the new report table) and treat a small edge on them as unproven.
+
+**For the next review.**
+
+- Check the first live cycles after 23:45 UTC: `allowed_pool_used` should be about 3, `api_calls` about 40 (was 32), no `pool lookup` errors.
+- If the next closed trades repeat Leonida's shape (bought within a few cycles of a 5-minute drop of 10% or more, or with the 1-hour change collapsing from above the overheated line), the entry section is the candidate. With three trades it is a story, not evidence.
+- At 13:45 UTC on 14 Nov the 24-hour check from the last review falls due: `universe_ok` under 10 per run means discovery or the universe filters are still the bottleneck.
+
+**Would prove this review wrong.** The pool change is wrong if `pool lookup` errors repeat across cycles, if cycles slow down or `api_calls` climbs past about 60, or if a trade opened on a switched pool shows a fill or a liquidity reading that does not match that pool on DexScreener: then revert `refine_pools`. Leaving the rules alone is wrong if the next 5 to 10 closed trades are again stopped out without ever being more than a few percent in profit: at that point the entry rules are buying local tops and the entry section should change, even under 30 trades.
+
 ### v2, 2026-11-13 18:35 UTC review: no rule change (plumbing: quote-token diagnostics)
 
 **Health.** 54 cycles since 13:43 UTC. Since the external scheduler started at 14:18 there have been 51 cycles with a median gap of 5.0 minutes and a longest gap of 5.2 minutes (one 26-minute gap before that). The newest cycle was under 2 minutes old at review time, so no `.kick` was needed. Errors in 2 of 54 runs, both GeckoTerminal 429s from before the 2-pages-per-cycle fix; none in the last 51 runs. `batch_miss` is 2 to 7 per cycle out of about 290 tokens fetched (about 2%), and 6 of the 7 are tokens DexScreener has no Solana pair for (`no_data`); they drop off after 24 hours. RugCheck ran once (for WEALTH): the saved sample has `score_normalised` 1, `risks` [] and `lpLockedPct` 99.75, and `compact()`/`assess()` read all three correctly. No `safety:rugcheck_*` rejections.

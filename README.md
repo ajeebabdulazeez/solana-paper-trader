@@ -32,7 +32,8 @@ Only tokens 3 to 30 days old with real liquidity, volume and trading activity, t
 - Stops fill at the price seen when the bot runs, not at the stop level, so gaps between runs cost what they would really cost.
 - A drained pool returns almost nothing. A token that disappears from the data is written off at zero.
 - If the safety check cannot be completed, the trade is skipped.
-- Known blind spots: prices are sampled every 5 minutes or slower, real fills can be worse, and tokens are discovered from DexScreener's boost and profile feeds (which favour tokens whose teams paid for visibility) and GeckoTerminal's trending and most-traded pool lists, so anything outside those lists is never seen.
+- A token is judged on one pool: its deepest pool quoted in SOL, USDC or USDT if that pool has at least the watchlist's minimum liquidity, otherwise its deepest known pool (which the rulebook then rejects for its quote token). Fills, liquidity checks and stops use that pool's own numbers, and an open position stays on the pool it was opened on.
+- Known blind spots: prices are sampled every 5 minutes or slower, real fills can be worse, and tokens are discovered from DexScreener's boost and profile feeds (which favour tokens whose teams paid for visibility) and GeckoTerminal's trending and most-traded pool lists, so anything outside those lists is never seen. Swap fees also differ from pool to pool (some Meteora pools charge well over 0.5%) and DexScreener does not report them, so the flat 0.5% in the cost model can be too low for a given pool; the review report splits results by DEX for that reason.
 
 ## Proof gate before real money
 
