@@ -8,7 +8,7 @@ The aim is to find out, with evidence, whether a rule-based strategy for establi
 
 | Part | What it does | Where |
 |---|---|---|
-| Bot | Every 5 minutes, in back-to-back sessions that restart themselves: discovers tokens (DexScreener feeds, GeckoTerminal pool lists), pulls DexScreener data, records a snapshot, applies the rulebook mechanically, opens and closes paper trades | `bot/`, run by `.github/workflows/bot.yml` |
+| Bot | Every 5 minutes, one short run per cycle: discovers tokens (DexScreener feeds, GeckoTerminal pool lists), pulls DexScreener data, records a snapshot, applies the rulebook mechanically, opens and closes paper trades | `bot/`, run by `.github/workflows/bot.yml` |
 | Rulebook | Every threshold the bot uses. Versioned; each trade records the version that produced it | `rulebook.json` |
 | Data | Snapshots, trade journal, portfolio state | `data/` |
 | Reviews | A few times a day Claude reads the results, writes up what worked and what did not, and changes the rulebook | `reviews/` |
