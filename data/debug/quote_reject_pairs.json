@@ -244,5 +244,84 @@
   "pools_returned": 15,
   "symbol": "AMD",
   "ts": "2026-11-13T18:55:08Z"
+ },
+ "DKYcjobF7HPtL9RyQBRdeRQ2iWvizpfbgWwPWNXdpump": {
+  "chosen_quote": "TTWO",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 29.23,
+    "dex": "pumpswap",
+    "liq_usd": 312998,
+    "pair": "7Te1wXcfeQjKLGHXFvxSCnGZTqunoZ9fxBn7KKjrkNEr",
+    "price_usd": 0.004581,
+    "quote": "TTWO",
+    "txns_h24": 6793,
+    "vol_h24": 1060448
+   },
+   {
+    "age_days": 20.6,
+    "dex": "meteora",
+    "liq_usd": 102598,
+    "pair": "5Dc4s9fxxQoPfaMUaxFKB5v1Nh6FPqest7usgyvGXwWw",
+    "price_usd": 0.004698,
+    "quote": "SOL",
+    "txns_h24": 1289,
+    "vol_h24": 272846
+   },
+   {
+    "age_days": 20.18,
+    "dex": "meteora",
+    "liq_usd": 85149,
+    "pair": "EDaiLFduGDWR3VJuCBxGxJZiYnFbz5QAXTRnMVttBSP1",
+    "price_usd": 0.004606,
+    "quote": "SOL",
+    "txns_h24": 4182,
+    "vol_h24": 488419
+   },
+   {
+    "age_days": 29.0,
+    "dex": "meteora",
+    "liq_usd": 14616,
+    "pair": "FSb7qz3cMGjYacrLfoKumozoqFibiAtzjDq97FxHivYP",
+    "price_usd": 0.004517,
+    "quote": "SOL",
+    "txns_h24": 269,
+    "vol_h24": 15995
+   },
+   {
+    "age_days": 3.2,
+    "dex": "meteora",
+    "liq_usd": 2079,
+    "pair": "47mgFZfgo2xCbVXqkJdUE6EqHdBrZmJdrPyhEBrPAcVo",
+    "price_usd": 0.004699,
+    "quote": "USDC",
+    "txns_h24": 1736,
+    "vol_h24": 16188
+   },
+   {
+    "age_days": 21.15,
+    "dex": "meteora",
+    "liq_usd": 60,
+    "pair": "cRGzVgGd5oxBoYa96Du2o9dsUjZQckF1ApR7XUhSxYj",
+    "price_usd": 0.004697,
+    "quote": "CSR",
+    "txns_h24": 228,
+    "vol_h24": 30
+   },
+   {
+    "age_days": 3.07,
+    "dex": "orca",
+    "liq_usd": 4,
+    "pair": "J1VCbu9sAtcw1nFSsmWugjBDBc3ZtQh4bDZRjJ9fZt6c",
+    "price_usd": 0.00463,
+    "quote": "SOL",
+    "txns_h24": 163,
+    "vol_h24": 3
+   }
+  ],
+  "pools_returned": 12,
+  "symbol": "DacityCoin",
+  "ts": "2026-11-13T19:00:20Z"
  }
 }
