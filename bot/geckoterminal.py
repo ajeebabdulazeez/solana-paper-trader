@@ -1,6 +1,7 @@
 """GeckoTerminal public API: used only to DISCOVER tokens (trending and most-traded Solana pools).
 
-Base https://api.geckoterminal.com/api/v2, no key, 30 calls/minute.
+Base https://api.geckoterminal.com/api/v2, no key. Documented limit is 30 calls/minute but the
+live API returned HTTP 429 on the 10th call in about 22 seconds, so calls are spaced 6.5s apart.
 Prices and trade decisions still come from DexScreener; this just widens the net,
 because DexScreener's own feeds skew to brand-new or paid-for tokens.
 """
@@ -19,7 +20,7 @@ NOT_TARGETS = {
 
 class GeckoTerminal:
     def __init__(self):
-        self.limiter = RateLimiter(2.2)
+        self.limiter = RateLimiter(6.5)
         self.calls = 0
 
     def _pools(self, path) -> list:

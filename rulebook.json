@@ -31,8 +31,8 @@
     "geckoterminal": {
       "enabled": true,
       "every_minutes": 20,
-      "trending_pages": 3,
-      "top_volume_pages": 5,
+      "trending_pages": 2,
+      "top_volume_pages": 4,
       "top_tx_pages": 3,
       "min_reserve_usd": 30000,
       "max_age_days": 35

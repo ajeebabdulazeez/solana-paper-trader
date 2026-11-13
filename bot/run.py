@@ -265,7 +265,7 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         hist.append([round(now_ts), round(v["liq_usd"])])
         ur = S.universe_reject(v, rules["universe"])
         if ur:
-            funnel["u:" + ur] += 1
+            funnel["u:" + ur + (":" + v["quote_symbol"][:10] if ur == "quote_token" else "")] += 1
             continue
         funnel["universe_ok"] += 1
         if t in held:
