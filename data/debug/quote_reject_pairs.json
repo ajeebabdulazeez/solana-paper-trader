@@ -175,5 +175,74 @@
   "pools_returned": 6,
   "symbol": "STANK",
   "ts": "2026-11-13T18:50:10Z"
+ },
+ "DDmGnuvroxVrb7CSyjYcezFU8gnAfhKasg4ZZezmpump": {
+  "chosen_quote": "AMD",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 9.89,
+    "dex": "pumpswap",
+    "liq_usd": 94832,
+    "pair": "7RD5YALHcMLUFKJ8FRePGd6ei11F15uXZF1rc7mPKeCv",
+    "price_usd": 0.0005834,
+    "quote": "AMD",
+    "txns_h24": 3815,
+    "vol_h24": 364443
+   },
+   {
+    "age_days": 9.87,
+    "dex": "meteora",
+    "liq_usd": 23889,
+    "pair": "3uijTWAzhQKnqZ59Wwgay7sccFWAk5reEibKg2ZRAGZ9",
+    "price_usd": 0.0005812,
+    "quote": "SOL",
+    "txns_h24": 2750,
+    "vol_h24": 160588
+   },
+   {
+    "age_days": 9.87,
+    "dex": "meteora",
+    "liq_usd": 2090,
+    "pair": "9rEF8wvkp54DYkxZ41D5rGJCbqGqc7W5KiPTsbF8t5gd",
+    "price_usd": 0.0007425,
+    "quote": "USDC",
+    "txns_h24": 60,
+    "vol_h24": 425
+   },
+   {
+    "age_days": 9.88,
+    "dex": "meteora",
+    "liq_usd": 189,
+    "pair": "12LQmZeUTxPNFqMHMV9mJ5cXLoCmTvoq6gfChCQFpdmK",
+    "price_usd": 0.0005721,
+    "quote": "SOL",
+    "txns_h24": 479,
+    "vol_h24": 410
+   },
+   {
+    "age_days": 9.76,
+    "dex": "meteora",
+    "liq_usd": 11,
+    "pair": "5bS11Jk7tL1EMJamM3gZtWjSi4DHLtr2bsoHHQ5BpPWg",
+    "price_usd": 0.0005817,
+    "quote": "CSR",
+    "txns_h24": 143,
+    "vol_h24": 9
+   },
+   {
+    "age_days": 9.74,
+    "dex": "meteora",
+    "liq_usd": 0,
+    "pair": "D5RRNJXXRSjuKpprGpp7pmbwPkWSL15nP65fjwZLdMgM",
+    "price_usd": 0.0005926,
+    "quote": "SOL",
+    "txns_h24": 50,
+    "vol_h24": 0
+   }
+  ],
+  "pools_returned": 15,
+  "symbol": "AMD",
+  "ts": "2026-11-13T18:55:08Z"
  }
 }
