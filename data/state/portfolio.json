@@ -7,7 +7,7 @@
   "start_equity": 5.0
  },
  "last_exit": {},
- "last_sol_usd": 79.99466879677948,
+ "last_sol_usd": 80.06354249404289,
  "positions": [
   {
    "entry_exec_usd": 0.0006274344073355444,
@@ -35,7 +35,7 @@
    },
    "fees_sol": 0.0045000000000000005,
    "id": 1,
-   "last_price_usd": 0.0005688,
+   "last_price_usd": 0.0005528,
    "missing_runs": 0,
    "opened": "2026-11-13T17:25:08Z",
    "pair": "5n8V68fCaNTRQvaXzrmBryDe5jFLrgm65pFfsmia6Nro",
@@ -54,7 +54,7 @@
    "tokens": 62836.36913561784,
    "tokens_remaining": 62836.36913561784,
    "tp1_done": false,
-   "trough_usd": 0.0005688
+   "trough_usd": 0.0005528
   },
   {
    "entry_exec_usd": 0.002774499026473532,
@@ -82,7 +82,7 @@
    },
    "fees_sol": 0.004477246704472943,
    "id": 2,
-   "last_price_usd": 0.002809,
+   "last_price_usd": 0.002816,
    "missing_runs": 0,
    "opened": "2026-11-13T18:50:10Z",
    "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
@@ -129,7 +129,7 @@
    },
    "fees_sol": 0.0044756810339190425,
    "id": 3,
-   "last_price_usd": 0.0007579,
+   "last_price_usd": 0.000738,
    "missing_runs": 0,
    "opened": "2026-11-13T18:55:08Z",
    "pair": "5GxdoPcK2LJ6QYcJ3uvtC37tgsFHma55ULFkufTYe49R",
