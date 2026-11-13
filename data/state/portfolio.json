@@ -7,7 +7,7 @@
   "start_equity": 5.0
  },
  "last_exit": {},
- "last_sol_usd": 79.88126649076517,
+ "last_sol_usd": 80.00880281018073,
  "positions": [
   {
    "entry_exec_usd": 0.0006274344073355444,
@@ -35,11 +35,11 @@
    },
    "fees_sol": 0.0045000000000000005,
    "id": 1,
-   "last_price_usd": 0.0006119,
+   "last_price_usd": 0.0006268,
    "missing_runs": 0,
    "opened": "2026-11-13T17:25:08Z",
    "pair": "5n8V68fCaNTRQvaXzrmBryDe5jFLrgm65pFfsmia6Nro",
-   "peak_usd": 0.0006236,
+   "peak_usd": 0.0006268,
    "rugcheck": {
     "lp_locked_pct": 99.75490982628827,
     "risks": [],
