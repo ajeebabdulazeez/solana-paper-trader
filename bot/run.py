@@ -78,22 +78,26 @@ def discover(dex, d, errors, gecko=None, meta=None, now=None):
 
     g = d.get("geckoterminal") or {}
     if g.get("enabled") and gecko is not None and meta is not None:
-        last = meta.get("gecko_last")
-        if not last or hours_since(now, last) * 60 >= g.get("every_minutes", 20):
-            meta["gecko_last"] = iso(now)
-            jobs = [("trending", p) for p in range(1, g.get("trending_pages", 0) + 1)]
-            jobs += [("h24_volume_usd_desc", p) for p in range(1, g.get("top_volume_pages", 0) + 1)]
-            jobs += [("h24_tx_count_desc", p) for p in range(1, g.get("top_tx_pages", 0) + 1)]
-            pools = []
-            for kind, page in jobs:
-                try:
-                    pools += gecko.trending(page) if kind == "trending" else gecko.top(kind, page)
-                except Exception as e:
-                    errors.append(f"gecko {kind} p{page}: {e}")
-                    break  # do not hammer a failing API
-            gecko_sample = pools[0] if pools else None
-            for t in GT.pick_tokens(pools, now, g["min_reserve_usd"], g["max_age_days"]):
-                found.setdefault(t, "gecko")
+        # GeckoTerminal rate-limits hard (shared runner IPs), so take a couple of pages per
+        # cycle and rotate through the list instead of fetching everything at once.
+        jobs = [("trending", p) for p in range(1, g.get("trending_pages", 0) + 1)]
+        jobs += [("h24_volume_usd_desc", p) for p in range(1, g.get("top_volume_pages", 0) + 1)]
+        jobs += [("h24_tx_count_desc", p) for p in range(1, g.get("top_tx_pages", 0) + 1)]
+        pools = []
+        idx = int(meta.get("gecko_idx", 0))
+        for _ in range(min(len(jobs), int(g.get("calls_per_cycle", 2)))):
+            kind, page = jobs[idx % len(jobs)]
+            try:
+                pools += gecko.trending(page) if kind == "trending" else gecko.top(kind, page)
+            except Exception as e:
+                errors.append(f"gecko {kind} p{page}: {e}")
+                break  # do not hammer a failing API; retry this page next cycle
+            idx += 1
+        if jobs:
+            meta["gecko_idx"] = idx % len(jobs)
+        gecko_sample = pools[0] if pools else None
+        for t in GT.pick_tokens(pools, now, g["min_reserve_usd"], g["max_age_days"]):
+            found.setdefault(t, "gecko")
     return found, pairs, gecko_sample
 
 

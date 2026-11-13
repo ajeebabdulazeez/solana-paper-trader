@@ -367,12 +367,12 @@ class Cycle(unittest.TestCase):
         s = self.step()
         self.assertEqual(s["opened"], ["GOOD"])        # found only via GeckoTerminal
         self.assertEqual(s["funnel"].get("discovered_gecko"), 2)
-        calls = self.gecko.calls
-        self.step()                                     # 5 minutes later: throttled, no new calls
-        self.assertEqual(self.gecko.calls, calls)
-        self.now += timedelta(minutes=20)
-        self.step()
-        self.assertGreater(self.gecko.calls, calls)
+        self.assertEqual(self.gecko.calls, 2)           # only calls_per_cycle pages per run
+        for _ in range(4):
+            self.step()
+        self.assertEqual(self.gecko.calls, 10)          # rotates through all 9 pages, then wraps
+        meta = store.read_json(self.tmp / "data" / "state" / "meta.json", {})
+        self.assertEqual(meta["gecko_idx"], 1)
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")

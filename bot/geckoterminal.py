@@ -1,7 +1,8 @@
 """GeckoTerminal public API: used only to DISCOVER tokens (trending and most-traded Solana pools).
 
 Base https://api.geckoterminal.com/api/v2, no key. Documented limit is 30 calls/minute but the
-live API returned HTTP 429 on the 10th call in about 22 seconds, so calls are spaced 6.5s apart.
+live API returned HTTP 429 after 6 to 10 calls even when spaced 6.5s apart (GitHub runners
+share IP addresses), so the bot fetches only a couple of pages per cycle and rotates.
 Prices and trade decisions still come from DexScreener; this just widens the net,
 because DexScreener's own feeds skew to brand-new or paid-for tokens.
 """
