@@ -1,6 +1,6 @@
 {
- "cash_sol": 4.32698360964783,
- "closed_count": 2,
+ "cash_sol": 4.755319874781019,
+ "closed_count": 3,
  "day": {
   "date": "2026-11-13",
   "opens": 3,
@@ -8,59 +8,12 @@
  },
  "last_exit": {
   "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump": "2026-11-13T19:55:09Z",
-  "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-13T19:35:08Z"
+  "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-13T19:35:08Z",
+  "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-13T23:15:13Z"
  },
- "last_sol_usd": 77.65843179377013,
- "positions": [
-  {
-   "entry_exec_usd": 0.002774499026473532,
-   "entry_liq_usd": 311264.33,
-   "entry_mid_usd": 0.00276,
-   "entry_sol_usd": 79.88422575976844,
-   "features": {
-    "age_days": 15.86,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.5,
-    "chg_h1": 4.13,
-    "chg_h24": -18.74,
-    "chg_h6": 1.06,
-    "chg_m5": 1.84,
-    "dex": "raydium",
-    "liq_to_mcap": 0.1129,
-    "liq_usd": 311264,
-    "mcap": 2757720,
-    "quote": "SOL",
-    "score": 2.33,
-    "txns_h1": 160,
-    "vol_h1": 19174,
-    "vol_h24": 475073,
-    "volume_accel": 1.56
-   },
-   "fees_sol": 0.004477246704472943,
-   "id": 2,
-   "last_price_usd": 0.002558,
-   "missing_runs": 0,
-   "opened": "2026-11-13T18:50:10Z",
-   "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
-   "peak_usd": 0.002826,
-   "rugcheck": {
-    "lp_locked_pct": 61.600524018249935,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 2,
-   "sol_in": 0.4954493408945887,
-   "sol_returned": 0.0,
-   "symbol": "FLOAT",
-   "token": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
-   "tokens": 14136.218913682742,
-   "tokens_remaining": 14136.218913682742,
-   "tp1_done": false,
-   "trough_usd": 0.002558
-  }
- ],
- "realized_pnl_sol": -0.17756704945758095,
+ "last_sol_usd": 77.35061838772165,
+ "positions": [],
+ "realized_pnl_sol": -0.24468012521898053,
  "starting_sol": 5.0,
  "trade_seq": 3
 }
