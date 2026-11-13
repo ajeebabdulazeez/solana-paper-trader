@@ -60,13 +60,24 @@ The last review set the test in advance: change pool selection only if a sampled
 
 An offline dry run of two cycles on a copy of the live state (latest snapshot plus the sampled pools) gave: no errors, STANK and CHOO join the universe (7 to 9), DacityCoin moves from `u:quote_token:TTWO` to `u:liq_to_mcap`, AMD, BIG and HUNG stay rejected. Tests: 4 added, 2 adjusted, 22 pass.
 
-**This changes which trades v2 takes.** Pushed at about 23:45 UTC on 13 Nov; trades opened after that can be on a pool the bot could not see before. They are recognisable in the journal: `features.dex` and `pair` name the pool.
+**This changes which trades v2 takes.** Pushed at 23:39 UTC on 13 Nov and live from the 23:40 cycle; trades opened from then on can be on a pool the bot could not see before. They are recognisable in the journal: `features.dex` and `pair` name the pool.
+
+**First live cycle (23:40 UTC).** No errors, `api_calls` 41 (was 32), `allowed_pool_used` 4, `universe_ok` 9 (was 7). The four switched tokens, read from the snapshot:
+
+| Token | Before (23:35) | After (23:40) | Universe result |
+|---|---|---|---|
+| STANK | STONK pool, $86k | SOL pool, $142k | eligible |
+| CHOO | WBTC pool, $105k | SOL pool, $70k | eligible |
+| DacityCoin | TTWO pool, $314k | SOL pool, $97k | `liq_to_mcap` |
+| Dacity | TTWO pool, $240k | SOL pool, $56k, age kept at 33.5 days | `too_old` |
+
+Prices on the SOL pools were within 3% of the exotic pools. STANK and CHOO were both `h1_weak` on that cycle, so no trade yet.
 
 **Blind spot this makes more relevant (not fixed, cannot be from this data).** The SOL pools of STANK and CHOO are Meteora pools. Meteora pool fees vary by pool and can be well above the flat 0.5% swap fee the cost model charges; DexScreener does not report the fee. The bot could already buy tokens whose main pool is on Meteora, so this is not new, but more trades may now land there. The costs section was not touched. Judge Meteora-pool trades separately (the new report table) and treat a small edge on them as unproven.
 
 **For the next review.**
 
-- Check the first live cycles after 23:45 UTC: `allowed_pool_used` should be about 3, `api_calls` about 40 (was 32), no `pool lookup` errors.
+- Confirm the pool lookups stayed clean overnight: `allowed_pool_used` about 4 per cycle, `api_calls` about 41, no `pool lookup` errors.
 - If the next closed trades repeat Leonida's shape (bought within a few cycles of a 5-minute drop of 10% or more, or with the 1-hour change collapsing from above the overheated line), the entry section is the candidate. With three trades it is a story, not evidence.
 - At 13:45 UTC on 14 Nov the 24-hour check from the last review falls due: `universe_ok` under 10 per run means discovery or the universe filters are still the bottleneck.
 
