@@ -1,0 +1,31 @@
+{
+ "34DXEU2ttEtBSb1TqGJm7izgvYTTkqKcCoiNWdPDpump": {
+  "chosen_quote": "TTWO",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 5.1,
+    "dex": "pumpswap",
+    "liq_usd": 103075,
+    "pair": "5TecgcpFLdBnJvBrpjvk32UAYABPRA1HgeFPEUjQQkYK",
+    "price_usd": 0.00128,
+    "quote": "TTWO",
+    "txns_h24": 54699,
+    "vol_h24": 158657
+   },
+   {
+    "age_days": 4.17,
+    "dex": "meteora",
+    "liq_usd": 3870,
+    "pair": "5dwzFhxfs7LUkMZqN6jukjgTmzCNfzbT1dKmpYub28ph",
+    "price_usd": 0.001236,
+    "quote": "SOL",
+    "txns_h24": 3533,
+    "vol_h24": 104233
+   }
+  ],
+  "pools_returned": 2,
+  "symbol": "BIG",
+  "ts": "2026-11-13T18:40:11Z"
+ }
+}
