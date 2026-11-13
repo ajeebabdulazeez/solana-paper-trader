@@ -1,0 +1,92 @@
+{
+ "attributes": {
+  "address": "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+  "base_token_price_native_currency": "0.000216090981022246",
+  "base_token_price_quote_token": "0.000216090981",
+  "base_token_price_usd": "0.017768043855206935503786628044505684938005038337254671703561744",
+  "fdv_usd": "16645900.1354443",
+  "market_cap_usd": "16645902.1204313",
+  "name": "mihao / SOL",
+  "pool_created_at": "2026-10-25T16:43:15Z",
+  "price_change_percentage": {
+   "h1": "18.691",
+   "h24": "2.645",
+   "h6": "16.573",
+   "m15": "-0.153",
+   "m30": "7.052",
+   "m5": "-0.225"
+  },
+  "quote_token_price_base_token": "4627.6804116",
+  "quote_token_price_native_currency": "1.0",
+  "quote_token_price_usd": "81.86070678043497214311612602906826718070057272",
+  "reserve_in_usd": "472423.6772",
+  "transactions": {
+   "h1": {
+    "buyers": 877,
+    "buys": 1818,
+    "sellers": 748,
+    "sells": 1712
+   },
+   "h24": {
+    "buyers": 12394,
+    "buys": 53973,
+    "sellers": 11883,
+    "sells": 37229
+   },
+   "h6": {
+    "buyers": 2111,
+    "buys": 5826,
+    "sellers": 1872,
+    "sells": 4771
+   },
+   "m15": {
+    "buyers": 484,
+    "buys": 860,
+    "sellers": 376,
+    "sells": 670
+   },
+   "m30": {
+    "buyers": 634,
+    "buys": 1203,
+    "sellers": 518,
+    "sells": 958
+   },
+   "m5": {
+    "buyers": 43,
+    "buys": 58,
+    "sellers": 64,
+    "sells": 73
+   }
+  },
+  "volume_usd": {
+   "h1": "399994.957484888",
+   "h24": "7689697.37024245",
+   "h6": "1028136.49172669",
+   "m15": "172533.741561792",
+   "m30": "267516.972299352",
+   "m5": "9965.1181472381"
+  }
+ },
+ "id": "solana_Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+ "relationships": {
+  "base_token": {
+   "data": {
+    "id": "solana_4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+    "type": "token"
+   }
+  },
+  "dex": {
+   "data": {
+    "id": "pumpswap",
+    "type": "dex"
+   }
+  },
+  "quote_token": {
+   "data": {
+    "id": "solana_So11111111111111111111111111111111111111112",
+    "type": "token"
+   }
+  }
+ },
+ "type": "pool"
+}
