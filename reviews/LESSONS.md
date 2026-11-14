@@ -49,6 +49,8 @@ The replay uses the same check. With the live rules it gives the same trades as 
 2. Plumbing, no rule in it: `traded_since` and `unbacked_move` in `bot/strategy.py`, used by `hold_suspect`; positions now remember the time and the 24-hour volume of their last accepted reading (`last_ts`, `last_vol_h24`). `bot/replay.py` mirrors it. README honesty rule updated.
 3. Tests: 6 added, 2 adjusted (the scripted market now states the volume behind a real crash), 35 pass.
 
+**First live cycle (18:45 UTC).** Pushed at 18:41 UTC and picked up by the 18:45 cycle: no errors, `api_calls` 43, `universe_ok` 7, no signal, nothing open. With no position open the new check has not run live yet; the first open position will carry `last_ts` and `last_vol_h24`.
+
 **For the next review.**
 
 - If the next review still finds no signal since 07:55 UTC, the 12-hour rule will allow one relaxation. The numbers above say none of the modest ones would have helped: the 1-hour floor at 1% or 0% adds nothing, and the others add one losing or underwater trade each. A relaxation is allowed, not required. If one is made, buy pressure is the only filter with a hint behind it (NIO), and a modest step (1.2 to 1.1) would not have let NIO in.
