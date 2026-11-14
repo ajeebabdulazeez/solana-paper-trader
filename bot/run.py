@@ -274,16 +274,21 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         # delayed by more than one cycle (two if the readings contradict each other). Not applied
         # when this view is another pool's.
         verified = pos["token"] not in pool_unverified
+        gap_s = hours_since(now, pos["last_ts"]) * 3600.0 if pos.get("last_ts") else None
+        traded = S.traded_since(v, pos.get("last_vol_h24"))
         pos["suspect"] = S.hold_suspect(
             pos["last_price_usd"], pos.get("last_liq_usd") or pos.get("entry_liq_usd"),
-            pos.get("suspect"), price, liq) if verified else None
+            pos.get("suspect"), price, liq, traded, gap_s) if verified else None
         if pos["suspect"]:
             funnel["suspect_price"] += 1
             store.append_jsonl(dd / "journal" / "events.jsonl", {
                 "ts": now_iso, "event": "suspect_price", "id": pos["id"], "symbol": pos["symbol"],
-                "price_usd": price, "last_price_usd": pos["last_price_usd"], "liq_usd": liq})
+                "price_usd": price, "last_price_usd": pos["last_price_usd"], "liq_usd": liq,
+                "traded_usd": round(traded) if traded is not None else None})
             continue
-        pos["last_price_usd"] = price
+        pos["last_price_usd"], pos["last_ts"] = price, now_iso
+        # Another pool's 24-hour volume says nothing about this one: no figure is better than a wrong one.
+        pos["last_vol_h24"] = v.get("vol_h24") if verified else None
         if verified:
             pos["last_liq_usd"] = liq
         pos["peak_usd"] = max(pos["peak_usd"], price)

@@ -97,10 +97,12 @@ def replay(snaps: list, rules: dict, cooldown: bool = True) -> list:
                 continue
             price, liq = v["price_usd"], v["liq_usd"]
             p["seen"] = now
-            p["suspect"] = S.hold_suspect(p["last"], p["last_liq"], p["suspect"], price, liq)
+            p["suspect"] = S.hold_suspect(p["last"], p["last_liq"], p["suspect"], price, liq,
+                                          S.traded_since(v, p["last_vol_h24"]),
+                                          (now - p["last_ts"]).total_seconds())
             if p["suspect"]:
                 continue
-            p["last"], p["last_liq"] = price, liq
+            p["last"], p["last_liq"], p["last_ts"], p["last_vol_h24"] = price, liq, now, v.get("vol_h24")
             p["peak"], p["trough"] = max(p["peak"], price), min(p["trough"], price)
             chg = (price / p["mid"] - 1) * 100
             held_h = (now - parse(p["opened"])).total_seconds() / 3600
@@ -147,7 +149,8 @@ def replay(snaps: list, rules: dict, cooldown: bool = True) -> list:
             pos[t] = {"symbol": v["symbol"], "opened": d["ts"], "mid": v["price_usd"],
                       "entry_liq": v["liq_usd"], "sol_in": size, "left": tokens, "out": 0.0,
                       "peak": v["price_usd"], "trough": v["price_usd"], "tp1": False,
-                      "last": v["price_usd"], "last_liq": v["liq_usd"], "suspect": None, "seen": now,
+                      "last": v["price_usd"], "last_liq": v["liq_usd"], "last_ts": now,
+                      "last_vol_h24": v.get("vol_h24"), "suspect": None, "seen": now,
                       "features": S.features(v)}
     if snaps:
         end, sol = parse(snaps[-1]["ts"]), snaps[-1].get("sol_usd")

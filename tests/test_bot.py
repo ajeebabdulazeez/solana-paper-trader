@@ -27,7 +27,8 @@ SOL_USD = 200.0
 
 
 def make_pair(token, symbol, price, liq, now, age_days=7, mcap=2_000_000, vol_h24=500_000, vol_h6=120_000,
-              vol_h1=40_000, buys_h1=120, sells_h1=60, chg=(0.5, 8.0, 12.0, 20.0), quote="SOL"):
+              vol_h1=40_000, buys_h1=120, sells_h1=60, chg=(0.5, 8.0, 12.0, 20.0), quote="SOL",
+              vol_m5=3000):
     created = int((now - timedelta(days=age_days)).timestamp() * 1000)
     qaddr = S.WSOL if quote == "SOL" else "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
     return {
@@ -37,7 +38,7 @@ def make_pair(token, symbol, price, liq, now, age_days=7, mcap=2_000_000, vol_h2
         "priceUsd": str(price), "priceNative": str(price / SOL_USD if quote == "SOL" else price),
         "txns": {"m5": {"buys": 10, "sells": 6}, "h1": {"buys": buys_h1, "sells": sells_h1},
                  "h24": {"buys": 3000, "sells": 2500}},
-        "volume": {"m5": 3000, "h1": vol_h1, "h6": vol_h6, "h24": vol_h24},
+        "volume": {"m5": vol_m5, "h1": vol_h1, "h6": vol_h6, "h24": vol_h24},
         "priceChange": {"m5": chg[0], "h1": chg[1], "h6": chg[2], "h24": chg[3]},
         "liquidity": {"usd": liq, "base": 1, "quote": 1},
         "fdv": mcap, "marketCap": mcap, "pairCreatedAt": created, "boosts": {"active": 0},
@@ -201,6 +202,38 @@ class Rules(unittest.TestCase):
         self.assertFalse(S.suspect_print(1.0, 100_000, 0.70, 100_000))          # an ordinary gap down
         self.assertFalse(S.suspect_print(None, None, 1.0, 100_000))             # nothing to compare with
 
+    def test_unbacked_move_is_a_big_move_that_almost_nobody_traded(self):
+        # Real readings. The liquidity moved with the price, so suspect_print cannot see these two.
+        self.assertFalse(S.suspect_print(0.0006272, 62_201, 0.0003898, 49_748))
+        self.assertTrue(S.unbacked_move(0.0006272, 62_201, 0.0003898, 2_564, 299))   # Leonida 16:50, -38%
+        self.assertTrue(S.unbacked_move(1.0, 110_782, 1.449, 12, 300))               # GLITCH 04:50, +45%
+        self.assertTrue(S.unbacked_move(0.0021, 56_763, 0.0000004, 216, 300))        # Dacity: both checks agree
+        # Real moves came with the volume it takes to move the pool.
+        self.assertFalse(S.unbacked_move(0.001013, 86_083, 0.0003458, 58_441, 300))  # inuhao, -66%
+        self.assertFalse(S.unbacked_move(1.0, 121_179, 0.537, 22_782, 300))          # AMC, -46%
+        self.assertFalse(S.unbacked_move(0.0009278, 69_326, 0.0007032, 4_031, 305))  # AI, -24%: thin but real
+        # Not judged: an ordinary move, a late cycle (the 5-minute volume cannot vouch for it), no data.
+        self.assertFalse(S.unbacked_move(1.0, 100_000, 0.85, 0, 300))                # -15% is the stop's business
+        self.assertFalse(S.unbacked_move(1.0, 100_000, 1.24, 0, 300))
+        self.assertFalse(S.unbacked_move(0.0006272, 62_201, 0.0003898, 2_564, 900))
+        self.assertFalse(S.unbacked_move(0.0006272, 62_201, 0.0003898, 2_564, None))
+        self.assertFalse(S.unbacked_move(0.0006272, 62_201, 0.0003898, None, 300))
+
+    def test_traded_since_takes_the_better_of_two_volume_witnesses(self):
+        # AI, 2026-11-14 06:30: the 5-minute volume read $30 while the 24-hour volume had risen $4,031.
+        self.assertEqual(S.traded_since({"vol_m5": 30.0, "vol_h24": 94_165.0}, 90_134.0), 4_031.0)
+        # GLITCH's bad print: neither moved. Old volume rolling off must not count against the 5-minute figure.
+        self.assertEqual(S.traded_since({"vol_m5": 12.0, "vol_h24": 150_760.0}, 150_794.0), 12.0)
+        self.assertEqual(S.traded_since({"vol_m5": 500.0, "vol_h24": 9_000.0}, None), 500.0)
+        self.assertIsNone(S.traded_since({"vol_h24": 9_000.0}, 8_000.0))             # a row with no volume field
+
+    def test_unbacked_move_is_held_back_once_and_never_twice(self):
+        note = S.hold_suspect(0.0006272, 62_201, None, 0.0003898, 49_748, 2_564, 299)
+        self.assertEqual(note["runs"], 1)
+        self.assertIsNone(S.hold_suspect(0.0006272, 62_201, note, 0.00039, 49_700, 500, 599))    # still there: real
+        self.assertIsNone(S.hold_suspect(0.0006272, 62_201, note, 0.0006233, 61_723, 875, 599))  # back: nothing happened
+        self.assertIsNone(S.hold_suspect(0.0006272, 62_201, None, 0.0003898, 49_748))            # callers without volume
+
     def test_sol_price_from_sol_pairs(self):
         pairs = [make_pair("A", "A", 2.0, 1e5, T0), make_pair("B", "B", 0.01, 1e5, T0),
                  make_pair("C", "C", 5.0, 1e5, T0, quote="USDC")]
@@ -292,7 +325,7 @@ class Cycle(unittest.TestCase):
     def test_loser_is_stopped_out_at_the_observed_price_not_the_stop_level(self):
         self.list_token("LOSE")
         self.step()
-        self.set("LOSE", 0.70)                # gapped -30% between runs
+        self.set("LOSE", 0.70, vol_m5=20_000)  # gapped -30% between runs, on real selling
         s = self.step()
         self.assertEqual(s["closed"][0][1], "stop_loss")
         t = self.trades()[0]
@@ -344,10 +377,60 @@ class Cycle(unittest.TestCase):
         self.assertEqual(s["closed"][0][1], "stop_loss")
         self.assertLess(self.trades()[0]["pnl_pct"], -99)
 
+    def test_big_move_on_almost_no_volume_waits_one_cycle_for_a_second_reading(self):
+        # Leonida, 2026-11-14 16:50 UTC: -38% for one cycle, liquidity down 20% with it, $2.3k traded.
+        self.list_token("DIP")
+        self.step()
+        self.set("DIP", 0.62, liq=80_000, vol_m5=2_300)
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], 1))
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["last_price_usd"], pos["trough_usd"]), (1.0, 1.0))
+        self.set("DIP", 0.99, vol_m5=900)     # back where it was: no stop was filled at a price nobody paid
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], None))
+        self.assertEqual(self.state()["positions"][0]["trough_usd"], 0.99)
+        # GLITCH, 04:50 UTC the same day: +45% for one cycle on $12. No take-profit at a fantasy price.
+        self.set("DIP", 1.45, liq=122_000, vol_m5=12)
+        s = self.step()
+        self.assertEqual(s["funnel"].get("suspect_price"), 1)
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["tp1_done"], pos["peak_usd"]), (False, 1.0))
+        self.set("DIP", 1.0, vol_m5=34)
+        self.assertEqual(self.step()["closed"], [])
+        # A fall that is still there on the next cycle is real, however little volume was reported.
+        self.set("DIP", 0.62, liq=80_000, vol_m5=2_300)
+        self.assertEqual(self.step()["closed"], [])
+        s = self.step()
+        self.assertEqual((s["closed"][0][1], s["funnel"].get("suspect_price")), ("stop_loss", None))
+        self.assertLess(self.trades()[0]["pnl_pct"], -38)
+        events = store.read_jsonl(self.tmp / "data" / "journal" / "events.jsonl")
+        self.assertEqual([e["event"] for e in events],
+                         ["open", "suspect_price", "suspect_price", "suspect_price", "close"])
+        self.assertEqual(events[1]["traded_usd"], 2_300)
+
+    def test_real_move_shows_in_the_24h_volume_even_when_the_5_minute_figure_lags(self):
+        # AI, 2026-11-14 06:30 UTC: -24% that stayed, 5-minute volume $30, 24-hour volume up $4k.
+        self.list_token("LAG")
+        self.step()
+        self.set("LAG", 0.76, liq=88_000, vol_m5=30, vol_h24=507_000)
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+        self.assertNotIn("suspect_price", s["funnel"])
+
+    def test_late_cycle_acts_on_a_big_move_without_asking_the_five_minute_volume(self):
+        self.list_token("LATE")
+        self.step(minutes=20)                  # the next cycle comes 20 minutes later
+        self.set("LATE", 0.62, liq=80_000, vol_m5=100)
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+        self.assertNotIn("suspect_price", s["funnel"])
+
     def test_real_crash_with_falling_liquidity_is_stopped_at_once(self):
         self.list_token("CRASH")
         self.step()
-        self.set("CRASH", 0.34, liq=75_000)   # -66%, and the pool shrank with it (like inuhao, 2026-11-13)
+        # -66%, the pool shrank with it and the selling shows in the volume (like inuhao, 2026-11-13)
+        self.set("CRASH", 0.34, liq=75_000, vol_m5=58_000)
         s = self.step()
         self.assertEqual(s["closed"][0][1], "stop_loss")
         self.assertNotIn("suspect_price", s["funnel"])

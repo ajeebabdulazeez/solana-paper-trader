@@ -14,6 +14,54 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v3, 2026-11-14 18:40 UTC review: no rule change (plumbing: a second kind of bad price print)
+
+**Health.** 347 cycles since launch, 57 since the last review. Last 6 hours: 72 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 2 minutes old when the review started, so no `.kick`. No errors in any run since 07:05 UTC. `batch_miss` 8 to 12 per cycle out of about 245 tokens (4%), 6 to 9 of them `no_data`. `allowed_pool_used` 4 or 5, `api_calls` 39 to 43, no `pool lookup` error. RugCheck was not called (no signal); the saved sample and the six cached answers still parse (`score_normalised` 1, no risks, `lpLockedPct` read). No `safety:*`, `skip:*` or `suspect_price` rows. Two cycles ran 31 seconds apart at 14:30 (both triggers fired); the workflow's concurrency group ran them one after the other and nothing was lost.
+
+**Strategy: v3 has no trades, so there is nothing to judge.** 59 cycles on v3 (13:50 to 18:35 UTC), no signal, nothing open, equity unchanged at 4.6954 SOL (-6.09%). The last signal was STANK at 07:55 UTC, 10.7 hours before this review. The 12-hour zero-signal rule is not met, so no threshold was relaxed. All-time record is still v2's 6 closed trades (1 win), which are closed business.
+
+- Why no signal. 455 universe-token checks on v3: 235 `h1_weak` (52%), 111 a token in its cooldown (24%), 63 `h6_down`, 40 `buy_pressure`, 2 `h1_overheated`, 2 `m5_dropping`, 2 `txns_h1`. The universe was 6 to 9 tokens a cycle (median 8). Their median 1-hour change was -2.4% and only 29% of readings were at +2% or better, while SOL fell from $75.7 to $72.7 (-4%). The market is what kept the bot out.
+- The v3 filter is not the cause. `txns_h1` blocked two checks, both GLITCH at 18:30 and 18:35 (96 and 99 trades in the hour), and at 18:30 GLITCH would have failed the buy-pressure test next (buy/sell 0.55).
+- New entries the v3 filter would have blocked, from `python3 -m bot.replay --wide --set universe.min_age_days=3 --set universe.max_age_days=30 --set entry.min_txns_h1=50`: Macca (13:10, 112 trades, -12.9%) and CHILL (14:30, 91 trades, -18.5%). Entries under 150 trades are now 0 wins of 7 in that replay, against 3 of 9 at 150 or more. Both new ones are outside the bot's own universe and the gap still turns up by chance about one time in seven. A hint in the hypothesis's favour, no more.
+- A modest relaxation would have bought nothing good. Replayed on the bot's universe: `h1_change_min_pct` at 1 or even 0 adds no trade at all in the whole record; `min_buy_sell_ratio_h1` 1.1 adds one (Leonida 16:35, open at -10%); `h6_change_min_pct` -5 adds one stop-loss (Leonida 11:55, -14.4%); `min_volume_accel` 1.0 adds one stop-loss (paws 10:05, -12.1%).
+- Buy-pressure hint (n=1, not acted on). NIO passed every price test on 29 checks between 13:50 and 17:25 while its 6-hour change went from +4% to +36%, and failed only `buy_pressure`: 0.70 to 1.00 buys per sell against 1.2 needed. The rule counts trades, not money, so a rise carried by fewer, larger buys reads as selling. With the ratio at 0.7 the replay takes NIO at 14:05 for +15.0% and NIO on 13 Nov for +42.9%, and also paws for -18.3%: 7 closed, 3 wins, +1.8% per trade, against 4 closed, 1 win, -6.2% for v3 as it stands. The whole difference is two wins in one token, and 0.7 is a number found by looking for the one that lets NIO in. A story, not evidence.
+- Meteora, the measurement the last review asked for. Snapshot rows have carried `dex` since 13:50, so this is 58 snapshots. Price step in quiet cycles (1 to 5 trades, volume under 0.5% of one side of the pool, SOL's own move taken out, tokens with 8 or more such cycles), 90th percentile: Meteora 2.4% over 63 cycles in 4 pools (CHOO 3.9%, STANK 3.2%, Dacity 2.3%, DacityCoin 1.7%); PumpSwap 2.4% over 223 cycles in 10 pools (1.6% to 3.3%); Raydium 1.4% over 53 cycles in 3 pools; MetaDAO 1.2% in 1. On this window Meteora pools do not stand apart from PumpSwap, and STANK reads 3.2%, not the 4.2% of this morning. No case for excluding Meteora or pricing it differently. Five hours is short: measure again on a full day.
+- Stops: no new exits, so nothing new on fills.
+
+**Bug fixed: a bad price print the guard from this morning could not see.** Two readings in the record are prices nobody traded at, on tokens that are in the bot's universe:
+
+| Token | Time (UTC, 14 Nov) | Price before, at, after | Liquidity | Traded in those 5 minutes | Volume a real move that size needs |
+|---|---|---|---|---|---|
+| GLITCH | 04:50 | 0.001829, 0.002650 (+45%), 0.001834 | +22.8% | $12 | about $11,300 |
+| Leonida | 16:50 | 0.000627, 0.000390 (-38%), 0.000623 | -20.0% | $2,286 (24-hour volume up $2,564) | about $6,600 |
+
+The guard added this morning ignores a price that more than halves or doubles while liquidity stays within 15%. These two are smaller than 2x, and DexScreener appears to work out the liquidity figure from the same wrong price, so liquidity moved with it (a liquidity figure worked out from a price printed 45% too high would read 22.5% too high, and it read +22.8%). The bot held neither token. Had it held Leonida, the stop would have sold at -38%: the replay with a looser buy-pressure rule booked exactly that, -35.0%. Had it held GLITCH, half the position would have been sold at +45%, a profit that never existed.
+
+The fix uses a second thing a pool cannot do: move without trades. Moving a constant-product pool by a price ratio r takes about half its liquidity times |sqrt(r) - 1| in volume. An open position now also ignores, for one cycle, a move beyond +25% or -20% since its last accepted reading when the volume traded since then is under half of that amount. "Traded since then" is the larger of the 5-minute volume and the rise in 24-hour volume; the second is there because the 5-minute figure sometimes lags the price (AI at 06:30: a real -24% that stayed, 5-minute volume $30, 24-hour volume up $4,031). The check only runs when the two readings are at most 6 minutes apart, so on the next cycle a move it held back is acted on whatever the volume: the delay is one cycle, never more. The old check is unchanged and both feed the same `suspect_price` log line, which now records the traded volume.
+
+How well it separates, on all 15,751 pairs of consecutive readings of one pool in the record (161 moves that large): every bad print came with 0.39 of the needed volume or less (the two above and Dacity's); real moves came with 0.56 or more, and all but three with more than the full amount. One real move lands on the wrong side: GTA$ at 12:40, +89% while its liquidity fell 19% (0.28), on a pool the bot could not have held (under $50k). Run over every reading of every token as if it were held, the new check holds back three readings in 15,888: GLITCH, Leonida and GTA$. The half is a number chosen between 0.39 and 0.56 on two bad prints, so it is fitted; what is not fitted is the mechanism, and a wrong call costs one cycle of delay on a stop or a take-profit.
+
+The replay uses the same check. With the live rules it gives the same trades as before (the five v2 trades it can see, each to the same hundredth; `--wide` 27 closed, unchanged).
+
+**Changed, in full.**
+
+1. Rulebook: nothing. v3 stays.
+2. Plumbing, no rule in it: `traded_since` and `unbacked_move` in `bot/strategy.py`, used by `hold_suspect`; positions now remember the time and the 24-hour volume of their last accepted reading (`last_ts`, `last_vol_h24`). `bot/replay.py` mirrors it. README honesty rule updated.
+3. Tests: 6 added, 2 adjusted (the scripted market now states the volume behind a real crash), 35 pass.
+
+**For the next review.**
+
+- If the next review still finds no signal since 07:55 UTC, the 12-hour rule will allow one relaxation. The numbers above say none of the modest ones would have helped: the 1-hour floor at 1% or 0% adds nothing, and the others add one losing or underwater trade each. A relaxation is allowed, not required. If one is made, buy pressure is the only filter with a hint behind it (NIO), and a modest step (1.2 to 1.1) would not have let NIO in.
+- Judge v3 only on v3 trades. There are none yet.
+- Still open from the last review: the exit hint (entries that peak at +13% to +19% and end at the stop), the 1-hour-change hint, the cooldown hint, and the size of the universe (median 8 tokens a cycle; discovery is the lever and cannot be tested from the repo's data).
+- Measure the Meteora price step again once a full day of rows has `dex`.
+- Check `suspect_price` in the funnel and in `data/journal/events.jsonl`. Each event should be followed by a normal price on the next cycle.
+
+**Would prove this review wrong.**
+
+- Leaving the rules alone is wrong if cycles keep arriving and v3 has opened fewer than 2 trades by the end of 15 Nov while the replay with `--set entry.min_txns_h1=50` shows winners among the entries v3 blocked: then put `min_txns_h1` back to 50. If the replay shows no trades either way, the universe is the bottleneck, not the entry rules.
+- The new check is wrong if a `suspect_price` event with a move under 2x is followed by the same price on the next cycle more than once in a while (real moves are being delayed), or if a position's close shows a stop or take-profit filled on a one-cycle spike that reversed (a bad print got through). In the first case raise nothing and remove `unbacked_move` from `hold_suspect`; in the second, look at what the volume read on that cycle before changing the half.
+
 ### v3, 2026-11-14 13:30 UTC review: a buy now needs 150 trades in the last hour, was 50 (plumbing: bad price prints, replay tool, DEX in snapshots)
 
 **Health.** 288 cycles since launch, 172 since the last review. Last 6 hours: 72 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 2 minutes old, so no `.kick`. Errors in 2 runs since the last review (06:45 and 07:05 UTC, one GeckoTerminal 429 each; the page was fetched on the next cycle) and none in the 80 runs after. `batch_miss` is 9 to 13 per cycle out of about 258 tokens (4%); 6 to 10 of those are `no_data`. The pool fix from the last review held: `allowed_pool_used` 4 to 6 per cycle, `api_calls` 39 to 46, no `pool lookup` error. RugCheck has run for all 6 signals and every response parsed (`score_normalised` 1, no risks, LP locked 40.5% to 99.8%). No `safety:*` or `skip:*` rows.

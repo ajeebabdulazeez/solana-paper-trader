@@ -142,18 +142,72 @@ def suspect_print(prev_price, prev_liq, price, liq) -> bool:
            (pr > SUSPECT_PRICE_RATIO and lr < 1.0 + SUSPECT_LIQ_BAND)
 
 
+UNBACKED_MOVE_RATIO = 1.25    # a move beyond +25% / -20% between two readings...
+UNBACKED_VOLUME_SHARE = 0.5   # ...on under half the volume a pool of that size needs to move that far
+UNBACKED_MAX_GAP_S = 360      # only judged when the readings are one cycle apart
+
+
+def traded_since(v: dict, prev_vol_h24):
+    """Roughly how much was traded in this pool since the last reading, in USD: the larger of the
+    5-minute volume and the rise in 24-hour volume since that reading. Either can run low (the
+    5-minute figure sometimes lags the price, the 24-hour figure loses yesterday's volume as it
+    rolls off), neither runs high, so the larger is the better witness.
+    """
+    m5 = v.get("vol_m5")
+    if m5 is None:
+        return None
+    rise = (v.get("vol_h24") or 0.0) - prev_vol_h24 if prev_vol_h24 is not None else 0.0
+    return max(m5, rise)
+
+
+def unbacked_move(prev_price, prev_liq, price, traded, gap_s) -> bool:
+    """Is this a big price move that almost nobody traded?
+
+    A second kind of bad print (GLITCH, 2026-11-14 04:50 UTC: +45% for one cycle on $12 of volume;
+    Leonida, 2026-11-14 16:50: -38% for one cycle on $2.6k). The data source works out the pool's
+    liquidity in USD from the same wrong price, so liquidity moves with it and `suspect_print`
+    sees nothing odd. But a pool's price only moves when someone trades: moving a constant-product
+    pool with `prev_liq` of liquidity by a price ratio r takes about prev_liq/2 * |sqrt(r) - 1| of
+    volume. `traded` is what `traded_since` reports.
+
+    Measured on the first 29 hours of snapshots (15,751 pairs of consecutive readings of one pool,
+    161 moves this large): the bad prints came with 0.39 of that volume or less, the real moves
+    with 0.56 or more, and all but three of them with more than the full amount. One odd real move
+    falls on the wrong side (GTA$, 12:40 on 14 Nov: +89% while liquidity fell 19%, 0.28) and costs
+    what a false alarm costs here: one cycle of delay.
+
+    `gap_s` is the time since the reading `prev_price` was taken. The 5-minute volume says nothing
+    about a longer gap, so nothing is judged then.
+    """
+    if not prev_price or not prev_liq or not price or price <= 0 or traded is None or gap_s is None:
+        return False
+    if gap_s > UNBACKED_MAX_GAP_S:
+        return False
+    r = price / prev_price
+    if 1.0 / UNBACKED_MOVE_RATIO <= r <= UNBACKED_MOVE_RATIO:
+        return False
+    needed = prev_liq / 2.0 * abs(r ** 0.5 - 1.0)
+    return traded < UNBACKED_VOLUME_SHARE * needed
+
+
 SUSPECT_MAX_RUNS = 2        # never ignore a position's price for more than this many cycles in a row
 
 
-def hold_suspect(last_price, last_liq, held, price, liq):
+def hold_suspect(last_price, last_liq, held, price, liq, traded=None, gap_s=None):
     """Should an open position ignore this reading for one cycle? Returns the note to keep on the
     position if so, else None (act on the reading as usual).
 
     `held` is the note from the previous cycle, if that reading was ignored. A second reading that
     agrees with an ignored one confirms it, so a real move is delayed by one cycle at most; readings
     that keep contradicting each other are ignored for SUSPECT_MAX_RUNS cycles, then taken as shown.
+
+    `traded` (see `traded_since`) and `gap_s` (seconds since the last accepted reading) switch on
+    the traded-volume check as well. That check can only fire on the first reading after an
+    accepted one: a cycle later the gap is too long for it, so a move it held back is acted on
+    then, whatever the volume.
     """
-    if not suspect_print(last_price, last_liq, price, liq):
+    if not (suspect_print(last_price, last_liq, price, liq)
+            or unbacked_move(last_price, last_liq, price, traded, gap_s)):
         return None
     runs = (held or {}).get("runs", 0)
     if held and not suspect_print(held.get("price"), held.get("liq"), price, liq):
