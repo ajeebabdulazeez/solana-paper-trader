@@ -7,12 +7,81 @@ The running record of what paper results have shown and why each rulebook versio
 1. Run `python3 -m bot.report` and read `data/STATUS.md` and the latest `data/runs/*.jsonl` errors.
 2. First check the bot is healthy: runs arriving, no repeated errors, `batch_miss` low, signals appearing. Fix plumbing before judging strategy.
 3. Judge the current rulebook version only on its own trades. Under about 30 closed trades, treat every pattern as a hint, not a finding.
-4. Look for: which exit reasons lose the most, which entry features separate winners from losers, how much gain was left on the table, and which funnel stage blocks the most candidates.
+4. Look for: which exit reasons lose the most, which entry features separate winners from losers, how much gain was left on the table, and which funnel stage blocks the most candidates. `python3 -m bot.replay` (add `--wide`, `--no-cooldown` or `--set entry.min_txns_h1=50`) replays the rules on the recorded snapshots, so you can look past the bot's own few trades and keep measuring entries a rule now blocks. Its output is a hint, never a finding; the limits are listed at the top of `bot/replay.py`.
 5. Change at most one rulebook section per review, bump `version`, and write the entry below: what the data showed, what changed, and what result would prove the change wrong.
 6. Never loosen a safety rule to get more trades. Never tune to hit a return target.
 7. Once a version looks good, stop changing it: the proof gate needs 100+ trades on one frozen version.
 
 ## Log
+
+### v3, 2026-11-14 13:30 UTC review: a buy now needs 150 trades in the last hour, was 50 (plumbing: bad price prints, replay tool, DEX in snapshots)
+
+**Health.** 288 cycles since launch, 172 since the last review. Last 6 hours: 72 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 2 minutes old, so no `.kick`. Errors in 2 runs since the last review (06:45 and 07:05 UTC, one GeckoTerminal 429 each; the page was fetched on the next cycle) and none in the 80 runs after. `batch_miss` is 9 to 13 per cycle out of about 258 tokens (4%); 6 to 10 of those are `no_data`. The pool fix from the last review held: `allowed_pool_used` 4 to 6 per cycle, `api_calls` 39 to 46, no `pool lookup` error. RugCheck has run for all 6 signals and every response parsed (`score_normalised` 1, no risks, LP locked 40.5% to 99.8%). No `safety:*` or `skip:*` rows.
+
+**v2 final record: 6 closed trades, 1 win. Six trades are hints, not findings.** Equity 4.6954 SOL (-6.09%), nothing open. Expectancy -10.28% per trade, total -0.3046 SOL, max drawdown 6.33%. SOL fell from $80.8 at launch to $75.4 (-7%).
+
+| # | Token | Opened (UTC) | Trades in the hour before | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|
+| 1 | WEALTH | 13 Nov 17:25 | 125 | +0.5% | stop | -18.84% |
+| 2 | FLOAT | 13 Nov 18:50 | 160 | +2.4% | stop | -13.55% |
+| 3 | Leonida | 13 Nov 18:55 | 726 | 0.0% | stop | -16.84% |
+| 4 | :3 | 14 Nov 03:40 | 223 | +4.2% | stop | -15.10% |
+| 5 | WASTED | 14 Nov 04:25 | 301 | +44.1% | half sold at +25%, rest trailed out | +20.76% |
+| 6 | STANK | 14 Nov 07:55 | 108 | +17.1% | stop | -18.08% |
+
+- Exits. The five stops cost 0.4029 SOL, average -16.48%. The price at the stop cycle was -12.2% to -15.8% (average -14.3%), so 2.3 points past the stop level with every cycle on time. As before, that is the gap between two 5-minute readings, not a late trigger.
+- Left on the table. WASTED: the second half trailed out at +25%; two hours and twenty minutes later the token was 76% above the entry. STANK: +17.1% fifteen minutes in, 3 points short of the take-profit, then five hours down to the stop. One case each way; no exit change on that.
+- The test the last review set for changing the entry rules (the next 5 to 10 trades stopped out without being more than a few percent up) is not met: of the three trades since, one won and one reached +17%. The change below rests on different evidence and is weaker than that test asked for. I say so plainly.
+
+**New review tool: `python3 -m bot.replay`.** It replays the rulebook on the recorded snapshots. With v2's numbers it reproduces all six real trades, each within 0.1 points of the journal. Its limits are at the top of `bot/replay.py`: no RugCheck, no caps, one day of one falling market, and every variant tried on it is fitted to it. It gave three things.
+
+1. *Universe.* The 24-hour check from 13 Nov is due and fails: `universe_ok` was 8 to 10 per run and under 10 in 140 of 169 runs. But looser universe numbers would not have found trades. Replayed since 18:40 UTC on 13 Nov: minimum age 2 days or 1 day adds one signal (Max, 13:10 today); `min_liq_to_mcap` 0.02 adds one (RAMBO, a stop-loss); maximum age 35 days adds none. About 9 tokens under 3 days old pass every other universe number each run and then fail the entry rules like the rest (`h1_weak` on 55% of their checks). More tokens have to come from discovery, not from thresholds. Not changed today.
+2. *Cooldown (hint for later).* 443 of 1,505 universe-token checks (29%) were a token inside its 12-hour cooldown. With no cooldown the replay takes five more trades in WASTED and FLOAT: three wins, two stops, average +1.3%. Two tokens on one night. Portfolio section, not touched.
+3. *Thin trading at entry (the change).* Below.
+
+**Changed: `entry.min_txns_h1` 50 to 150. A hypothesis, on weak evidence.**
+
+| Entries made with | Real v2 trades | Replay: every recorded token 3 to 30 days old |
+|---|---|---|
+| under 150 trades in the hour | 0 wins of 2 (WEALTH, STANK) | 0 wins of 5, average -16.7% (WEALTH, AMD, Gato, STANK, PIRATE) |
+| 150 or more | 1 win of 4 | 3 wins of 9, average -3.3% |
+
+The replay column is `python3 -m bot.replay --wide --set universe.min_age_days=3 --set universe.max_age_days=30 --set entry.min_txns_h1=50`: the v2 entry and exit rules on any token of tradable age, whatever its quote token or size.
+
+- How weak. Two of the five are the real trades, so the replay adds three tokens (AMD, Gato, PIRATE), not five. The universe filters reject all three and none was RugChecked. Zero of 5 against 3 of 9 turns up by chance about one time in four. I also split the same 14 replayed trades on five other entry features. The 1-hour change split them just as cleanly (at or under +7.8%: 0 wins of 7; above: 3 of 7). Buy/sell ratio, volume acceleration, liquidity and age showed nothing. So the data does not single out thin trading, and the best of six splits always looks better than it is.
+- Why act anyway, and why this one. (a) It is the candidate named after the first trade on 13 Nov ("a higher `min_txns_h1`"), not a pattern found by searching; the 1-hour change was found by searching. (b) There is a mechanism. Under 150 trades an hour is under 3 a minute, so the 1-hour change, the buy/sell ratio and the volume acceleration are each set by a handful of trades. STANK shows it: between 05:45 and 06:15 UTC its price sat at $0.00202 to $0.00203 while its reported 1-hour change read +3.3, -0.8, +3.3, +4.6, +0.5, +4.9, +0.6. That swing is only which side traded last (see the next section), and it is enough to pass the +2% entry test by itself. (c) It is a tightening and costs little: 54 of the 65 cycle-level entry passes since 18:40 on 13 Nov had 150 or more trades, and 4 of the 6 real trades would still have been taken, so expect about a third fewer trades. (d) The blocked entries stay measurable: `python3 -m bot.replay --set entry.min_txns_h1=50` keeps showing what they would have done.
+- Why 150 and not more. At 200 the replay would also drop FLOAT's losing entry, at 250 also :3's, and the bot's own universe replays at +0.3% and +5.5% per trade instead of -8.5%. Picking the number that makes the past look best is tuning to the result. 150 removes only the group with no winner in it.
+- What it does not do. On the same replay the v3 rules still lose: 10 closed, 3 wins, -4.5% per trade. This removes the worst group. It does not make the strategy profitable on the record.
+
+**STANK and the Meteora cost blind spot: measured, not fixed.** STANK was the first trade on a Meteora pool, the SOL pool the last review's fix made visible. While it was held (one pool, liquidity about $140k) the price hopped between two levels on almost no volume: 10:40 to 11:20 UTC read 0.002256, 0.002352, 0.002352, 0.002352, 0.002257, 0.002350, 0.002234, 0.002327, 0.002213. Two of those 4% hops came with $21 and $106 of volume in the 5 minutes; a $106 trade moves a constant-product pool of that size by 0.3%. So the buy price and the sell price in that pool sit 4 to 5% apart, where the cost model charges about 2% for a round trip (0.5% fee and 0.5% slippage each way) plus impact. STANK's -18.08% is therefore 2 to 3 points too kind, and its entry and stop were read off whichever side traded last. In quiet cycles (1 to 5 trades, volume under 0.5% of one side of the pool) the 90th-percentile price move was 4.2% for STANK and 4.2% and 4.1% for the two other Meteora SOL pools the bot reads (CHOO, DacityCoin), against 2.1% to 3.1% for the PumpSwap tokens WEALTH, Leonida and :3 and 1.3% for FLOAT on Raydium. Three pools is a hint. The costs section is untouched: the data cannot give a fee per pool, and one section per review. The new entry rule would have blocked STANK (108 trades) but does not fix the cost of a busy Meteora pool. Snapshot rows now carry the DEX so the next review can measure this across the watchlist.
+
+**Bug fixed: a bad price print could close a position at -100%.** DexScreener misprinted Dacity's price four times in 14 hours (00:40, 01:25, 07:10 and 07:39 UTC): under $0.000001 instead of $0.0021 for a single cycle, with liquidity only 5 to 8% lower than the reading before and the reported 1-hour change at -100%. The bot never held Dacity (it is over 30 days old), so no trade was affected. Had it held it, the stop would have fired and sold at that price: the replay booked exactly that, -100%, twice. A print the other way would have filled a take-profit at a fantasy price. Both would corrupt the record.
+
+The fix uses what a pool cannot do. When a price really halves, the pool's liquidity in USD falls by about 30%. Every one of the 9 genuine one-cycle moves beyond 2x in the record shows it (inuhao: price -66%, liquidity -42%). So an open position now ignores, for one cycle, a price that more than halved or doubled since its last accepted reading while liquidity stayed within 15%. If the next reading agrees with the ignored one, it is acted on, so a real move is delayed by one cycle at most; readings that keep contradicting each other are ignored for two cycles and then taken as shown. Each ignored reading is logged as `suspect_price` in the run funnel and in `data/journal/events.jsonl`. In 12,911 pairs of consecutive readings only Dacity trips it. One real crash trips it across a gap in the record: GTA at 17:55 on 13 Nov, three hours old and never tradable, read 84% lower than 20 minutes earlier with more liquidity, not less. That is the known cost: one cycle of delay on a real crash that happens with flat or rising liquidity. Entries need no guard: on a bad print the reported 1-hour change reads -100% or far above the 25% cap, and the entry rules reject both.
+
+**Changed, in full.**
+
+1. Rulebook v3: `entry.min_txns_h1` 50 to 150. Nothing else.
+2. Plumbing, no rule in it: the bad-print guard for open positions (`suspect_print` and `hold_suspect` in `bot/strategy.py`).
+3. Plumbing: snapshot rows gain a 22nd field, `dex`.
+4. New `bot/replay.py`, read-only, with its own tests.
+5. Tests: 7 added, 2 adjusted, 29 pass. An offline dry run of four cycles on a copy of the live state ran clean: a thin signal was rejected with `e:txns_h1`, a busy one opened, a bad print on the open position was ignored and the position carried on.
+
+**For the next review.**
+
+- Judge v3 only on v3 trades. v2 is closed at 6 trades.
+- With `dex` in the snapshots, measure the quiet-cycle price step by DEX across the watchlist. If Meteora pools as a group show the 4% step, the choice is to exclude them in `universe` or to price them in `costs` (tightening either is allowed).
+- Exit hint: three entries in the replay peaked at +13% to +19% and still ended at the full stop (STANK, AMD, Gato). If v3 trades do the same, the exit section is the candidate (a take-profit nearer +15%, or a stop moved to break-even after +10%).
+- Entry hint not acted on: the 1-hour change. In the replay every entry with a 1-hour change at or under +7.8% lost (0 of 7, the real trades WEALTH at +4.3% and FLOAT at +4.1% among them). If v3's losers cluster there, `h1_change_min_pct` is the next candidate.
+- Cooldown hint, item 2 above.
+- Universe size: thresholds are not the lever, discovery is. Nothing in the repo's data can test a new source; that needs a session with API access or a new feed.
+- Check `suspect_price` in the funnel. It should be rare, and never two cycles running on one position.
+
+**Would prove this review wrong.**
+
+- The entry change is wrong if v3's first 10 closed trades have 2 winners or fewer: v2 won 1 of 6 without the filter, so that would be no improvement. It is also wrong if, after a week, `python3 -m bot.replay --set entry.min_txns_h1=50` shows the blocked entries (under 150 trades) winning as often as the ones taken. In either case put it back to 50 and look at the exit side instead. Do not raise it further on replay results alone.
+- It costs too much if v3 opens fewer than 2 trades a day over three days with cycles arriving: at that rate the proof gate is out of reach, and the universe has to grow before any entry filter can be judged.
+- The bad-print guard is wrong if a `suspect_price` event is followed by the same price on the next cycle more than once in a while (it would mean real moves are being delayed), or if a position is ever ignored for more than two cycles running: then remove it.
 
 ### v2, 2026-11-13 23:40 UTC review: no rule change (plumbing: trade a token on its SOL pool when the batch call hides it)
 

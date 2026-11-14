@@ -2,6 +2,7 @@
 
 Run:  python3 -m unittest discover -s tests -v
 """
+import copy
 import json
 import os
 import shutil
@@ -13,6 +14,7 @@ from pathlib import Path
 from bot import portfolio as P
 from bot import store
 from bot import strategy as S
+from bot import replay as R
 from bot.report import review, stats
 from bot.rugcheck import assess, compact
 from bot.run import run
@@ -166,7 +168,9 @@ class Rules(unittest.TestCase):
         self.assertEqual(S.entry_reject(self.view(chg=(0.5, 60.0, 80.0, 90.0)), e, 0), "h1_overheated")
         self.assertEqual(S.entry_reject(self.view(chg=(0.5, 0.5, 5.0, 5.0)), e, 0), "h1_weak")
         self.assertEqual(S.entry_reject(self.view(chg=(-6.0, 8.0, 12.0, 20.0)), e, 0), "m5_dropping")
-        self.assertEqual(S.entry_reject(self.view(buys_h1=50, sells_h1=60), e, 0), "buy_pressure")
+        self.assertEqual(S.entry_reject(self.view(buys_h1=100, sells_h1=120), e, 0), "buy_pressure")
+        thin = self.view(buys_h1=e["min_txns_h1"] * 2 // 3 - 1, sells_h1=e["min_txns_h1"] // 3)
+        self.assertEqual(S.entry_reject(thin, e, 0), "txns_h1")      # too few trades in the hour to read
         self.assertEqual(S.entry_reject(self.view(vol_h1=10_000), e, 0), "volume_accel")
         self.assertEqual(S.entry_reject(self.view(), e, 25.0), "liquidity_falling")
 
@@ -179,6 +183,23 @@ class Rules(unittest.TestCase):
         self.assertEqual(pick([deep, sol])["quote_symbol"], "TTWO")                 # old behaviour: deepest
         self.assertEqual(pick([deep, sol, thin], allowed_quotes=allowed, min_allowed_liq=30_000)["liq_usd"], 80_000)
         self.assertEqual(pick([deep, thin], allowed_quotes=allowed, min_allowed_liq=30_000)["quote_symbol"], "TTWO")
+
+    def test_ignored_reading_is_confirmed_by_the_next_one_and_never_ignored_for_long(self):
+        first = S.hold_suspect(1.0, 100_000, None, 0.0004, 100_000)
+        self.assertEqual(first, {"price": 0.0004, "liq": 100_000, "runs": 1})
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, first, 0.00041, 99_000))     # same again: real
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, first, 1.01, 100_000))       # back to normal
+        second = S.hold_suspect(1.0, 100_000, first, 5000.0, 100_000)               # contradicts both
+        self.assertEqual(second["runs"], 2)
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, second, 0.0004, 100_000))    # the limit
+
+    def test_suspect_print_needs_a_big_price_jump_with_flat_liquidity(self):
+        self.assertTrue(S.suspect_print(0.0021, 56_000, 0.0000004, 52_000))    # Dacity, 2026-11-14 01:25
+        self.assertTrue(S.suspect_print(0.0000004, 52_000, 0.0021, 56_000))    # and the way back up
+        self.assertFalse(S.suspect_print(0.001013, 86_083, 0.0003458, 49_806))  # inuhao: a real -66% crash
+        self.assertFalse(S.suspect_print(0.0001862, 30_209, 0.00039, 44_859))   # chudhaos: a real +109%
+        self.assertFalse(S.suspect_print(1.0, 100_000, 0.70, 100_000))          # an ordinary gap down
+        self.assertFalse(S.suspect_print(None, None, 1.0, 100_000))             # nothing to compare with
 
     def test_sol_price_from_sol_pairs(self):
         pairs = [make_pair("A", "A", 2.0, 1e5, T0), make_pair("B", "B", 0.01, 1e5, T0),
@@ -193,6 +214,22 @@ class Rules(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(why.startswith("rugcheck_risk"))
         self.assertEqual(assess(compact({"weird": True}), s)[1], "rugcheck_no_score")
+
+
+class Replay(unittest.TestCase):
+    def test_token_that_leaves_the_record_while_held_is_lost_not_a_winner(self):
+        from bot.run import snapshot_row
+        row = lambda tok, px, now: snapshot_row(  # noqa: E731
+            S.pair_view(make_pair(tok, tok, px, 100_000, now), int(now.timestamp() * 1000)))
+        snaps = []
+        for k in range(10):
+            now = T0 + timedelta(minutes=5 * k)
+            rows = [row("STAY", 1.0 + 0.01 * k, now)] + ([row("GONE", 1.1, now)] if k < 2 else [])
+            snaps.append({"ts": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sol_usd": SOL_USD, "rows": rows})
+        trades = {t["symbol"]: t for t in R.replay(snaps, RULES)}
+        self.assertEqual({k: t["exit_reason"] for k, t in trades.items()}, {"STAY": "open", "GONE": "lost"})
+        text = R.report(list(trades.values()))
+        self.assertIn("0 closed, 1 still open, 1 lost from the record (not counted)", text)
 
 
 class Cycle(unittest.TestCase):
@@ -261,6 +298,60 @@ class Cycle(unittest.TestCase):
         t = self.trades()[0]
         self.assertLess(t["pnl_pct"], -30)    # pays the full gap plus costs, not a tidy -12%
         self.assertEqual(self.state()["positions"], [])
+
+    def test_one_cycle_bad_price_print_fills_nothing_but_a_repeated_one_is_acted_on(self):
+        self.list_token("GLITCH")
+        self.step()
+        self.set("GLITCH", 0.0004)            # -99.96% with the pool's liquidity untouched: a bad print
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], 1))
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["last_price_usd"], pos["trough_usd"]), (1.0, 1.0))
+        self.assertAlmostEqual(s["equity_sol"], 5.0, delta=0.02)   # still marked at the last good price
+        self.set("GLITCH", 5000.0)            # a different impossible print confirms nothing
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], 1))
+        self.assertFalse(self.state()["positions"][0]["tp1_done"])
+        self.set("GLITCH", 0.98)              # back to normal: the position was never touched
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], None))
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["last_price_usd"], pos["peak_usd"], pos["trough_usd"]), (0.98, 1.0, 0.98))
+        self.assertEqual(self.trades(), [])
+        events = store.read_jsonl(self.tmp / "data" / "journal" / "events.jsonl")
+        self.assertEqual([e["event"] for e in events], ["open", "suspect_price", "suspect_price"])
+        for px in (0.0004, 5000.0, 0.0004):   # garbage that never settles is not ignored for ever
+            self.set("GLITCH", px)
+            s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+
+    def test_bad_print_upwards_does_not_take_profit_and_the_position_carries_on(self):
+        self.list_token("SPIKE")
+        self.step()
+        self.set("SPIKE", 5000.0)             # x5000 with flat liquidity
+        s = self.step()
+        self.assertEqual(s["funnel"].get("suspect_price"), 1)
+        pos = self.state()["positions"][0]
+        self.assertFalse(pos["tp1_done"])
+        self.assertEqual(pos["peak_usd"], 1.0)
+        self.set("SPIKE", 1.05)               # back to normal: nothing happened
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], None))
+        self.assertEqual(self.state()["positions"][0]["last_price_usd"], 1.05)
+        self.set("SPIKE", 0.0004)             # a low print that is still there one cycle later is real
+        self.assertEqual(self.step()["closed"], [])
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+        self.assertLess(self.trades()[0]["pnl_pct"], -99)
+
+    def test_real_crash_with_falling_liquidity_is_stopped_at_once(self):
+        self.list_token("CRASH")
+        self.step()
+        self.set("CRASH", 0.34, liq=75_000)   # -66%, and the pool shrank with it (like inuhao, 2026-11-13)
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "stop_loss")
+        self.assertNotIn("suspect_price", s["funnel"])
+        self.assertLess(self.trades()[0]["pnl_pct"], -60)
 
     def test_rug_liquidity_pull_is_a_near_total_loss(self):
         self.list_token("RUG")
@@ -365,8 +456,9 @@ class Cycle(unittest.TestCase):
         snaps = list((self.tmp / "data" / "snapshots").rglob("*.jsonl"))
         self.assertTrue(snaps)
         row = store.read_jsonl(snaps[0])[0]["rows"][0]
-        self.assertEqual(len(row), 21)
+        self.assertEqual(len(row), 22)
         self.assertEqual(row[20], "SOL")                # quote symbol, so reviews can replay the universe filter
+        self.assertEqual(row[21], "raydium")            # DEX of the pool, so reviews can split pools by DEX
 
     def test_gecko_discovery_filters_and_throttles(self):
         from bot.geckoterminal import pick_tokens
@@ -461,6 +553,32 @@ class Cycle(unittest.TestCase):
         self.assertEqual(s["funnel"].get("u:quote_token:TTWO"), 1)   # FAKE: a token merely called SOL
         self.assertEqual(s["funnel"].get("u:too_old"), 1)            # OLD: judged by its oldest pool
         self.assertEqual(s["funnel"].get("allowed_pool_used"), 1)
+
+    def test_replay_reproduces_the_bots_own_trades_from_the_snapshots(self):
+        self.list_token("WIN")
+        self.list_token("LOSE")
+        self.list_token("THIN", buys_h1=60, sells_h1=30)   # under min_txns_h1: never bought
+        self.step()
+        for win, lose in ((1.25, 0.95), (1.50, 0.80), (1.33, 0.80)):
+            self.set("WIN", win)
+            self.set("LOSE", lose)
+            self.step()
+        real = {t["symbol"]: t for t in self.trades()}
+        self.assertEqual({k: t["exit_reason"] for k, t in real.items()},
+                         {"WIN": "trailing_stop", "LOSE": "stop_loss"})
+        snaps = R.load_snapshots()
+        again = {t["symbol"]: t for t in R.replay(snaps, RULES)}
+        self.assertEqual(set(again), {"WIN", "LOSE"})
+        for k, t in real.items():
+            self.assertEqual(again[k]["exit_reason"], t["exit_reason"])
+            self.assertAlmostEqual(again[k]["pnl_pct"], t["pnl_pct"], delta=0.05)
+            self.assertEqual(again[k]["max_gain_pct"], t["max_gain_pct"])
+        loose = copy.deepcopy(RULES)
+        loose["entry"]["min_txns_h1"] = 50                 # the entries a rule blocks can still be measured
+        self.assertIn("THIN", {t["symbol"] for t in R.replay(snaps, loose)})
+        wide = R.replay(snaps, R.wide_rules(RULES), cooldown=False)
+        self.assertGreaterEqual(len(wide), 2)
+        self.assertIn("| WIN |", R.report(wide))
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")

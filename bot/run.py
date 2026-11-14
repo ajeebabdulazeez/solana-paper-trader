@@ -194,7 +194,7 @@ def snapshot_row(v):
         r(v["vol_m5"]), r(v["vol_h1"]), r(v["vol_h6"]), r(v["vol_h24"]),
         v["buys_m5"], v["sells_m5"], v["buys_h1"], v["sells_h1"], v["buys_h24"], v["sells_h24"],
         v["chg_m5"], v["chg_h1"], v["chg_h6"], v["chg_h24"], r(v["age_days"], 2),
-        v["quote_symbol"],
+        v["quote_symbol"], v["dex"],
     ]
 
 
@@ -269,7 +269,23 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         if not trading:
             continue
         price, liq = v["price_usd"], v["liq_usd"]
+        # A bad data print must not fill a stop or a take-profit: an impossible reading is ignored
+        # for one cycle. If the next cycle shows it again it is acted on, so a real move is never
+        # delayed by more than one cycle (two if the readings contradict each other). Not applied
+        # when this view is another pool's.
+        verified = pos["token"] not in pool_unverified
+        pos["suspect"] = S.hold_suspect(
+            pos["last_price_usd"], pos.get("last_liq_usd") or pos.get("entry_liq_usd"),
+            pos.get("suspect"), price, liq) if verified else None
+        if pos["suspect"]:
+            funnel["suspect_price"] += 1
+            store.append_jsonl(dd / "journal" / "events.jsonl", {
+                "ts": now_iso, "event": "suspect_price", "id": pos["id"], "symbol": pos["symbol"],
+                "price_usd": price, "last_price_usd": pos["last_price_usd"], "liq_usd": liq})
+            continue
         pos["last_price_usd"] = price
+        if verified:
+            pos["last_liq_usd"] = liq
         pos["peak_usd"] = max(pos["peak_usd"], price)
         pos["trough_usd"] = min(pos["trough_usd"], price)
         chg = (price / pos["entry_mid_usd"] - 1.0) * 100.0

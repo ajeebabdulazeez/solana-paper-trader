@@ -122,6 +122,47 @@ def pool_briefs(pairs: list, token: str, now_ms: int, chain: str = "solana", lim
     return out[:limit]
 
 
+SUSPECT_PRICE_RATIO = 2.0   # a price that more than halves or doubles between two readings...
+SUSPECT_LIQ_BAND = 0.15     # ...while the pool's liquidity moves less than this fraction
+
+
+def suspect_print(prev_price, prev_liq, price, liq) -> bool:
+    """Is this price a bad data print rather than a market move?
+
+    In a pool, price and liquidity move together: when a price really halves, the pool's
+    liquidity in USD falls by roughly 30% (every real one-cycle crash in the first day's
+    snapshots did exactly that). A price that more than halves or doubles while liquidity stays
+    within 15% is the data source misprinting (Dacity, 2026-11-14: price read under 0.000001 instead
+    of 0.0021 for one cycle, four times in 14 hours, with liquidity unchanged).
+    """
+    if not prev_price or not prev_liq or not price or price <= 0 or liq is None:
+        return False
+    pr, lr = price / prev_price, liq / prev_liq
+    return (pr < 1.0 / SUSPECT_PRICE_RATIO and lr > 1.0 - SUSPECT_LIQ_BAND) or \
+           (pr > SUSPECT_PRICE_RATIO and lr < 1.0 + SUSPECT_LIQ_BAND)
+
+
+SUSPECT_MAX_RUNS = 2        # never ignore a position's price for more than this many cycles in a row
+
+
+def hold_suspect(last_price, last_liq, held, price, liq):
+    """Should an open position ignore this reading for one cycle? Returns the note to keep on the
+    position if so, else None (act on the reading as usual).
+
+    `held` is the note from the previous cycle, if that reading was ignored. A second reading that
+    agrees with an ignored one confirms it, so a real move is delayed by one cycle at most; readings
+    that keep contradicting each other are ignored for SUSPECT_MAX_RUNS cycles, then taken as shown.
+    """
+    if not suspect_print(last_price, last_liq, price, liq):
+        return None
+    runs = (held or {}).get("runs", 0)
+    if held and not suspect_print(held.get("price"), held.get("liq"), price, liq):
+        return None
+    if runs >= SUSPECT_MAX_RUNS:
+        return None
+    return {"price": price, "liq": liq, "runs": runs + 1}
+
+
 def sol_usd_from(pairs: list):
     """SOL price implied by SOL-quoted pairs: priceUsd / priceNative (median)."""
     vals = []

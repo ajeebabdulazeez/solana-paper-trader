@@ -78,7 +78,7 @@ def open_position(state, v, sol_amount, sol_usd, costs, now_iso, rulebook_versio
         "tokens": tokens, "tokens_remaining": tokens,
         "entry_mid_usd": v["price_usd"], "entry_exec_usd": exec_price,
         "entry_liq_usd": v["liq_usd"], "entry_sol_usd": sol_usd,
-        "last_price_usd": v["price_usd"],
+        "last_price_usd": v["price_usd"], "last_liq_usd": v["liq_usd"],
         "peak_usd": v["price_usd"], "trough_usd": v["price_usd"],
         "tp1_done": False,
         "sol_returned": 0.0, "fees_sol": fee,

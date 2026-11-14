@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "updated": "2026-11-13",
-  "notes": "v2 = v1 trading rules unchanged; discovery widened with GeckoTerminal trending and most-traded Solana pools because the first live run found only 6 of 160 discovered tokens liquid enough to watch. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+  "version": 3,
+  "updated": "2026-11-14",
+  "notes": "v3 = v2 with one entry change: min_txns_h1 raised from 50 to 150 (at least 150 trades in the last hour before buying). Hypothesis from the 2026-11-14 13:30 UTC review, on thin evidence: v2 closed 6 trades (1 win), and every entry made with under 150 trades in the hour lost, both in the real trades (2 of 2) and in a replay of the same rules on every recorded token 3 to 30 days old (5 of 5, against 6 losses in 9 with more trades). A gap that size turns up by chance about one time in four. See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
   "portfolio": {
     "starting_sol": 5.0,
     "position_size_sol": 0.5,
@@ -75,7 +75,7 @@
     "h6_change_min_pct": 0,
     "h24_change_min_pct": -30,
     "m5_change_min_pct": -3,
-    "min_txns_h1": 50,
+    "min_txns_h1": 150,
     "min_buy_sell_ratio_h1": 1.2,
     "min_volume_accel": 1.2,
     "max_liquidity_drop_pct_1h": 10
