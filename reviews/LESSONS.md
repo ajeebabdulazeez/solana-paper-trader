@@ -14,6 +14,44 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v3, 2026-11-14 23:35 UTC review: no rule change, no code change
+
+**Health.** 408 cycles since launch, 61 since the last review. Last 6 hours: 74 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 1.9 minutes old when the review started, so no `.kick`. Two extra cycles (19:25, 31 seconds after the one before, and 23:12, 2 minutes after): both triggers fired, the concurrency group ran them in turn, nothing was lost. No errors in any run since 07:05 UTC. `batch_miss` 12 to 15 per cycle out of about 240 tokens (6%, was 8 to 12): 7 to 9 are `no_data` as before, the rest are recovered by the single lookup. `allowed_pool_used` 3 to 5, `api_calls` 43 to 47, no `pool lookup` error. RugCheck ran for both signals (WASTED 20:45, paws 22:05) and both answers parsed: `score_normalised` 1, no risks, LP locked 85.8% and 60.9%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no code change.
+
+The traded-volume check from the last review met its first real case and made the right call. WASTED read -24.3% in one cycle at 22:25 while held. A move that size in a $235k pool needs about $15k of volume; $255k had traded (16.7 times the need), so the reading was acted on in the same cycle. The next two readings stayed there (0.00539, 0.00502), so the fall was real.
+
+**Strategy: v3 has 1 closed trade and 1 open. One trade is not a hint, let alone a finding.** Equity 4.7534 SOL (-4.93%, was 4.6954). SOL fell from $72.6 to $69.5 since the last review (-4.4%) and is 14% under its price at launch.
+
+| # | Token | Opened (UTC, 14 Nov) | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|
+| 7 | WASTED | 20:45 | 860 | +23.3% | +68.1% | half sold at +23.7%, rest trailed out at +18.8% | +21.00% |
+| 8 | paws | 22:05 | 174 | +3.3% | 0.0% | open, -7.6% (lowest -7.8%, stop at -12%) | |
+
+- Signals. Two in the five hours since the last review, so the 12-hour zero-signal rule is not met. The last review's test (fewer than 2 v3 trades by the end of 15 Nov) is already passed: 2 opened in v3's first 10 hours.
+- Funnel since 18:40 UTC, 492 universe-token checks: `h1_weak` 263 (53%), `h6_down` 84 (17%), a token in its cooldown 76 (15%), the held token 37, `volume_accel` 10, `txns_h1` 9, `h1_overheated` 6, `buy_pressure` 4, `m5_dropping` 1, signal 2. The universe was 7 to 10 tokens a cycle (median 8), ten different tokens in all. Their median 1-hour change was -1.75% and 32% of readings were at +2% or better. Same picture as before: a falling market and a small universe.
+- What the v3 filter cost. `txns_h1` blocked 9 checks, all GLITCH. `python3 -m bot.replay --set entry.min_txns_h1=50` takes the same trades as v3 since 13:50, so the filter has not yet blocked a trade the bot would otherwise have made. In the wide replay (`--wide`, ages 3 to 30 days, `min_txns_h1=50`) entries under 150 trades are still 0 wins of 7 closed, with one new entry open (TrumpWars 18:35, 62 trades, +5.6%, a $32k pool outside the universe); entries at 150 or more are 4 of 10 (was 3 of 9, the new one is the real WASTED trade). Nothing against the hypothesis, nothing new for it.
+- Exits: the trailing stop filled far under its level. WASTED peaked at +68.1% at 22:10, which put the trailing stop at +51.2%. At 22:20 it read +56.9%, at 22:25 +18.8%: the fall came inside one 5-minute cycle, on $236k of volume. The second half was sold 32 points under the trail level, about 16 points off the trade. The first trailing exit (trade 5) filled 4.5 points under its level (+25.2% against +29.7%). Two cases, one token. In the wide replay a 5% trail is better on three of the four trailing exits and level on the fourth (WASTED +40.6% against +21.1%, WASTED +25.7% against +20.8%, CJ +18.7% against +16.7%, :3 +13.8% against +13.9%) and lifts the 11 closed trades from -2.16% to +0.23% per trade. Four exits on three tokens, and 5 is a number tried because 10 just failed. A hint for the exit section, not acted on.
+- 1-hour change at entry (the hint from 13:30, updated). Wide replay with v3's rules: entries at or under +7.8% are 0 wins of 6, above it 4 of 5. With `min_txns_h1=50` it is 0 of 8 against 4 of 9. paws (+3.3%) is underwater. But two things keep this a hint. It is the best of six splits tried on the same trades. And the obvious fix does not work: with `entry.h1_change_min_pct=5` the replay still takes FLOAT and paws, one cycle later (at +5.5% and +5.7%), for about the same loss, and of the six losers it removes one (DacityCoin). Only a floor near +8% removes the group, and that number is read off the losers.
+- Cooldown: nothing new. WASTED was bought again 14.7 hours after its last exit and won. The replay without a cooldown adds the same four trades as before (FLOAT, WASTED three times; 3 wins), all from one night.
+- Meteora, measured again on 120 snapshots (13:50 to 23:30 UTC, still short of a full day). Quiet-cycle price step, 90th percentile: Meteora 2.6% (119 cycles, 5 pools: CHOO 3.6%, STANK 2.9%, Dacity 2.4%, DacityCoin 2.0%, Macca 2.0%); PumpSwap 2.8% (717 cycles, 19 pools; the 11 quoted in SOL read 1.4% to 3.1%, the highest figures, up to 8.6%, are pools quoted in another token whose own price moves are in the number); Raydium 1.1% (96 cycles, 3 pools); MetaDAO 1.3% (1 pool). Meteora still does not stand apart. Worth noting for the entry rules: on PumpSwap and Meteora a quiet pool's price steps by 2 to 3% with almost no trading, which is the size of the +2% 1-hour floor.
+
+**Changed.** Nothing. Rulebook v3 stays; no code change; 35 tests pass. v3 is 10 hours old with one closed trade. Both hints above (a tighter trail, a higher 1-hour floor) come from the replay, each rests on a handful of trades in two or three tokens, and changing either now would end v3 before its own change (150 trades in the hour) has been tested at all.
+
+**For the next review.**
+
+- Judge v3 on v3 trades. It needs about 10 closed before the test set on 14 Nov 13:30 can be read (2 winners or fewer in the first 10 means the 150-trade filter did not help).
+- Trailing exits: for each new one, compare the fill with the trail level (peak less 10%). If the next two also fill more than 5 points under it, the exit section is the candidate (a 5% trail, or selling more than half at the first target). Check with `python3 -m bot.replay --wide --set universe.min_age_days=3 --set universe.max_age_days=30 --set exit.trailing_stop_pct=5` that the tighter trail is still no worse on each trailing exit, not only on average.
+- 1-hour change: record where paws ends. If v3's closed losers sit under +8% at entry and its winners above, the entry section is the candidate, but a floor of 5 is not the fix (see above). Look for a rule with a mechanism, for example a 1-hour change that must hold for two cycles running, and test it in the replay before choosing a number.
+- Only one of those two sections may change in one review. Take the one v3's own trades point to.
+- Still open: the cooldown hint, the universe size (discovery is the lever and cannot be tested from the repo's data), and a full-day Meteora measurement (from 13:50 UTC on 15 Nov).
+- `batch_miss` crept from 8 to 12 up to 12 to 15 per cycle. Harmless at this level; look again if it passes 20 or if `no_data` grows past 10.
+
+**Would prove this review wrong.**
+
+- Leaving the exit alone is wrong if v3's next two trailing exits again give back more than 5 points between the trail level and the fill: then the 10% trail is too wide for 5-minute sampling and waiting cost real paper money.
+- Leaving the entry alone is wrong if v3 closes three or more losers that all had a 1-hour change under +8% at entry while every v3 winner was above it.
+- The health verdict is wrong if a `suspect_price` event appears for a move that the next cycle confirms, or if the gap between cycles grows past 15 minutes: stops depend on the 5-minute trigger.
+
 ### v3, 2026-11-14 18:40 UTC review: no rule change (plumbing: a second kind of bad price print)
 
 **Health.** 347 cycles since launch, 57 since the last review. Last 6 hours: 72 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 2 minutes old when the review started, so no `.kick`. No errors in any run since 07:05 UTC. `batch_miss` 8 to 12 per cycle out of about 245 tokens (4%), 6 to 9 of them `no_data`. `allowed_pool_used` 4 or 5, `api_calls` 39 to 43, no `pool lookup` error. RugCheck was not called (no signal); the saved sample and the six cached answers still parse (`score_normalised` 1, no risks, `lpLockedPct` read). No `safety:*`, `skip:*` or `suspect_price` rows. Two cycles ran 31 seconds apart at 14:30 (both triggers fired); the workflow's concurrency group ran them one after the other and nothing was lost.
