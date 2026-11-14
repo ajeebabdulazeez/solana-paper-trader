@@ -57,6 +57,6 @@ Python 3.10+, standard library only.
 
 `[token, symbol, price_usd, liquidity_usd, market_cap, vol_m5, vol_h1, vol_h6, vol_h24, buys_m5, sells_m5, buys_h1, sells_h1, buys_h24, sells_h24, chg_m5, chg_h1, chg_h6, chg_h24, age_days, quote_symbol, dex]`
 
-`quote_symbol` was added on 2026-11-13 (from the 18:40 UTC run); earlier rows have 20 fields. `dex` (the DEX of the pool the row describes) was added on 2026-11-14 (first run after 13:50 UTC); rows before that have 21 fields.
+`quote_symbol` was added on 2026-11-13 (from the 18:40 UTC run); earlier rows have 20 fields. `dex` (the DEX of the pool the row describes) was added on 2026-11-14 (from the 13:50 UTC run); rows before that have 21 fields.
 
 Not financial advice. Most traders of new tokens lose money.

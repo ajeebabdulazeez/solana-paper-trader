@@ -67,6 +67,8 @@ The fix uses what a pool cannot do. When a price really halves, the pool's liqui
 4. New `bot/replay.py`, read-only, with its own tests.
 5. Tests: 7 added, 2 adjusted, 29 pass. An offline dry run of four cycles on a copy of the live state ran clean: a thin signal was rejected with `e:txns_h1`, a busy one opened, a bad print on the open position was ignored and the position carried on.
 
+**First live cycles (13:50 and 13:55 UTC).** Pushed at 13:50:00 UTC and picked up by the 13:50 cycle. Both cycles ran v3 with no errors, `api_calls` 41, `universe_ok` 8, no signal (4 `h1_weak`, 1 `buy_pressure`, 1 `h6_down`), nothing open. Snapshot rows have 22 fields; of the 51 rows at 13:50, 44 are PumpSwap pools, 4 Meteora, 2 Raydium and 1 MetaDAO. v3 trades start from the 13:50 cycle.
+
 **For the next review.**
 
 - Judge v3 only on v3 trades. v2 is closed at 6 trades.
