@@ -8,3 +8,4 @@
 {"event":"open","id":5,"price_usd":0.0023,"score":2.12,"sol_in":0.473732,"symbol":"WASTED","token":"GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump","ts":"2026-11-14T04:25:10Z"}
 {"event":"close","id":4,"pnl_pct":-15.1,"pnl_sol":-0.071786,"reason":"stop_loss","symbol":":3","ts":"2026-11-14T05:40:10Z"}
 {"chg_pct":25.22,"event":"tp1","id":5,"price_usd":0.00288,"sol_received":0.286787,"symbol":"WASTED","ts":"2026-11-14T05:40:10Z"}
+{"event":"close","id":5,"pnl_pct":20.76,"pnl_sol":0.098325,"reason":"trailing_stop","symbol":"WASTED","ts":"2026-11-14T06:05:08Z"}
