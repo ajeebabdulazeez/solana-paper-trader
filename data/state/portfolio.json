@@ -2,9 +2,9 @@
  "cash_sol": 3.8311833445490913,
  "closed_count": 7,
  "day": {
-  "date": "2026-11-14",
-  "opens": 6,
-  "start_equity": 4.755319874781019
+  "date": "2026-11-15",
+  "opens": 0,
+  "start_equity": 4.748679394926076
  },
  "last_exit": {
   "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": "2026-11-14T13:25:08Z",
@@ -14,7 +14,7 @@
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 70.0,
+ "last_sol_usd": 70.18906144496962,
  "positions": [
   {
    "entry_exec_usd": 0.0007540457692455757,
@@ -44,8 +44,8 @@
    "id": 8,
    "last_liq_usd": 82663.11,
    "last_price_usd": 0.000703,
-   "last_ts": "2026-11-14T23:55:08Z",
-   "last_vol_h24": 273787.34,
+   "last_ts": "2026-11-15T00:00:22Z",
+   "last_vol_h24": 270120.43,
    "missing_runs": 0,
    "opened": "2026-11-14T22:05:08Z",
    "pair": "2rmaFtFZmJtLXdPgRvk417RLc9GBD3jGbAqtttmfG3AF",
@@ -93,14 +93,14 @@
    },
    "fees_sol": 0.00437912030180637,
    "id": 9,
-   "last_liq_usd": 300188.18,
-   "last_price_usd": 0.003053,
-   "last_ts": "2026-11-14T23:55:08Z",
-   "last_vol_h24": 596545.56,
+   "last_liq_usd": 300742.03,
+   "last_price_usd": 0.003056,
+   "last_ts": "2026-11-15T00:00:22Z",
+   "last_vol_h24": 595956.11,
    "missing_runs": 0,
    "opened": "2026-11-14T23:50:10Z",
    "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
-   "peak_usd": 0.003053,
+   "peak_usd": 0.003056,
    "rugcheck": {
     "lp_locked_pct": 73.68559449711002,
     "risks": [],
