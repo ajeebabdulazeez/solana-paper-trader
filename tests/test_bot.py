@@ -269,6 +269,39 @@ class Replay(unittest.TestCase):
         text = R.report(list(trades.values()))
         self.assertIn("0 closed, 1 still open, 1 lost from the record (not counted)", text)
 
+    def test_baseline_opens_a_position_at_every_eligible_cycle_and_marks_the_entry_rules_picks(self):
+        from bot.run import snapshot_row
+        prices = [1.00, 1.00, 1.00, 1.02, 1.30, 1.60, 1.40, 1.40, 1.40]
+        snaps = []
+        for k, px in enumerate(prices):
+            now = T0 + timedelta(minutes=5 * k)
+            # RUN passes the entry rules on cycles 2 and 3 only (a flat hour on the others).
+            chg = (0.5, 8.0, 12.0, 20.0) if k in (2, 3) else (0.5, 0.0, 12.0, 20.0)
+            rows = [snapshot_row(S.pair_view(make_pair(tok, tok, p, 100_000, now, chg=chg, vol_m5=50_000, **kw),
+                                             int(now.timestamp() * 1000)))
+                    for tok, p, kw in (("RUN", px, {}), ("BABY", px, {"age_days": 1}))]   # BABY: too young
+            snaps.append({"ts": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sol_usd": SOL_USD, "rows": rows})
+        rows = R.baseline(snaps, RULES)
+        self.assertEqual({r["symbol"] for r in rows}, {"RUN"})          # never a token outside the universe
+        by_open = {r["opened"][14:16]: r for r in rows}
+        # Bought on cycles 0 to 5 and closed; the buys on cycles 6 to 8 are still open and not counted.
+        self.assertEqual(sorted(by_open), ["00", "05", "10", "15", "20", "25"])
+        self.assertEqual([by_open[m]["exit_reason"] for m in ("00", "10", "20", "25")],
+                         ["trailing_stop", "trailing_stop", "trailing_stop", "stop_loss"])
+        self.assertGreater(by_open["00"]["pnl_pct"], 0)
+        self.assertLess(by_open["25"]["pnl_pct"], -12)                  # bought the top, sold at the stop
+        self.assertEqual([m for m, r in sorted(by_open.items()) if r["signal"]], ["10", "15"])
+        self.assertEqual([m for m, r in sorted(by_open.items()) if r["first"]], ["10"])
+        # The first passing cycle is the trade the replay takes, with the same result.
+        (trade,) = R.replay(snaps, RULES)
+        self.assertEqual((trade["opened"], trade["exit_reason"], trade["pnl_pct"]),
+                         (by_open["10"]["opened"], by_open["10"]["exit_reason"], by_open["10"]["pnl_pct"]))
+        text = R.baseline_report(rows)
+        self.assertIn("| every cycle a token was eligible | 6 | 1 | 83% |", text)
+        self.assertIn("| cycles the entry rules passed | 2 | 1 | 100% |", text)
+        self.assertIn("| the first passing cycle of each run | 1 | 1 | 100% |", text)
+        self.assertIn("| cycles the entry rules passed | 0 | 0 | - | - | - |", R.baseline_report([]))
+
 
 class Cycle(unittest.TestCase):
     """Full bot cycles against a scripted market, in a throwaway directory."""

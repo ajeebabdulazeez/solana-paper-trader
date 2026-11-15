@@ -46,6 +46,7 @@ At least 100 closed paper trades across at least two weeks on one frozen ruleboo
 python3 -m bot.run                         # one bot cycle
 python3 -m bot.report                      # review statistics
 python3 -m bot.replay                      # what the rulebook would have done on the recorded snapshots (hints only)
+python3 -m bot.replay --baseline           # a buy at every eligible moment, against the moments the entry rules pick
 python3 -m unittest discover -s tests -v   # offline tests
 ```
 
