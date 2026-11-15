@@ -76,6 +76,8 @@ The running record of what paper results have shown and why each rulebook versio
 2. A token found by GeckoTerminal now records the list and page that found it: `source` in `data/state/watchlist.json` reads `gecko:trend2`, `gecko:vol6` or `gecko:tx5` (tokens already on the watchlist keep `gecko`). This is what makes the change testable.
 3. Tests: 1 added (a page that keeps failing is skipped, the rotation carries on, the skipped page is tried again next time round, a token from the deepest page is labelled with it), 1 adjusted (the rotation test no longer assumes 9 pages). 36 pass. The new test fails on the old code.
 
+**First live cycles (13:50 to 14:05 UTC).** Pushed at 13:45 UTC and picked up by the 13:50 cycle. Four cycles on v4, no errors, 2 GeckoTerminal calls each, `api_calls` 41, `universe_ok` 8, no signal. The rotation went through volume pages 2 to 8 and trade-count page 1: pages 5 to 8 of the volume list all answered on the free API. They added four tokens the bot had not seen: Socks (`gecko:vol5`, $149k liquidity, one hour old, so `too_young`) and three that DexScreener returned no data for. Nothing tradable from them yet. Trade-count pages 4 to 6 come round at 14:10 to 14:20 UTC and were not seen by this review.
+
 **For the next review.**
 
 - Check the deeper pages first. Errors: any `gecko ... p5` to `p8` (volume) or `p4` to `p6` (trade count) line repeating in `data/runs`. Yield: in `data/state/watchlist.json`, count tokens whose `source` is `gecko:vol5` to `gecko:vol8` or `gecko:tx4` to `gecko:tx6`, and how many of those pass the universe filters in the latest snapshot. Also `universe_ok` per cycle (8 to 9 now), `watchlist` (176 now, cap 300) and `api_calls` (42 now).
