@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-15T02:50:11Z (UTC), rulebook v3. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-15T02:55:07Z (UTC), rulebook v3. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **4.6271 SOL** (started with 5.0 SOL, -7.46%)
 - Cash: 4.6271 SOL, open positions: 0, closed trades: 9
-- Watchlist: 180 tokens, entry signals this run: 0
+- Watchlist: 185 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -27,7 +27,3 @@ Max drawdown 7.46%, average hold 156.7 min, simulated fees 0.0819 SOL.
 | 2 | FLOAT | 2026-11-13T23:15:13Z | stop_loss | -13.55% | -0.0671 |
 | 1 | WEALTH | 2026-11-13T19:55:09Z | stop_loss | -18.84% | -0.0942 |
 | 3 | Leonida | 2026-11-13T19:35:08Z | stop_loss | -16.84% | -0.0834 |
-
-## Errors in the last run
-
-- gecko h24_volume_usd_desc p4: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_volume_usd_desc&page=4
