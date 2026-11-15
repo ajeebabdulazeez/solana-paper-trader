@@ -1,29 +1,24 @@
 # Paper trading status
 
-Updated 2026-11-15T01:40:11Z (UTC), rulebook v3. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-15T01:45:11Z (UTC), rulebook v3. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.6976 SOL** (started with 5.0 SOL, -6.05%)
-- Cash: 4.2489 SOL, open positions: 1, closed trades: 8
-- Watchlist: 180 tokens, entry signals this run: 0
+- Equity: **4.6271 SOL** (started with 5.0 SOL, -7.46%)
+- Cash: 4.6271 SOL, open positions: 0, closed trades: 9
+- Watchlist: 183 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 8 | 25.0% | 20.88% | -16.11% | -6.86% | -0.2753 | 0.42 |
+| All | 9 | 22.2% | 20.88% | -16.74% | -8.38% | -0.3729 | 0.35 |
 
-Max drawdown 6.33%, average hold 161.9 min, simulated fees 0.0736 SOL.
-
-## Open positions
-
-| # | Token | Opened | SOL in | Change vs entry | TP1 hit |
-|---|---|---|---|---|---|
-| 9 | FLOAT | 2026-11-14T23:50:10Z | 0.476 | -6.5% | no |
+Max drawdown 7.46%, average hold 156.7 min, simulated fees 0.0819 SOL.
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 9 | FLOAT | 2026-11-15T01:45:11Z | stop_loss | -20.52% | -0.0976 |
 | 8 | paws | 2026-11-15T01:15:10Z | stop_loss | -14.22% | -0.0693 |
 | 7 | WASTED | 2026-11-14T22:25:08Z | trailing_stop | +21.00% | +0.0986 |
 | 6 | STANK | 2026-11-14T13:25:08Z | stop_loss | -18.08% | -0.0864 |
