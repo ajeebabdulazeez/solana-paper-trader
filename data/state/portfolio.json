@@ -1,6 +1,6 @@
 {
- "cash_sol": 4.164418489961301,
- "closed_count": 9,
+ "cash_sol": 4.558298337486096,
+ "closed_count": 10,
  "day": {
   "date": "2026-11-15",
   "opens": 1,
@@ -9,67 +9,15 @@
  "last_exit": {
   "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": "2026-11-14T13:25:08Z",
   "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump": "2026-11-13T19:55:09Z",
-  "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-13T19:35:08Z",
+  "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-15T15:55:12Z",
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-15T01:45:11Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-15T01:15:10Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.11481790380873,
- "positions": [
-  {
-   "entry_exec_usd": 0.0005140580068184706,
-   "entry_liq_usd": 55707.25,
-   "entry_mid_usd": 0.0005109,
-   "entry_sol_usd": 71.41964896723886,
-   "features": {
-    "age_days": 9.8,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.27,
-    "chg_h1": 3.91,
-    "chg_h24": -4.52,
-    "chg_h6": 1.62,
-    "chg_m5": -1.61,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1123,
-    "liq_usd": 55707,
-    "mcap": 495935,
-    "quote": "SOL",
-    "score": 2.39,
-    "txns_h1": 227,
-    "vol_h1": 11159,
-    "vol_h24": 250697,
-    "volume_accel": 1.88
-   },
-   "fees_sol": 0.0043135658277562786,
-   "id": 10,
-   "last_liq_usd": 52421.2,
-   "last_price_usd": 0.000456,
-   "last_ts": "2026-11-15T15:50:10Z",
-   "last_vol_h24": 251392.38,
-   "missing_runs": 0,
-   "opened": "2026-11-15T14:55:10Z",
-   "pair": "5GxdoPcK2LJ6QYcJ3uvtC37tgsFHma55ULFkufTYe49R",
-   "peak_usd": 0.000519,
-   "rugcheck": {
-    "lp_locked_pct": 87.34005247277092,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 4,
-   "sol_in": 0.46271316555125575,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "Leonida",
-   "token": "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump",
-   "tokens": 63686.85647286527,
-   "tokens_remaining": 63686.85647286527,
-   "tp1_done": false,
-   "trough_usd": 0.0004508
-  }
- ],
- "realized_pnl_sol": -0.37286834448744194,
+ "last_sol_usd": 71.06776694173543,
+ "positions": [],
+ "realized_pnl_sol": -0.44170166251390347,
  "starting_sol": 5.0,
  "trade_seq": 10
 }

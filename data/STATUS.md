@@ -1,29 +1,24 @@
 # Paper trading status
 
-Updated 2026-11-15T15:50:10Z (UTC), rulebook v4. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-15T15:55:12Z (UTC), rulebook v4. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.5728 SOL** (started with 5.0 SOL, -8.54%)
-- Cash: 4.1644 SOL, open positions: 1, closed trades: 9
-- Watchlist: 185 tokens, entry signals this run: 0
+- Equity: **4.5583 SOL** (started with 5.0 SOL, -8.83%)
+- Cash: 4.5583 SOL, open positions: 0, closed trades: 10
+- Watchlist: 186 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 9 | 22.2% | 20.88% | -16.74% | -8.38% | -0.3729 | 0.35 |
+| All | 10 | 20.0% | 20.88% | -16.5% | -9.03% | -0.4417 | 0.31 |
 
-Max drawdown 7.46%, average hold 156.7 min, simulated fees 0.0819 SOL.
-
-## Open positions
-
-| # | Token | Opened | SOL in | Change vs entry | TP1 hit |
-|---|---|---|---|---|---|
-| 10 | Leonida | 2026-11-15T14:55:10Z | 0.463 | -10.7% | no |
+Max drawdown 8.83%, average hold 147.0 min, simulated fees 0.0902 SOL.
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 10 | Leonida | 2026-11-15T15:55:12Z | stop_loss | -14.88% | -0.0688 |
 | 9 | FLOAT | 2026-11-15T01:45:11Z | stop_loss | -20.52% | -0.0976 |
 | 8 | paws | 2026-11-15T01:15:10Z | stop_loss | -14.22% | -0.0693 |
 | 7 | WASTED | 2026-11-14T22:25:08Z | trailing_stop | +21.00% | +0.0986 |
