@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "updated": "2026-11-14",
-  "notes": "v3 = v2 with one entry change: min_txns_h1 raised from 50 to 150 (at least 150 trades in the last hour before buying). Hypothesis from the 2026-11-14 13:30 UTC review, on thin evidence: v2 closed 6 trades (1 win), and every entry made with under 150 trades in the hour lost, both in the real trades (2 of 2) and in a replay of the same rules on every recorded token 3 to 30 days old (5 of 5, against 6 losses in 9 with more trades). A gap that size turns up by chance about one time in four. See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+  "version": 4,
+  "updated": "2026-11-15",
+  "notes": "v4 = v3 with one discovery change and no change to any trading rule: GeckoTerminal's most-traded pool lists are read twice as deep (top_volume_pages 4 to 8, top_tx_pages 3 to 6; still 2 calls per cycle, so the 16 pages now come round every 40 minutes instead of 9 pages every 22.5). Hypothesis from the 2026-11-15 13:30 UTC review: the tradable universe has been the same 8 to 10 tokens for two days (15 tokens ever eligible, 12 of them found in the bot's first hour), no entry signal for 13.7 hours, and no modest relaxation of an entry or universe threshold would have added a winning trade in the replay, so the bottleneck is what discovery finds, not the thresholds. Entry, exit, universe, portfolio, safety and costs are exactly v3's (v3 = v2 with entry.min_txns_h1 raised from 50 to 150), so v3 and v4 trades test the same trading rules on a different pool of tokens. See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
   "portfolio": {
     "starting_sol": 5.0,
     "position_size_sol": 0.5,
@@ -31,8 +31,8 @@
     "geckoterminal": {
       "enabled": true,
       "trending_pages": 2,
-      "top_volume_pages": 4,
-      "top_tx_pages": 3,
+      "top_volume_pages": 8,
+      "top_tx_pages": 6,
       "min_reserve_usd": 30000,
       "max_age_days": 35,
       "calls_per_cycle": 2

@@ -104,15 +104,20 @@ class FakeRug:
 
 class FakeGecko:
     def __init__(self):
-        self.calls, self.pools = 0, []
+        self.calls, self.pools, self.by_page, self.broken, self.asked = 0, [], {}, set(), []
+
+    def _page(self, kind, page):
+        self.calls += 1
+        self.asked.append((kind, page))
+        if (kind, page) in self.broken:
+            raise RuntimeError("HTTP 404")
+        return self.by_page.get((kind, page), self.pools if (kind, page) == ("trending", 1) else [])
 
     def trending(self, page):
-        self.calls += 1
-        return self.pools if page == 1 else []
+        return self._page("trending", page)
 
     def top(self, sort, page):
-        self.calls += 1
-        return []
+        return self._page(sort, page)
 
 
 def gecko_pool(base, quote, reserve, created):
@@ -558,11 +563,45 @@ class Cycle(unittest.TestCase):
         self.assertEqual(s["opened"], ["GOOD"])        # found only via GeckoTerminal
         self.assertEqual(s["funnel"].get("discovered_gecko"), 2)
         self.assertEqual(self.gecko.calls, 2)           # only calls_per_cycle pages per run
-        for _ in range(4):
+        g = RULES["discovery"]["geckoterminal"]
+        pages = g["trending_pages"] + g["top_volume_pages"] + g["top_tx_pages"]
+        runs = pages // 2 + 1                           # enough cycles to go once round and wrap
+        for _ in range(runs - 1):
             self.step()
-        self.assertEqual(self.gecko.calls, 10)          # rotates through all 9 pages, then wraps
+        self.assertEqual(self.gecko.calls, 2 * runs)    # two pages a cycle, whatever the number of pages
+        self.assertEqual(len(set(self.gecko.asked)), pages)        # every page was asked for
         meta = store.read_json(self.tmp / "data" / "state" / "meta.json", {})
-        self.assertEqual(meta["gecko_idx"], 1)
+        self.assertEqual(meta["gecko_idx"], 2 * runs % pages)
+        watch = store.read_json(self.tmp / "data" / "state" / "watchlist.json", {})
+        self.assertEqual(watch["GOOD"]["source"], "gecko:trend1")  # the list and page that found it
+
+    def test_gecko_page_that_keeps_failing_is_skipped_not_retried_forever(self):
+        week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        deep = ("h24_volume_usd_desc", RULES["discovery"]["geckoterminal"]["top_volume_pages"])
+        self.gecko.broken = {("trending", 2)}
+        self.gecko.by_page = {deep: [gecko_pool("DEEP", S.WSOL, 80_000, week)]}
+        self.set("DEEP", 1.0)
+        s = self.step()
+        self.assertEqual(self.gecko.asked, [("trending", 1), ("trending", 2)])
+        gecko_errors = lambda s: [e for e in s["errors"] if e.startswith("gecko")]  # noqa: E731
+        self.assertEqual(gecko_errors(s), ["gecko trending p2: HTTP 404"])
+        s = self.step()                                 # one more try, in case it was a rate limit
+        self.assertEqual(self.gecko.asked[2:], [("trending", 2)])
+        self.assertEqual(len(gecko_errors(s)), 1)
+        s = self.step()                                 # then the rotation moves past it
+        self.assertEqual(self.gecko.asked[3:], [("h24_volume_usd_desc", 1), ("h24_volume_usd_desc", 2)])
+        self.assertEqual(gecko_errors(s), [])
+        for _ in range(deep[1]):
+            self.step()
+        self.assertIn(deep, self.gecko.asked)
+        watch = store.read_json(self.tmp / "data" / "state" / "watchlist.json", {})
+        self.assertEqual(watch["DEEP"]["source"], "gecko:vol%d" % deep[1])   # found on the deepest volume page
+        self.gecko.broken = set()
+        before = len(self.gecko.asked)
+        while ("trending", 2) not in self.gecko.asked[before:]:
+            self.step()                                 # the skipped page gets its turn again next time round
+        meta = store.read_json(self.tmp / "data" / "state" / "meta.json", {})
+        self.assertEqual(meta["gecko_fails"], 0)
 
     def test_quote_rejected_token_has_its_pools_recorded_once(self):
         self.list_token("OK")

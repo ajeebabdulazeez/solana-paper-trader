@@ -20,6 +20,8 @@ CHAIN = "solana"
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 QUOTE_SAMPLES = 8  # how many quote-rejected tokens to record in data/debug/quote_reject_pairs.json
 POOL_LOOKUPS = 12  # per cycle: full pool lookups for tokens whose batch pool has a quote we do not trade
+GECKO_SKIP_AFTER = 2  # a GeckoTerminal page that fails this many cycles running is skipped until its next turn
+GECKO_KINDS = {"trending": "trend", "h24_volume_usd_desc": "vol", "h24_tx_count_desc": "tx"}  # source labels
 
 
 def iso(dt) -> str:
@@ -85,21 +87,27 @@ def discover(dex, d, errors, gecko=None, meta=None, now=None):
         jobs = [("trending", p) for p in range(1, g.get("trending_pages", 0) + 1)]
         jobs += [("h24_volume_usd_desc", p) for p in range(1, g.get("top_volume_pages", 0) + 1)]
         jobs += [("h24_tx_count_desc", p) for p in range(1, g.get("top_tx_pages", 0) + 1)]
-        pools = []
-        idx = int(meta.get("gecko_idx", 0))
+        idx, fails = int(meta.get("gecko_idx", 0)), int(meta.get("gecko_fails", 0))
         for _ in range(min(len(jobs), int(g.get("calls_per_cycle", 2)))):
             kind, page = jobs[idx % len(jobs)]
             try:
-                pools += gecko.trending(page) if kind == "trending" else gecko.top(kind, page)
+                pools = gecko.trending(page) if kind == "trending" else gecko.top(kind, page)
             except Exception as e:
                 errors.append(f"gecko {kind} p{page}: {e}")
+                fails += 1
+                if fails >= GECKO_SKIP_AFTER:
+                    # A page that keeps failing (for example one the free API does not serve)
+                    # must not block the pages behind it: move on, it comes round again later.
+                    idx, fails = idx + 1, 0
                 break  # do not hammer a failing API; retry this page next cycle
-            idx += 1
+            idx, fails = idx + 1, 0
+            gecko_sample = gecko_sample or (pools[0] if pools else None)
+            # The source names the list and page, so a review can see which pages find tradable tokens.
+            src = "gecko:" + GECKO_KINDS.get(kind, kind) + str(page)
+            for t in GT.pick_tokens(pools, now, g["min_reserve_usd"], g["max_age_days"]):
+                found.setdefault(t, src)
         if jobs:
-            meta["gecko_idx"] = idx % len(jobs)
-        gecko_sample = pools[0] if pools else None
-        for t in GT.pick_tokens(pools, now, g["min_reserve_usd"], g["max_age_days"]):
-            found.setdefault(t, "gecko")
+            meta["gecko_idx"], meta["gecko_fails"] = idx % len(jobs), fails
     return found, pairs, gecko_sample
 
 
@@ -224,7 +232,7 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         if t != S.WSOL and t not in watch:
             watch[t] = {"first_seen": now_iso, "source": src, "last_ok": None, "low_since": None}
             funnel["discovered_new"] += 1
-            if src == "gecko":
+            if src.startswith("gecko"):
                 funnel["discovered_gecko"] += 1
     if gecko_sample and not (dd / "debug" / "gecko_sample.json").exists():
         store.write_json(dd / "debug" / "gecko_sample.json", gecko_sample)

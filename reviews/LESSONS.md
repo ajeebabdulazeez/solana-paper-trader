@@ -14,6 +14,83 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v4, 2026-11-15 13:30 UTC review: GeckoTerminal's most-traded lists read twice as deep; no trading rule changed
+
+**Health.** 578 cycles since launch, 170 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 2.6 minutes old when the review started, so no `.kick`. Two extra cycles (02:40 and 09:55, each 1 to 2 minutes after the one before): both triggers fired, the concurrency group ran them in turn. Errors in 3 of the 170 runs (02:50, 03:35 and 08:15 UTC), each one GeckoTerminal 429 on a single page; the page was fetched on the next cycle each time. `batch_miss` 8 to 15 per cycle (median 11) out of about 238 tokens; `no_data` 8 to 12 (median 9, was 7 to 9). It touched 12 between 00:00 and 06:00 UTC and is back at 9: over the 10 the last review named, not growing. `allowed_pool_used` 3 to 5, `api_calls` 40 to 47, no `pool lookup` error. RugCheck ran once (FLOAT, 23:50) and parsed: `score_normalised` 1, no risks, LP locked 73.7%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found in the trading path.
+
+**Strategy: v3 closed 3 trades, 1 win. Three trades are a hint at most.** Equity 4.6271 SOL (-7.46%, was 4.7534), nothing open. v3: -4.58% per trade, -0.0683 SOL. All versions: 9 closed, 2 wins (both WASTED), -8.38% per trade. SOL rose from $69.4 to $73.0 (+5%) since the last review.
+
+| # | Token | Opened (UTC) | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|
+| 7 | WASTED | 14 Nov 20:45 | 860 | +23.3% | +68.1% | half sold at +23.7%, rest trailed out at +18.8% | +21.00% |
+| 8 | paws | 14 Nov 22:05 | 174 | +3.3% | 0.0% | stop, price at -12.6% | -14.22% |
+| 9 | FLOAT | 14 Nov 23:50 | 184 | +11.2% | +0.9% | stop, price at -20.1% | -20.52% |
+
+- Stops. FLOAT read -6.5% at 01:40 and -20.1% at 01:45: a 14.5% fall inside one cycle on $29k of volume (2.7 times what a $286k pool needs to move that far, so the traded-volume check rightly let it through; the next readings were -19.5%, -15.5%, -16.1%). That stop filled 8 points past its level with every cycle on time. paws drifted down for three hours and was stopped at -12.6% on a reading with $9 of volume in the five minutes; the reading before was -9.9% and the one after -10.9%, so the last 2 points were the pool's price hopping between buy and sell side, on a trade that was already 10% down. Across all 7 stops the price at the stop cycle averaged -14.9%, 2.9 points past the level. It is the 5-minute sampling, not the trigger.
+- FLOAT's entry (hint, n=1, the same shape as WEALTH and Leonida on 13 Nov). The price rose 10.9% in the 15 minutes before the buy (0.002741 at 23:35, 0.003041 at 23:50), the 1-hour change went from +1.4% to +11.2% and the hourly trade count from 62 to 184 in those three cycles. The bot bought the top of that burst; the trade never got above +0.9%. The 150-trade filter was passed only because of the burst itself.
+- The 1-hour-change test from the last review is not met: v3's losers entered at +3.3% and +11.2%, so they do not both sit under +8%. In the wide replay with v3's rules the split is now 1 win of 9 at or under +7.8% against 4 of 9 above it (was 0 of 6 against 4 of 5): mihao entered at +2.9% and made +13.9%, FLOAT (+11.2%) and RAMBO (+18.9%) lost. The hint is weaker.
+- The 150-trade filter. On the bot's own universe `python3 -m bot.replay --set entry.min_txns_h1=50` took the same trades as v3 until 13:20 today, when it bought paws (101 trades in the hour; open, -4.75% after ten minutes, most of it costs). That is the first trade the filter has blocked; no result yet. In the wide replay (ages 3 to 30 days, `min_txns_h1=50`) entries under 150 trades are now 2 wins of 10 (-9.4% per trade) against 5 of 15 (-4.2%) at 150 or more; it was 0 of 7 against 4 of 10. The two new winners are WANTED (55 trades, +25.6%) and TrumpWars (62 trades, +2.1%), both in pools of about $31k that the universe rejects. The group with no winner in it now has two, so the evidence for the filter is thinner than when it was made. Not changed today: one section per review, and v3's own test (2 winners or fewer in the first 10 closed trades) is 1 of 3 so far.
+- Trailing exits: none since the last review, so nothing new. In the wide replay a 5% trail is still better or level on each of the four trailing exits.
+- Meteora, on a full day of rows with `dex` (290 snapshots, 13:50 on 14 Nov to 13:30 on 15 Nov). Quiet-cycle price step, 90th percentile: Meteora 3.1% (282 cycles, 3 pools: STANK 4.1%, Macca 2.3%, DacityCoin 2.2%); PumpSwap 2.6% (2,214 cycles, 27 pools; SOL pools 2.1% to 3.1%); Raydium 0.9% (5 pools; FLOAT 0.8%); MetaDAO 1.1% (1 pool). STANK stands apart, Meteora as a group does not. No case for excluding or repricing Meteora. This closes the question unless a Meteora trade shows otherwise.
+
+**No signal for 13.7 hours, so the zero-signal rule is met. Thresholds are not the reason.** The last signal was FLOAT at 23:50 UTC on 14 Nov; 166 cycles since.
+
+- Funnel since then, 1,389 universe-token checks: `h1_weak` 607 (44%), a token in its cooldown 436 (31%), `h6_down` 159 (11%), `txns_h1` 84 (6%), the held token 38, `buy_pressure` 18, `h1_overheated` 17, `h24_dumped` 15, `volume_accel` 10, `m5_dropping` 5. The universe was 8 to 10 tokens a cycle (median 8), ten different tokens in all. Their median 1-hour change was -0.2% and 35% of readings were at +2% or better, a little stronger than yesterday.
+- Gaps this long are normal for a universe this small: the three longest gaps between signals so far are 10.7, 12.8 and now 13.7 hours.
+- The cooldown did not block anything: none of the 436 checks on a token in its cooldown (FLOAT, paws, WASTED, STANK) would have passed the entry rules.
+- No modest relaxation would have bought a winner. Replayed on the recorded snapshots since 23:55 UTC:
+
+| Change tried | Trades it adds since the last signal |
+|---|---|
+| `entry.h1_change_min_pct` 2 to 1, or to 0 | none |
+| `entry.h6_change_min_pct` 0 to -5 | Max 10:15, stop, -15.1%; Leonida 12:05, open at -0.2% |
+| `entry.min_buy_sell_ratio_h1` 1.2 to 1.1 | none (to 1.0: Max 11:00, stop, -18.3%) |
+| `entry.min_volume_accel` 1.2 to 1.0 | none |
+| `entry.h1_change_max_pct` 25 to 35 | STANK 03:25, stop, -13.6% |
+| `entry.min_txns_h1` 150 to 100 or 50 | paws 13:20, open at -4.8% |
+| `portfolio.token_cooldown_hours` 12 to 6 | none |
+| `universe.min_liquidity_usd` 50k to 40k or 30k, `min_volume_h24_usd` 100k to 50k, `max_age_days` 30 to 35, `min_age_days` 3 to 2 | none |
+| `universe.min_liq_to_mcap` 0.03 to 0.02 | RAMBO 04:10, stop, -17.5% |
+| `universe.min_age_days` 3 to 1 (not modest) | WOHAIHAO 02:38, one day old, +12.8% |
+
+  Every relaxation the rule allows adds nothing, an open trade near zero, or a stop-loss. Relaxing one anyway would be buying trades the record says lose.
+
+**The bottleneck is what discovery finds.** This has been said in every review since 13 Nov; this time there are numbers for it.
+
+- Since 18:40 UTC on 13 Nov, 15 tokens have ever passed the universe filters. 12 of them were on the watchlist by 14:48 UTC on 13 Nov, the bot's first hour. In the 47 hours since, discovery has added three that became eligible: GLITCH (DexScreener boosts, 14 Nov 01:00), GTA$ (DexScreener profiles, 14 Nov 11:10) and POLYMARKET (GeckoTerminal, 15 Nov 07:35, eligible for under an hour before it turned 30 days old).
+- GeckoTerminal found 8 of the 15 on its first full pass and one since. Its 9 pages (the top 180 pools by trending, volume and trade count) keep returning the same pools: the 75 or so "new" GeckoTerminal tokens every 6 hours in the funnel are the same too-old tokens dropped and found again.
+- Its current depth misses tokens the bot can trade. WASTED (both of the bot's winning trades) and GLITCH were in the tradable band when a DexScreener boost feed found them, and GeckoTerminal had not shown either. WASTED (14 days old, $110k liquidity, $147k volume) was not among the pools the 9 GeckoTerminal calls of the 13:52 run on 13 Nov returned and came in from the boost feed at 14:18. GLITCH (28 days old, $113k liquidity, $160k volume) first appears in the record at 01:00 on 14 Nov, from the boost feed, after 11 hours of page rotation. The source label only names the first feed to find a token, so this shows what GeckoTerminal missed before then, not what it lists now. Half of today's universe (WASTED, GLITCH, Leonida, Max) is there only because a team paid DexScreener for visibility.
+- Why deeper pages are the likely place. The universe needs $100k of 24-hour volume; the bot's tokens trade $150k to $2M a day. Page 4 of the volume list ends at rank 80 on a chain with thousands of pools, so the list stops well above where most 3-to-30-day tokens of that size rank.
+- The bot keeps trading the same few tokens: 9 trades on 7 tokens, FLOAT and WASTED twice each. Even a good result on so few tokens would say little.
+
+**Changed: rulebook v4, discovery section only. `geckoterminal.top_volume_pages` 4 to 8 and `top_tx_pages` 3 to 6. A hypothesis; it could not be tested from here.**
+
+- What it does. The rotation is now 16 pages (2 trending, 8 by volume, 6 by trade count) instead of 9. Still 2 GeckoTerminal calls per cycle, so the rate-limit exposure is the same; a full pass takes 40 minutes instead of 22.5. A token stays on the watchlist once found, so the slower pass costs little. Pools are still pre-filtered to $30k reserve and 35 days.
+- What it does not do. No entry, exit, universe, portfolio, safety or costs number changed. A token from a deeper page passes the same universe filters and the same RugCheck screen as any other. v3 and v4 trades are made by identical trading rules on a different pool of tokens, so the tests set for the 150-trade filter, the trail and the 1-hour change carry on across both; the version tables keep them apart so the effect of the wider net can be seen.
+- Not verified. GeckoTerminal is not reachable from the review session. CoinGecko's documentation for the paid version of the same endpoint (read today) says 20 pools per page and that paging past page 10 needs a higher plan; it says nothing about what the free API serves on pages 5 to 8. If a page is refused the bot now copes (next point).
+- Why not more. Trending pages are unchanged and both lists stop short of page 10. If pages 5 to 8 find tradable tokens the next review can go deeper; if they find none, more pages are not the answer.
+
+**Plumbing (no rule in it).**
+
+1. A GeckoTerminal page that fails two cycles running is skipped until its next turn (`GECKO_SKIP_AFTER` in `bot/run.py`). Before, a failing page was retried every cycle for ever and the pages behind it were never fetched. That was harmless with pages that always answer after a 429, and would have stopped all GeckoTerminal discovery if one of the new pages is refused. One retry is kept, because a 429 usually clears by the next cycle.
+2. A token found by GeckoTerminal now records the list and page that found it: `source` in `data/state/watchlist.json` reads `gecko:trend2`, `gecko:vol6` or `gecko:tx5` (tokens already on the watchlist keep `gecko`). This is what makes the change testable.
+3. Tests: 1 added (a page that keeps failing is skipped, the rotation carries on, the skipped page is tried again next time round, a token from the deepest page is labelled with it), 1 adjusted (the rotation test no longer assumes 9 pages). 36 pass. The new test fails on the old code.
+
+**For the next review.**
+
+- Check the deeper pages first. Errors: any `gecko ... p5` to `p8` (volume) or `p4` to `p6` (trade count) line repeating in `data/runs`. Yield: in `data/state/watchlist.json`, count tokens whose `source` is `gecko:vol5` to `gecko:vol8` or `gecko:tx4` to `gecko:tx6`, and how many of those pass the universe filters in the latest snapshot. Also `universe_ok` per cycle (8 to 9 now), `watchlist` (176 now, cap 300) and `api_calls` (42 now).
+- v3 is closed at 3 trades (1 win). Judge v4 on v4 trades; for the entry and exit hints, v3 and v4 trades may be read together because those sections are identical.
+- The 150-trade filter: record where the replay's paws entry (13:20 on 15 Nov, 101 trades) ends. If the entries it blocks keep winning as often as the ones taken, put it back to 50 as the 14 Nov review said.
+- Entry hint to test in the replay before choosing any number: a buy made at the top of a 15-minute burst (WEALTH, Leonida, FLOAT twice). One candidate with a mechanism: the 1-hour change must have been above the floor on the previous cycle too.
+- Trailing exits: unchanged from the last review. Compare each new one with its trail level.
+
+**Would prove this review wrong.**
+
+- The discovery change is wrong if, by 14:00 UTC on 16 Nov, no token found on a deeper page (`gecko:vol5` to `vol8`, `gecko:tx4` to `tx6`) has passed the universe filters: then the deeper pages hold nothing the bot can trade. Put the pages back to 4 and 3 and look for another source instead. It is half wrong if they add tokens and `universe_ok` still sits at 8 to 9 after two days.
+- It is also wrong if the new pages are refused (the same `gecko ... p5`-style error twice in a row, every 40 minutes): cut the page counts to the pages that answer.
+- It costs too much if `api_calls` passes about 60, the watchlist reaches its 300 cap, or GeckoTerminal 429s rise above a handful a day.
+- Not relaxing a threshold is wrong if the entries a modest relaxation would have added (Leonida 12:05 with `h6_change_min_pct` -5, paws 13:20 with fewer trades) both end as winners and the next 12 hours again bring no signal.
+
 ### v3, 2026-11-14 23:35 UTC review: no rule change, no code change
 
 **Health.** 408 cycles since launch, 61 since the last review. Last 6 hours: 74 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 1.9 minutes old when the review started, so no `.kick`. Two extra cycles (19:25, 31 seconds after the one before, and 23:12, 2 minutes after): both triggers fired, the concurrency group ran them in turn, nothing was lost. No errors in any run since 07:05 UTC. `batch_miss` 12 to 15 per cycle out of about 240 tokens (6%, was 8 to 12): 7 to 9 are `no_data` as before, the rest are recovered by the single lookup. `allowed_pool_used` 3 to 5, `api_calls` 43 to 47, no `pool lookup` error. RugCheck ran for both signals (WASTED 20:45, paws 22:05) and both answers parsed: `score_normalised` 1, no risks, LP locked 85.8% and 60.9%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no code change.
