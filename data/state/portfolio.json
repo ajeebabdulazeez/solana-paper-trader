@@ -15,7 +15,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-15T01:15:10Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.41964896723886,
+ "last_sol_usd": 71.60184985133286,
  "positions": [
   {
    "entry_exec_usd": 0.0005140580068184706,
@@ -43,14 +43,14 @@
    },
    "fees_sol": 0.0043135658277562786,
    "id": 10,
-   "last_liq_usd": 55707.25,
-   "last_price_usd": 0.0005109,
-   "last_ts": "2026-11-15T14:55:10Z",
-   "last_vol_h24": 250696.73,
+   "last_liq_usd": 56239.12,
+   "last_price_usd": 0.000519,
+   "last_ts": "2026-11-15T15:00:20Z",
+   "last_vol_h24": 248883.5,
    "missing_runs": 0,
    "opened": "2026-11-15T14:55:10Z",
    "pair": "5GxdoPcK2LJ6QYcJ3uvtC37tgsFHma55ULFkufTYe49R",
-   "peak_usd": 0.0005109,
+   "peak_usd": 0.000519,
    "rugcheck": {
     "lp_locked_pct": 87.34005247277092,
     "risks": [],
@@ -60,6 +60,7 @@
    "rulebook_version": 4,
    "sol_in": 0.46271316555125575,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "Leonida",
    "token": "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump",
    "tokens": 63686.85647286527,
