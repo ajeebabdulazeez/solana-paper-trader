@@ -1,5 +1,5 @@
 {
- "cash_sol": 4.041091673362025,
+ "cash_sol": 4.307233722113689,
  "closed_count": 11,
  "day": {
   "date": "2026-11-16",
@@ -16,7 +16,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-15T01:15:10Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.33783951841407,
+ "last_sol_usd": 71.28714908812225,
  "positions": [
   {
    "entry_exec_usd": 0.00634955863416992,
@@ -42,16 +42,16 @@
     "vol_h24": 559807,
     "volume_accel": 4.7
    },
-   "fees_sol": 0.004245050929645569,
+   "fees_sol": 0.0075924984108097105,
    "id": 12,
-   "last_liq_usd": 209829.15,
-   "last_price_usd": 0.006671,
-   "last_ts": "2026-11-16T06:00:20Z",
-   "last_vol_h24": 836910.47,
+   "last_liq_usd": 225844.27,
+   "last_price_usd": 0.007692,
+   "last_ts": "2026-11-16T06:05:13Z",
+   "last_vol_h24": 896145.18,
    "missing_runs": 0,
    "opened": "2026-11-16T05:35:11Z",
    "pair": "Hr9qopJXCuak38rxDpZduUFhdAK2BfjtoXbfQZVn2EwU",
-   "peak_usd": 0.007509,
+   "peak_usd": 0.007692,
    "rugcheck": {
     "lp_locked_pct": 99.99996662902397,
     "risks": [],
@@ -60,13 +60,15 @@
    },
    "rulebook_version": 4,
    "sol_in": 0.44901018592911385,
-   "sol_returned": 0.0,
+   "sol_returned": 0.2661420487516641,
+   "sold_tokens": 2510.5275754999275,
+   "sold_usd": 19.211137895632586,
    "suspect": null,
    "symbol": "BLOB",
    "token": "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump",
    "tokens": 5021.055150999855,
-   "tokens_remaining": 5021.055150999855,
-   "tp1_done": false,
+   "tokens_remaining": 2510.5275754999275,
+   "tp1_done": true,
    "trough_usd": 0.005984
   }
  ],
