@@ -37,3 +37,4 @@
 {"event":"close","id":16,"pnl_pct":23.97,"pnl_sol":0.110834,"reason":"trailing_stop","symbol":"Rings","ts":"2026-11-16T18:35:37Z"}
 {"event":"close","id":14,"pnl_pct":-20.33,"pnl_sol":-0.092506,"reason":"stop_loss","symbol":"Max","ts":"2026-11-16T20:25:12Z"}
 {"event":"close","id":17,"pnl_pct":-16.63,"pnl_sol":-0.078858,"reason":"stop_loss","symbol":"paws","ts":"2026-11-16T20:35:12Z"}
+{"event":"open","id":18,"price_usd":0.001606,"score":2.05,"sol_in":0.452636,"symbol":"NIO","token":"7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump","ts":"2026-11-16T20:50:12Z"}

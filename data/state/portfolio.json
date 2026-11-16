@@ -1,9 +1,9 @@
 {
- "cash_sol": 4.5263597690280655,
+ "cash_sol": 4.073723792125259,
  "closed_count": 17,
  "day": {
   "date": "2026-11-16",
-  "opens": 7,
+  "opens": 8,
   "start_equity": 4.558298337486096
  },
  "last_exit": {
@@ -20,9 +20,60 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.25906394199077,
- "positions": [],
+ "last_sol_usd": 71.33481229014154,
+ "positions": [
+  {
+   "entry_exec_usd": 0.001614772167164824,
+   "entry_liq_usd": 139117.14,
+   "entry_mid_usd": 0.001606,
+   "entry_sol_usd": 71.33481229014154,
+   "features": {
+    "age_days": 26.2,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.44,
+    "chg_h1": 2.16,
+    "chg_h24": 24.17,
+    "chg_h6": 7.07,
+    "chg_m5": 2.05,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0909,
+    "liq_usd": 139117,
+    "mcap": 1530396,
+    "quote": "SOL",
+    "score": 2.05,
+    "txns_h1": 300,
+    "vol_h1": 23750,
+    "vol_h24": 304800,
+    "volume_accel": 1.42
+   },
+   "fees_sol": 0.004263179884514033,
+   "id": 18,
+   "last_liq_usd": 139117.14,
+   "last_price_usd": 0.001606,
+   "last_ts": "2026-11-16T20:50:12Z",
+   "last_vol_h24": 304799.51,
+   "missing_runs": 0,
+   "opened": "2026-11-16T20:50:12Z",
+   "pair": "B4Wmjc6PvjCtU3qSVS3eTT9Mr4M5V5jBkRQctWANTc71",
+   "peak_usd": 0.001606,
+   "rugcheck": {
+    "lp_locked_pct": 41.658744728360766,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 6,
+   "sol_in": 0.45263597690280655,
+   "sol_returned": 0.0,
+   "symbol": "NIO",
+   "token": "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump",
+   "tokens": 19807.493565772416,
+   "tokens_remaining": 19807.493565772416,
+   "tp1_done": false,
+   "trough_usd": 0.001606
+  }
+ ],
  "realized_pnl_sol": -0.47364023097193464,
  "starting_sol": 5.0,
- "trade_seq": 17
+ "trade_seq": 18
 }
