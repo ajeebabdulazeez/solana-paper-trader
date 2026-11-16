@@ -60,9 +60,22 @@ The running record of what paper results have shown and why each rulebook versio
 2. Plumbing, no rule in it: the order of the single lookups in `fetch_views` (above).
 3. Tests: 1 added. 40 pass.
 
+**First live cycles (14:35 and 14:40 UTC).** Pushed at 14:37 UTC and picked up by the 14:40 cycle: no errors, `api_calls` 49 (49 on the cycle before, on the old code), `batch_miss` 15, `no_data` 14, 12 tokens on the watchlist that have never returned data. With 15 misses the lookups did not run out, so the new order has not been put to the test yet. rockstar read -6.1% at 14:40, ten minutes in.
+
+The 14:40 cycle also opened trade 14, after this review's analysis was done:
+
+| # | Token | Opened (UTC, 16 Nov) | Age | Trades in the hour before | 1-hour change at entry | Pool | Status |
+|---|---|---|---|---|---|---|---|
+| 14 | Max | 14:40 | 4.7 days | 319 | +2.5% | PumpSwap, $136k, LP locked 79.4% | open |
+
+- Max is the first trade on the v5 entry rules in a token 3 days or older, so it is the first that counts for the 300-trade floor. It is the same token the floor blocked at 13:55 (259 trades); the bot bought it 45 minutes later, 7.6% lower, once the count passed 300. The wide replay's 13:55 entry and this one will end close together, so do not count them as two results.
+- It is also the first trade with a RugCheck risk on it: `score_normalised` 29 against a limit of 30, one risk, "Copycat token", level `warn`. The answer parsed (the level is read and only `danger` blocks), and the trade was allowed by one point. Not a bug and not a reason to touch the safety section; if trades with a score this close to the limit lose, lowering `max_score_normalised` is a tightening and allowed.
+- Open positions 2 of 5, new trades today 4 of 10.
+
 **For the next review.**
 
 - rockstar: record the exit and, if it is a stop, the price at the stop cycle against the 12% level. It counts in the "under 3 days" row only.
+- Max: record the exit. It counts in the "3 days or more" row and is the first of the 10 closed trades the 06:30 entry's test for the floor needs.
 - The lookup change: on cycles with `batch_miss` over 15, `no_data` should now equal the number of watchlist tokens that have never returned data (12 today), and no token with `last_ok` should miss a snapshot on those cycles.
 - Cycle gaps: one cycle was skipped at 12:55. If skipped cycles start to repeat (more than two in six hours), tell Ajeeb; a young token's stop depends on every cycle more than an old one's.
 - Discovery: after 12:35 UTC on 17 Nov, count the tokens from `gecko:vol5` to `vol8` and `gecko:tx4` to `tx6` that passed the v6 universe and what the trades on them did. HOGE is one.
@@ -71,7 +84,7 @@ The running record of what paper results have shown and why each rulebook versio
 
 **Would prove this review wrong.**
 
-- The lookup change is wrong if `api_calls` rises above 48 with the watchlist the same size, if a `pair lookup` error starts repeating, or if a token that has returned data before still drops out of a snapshot on a cycle with more than 15 misses. In the last case the batch call is the thing to look at, not the order of the lookups.
+- The lookup change is wrong if `api_calls` passes about 55 with the watchlist the same size (it was 49 with one position open before the change and 49 with two after), if a `pair lookup` error starts repeating, or if a token that has returned data before still drops out of a snapshot on a cycle with more than 15 misses. In the last case the batch call is the thing to look at, not the order of the lookups.
 - The age table overstates the problem if the first five stops on tokens under 3 days old fill within 3 points of the level, as the stops on older tokens do (2.3 points on average). Then five-minute cycles follow young tokens well enough and no change for them is needed on that account.
 - Leaving v6 alone is wrong by the tests the 12:30 entry set, which are unchanged: young tokens' first 15 closed trades losing more per trade than older tokens' over the same days, a single day of young-token trades costing more than 5% of equity, or more than one `liquidity_drop` or write-off in the first 15.
 - The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles repeat.
