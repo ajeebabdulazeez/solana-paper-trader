@@ -27,7 +27,7 @@ SOL_USD = 200.0
 
 
 def make_pair(token, symbol, price, liq, now, age_days=7, mcap=2_000_000, vol_h24=500_000, vol_h6=120_000,
-              vol_h1=40_000, buys_h1=120, sells_h1=60, chg=(0.5, 8.0, 12.0, 20.0), quote="SOL",
+              vol_h1=40_000, buys_h1=400, sells_h1=200, chg=(0.5, 8.0, 12.0, 20.0), quote="SOL",
               vol_m5=3000):
     created = int((now - timedelta(days=age_days)).timestamp() * 1000)
     qaddr = S.WSOL if quote == "SOL" else "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
@@ -174,9 +174,11 @@ class Rules(unittest.TestCase):
         self.assertEqual(S.entry_reject(self.view(chg=(0.5, 60.0, 80.0, 90.0)), e, 0), "h1_overheated")
         self.assertEqual(S.entry_reject(self.view(chg=(0.5, 0.5, 5.0, 5.0)), e, 0), "h1_weak")
         self.assertEqual(S.entry_reject(self.view(chg=(-6.0, 8.0, 12.0, 20.0)), e, 0), "m5_dropping")
-        self.assertEqual(S.entry_reject(self.view(buys_h1=100, sells_h1=120), e, 0), "buy_pressure")
+        self.assertEqual(S.entry_reject(self.view(buys_h1=300, sells_h1=360), e, 0), "buy_pressure")
         thin = self.view(buys_h1=e["min_txns_h1"] * 2 // 3 - 1, sells_h1=e["min_txns_h1"] // 3)
         self.assertEqual(S.entry_reject(thin, e, 0), "txns_h1")      # too few trades in the hour to read
+        floor = self.view(buys_h1=e["min_txns_h1"] - e["min_txns_h1"] // 3, sells_h1=e["min_txns_h1"] // 3)
+        self.assertIsNone(S.entry_reject(floor, e, 0))               # exactly the floor is enough
         self.assertEqual(S.entry_reject(self.view(vol_h1=10_000), e, 0), "volume_accel")
         self.assertEqual(S.entry_reject(self.view(), e, 25.0), "liquidity_falling")
 

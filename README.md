@@ -22,9 +22,9 @@ The bot never edits the rules. Reviews never place trades. That separation is wh
 - `data/journal/trades.jsonl`: one line per closed trade, with the market conditions at entry.
 - `reviews/LESSONS.md`: what has been learned so far and why each rule changed.
 
-## Strategy in one paragraph (rulebook v4; the trading rules are unchanged since v3)
+## Strategy in one paragraph (rulebook v5)
 
-Only tokens 3 to 30 days old with real liquidity, volume and trading activity, that pass a RugCheck safety screen. Buy when the last hour shows moderate upward momentum with more buyers than sellers, rising volume and at least 150 trades. Risk 0.5 SOL per trade, at most 5 positions and 10 new trades a day. Exit on a 12% stop-loss, sell half at +20% and trail the rest, or leave after 6 hours. Every number is a starting guess to be tested.
+Only tokens 3 to 30 days old with real liquidity, volume and trading activity, that pass a RugCheck safety screen. Buy when the last hour shows moderate upward momentum with more buyers than sellers, rising volume and at least 300 trades. Risk 0.5 SOL per trade, at most 5 positions and 10 new trades a day. Exit on a 12% stop-loss, sell half at +20% and trail the rest, or leave after 6 hours. Every number is a starting guess to be tested.
 
 ## Honesty rules for the simulation
 

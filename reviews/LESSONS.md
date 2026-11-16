@@ -14,6 +14,114 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v5, 2026-11-16 06:30 UTC review: a buy now needs 300 trades in the last hour, was 150
+
+**Health.** 787 cycles since launch, 100 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.3. The newest cycle was 1.9 minutes old when the review started, so no `.kick`. One extra cycle (01:06, 1.6 minutes after the one before): both triggers fired, the concurrency group ran them in turn. One error in the 100 cycles: GeckoTerminal 429 on page 1 of the trade-count list at 06:30, fetched on the next cycle. No `gecko ... p5` to `p8` or `p4` to `p6` line, so the deeper pages still answer. `allowed_pool_used` 4 or 5, `api_calls` 43 to 48 (was 41 to 47), watchlist 185 to 215 (cap 300), no `pool lookup` error. RugCheck ran twice (Rings 01:45, BLOB 05:35) and both answers parsed: `score_normalised` 1, no risks, LP locked 26.2% and 100.0%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found in the trading path, so no change to `bot/`.
+
+`no_data` is up: 9 to 17 per cycle (median 13, was 10), and `batch_miss` 11 to 17 (median 13) out of about 255 tokens. It is not the deeper pages. All 14 tokens on the watchlist that have never returned data came from DexScreener's `profiles_latest` feed (a profile for a token with no Solana pool yet); each drops off after 24 hours. On 10 of the 100 cycles `batch_miss` was 16 or 17, over the 15 single lookups a cycle allows, so one or two tokens went without a lookup. I looked for harm and found none: of the 32 times a token was missing from the snapshots for a few cycles, one fell in those cycles, and a held token is always looked up first. Not changed. See "For the next review".
+
+**Strategy: v4 closed 3 trades, 1 win. v3 and v4 have the same trading rules: together 6 closed, 2 wins. Six trades are hints, not findings.** Equity 4.5853 SOL (-8.29%, was 4.5583), nothing open. v4 -2.88% per trade, v3 and v4 together -3.73%. All versions: 12 closed, 3 wins on two tokens (WASTED twice, BLOB), -7.00% per trade, max drawdown 10.2%. SOL went from $72.2 to $71.0.
+
+| # | Token | Opened (UTC, 16 Nov) | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|
+| 11 | Rings | 01:45 | 843 | +14.3% | 0.0% | stop, price at -12.0% | -14.96% |
+| 12 | BLOB | 05:35 | 2,798 | +2.4% | +41.7% | half sold at +21.8%, rest trailed out at +26.6% | +21.20% |
+
+- Rings (Meteora pool, $57k). The price jumped 55.6% in one cycle at 00:45 and then went sideways for an hour. The 1-hour change read +42% to +74%, over the 25% cap, until that jump left the hour: +73.7% at 01:40, +14.3% at 01:45. The bot bought a price 4% lower than it had been 50 minutes earlier. It was stopped twenty minutes later, on the level (-12.0%). Afterwards the price moved between -18% and +15% of the entry for three hours, never reached the +20% target, fell 49% in one cycle at 05:05 (liquidity $56k to $40k, so a real move) and stood 28% under the entry at 06:40. The stop was right. A 20% stop would have filled near -50%.
+- Rings had 26.2% of its LP locked, the lowest of any trade so far (the others: 40.5% to 100%). The safety section has no floor for it. One trade; recorded, not acted on.
+- BLOB (PumpSwap, $205k). Found by the boost feed at 05:30 and bought five minutes later, on the first cycle its 1-hour change was over +2%, with volume at 4.7 times its 6-hour average. The trail level was +27.5% (peak +41.7% less 10%) and the fill +26.6%: 0.9 points under. A 5% trail would have sold on the same cycle. Ten minutes after the exit the price was +4.7% over the entry. Nothing was left on the table that a rule here could have taken.
+- Trailing exits, the test set on 14 Nov 23:35 (the next two both more than 5 points under the trail level): the first of the two is 0.9 points under. The three so far: 4.5, 32 and 0.9.
+- Stops: all 9 lost, average -16.33%, total -0.7068 SOL; the three trailing exits made +0.2921 SOL. Across the 9 the price at the stop cycle averages -14.3%, 2.3 points past the level, with every cycle on time.
+- Both new trades came from the shallow sources (Rings from `gecko:trend2`, BLOB from `boosts_top`).
+
+**What the last review asked, answered.**
+
+- `python3 -m bot.replay --baseline`, with the rules as they stood (v4):
+
+| Positions opened at | Bot's universe: cycles (tokens) | Win rate | Mean | Wide, ages 3 to 30 days: cycles (tokens) | Win rate | Mean |
+|---|---|---|---|---|---|---|
+| every cycle a token was eligible | 5,437 (17) | 29% | -4.92% | 15,856 (41) | 33% | -3.87% |
+| cycles the entry rules passed | 70 (7) | 50% | -0.73% | 147 (19) | 35% | -4.03% |
+| the first passing cycle of each run | 25 (7) | 48% | -0.62% | 60 (19) | 35% | -3.89% |
+
+  The first row moved 0.6 points on 15% more record (it was -4.32% and -3.27%), so the yardstick is steady enough to use. On the wide record the v4 entry rules still picked moments no better than no rule at all. On the bot's own universe 44 of the 70 passing cycles are still WASTED.
+- The relaxations it listed: WASTED 20:30 on 15 Nov (bought with `h6_change_min_pct` -5) ended at the time stop, -11.9%. FLOAT 17:45 (bought with `min_volume_accel` 1.0) ended at the time stop, -3.7%. Not relaxing was right for the third review running. There were signals at 01:45 and 05:35, so the 12-hour rule is not met.
+- Its test for leaving the rules alone (4 or more winners in the next 10 closed trades): 1 of 2 when the rules changed below. It ends unread.
+- v3's test for the 150-trade filter (2 winners or fewer in its first 10 closed): 2 of 6. The change below goes further the same way and replaces it.
+- Discovery, interim (the test is due at 14:00 UTC today): from 13:45 on 15 Nov to 06:40, read from 208 versions of `data/state/watchlist.json`, the deeper pages (`gecko:vol5` to `vol8`, `gecko:tx4` to `tx6`) found 43 tokens. 31 reached the snapshots; 30 of those were under a day old when first seen, 25 under two hours old; the other is XTO (market cap far over the ceiling). None has passed the universe filters. Still heading for a fail. Not touched: one section per review, and it is not due.
+
+**New measurement 1: the exits against a buy at any moment. No exit setting is the problem, and none can be the fix.** The stops have lost 0.71 SOL, so the obvious question is whether the 12% stop is too tight. A scratch version of the baseline answers it on far more than 9 stops: open a position at every eligible cycle, run it through each exit variant, and compare the same entries. Two fixes to make that fair: only entries opened at least 13 hours before the end of the record count, and a position whose token left the record is marked at its last price instead of being dropped (the built-in `--baseline` drops them, which flatters wide stops and long holds, so do not read `--baseline --set exit.stop_loss_pct=30` at face value).
+
+| Exit variant | Bot's universe, 4,636 entries on 15 tokens | Wide, ages 3 to 30 days, 13,438 entries on 36 tokens |
+|---|---|---|
+| live (12% stop, 6 hours) | -3.92% | -3.21% |
+| stop 8% | -3.90% | -3.52% |
+| stop 16% | -3.32% | -2.77% |
+| stop 20% | -2.99% | -2.59% |
+| stop 30% | -2.22% | -2.28% |
+| hold at most 2 hours | -3.12% | -3.24% |
+| hold at most 1 hour | -2.87% | -3.03% |
+| sell everything at +20% | -4.01% | -2.61% |
+| trail 5% | -3.98% | -3.05% |
+
+- Every variant lands between -2.2% and -4.0%. A round trip costs about 3%. That is what a market with no drift does to any exit rule: exits move the losses around, they do not make or remove them. The edge, if there is one, has to come from when the bot buys.
+- Under the live exits 48% of any-moment buys on the bot's universe (43% wide) ended at the stop within six hours. A 12% fall inside six hours is an ordinary event for these tokens, not a sign that a trade was wrong.
+- A 20% stop reads 0.6 to 0.9 points better. Not acted on, for four reasons. Of the entries stopped at 12%, the 20% stop ended better on only 41% to 45%. On the bot's universe the per-token average does not move (-2.93% against -2.96%). The bad cases get much worse (Rings: about -50% instead of -15%). And it is under a point on a record where every figure is within a point of the costs.
+
+**New measurement 2: the same yardstick, split by how many trades the token had in the hour before the signal.** Wide record (every recorded token 3 to 30 days old), live exits, the first cycle of each run of signals, with `entry.min_txns_h1` set to 50 so the entries v3 blocks are in the table too:
+
+| Trades in the hour before | First signals (tokens) | Wins | Mean | Tokens with a positive average |
+|---|---|---|---|---|
+| 50 to 149 | 44 (15) | 4 | -13.50% | 0 of 15 |
+| 150 to 299 | 17 (10) | 1 | -13.79% | 1 of 10 |
+| 300 to 599 | 9 (4) | 4 | -1.57% | 2 of 4 |
+| 600 to 1,199 | 10 (8) | 2 | -7.99% | 2 of 8 |
+| 1,200 or more | 24 (7) | 14 | +3.97% | 3 of 7 |
+| 300 or more, together | 43 (14) | 20 | +0.03% | 6 of 14 |
+| for scale: a buy at any eligible cycle | 15,856 (41) | 33% | -3.87% | 9 of 41 |
+
+- A signal on fewer than 300 trades in the hour is worse than no signal. Any cycle at all with 150 to 299 trades made -3.12% (2,942 cycles on 30 tokens). The cycles the entry rules picked in that band made -13.79%. The rules are not just failing to help there, they are picking the worst moments: the top of a short burst, as the reviews of 14 and 15 Nov described for WEALTH, FLOAT and Leonida one trade at a time.
+- It holds on each day the band had signals: -10.5% (2 signals), -10.1% (6) and -17.0% (9) on 13, 14 and 15 Nov. The group at 300 or more made -15.2% (8), +6.8% (19), +1.1% (10) and -2.9% (6, 16 Nov): bad on 13 Nov as well, then about level.
+- The real trades say the same. Bought on 150 to 299 trades: FLOAT (160), :3 (223), paws (174), FLOAT (184), Leonida (227): 0 wins of 5, all stops, -15.65% a trade. Bought on 300 or more: Leonida (726) and Rings (843) lost, WASTED (301 and 860) and BLOB (2,798) won: 3 of 5, +6.23%.
+- Forward check. The 14 Nov 13:30 review looked at 200 and 250 and declined to pick "the number that makes the past look best". Since then, in the wide replay with the live rules: entries on 150 to 299 trades 0 wins of 8 on 8 tokens (-15.5%), entries on 300 or more 3 of 9 on 7 tokens (-3.5%). Three of the eight are real trades. On wins alone that split turns up by chance about one time in eight.
+- The number does not matter much above 250. First signals at or over 200: -1.73%; 250: -0.40%; 300: +0.03%; 400: -0.08%; 500: -0.06%; 600: +0.45%. The gain is all in dropping 150 to 250; nothing above it is a peak picked off the record.
+- The blocked entries do not come back a cycle later, which is how the last three entry ideas failed. `python3 -m bot.replay --wide --set universe.min_age_days=3 --set universe.max_age_days=30 --set entry.min_txns_h1=300` drops 12 entries: 11 losers and one winner (CJ, +16.7% on 247 trades, which it buys again 2 hours 20 minutes later on 671 trades for +15.9%). With no cooldown from the dropped losers it adds three: FLOAT +12.4%, CJ +15.9%, RAMBO -21.8%. Result: 18 closed on 14 tokens, 7 wins, -2.85% a trade, against 27 closed on 19 tokens, 6 wins, -7.42% with the floor at 150. On the bot's own universe: 6 closed on 5 tokens, 4 wins, +7.32%, against 10 closed, 3 wins, -4.66%.
+
+**Changed: rulebook v5, entry section only. `entry.min_txns_h1` 150 to 300. A hypothesis, on hints.**
+
+- Why it is more than the last three entry ideas. It was named before the data (13 Nov: "a higher `min_txns_h1`"), it has a mechanism (under 300 trades an hour is under 5 a minute, so the 1-hour change, the buy/sell ratio and the volume acceleration are each set by one burst, and passing all three at once mostly means the burst has just happened), it has held on trades made after it was first looked at, and it passes the test the last review set: the cycles it picks beat all cycles by more than a couple of points on the wide record (+0.03% against -3.87%) on more tokens than one (6 with a positive average: WASTED, BLOB, DIGS, :3, FLOAT, CJ).
+- How weak it still is. The 14 Nov review wrote "do not raise it further on replay results alone". Five real trades in the band, none a winner, are the part that is not replay; five trades are a hint. Without WASTED and BLOB the group at 300 or more is 10 wins of 29, -3.35%: level with a buy at any moment. So the honest claim is the narrow one: signals under 300 trades have been reliably bad; signals over 300 have not been shown to be good. All of it is three days of one falling market.
+- What it does not do. On the wide record the v5 rules still lose 2.85% a trade, about one round trip's costs. The +7.32% on the bot's universe is six trades on five tokens, read off the same record the number was chosen on. Do not expect it. This removes the worst group; it does not show an edge.
+- What it costs. About half the trades: 5 of the 12 real trades had 300 or more, and the replay on the bot's universe goes from 10 trades to 6 in 2.5 days, about 2 a day. The proof gate (100 trades on one version) was already weeks away at 4 a day. Buying a band that has lost every time would fill the count faster and prove nothing.
+- The blocked entries stay measurable: `python3 -m bot.replay --set entry.min_txns_h1=150` (add `--wide --set universe.min_age_days=3 --set universe.max_age_days=30`) shows what they would have done; the table has the trade count of each entry.
+- Nothing else changed. Exit, universe, portfolio, safety, costs and discovery are v4's.
+
+**Changed, in full.**
+
+1. Rulebook v5: `entry.min_txns_h1` 150 to 300, `version`, `updated`, `notes`.
+2. README: the strategy paragraph says 300 trades and v5.
+3. Tests: the scripted token used as "a good token" traded 180 times an hour and would now be rejected, so it trades 600 times an hour (same 2:1 buy/sell ratio); the buy-pressure case likewise. One assertion added: a token exactly at the floor passes, one trade under it is rejected (both read the floor from the rulebook). 37 pass.
+4. No change to `bot/`.
+
+**For the next review.**
+
+- The discovery test is due at 14:00 UTC on 16 Nov. Walk `git log -- data/state/watchlist.json` as before (the checkout is shallow: `git fetch --depth=400 origin main` first, or the walk stops after 50 versions). If no token from `gecko:vol5` to `vol8` or `gecko:tx4` to `tx6` has passed the universe, put `top_volume_pages` back to 4 and `top_tx_pages` to 3. That is a discovery-section change and the one change for that review.
+- v5: judge it on v5 trades. For the entry hint, count in the wide replay with `entry.min_txns_h1=150` the entries opened after 06:45 UTC on 16 Nov with 150 to 299 trades, and how they ended.
+- Rings' shape, one trade: bought on the cycle a single +55% jump left the 1-hour window, after 50 minutes of no movement. If it repeats, the candidate is a rule on how the 1-hour change got into the band (it fell in from above the cap), which needs code. Test it against all cycles first.
+- LP locked: Rings 26%, every other trade 40% or more. If the next losers also sit low, a floor in the safety section is a tightening and allowed.
+- `no_data`: if `batch_miss` stays over 15 on most cycles, or a token with data history starts dropping out of the snapshots on those cycles, make the single lookups in `fetch_views` take tokens that have returned data before (`last_ok` set) ahead of tokens that never have. Plumbing, with a test.
+- Trailing exits: compare the next one with its trail level (0 of 1 in the test so far).
+- To redo the exit table, do not use `--baseline --set exit...` as it stands (it drops unfinished positions). Keep them, marked at the last price, and compare the same entries.
+
+**Would prove this review wrong.**
+
+- The entry change is wrong if the entries it blocks start winning as often as the ones it takes: of the next 10 entries on 150 to 299 trades in the wide replay with `entry.min_txns_h1=150` (opened after 06:45 UTC on 16 Nov), 3 or more winners. So far that band is 1 of 12 in the replay with trades and 0 of 5 for real. Then put it back to 150.
+- It is also wrong if v5's first 10 closed trades have 2 winners or fewer: the same rules without it made 2 of 6, so that would be no improvement on the trades it keeps.
+- It only removes losers, and the entry section still needs a different idea, if after a week the first signals at 300 or more, with WASTED and BLOB left out, are still level with a buy at any moment on the wide record (-3.35% against -3.87% today).
+- It costs too much if v5 opens fewer than one trade a day over three days with cycles arriving. Then the universe has to grow before any entry rule can be judged, and discovery is the section to work on.
+- Leaving the stop at 12% is wrong if the exit table, redone on a week of data, shows a 20% stop ahead by 2 points or more on both records and on the per-token average as well.
+- The health verdict is wrong if the gap between cycles grows past 15 minutes, or if a token that has returned data before is missing from the snapshots on cycles where `batch_miss` is over 15.
+
 ### v4, 2026-11-15 22:30 UTC review: no rule change (review tool: the entry rules measured against a buy at any moment)
 
 **Health.** 688 cycles since launch, 110 since the last review. Last 6 hours: 74 cycles, median gap 5.0 minutes, longest 5.2. The newest cycle was 1.8 minutes old when the review started, so no `.kick`. Two extra cycles (16:41 and 21:17, each 2 to 3 minutes after the one before): both triggers fired, the concurrency group ran them in turn. No error in any of the 107 cycles on v4; the one error since the last review was at 13:40, before v4 was live (GeckoTerminal 429 on trending page 2). No `gecko ... p5` to `p8` or `p4` to `p6` line: the deeper pages have answered on every turn for 8.7 hours. `batch_miss` 10 to 16 per cycle (median 13) out of about 250 tokens; `no_data` 8 to 12 (median 10, the level the 14 Nov review said to watch; not growing). `allowed_pool_used` 3 to 5, `api_calls` 41 to 47, watchlist 168 to 196 (cap 300), no `pool lookup` error. RugCheck ran once (Leonida, 14:55) and parsed: `score_normalised` 1, no risks, LP locked 87.3%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found in the trading path, so no change to it.

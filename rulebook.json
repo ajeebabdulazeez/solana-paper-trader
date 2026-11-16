@@ -1,7 +1,7 @@
 {
-  "version": 4,
-  "updated": "2026-11-15",
-  "notes": "v4 = v3 with one discovery change and no change to any trading rule: GeckoTerminal's most-traded pool lists are read twice as deep (top_volume_pages 4 to 8, top_tx_pages 3 to 6; still 2 calls per cycle, so the 16 pages now come round every 40 minutes instead of 9 pages every 22.5). Hypothesis from the 2026-11-15 13:30 UTC review: the tradable universe has been the same 8 to 10 tokens for two days (15 tokens ever eligible, 12 of them found in the bot's first hour), no entry signal for 13.7 hours, and no modest relaxation of an entry or universe threshold would have added a winning trade in the replay, so the bottleneck is what discovery finds, not the thresholds. Entry, exit, universe, portfolio, safety and costs are exactly v3's (v3 = v2 with entry.min_txns_h1 raised from 50 to 150), so v3 and v4 trades test the same trading rules on a different pool of tokens. See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+  "version": 5,
+  "updated": "2026-11-16",
+  "notes": "v5 = v4 with one entry change: a buy now needs 300 trades in the last hour (entry.min_txns_h1 150 to 300). Hypothesis from the 2026-11-16 06:30 UTC review: an entry signal on a thinly traded token is noise, because the 1-hour change, the buy/sell ratio and the volume acceleration are then each set by a short burst of trades and the bot buys the top of it. Evidence, all of it hints: every real trade bought on 150 to 299 trades in the hour ended at the stop (0 wins of 5, three of them since v3 raised the floor from 50 to 150); on every recorded token 3 to 30 days old the first cycle of a signal in that band won 1 time in 17 on 10 tokens (-13.8% a trade) against 20 in 43 on 14 tokens (+0.0%) at 300 or more, while a buy at any moment made -3.9%; the result is the same for any floor from 250 to 600. It removes the worst group; on the same record the rules still lose about a round trip's costs per trade, so no edge is shown yet. Expect about half as many trades. Exit, universe, portfolio, safety, costs and discovery are exactly v4's (v4 = v3 with GeckoTerminal's most-traded lists read twice as deep; v3 = v2 with min_txns_h1 50 to 150). See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
   "portfolio": {
     "starting_sol": 5.0,
     "position_size_sol": 0.5,
@@ -75,7 +75,7 @@
     "h6_change_min_pct": 0,
     "h24_change_min_pct": -30,
     "m5_change_min_pct": -3,
-    "min_txns_h1": 150,
+    "min_txns_h1": 300,
     "min_buy_sell_ratio_h1": 1.2,
     "min_volume_accel": 1.2,
     "max_liquidity_drop_pct_1h": 10
