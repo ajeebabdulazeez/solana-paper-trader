@@ -1,6 +1,6 @@
 {
- "cash_sol": 4.1311368037138845,
- "closed_count": 16,
+ "cash_sol": 4.5263597690280655,
+ "closed_count": 17,
  "day": {
   "date": "2026-11-16",
   "opens": 7,
@@ -17,64 +17,12 @@
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-15T01:45:11Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
   "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-16T15:50:12Z",
-  "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-15T01:15:10Z",
+  "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.39175124571261,
- "positions": [
-  {
-   "entry_exec_usd": 0.000587735148835837,
-   "entry_liq_usd": 76508.86,
-   "entry_mid_usd": 0.0005843,
-   "entry_sol_usd": 71.23864883332814,
-   "features": {
-    "age_days": 20.57,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.56,
-    "chg_h1": 16.06,
-    "chg_h24": -16.32,
-    "chg_h6": 6.31,
-    "chg_m5": 18.39,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1366,
-    "liq_usd": 76509,
-    "mcap": 560224,
-    "quote": "SOL",
-    "score": 3.12,
-    "txns_h1": 300,
-    "vol_h1": 15683,
-    "vol_h24": 203186,
-    "volume_accel": 1.99
-   },
-   "fees_sol": 0.004370405354316693,
-   "id": 17,
-   "last_liq_usd": 75106.48,
-   "last_price_usd": 0.0005613,
-   "last_ts": "2026-11-16T20:30:17Z",
-   "last_vol_h24": 243188.83,
-   "missing_runs": 0,
-   "opened": "2026-11-16T18:00:24Z",
-   "pair": "2rmaFtFZmJtLXdPgRvk417RLc9GBD3jGbAqtttmfG3AF",
-   "peak_usd": 0.0006447,
-   "rugcheck": {
-    "lp_locked_pct": 67.39291364470368,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 6,
-   "sol_in": 0.47408107086333856,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "paws",
-   "token": "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump",
-   "tokens": 56933.0475125495,
-   "tokens_remaining": 56933.0475125495,
-   "tp1_done": false,
-   "trough_usd": 0.0005161
-  }
- ],
- "realized_pnl_sol": -0.3947821254227767,
+ "last_sol_usd": 71.37388345384942,
+ "positions": [],
+ "realized_pnl_sol": -0.47364023097193464,
  "starting_sol": 5.0,
  "trade_seq": 17
 }
