@@ -52,6 +52,8 @@ Not a scheduled review. Ajeeb asked for it after reading the 06:30 note: he beli
 - The discovery test due at 14:00 UTC today was written for a 3-day floor: "no token from the deeper pages has passed the universe" was true because 30 of the 31 they found were under a day old. Those tokens can pass now. Do not put the pages back to 4 and 3 on the old reading. Re-read it after a day of v6: how many tokens from `gecko:vol5` to `vol8` and `gecko:tx4` to `tx6` passed the universe, and what trades on them did.
 - On the latest snapshot (12:25 UTC) v6 adds four tokens to the universe, 7 to 11 (rockstar, HOGE, Anthropig, SWJ, all 19 to 30 hours old); none met the entry rules on that cycle.
 
+**First live cycle (12:35 UTC).** Pushed at 12:31 UTC and picked up by the 12:35 cycle: v6, no errors, `api_calls` 46, `u:too_young` 28 to 2, `universe_ok` 7 to 11, no signal (7 `h1_weak`, 1 each of `h1_overheated`, `h6_down`, `m5_dropping`, `txns_h1`), nothing open. v6 trades start from the 12:35 cycle.
+
 **For the next review.**
 
 - Judge young tokens (under 3 days at entry) as their own group. Under about 30 closed trades it is a hint.
