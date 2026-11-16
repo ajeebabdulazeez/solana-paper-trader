@@ -103,6 +103,8 @@ The running record of what paper results have shown and why each rulebook versio
 3. Tests: the scripted token used as "a good token" traded 180 times an hour and would now be rejected, so it trades 600 times an hour (same 2:1 buy/sell ratio); the buy-pressure case likewise. One assertion added: a token exactly at the floor passes, one trade under it is rejected (both read the floor from the rulebook). 37 pass.
 4. No change to `bot/`.
 
+**First live cycles (06:50 and 06:55 UTC).** Pushed at 06:46 UTC and picked up by the 06:50 cycle. Both cycles ran v5 with no errors, `api_calls` 48, `universe_ok` 7, no signal (5 `h1_weak` each, 1 `buy_pressure`, 1 `h6_down`, 1 token in its cooldown), nothing open. v5 trades start from the 06:50 cycle.
+
 **For the next review.**
 
 - The discovery test is due at 14:00 UTC on 16 Nov. Walk `git log -- data/state/watchlist.json` as before (the checkout is shallow: `git fetch --depth=400 origin main` first, or the walk stops after 50 versions). If no token from `gecko:vol5` to `vol8` or `gecko:tx4` to `tx6` has passed the universe, put `top_volume_pages` back to 4 and `top_tx_pages` to 3. That is a discovery-section change and the one change for that review.
