@@ -271,6 +271,22 @@ class Rules(unittest.TestCase):
         self.assertIsNone(S.hold_suspect(0.0006272, 62_201, note, 0.0006233, 61_723, 875, 599))  # back: nothing happened
         self.assertIsNone(S.hold_suspect(0.0006272, 62_201, None, 0.0003898, 49_748))            # callers without volume
 
+    def test_a_reading_too_soon_after_an_ignored_one_cannot_confirm_it(self):
+        # CJ, 2026-11-15: +42% on no volume at 21:17:34 and again at 21:20:14 (two triggers), gone at 21:25.
+        t0 = 1_000_000.0
+        note = S.hold_suspect(1.0, 100_000, None, 1.42, 119_000, 12, 141, t0)
+        self.assertEqual((note["runs"], note["ts"]), (1, t0))
+        again = S.hold_suspect(1.0, 100_000, note, 1.42, 119_000, 12, 301, t0 + 160)
+        self.assertEqual(again, note)                                   # still ignored, and no run used up
+        self.assertEqual(S.hold_suspect(1.0, 100_000, note, 1.42, 119_000, 12, 500, t0 + 200), note)  # nor by a late gap
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, note, 0.97, 99_000, 900, 301, t0 + 160))   # back to normal: fine
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, note, 1.42, 119_000, 12, 600, t0 + 300))   # a cycle later: real
+        wait = S.SUSPECT_MIN_WAIT_S
+        self.assertEqual(S.hold_suspect(1.0, 100_000, note, 1.42, 119_000, 12, 300, t0 + wait - 1), note)
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, note, 1.42, 119_000, 12, 300, t0 + wait))
+        old = {"price": 1.42, "liq": 119_000, "runs": 1}                # a note written before notes had a time
+        self.assertIsNone(S.hold_suspect(1.0, 100_000, old, 1.42, 119_000, 12, 301, t0 + 160))
+
     def test_sol_price_from_sol_pairs(self):
         pairs = [make_pair("A", "A", 2.0, 1e5, T0), make_pair("B", "B", 0.01, 1e5, T0),
                  make_pair("C", "C", 5.0, 1e5, T0, quote="USDC")]
@@ -478,6 +494,30 @@ class Cycle(unittest.TestCase):
         self.assertEqual([e["event"] for e in events],
                          ["open", "suspect_price", "suspect_price", "suspect_price", "close"])
         self.assertEqual(events[1]["traded_usd"], 2_300)
+
+    def test_second_trigger_a_minute_later_does_not_confirm_a_bad_print(self):
+        # Two triggers sometimes start two cycles a minute apart. A bad print lasts longer than that,
+        # so the second of them must not count as "the next cycle shows it again".
+        self.list_token("TWICE")
+        self.step()
+        self.set("TWICE", 1.42, liq=119_000, vol_m5=12)       # +42% that nobody traded
+        s = self.step(minutes=1)
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], 1))
+        s = self.step(minutes=4)                               # one minute later: the same print
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], 1))
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["tp1_done"], pos["peak_usd"], pos["suspect"]["runs"]), (False, 1.0, 1))
+        self.set("TWICE", 0.97, vol_m5=900)                    # the next real cycle: it never happened
+        s = self.step()
+        self.assertEqual((s["closed"], s["funnel"].get("suspect_price")), ([], None))
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["tp1_done"], pos["peak_usd"], pos["last_price_usd"]), (False, 1.0, 0.97))
+        # A real fall is still acted on at the first cycle a full wait after it was first seen.
+        self.set("TWICE", 0.62, liq=80_000, vol_m5=2_300)
+        self.assertEqual(self.step(minutes=1)["closed"], [])
+        self.assertEqual(self.step(minutes=4)["closed"], [])
+        s = self.step()
+        self.assertEqual((s["closed"][0][1], s["funnel"].get("suspect_price")), ("stop_loss", None))
 
     def test_real_move_shows_in_the_24h_volume_even_when_the_5_minute_figure_lags(self):
         # AI, 2026-11-14 06:30 UTC: -24% that stayed, 5-minute volume $30, 24-hour volume up $4k.

@@ -191,9 +191,10 @@ def unbacked_move(prev_price, prev_liq, price, traded, gap_s) -> bool:
 
 
 SUSPECT_MAX_RUNS = 2        # never ignore a position's price for more than this many cycles in a row
+SUSPECT_MIN_WAIT_S = 240    # a reading sooner than this after an ignored one is not "the next cycle"
 
 
-def hold_suspect(last_price, last_liq, held, price, liq, traded=None, gap_s=None):
+def hold_suspect(last_price, last_liq, held, price, liq, traded=None, gap_s=None, now_ts=None):
     """Should an open position ignore this reading for one cycle? Returns the note to keep on the
     position if so, else None (act on the reading as usual).
 
@@ -205,7 +206,19 @@ def hold_suspect(last_price, last_liq, held, price, liq, traded=None, gap_s=None
     the traded-volume check as well. That check can only fire on the first reading after an
     accepted one: a cycle later the gap is too long for it, so a move it held back is acted on
     then, whatever the volume.
+
+    `now_ts` (seconds) lets the wait be measured in time, not in runs. Two triggers sometimes fire
+    within a minute or two of each other, and a bad print outlives that (CJ, 2026-11-15: +42% at
+    21:17:34 and again at 21:20:14, gone at 21:25). So a reading taken less than SUSPECT_MIN_WAIT_S
+    after the ignored one cannot confirm it: while it is still a big move away from the last
+    accepted price it is ignored too, and it does not count towards SUSPECT_MAX_RUNS. The first
+    cycle after that wait decides, as before.
     """
+    if held and now_ts is not None and held.get("ts") is not None \
+            and now_ts - held["ts"] < SUSPECT_MIN_WAIT_S and last_price and price and price > 0:
+        r = price / last_price
+        if r < 1.0 / UNBACKED_MOVE_RATIO or r > UNBACKED_MOVE_RATIO:
+            return held
     if not (suspect_print(last_price, last_liq, price, liq)
             or unbacked_move(last_price, last_liq, price, traded, gap_s)):
         return None
@@ -214,7 +227,10 @@ def hold_suspect(last_price, last_liq, held, price, liq, traded=None, gap_s=None
         return None
     if runs >= SUSPECT_MAX_RUNS:
         return None
-    return {"price": price, "liq": liq, "runs": runs + 1}
+    note = {"price": price, "liq": liq, "runs": runs + 1}
+    if now_ts is not None:
+        note["ts"] = now_ts    # when this reading was taken, for the wait above
+    return note
 
 
 def sol_usd_from(pairs: list):

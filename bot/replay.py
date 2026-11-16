@@ -111,7 +111,7 @@ def _manage(p: dict, v: dict, now, sol: float, ex: dict, costs: dict):
     p["seen"] = now
     p["suspect"] = S.hold_suspect(p["last"], p["last_liq"], p["suspect"], price, liq,
                                   S.traded_since(v, p["last_vol_h24"]),
-                                  (now - p["last_ts"]).total_seconds())
+                                  (now - p["last_ts"]).total_seconds(), now.timestamp())
     if p["suspect"]:
         return None, None
     p["last"], p["last_liq"], p["last_ts"], p["last_vol_h24"] = price, liq, now, v.get("vol_h24")

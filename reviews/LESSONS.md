@@ -14,6 +14,112 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v7, 2026-11-16 22:30 UTC review: the trailing stop is 5% under the best price, was 10% (plumbing: a second trigger a minute later cannot confirm a bad price print)
+
+**Health.** 979 cycles since launch, 96 since 14:40 UTC. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 10.0. Two cycles were skipped (none between 18:55 and 19:05, none between 21:30 and 21:40); with the one at 12:55 that is three in ten hours. The last review said to tell Ajeeb at more than two in six hours. It is two, so no message, and the gap never reached 15 minutes. Three extra cycles (17:41, 19:53 and 21:59, each 30 seconds to 2 minutes from its neighbour; both triggers fired). The newest cycle was 1.9 minutes old when the review started, so no `.kick`. No error in any of the 96 cycles. `api_calls` 48 to 50, `allowed_pool_used` 4 to 6, watchlist 208 to 261 (cap 300; it was 185 to 215), universe 9 to 17 tokens a cycle (median 13). RugCheck ran for all 5 signals and every answer parsed: `score_normalised` 1 and no risks on four, 29 with one `warn` on Max; LP locked 41.7% to 84.6%. No `safety:*`, `skip:*` or `suspect_price` rows.
+
+The lookup change from 14:35 passed its test. `batch_miss` was 14 to 17 (median 15) and over the 15 single lookups on 46 of the 96 cycles. `api_calls` stayed under 55. A token was missing from one snapshot and back in the next 16 times; I read the watchlist as it stood on eight of those cycles, including all five with more than 15 misses, and every one of those tokens had data on that cycle (`last_ok` set to it). They were out because their pool read under the watchlist's $30k floor for one cycle. No token with a live pool went unpriced.
+
+**Bug fixed: two cycles a minute apart could confirm a bad price print.** The guard against bad prints ignores an impossible reading for one cycle and acts if "the next cycle" shows it again. That assumed cycles five minutes apart. When both triggers fire, or one cycle starts late and the next on time, two cycles run 30 seconds to 4 minutes apart (29 of the 978 gaps so far are under 4 minutes, 16 of them under 2.5), and a bad print can outlive that. The record has the case: CJ on 15 Nov read +42% on almost no volume at 21:17:34 and again at 21:20:14, and was back at its old price at 21:25. A position in CJ would have ignored the first reading and sold half at the second, at a price nobody paid. The bot did not hold CJ, so no real trade was affected. The review tools were: in the any-moment yardstick 39 CJ positions had booked that sale (+10.8% on average); without it they end at -16.1%.
+
+- `hold_suspect` in `bot/strategy.py` now takes the time of the reading. A reading less than four minutes after an ignored one cannot confirm it: while the price is still more than +25% or -20% away from the last accepted price it is ignored too, and it does not use up one of the two cycles a position may be ignored for. The first cycle four minutes or more after the ignored reading decides, as before, so with cycles on time nothing changes and a real move is still delayed by one normal cycle at most. `bot/run.py` and `bot/replay.py` pass the time in.
+- Tests: 2 added (the rule itself with CJ's numbers; a scripted position that sees a +42% print on two cycles a minute apart, takes no profit, carries on, and is still stopped on a real fall at the next normal cycle). Both fail on the old code. 42 pass.
+- Effect on the review tools: the replay's own trades are unchanged to the hundredth. `--baseline` on the wide record moves from -3.59% to -3.64% for a buy at every cycle (the 39 CJ positions).
+- Known limit, not changed: a bad print that lasts two normal cycles is acted on at the second. A rough count over every token in the record, held or not: about 14 bad-print episodes, of which three lasted two normal cycles or more (Dacity twice, TrumpWars). Dacity is over 30 days old and TrumpWars' pool is under $50k, so the bot could not have held either. (gtacoin looks like a fourth and is not: its row flips between two pools, one of them a dead SOL pool with a frozen price, which the 24-hour volume floor rejects. A held token is priced on its own pool.) Waiting two cycles would delay every real crash by ten minutes, so this stays as it is unless a trade is hit.
+
+**Strategy: v6 closed 5 trades, 2 wins, -2.47% a trade (-0.0589 SOL). Five trades are hints, not findings.** Equity 4.5425 SOL (-9.15%; it was 4.5784). All versions: 17 closed, 5 wins on four tokens, -5.67% a trade, max drawdown 10.2%. SOL $70.4 to $71.9.
+
+| # | Token | Opened (UTC, 16 Nov) | Age | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|---|
+| 13 | rockstar | 14:30 | 1.15 days | 459 | +8.9% | 0.0% | stop, price at -14.5% | -16.37% |
+| 14 | Max | 14:40 | 4.7 days | 319 | +2.5% | +16.6% | stop, price at -17.8% | -20.33% |
+| 15 | HOGE | 15:20 | 1.35 days | 1,286 | +18.7% | +39.6% | half sold at +30.1%, rest trailed out at +11.6% | +17.03% |
+| 16 | Rings | 17:00 | 5.9 days | 526 | +18.4% | +65.1% | half sold at +24.7%, rest trailed out at +32.4% | +23.97% |
+| 17 | paws | 18:00 | 20.6 days | 300 | +16.1% | +10.3% | stop, price at -13.8% | -16.63% |
+| 18 | NIO | 20:50 | 26.2 days | 300 | +2.2% | +9.0% | open at +5.9% | |
+
+- Young tokens (rockstar, HOGE): 2 closed, 1 win, +0.33% a trade, +0.0016 SOL. Tokens 3 days or older on the same rules and the same day (Max, Rings, paws): 3 closed, 1 win, -4.33%. Two against three trades says nothing yet. No `liquidity_drop`, no write-off, and the day's young trades cost nothing, so none of the 12:30 entry's tests for the age change is close. The day used 8 of its 10 new trades, 2 of them young: the older tokens were not crowded out.
+- The youngest band is now seen but not traded: 20 tokens passed the universe since 12:35, 9 of them under 3 days old, and four of those were first eligible at about 3 hours old (DSP on 30 cycles, GTA 19, COGE 3, ROCCO 2). None gave a signal.
+- Stops. rockstar's stop cycle read -14.5% (the reading before: -8.6%), 2.5 points past the level: the first of the five young-token stops the 14:35 entry's age test asks for, and inside its 3 points. Max read -8.8% and then -17.8% on $27.6k of volume in the five minutes, a 9-point fall in one cycle in a token 4.7 days old; it had been held 5 hours 45 minutes. paws read -3.9% and then -13.8%. All 12 stops so far lost, average -16.69%, total -0.9532 SOL; the price at the stop cycle averages -14.6%, 2.6 points past the level, with every one of those cycles on time. The five trailing exits made +0.4796 SOL.
+- Max peaked at +16.6% and ended at the stop, the shape STANK had on 14 Nov. Tested as a lower first target on a buy at any moment (same entries, with the 5% trail): a target of 15% moves the mean by +0.2 and +0.1 points (bot's universe and wide) with tokens split 21 better to 13 worse and 16 to 13; a target of 10% makes the entry rules' own picks worse. No case for it.
+- paws was bought on one burst. Its trades in the hour went from 76 to 300 in a single cycle (227 trades and +13.8% on price in five minutes), which is the first cycle the 300-trade floor let it through. Tested as an idea ("not when most of the hour's trades came in the last five minutes") against all cycles: only two first signals in the whole record had more than a third of the hour's trades in the last five minutes (paws, and RAMBO on 16 Nov at 03:25), both stops. But a buy at any cycle like that, with 300 or more trades in the hour, made -0.5% and 0.0% (35 and 37 cycles on 17 and 16 tokens), better than the average cycle. Two trades and a yardstick that points the other way: dropped.
+- Max is the first trade with a RugCheck score near the limit (29 against 30) and it lost. LP locked: rockstar 48.5% lost, NIO 41.7% is open. Every closed trade under 50% lost (Rings 26.2%, STANK 40.5%, rockstar 48.5%), and so did 9 of the 14 at 60% or more. The figure is not stable either: Rings read 26.2% at 01:45 and 78.8% at 17:00. Still a hint.
+- The cooldown: with no cooldown the yardstick would have bought Rings again at 18:40 (-17.8%) and HOGE at 18:30 (-16.2%), each after its winning trade. Two more cases for keeping it.
+- 5 signals in the 8 hours since 14:40, the last at 20:50, so the 12-hour rule is not met. Funnel, 1,239 universe-token checks: `h1_weak` 522 (42%), a token in its cooldown 266, the held token 151, `txns_h1` 143, `h1_overheated` 53, `buy_pressure` 45, `h6_down` 38, `m5_dropping` 12, `h24_dumped` 3, `volume_accel` 1, signal 5.
+
+**What the last reviews asked, answered.**
+
+- The 300-trade floor, forward check (entries on 150 to 299 trades opened after 06:45 UTC on 16 Nov, wide replay with `entry.min_txns_h1=150`, tokens 3 to 30 days old): 4 closed, 1 win. DIGS 13:20 (245 trades, a $34k pool outside the universe) +19.7%; Max 13:55 (259) -15.8%, the same fall the real trade 14 took; STANK 17:10 (155) -18.3%; FLOAT 21:00 (245) -14.8%. Two open: CJ 17:30 (255) at -10.4% and RAMBO 22:15 (161) at -9.7%. The test needs 10 closed and calls the floor wrong at 3 winners or more.
+- The floor's other test (2 winners or fewer in the first 10 closed trades on tokens 3 days or older): 1 of 3. The bot now buys on the first cycle the count reaches 300: Max at 319, paws and NIO at exactly 300.
+- `python3 -m bot.replay --baseline`, wide record, ages 3 to 30 days, with the rules as they stood (v6) and the guard fix in: every eligible cycle 21,540 on 43 tokens, 34% wins, -3.64%; the first passing cycle of each run 73 on 16 tokens, 52% wins, +1.67% (it was +1.83% on 50 at 14:35). The bot's universe, young tokens included: 12,757 cycles on 55 tokens, -4.32%; first passing cycles 42 on 13 tokens, 55% wins, +2.78%.
+- `python3 -m bot.replay` with the v6 rules reproduces the five v6 trades, each within 0.1 points of the journal.
+- Discovery: not due until 12:35 UTC on 17 Nov. HOGE (`gecko:tx4`) is still the only token from a deeper page that has passed the universe; the bot traded it once (+17.03%).
+
+**The trailing exits: the half kept after the first target has been sold far under its trail level, five times out of five on average and badly on three.**
+
+| # | Token | Half sold at the target | Best while held | Trail level (best less 10%) | Kept half sold at | Under the level |
+|---|---|---|---|---|---|---|
+| 5 | WASTED | +25.2% | +44.1% | +29.7% | +25.2% | 4.5 points |
+| 7 | WASTED | +23.7% | +68.1% | +51.3% | +18.8% | 32.5 |
+| 12 | BLOB | +21.8% | +41.7% | +27.5% | +26.6% | 0.9 |
+| 15 | HOGE | +30.1% | +39.6% | +25.6% | +11.6% | 14.0 |
+| 16 | Rings | +24.7% | +65.1% | +48.6% | +32.4% | 16.2 |
+
+- The kept half was sold 13.6 points under its trail level on average. It was sold at +22.9% on average; the half sold at the target got +25.1%. So over five winners that peaked at +52% on average, trailing the second half earned less than selling it with the first.
+- Why. The bot sees one price every five minutes. The 14:35 entry measured how far these tokens move between two readings: the 90th percentile is 4% for a token 3 days or older and 7% to 10% for a younger one. After a run to +40% or +60% the moves are larger still (HOGE: +39.1%, +28.9%, +11.6% on three readings; Rings: +65.1% then +32.4%). A level 10% under the peak is crossed by a fall that is already well past it when the bot looks.
+- The 14 Nov 23:35 review named this and set a test: the exit section is the candidate if the next two trailing exits both fill more than 5 points under the level. BLOB came next (0.9) and ended that test. The two since are 14.0 and 16.2, both v6's own trades.
+- A 5% trail, the number that review named, on the same entries. It was not picked today from several.
+
+| Measured on | Trades or positions | 10% trail | 5% trail | Better / level / worse |
+|---|---|---|---|---|
+| Replayed trades that reached the first target (bot's universe and wide together) | 14 on 11 tokens | | | 7 / 7 / 0 |
+| The same, bot's universe (v6 rules) | 9 | +22.72% | +26.92% | 4 / 5 / 0 |
+| The same, wide, ages 3 to 30 days | 9 | +18.25% | +22.21% | 5 / 4 / 0 |
+| A buy at any cycle that reached +20%, bot's universe | 2,846 on 39 tokens | +24.65% | +25.22% | tokens: 21 better, 6 worse |
+| A buy at any cycle that reached +20%, wide | 4,744 on 39 tokens | +19.56% | +20.17% | tokens: 23 better, 5 worse |
+| A buy at any cycle, all of them, bot's universe / wide | 12,757 / 21,540 | -4.32% / -3.64% | -4.19% / -3.51% | |
+
+  ("Level" is within 0.2 points. The 7 better: WASTED twice, WOHAIHAO, HOGE 15:20, CJ, GTA6, DIGS.)
+- Of the five real trailing exits a 5% trail would have been better on three (WASTED +25.7% against +20.8%, WASTED +40.6% against +21.1%, HOGE +25.9% against +17.2%), the same on BLOB and 0.2 points worse on Rings, where it sells at 17:55 at +32.6% and misses the run to +65% that the 10% trail also failed to keep.
+- It holds forward. Since the number was named on 14 Nov 23:35, eight replayed trades have been opened and reached the first target: four better with 5% (WOHAIHAO, GTA6, DIGS, HOGE 15:20), four level, none worse.
+- It points one way. A 7% trail sits between the two (better on 15 to 17 tokens, worse on 4 to 6). A 15% trail is worse than 10% on 24 and 26 of the 38 and 39 tokens. On the bot's universe 5% beat 10% on three of the four days and was level on the fourth (-0.1 points on 14 Nov); on the wide record on all four. It holds in each age group (under 1 day +1.0 points, 1 to 3 days +0.6, 3 days or more +0.3).
+- How weak it is. The gain is small: 0.6 points on a position that reached the target and 0.13 points a trade over all of them. Costs are about 3%. The 06:30 review's exit table, made with a stricter method on the record as it stood then, had the 5% trail level with the 10% (-3.98% against -3.92% on the bot's universe, -3.05% against -3.21% wide), and its conclusion stands: exits move the losses around and the edge, if there is one, has to come from the entry. The large numbers (+4 points on the replay's own winners) are 14 trades on a record the 5 has now been looked at on twice. And a 5% trail gives up the rare long run: it will usually sell the kept half within a cycle or two of the first target.
+
+**Changed: rulebook v7, exit section only. `exit.trailing_stop_pct` 10 to 5. A hypothesis, on hints.**
+
+- Why act on five trades. The mechanism does not depend on them: the trail is narrower than the distance these tokens move between two readings, so its level is not where it sells. The number was named two days before the trades that now support it. No trade and no token on the record did worse with it by more than 0.2 points among those the rules picked. And the counterfactual stays exact: for every trailing exit from here, `python3 -m bot.replay --set exit.trailing_stop_pct=10` shows what the old trail would have done on the same entry.
+- What it does not do. It does not touch the stop, the first target, the 6-hour limit, the universe, the entry rules, the portfolio, the safety screen or the costs. It changes nothing for a trade that never reaches +20%, which is 12 of the 17 so far. It does not make the strategy profitable.
+- What it does to the open tests. The young-token tests compare young and older tokens on the same days, and both get the same exit, so they carry on across v6 and v7 (use the report's age table, which spans versions). The 300-trade floor is read on winners and losers and in the wide replay, and a trade that reached +20% is a winner under either trail. v6 ends at 5 closed trades. NIO (trade 18) was opened under v6 and is labelled v6; if it reaches +20% from here its kept half is trailed at 5%.
+- On the same record with v7: `python3 -m bot.replay` 18 closed on 13 tokens, 10 wins, +5.52% (v6: +3.42%); wide, ages 3 to 30 days, 23 closed on 16 tokens, 10 wins, +0.21% (v6: -1.34%). `--baseline` for the next review to compare with: bot's universe every cycle 12,778 on 56 tokens, -4.16%, first passing cycles 42 on 13 tokens, +4.88%; wide every cycle 21,557 on 43 tokens, -3.49%, first passing cycles 73 on 16 tokens, +2.97%. These are read off the record the change was checked on. Do not expect them.
+
+**Changed, in full.**
+
+1. Rulebook v7: `exit.trailing_stop_pct` 10 to 5, `version`, `notes`.
+2. Plumbing, no rule in it: the wait in `hold_suspect` (above), with `bot/run.py` and `bot/replay.py` passing the time.
+3. README: the strategy paragraph (v7, the 5% trail) and one sentence in the bad-print honesty rule.
+4. Tests: 2 added. 42 pass.
+
+**For the next review.**
+
+- Each new trailing exit: the trail level (best less 5%), the fill, and what `--set exit.trailing_stop_pct=10` gives for the same entry. Keep the table above going.
+- Cycle gaps: two skipped cycles in the last six hours and three extra ones. If a third is skipped inside six hours, or any gap passes 15 minutes, tell Ajeeb.
+- `suspect_price` rows: after one, check that the position's next accepted reading was at least four minutes later and that no fill happened on the cycle in between.
+- Watchlist size: 261 against a cap of 300. At the cap the bot drops rejected and thin tokens first, so nothing breaks; note it if `api_calls` passes 55.
+- Young tokens: 2 of the 15 closed trades the 12:30 entry asks for, 1 of the 5 stops the 14:35 entry asks for (2.5 points past the level).
+- The 300-trade floor: 4 of 10 closed in the forward check (1 winner); where CJ 17:30 and RAMBO 22:15 end.
+- Discovery: due after 12:35 UTC on 17 Nov, as the 14:35 entry set out.
+- NIO: record the exit. LP locked 41.7%.
+- Everything under "For the next review" in the 14:35, 12:30 and 06:30 entries still stands.
+
+**Would prove this review wrong.**
+
+- The exit change is wrong if, over the next 10 trailing exits, the 10% trail would have done better on the same entries by more than 2 points a trade on average, or better on 5 or more of the 10. Then put it back to 10. One long run kept by the old trail can do the first by itself, so read both numbers.
+- It is also wrong if it keeps selling into noise: if 3 of the next 5 kept halves are sold under +15% while the token is above the first target's price again an hour later.
+- It made no difference, and the exit section should then be left alone for good, if after 10 trailing exits the two trails are within 1 point a trade of each other.
+- The guard fix is wrong if a real move is held back for more than one normal cycle (two `suspect_price` rows on one position more than four minutes apart, followed by a fill at about the same price), or if a position's close shows a stop or a take-profit filled on a reading that reversed on the next cycle after two triggers fired together.
+- Leaving the entry, the stop and the first target alone is wrong by the tests the 06:30 and 12:30 entries set, which are unchanged.
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles become regular.
+
 ### v6, 2026-11-16 14:35 UTC review: no rule change (plumbing: single lookups go first to tokens that have had data)
 
 **Health.** 882 cycles since launch, 95 since the 06:30 review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 10.2: one cycle was skipped (none between 12:50 and 13:00), the first skipped cycle since the external scheduler started. One extra cycle (13:30, 34 seconds after the one before; both triggers fired). The newest cycle was 2.3 minutes old when the review started, so no `.kick`. No error in any of the 95 cycles. `api_calls` 46 to 48, watchlist 185 to 215 (cap 300), `allowed_pool_used` 4 or 5. RugCheck ran once (rockstar, 14:30) and parsed: `score_normalised` 1, no risks, LP locked 48.5%. No `safety:*`, `skip:*` or `suspect_price` rows.

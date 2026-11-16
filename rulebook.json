@@ -1,7 +1,7 @@
 {
-  "version": 6,
+  "version": 7,
   "updated": "2026-11-16",
-  "notes": "v6 = v5 with one universe change, made at Ajeeb's request on 2026-11-16: a token can be traded from 3 hours after launch instead of 3 days (universe.min_age_days 3 to 0.125). His hypothesis: the volume in young tokens is genuine, so a young token with serious buyers and sellers should be considered. Every other test still applies to it: $50k liquidity, $100k of 24-hour volume, 500 trades, the market-cap band, the RugCheck screen, and the entry rules (300 trades in the last hour, more buyers than sellers, rising volume). What the record says, hints only: replayed on the recorded snapshots the change adds 7 trades on 6 tokens under 3 days old, 4 wins, +4.2% a trade, with stops filling at -20% to -26% instead of about -15%; a buy at any moment in a token 6 to 24 hours old made -2.5%, and 6% of those positions were in tokens that left the record while held. The data cannot tell genuine volume from bots; the paper results will show whether it pays. Judge young tokens apart (python3 -m bot.report, 'By age of the token at entry'). v5 = v4 with entry.min_txns_h1 150 to 300 (2026-11-16 06:30 UTC review; a signal on a thinly traded token has been reliably bad). Exit, portfolio, safety, costs and discovery are unchanged since v4. See reviews/LESSONS.md for the evidence and what would prove each change wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+  "notes": "v7 = v6 with one exit change (2026-11-16 22:30 UTC review): the trailing stop on the half kept after the first target is 5% under the best price seen, was 10% (exit.trailing_stop_pct). Why: the bot sees a price every 5 minutes and these tokens often move more than 10% between two readings, so the kept half was sold far under the 10% level: 13.6 points under on average over the 5 real trailing exits (HOGE 14.0 and Rings 16.2 on v6), and on average at a lower price than the half sold at the target. On the recorded snapshots a 5% trail was better or level on each of the 14 replayed trades that reached the first target (11 tokens, worse on none) and, over a buy at any moment, better on 21 to 23 tokens and worse on 5 to 6; a 15% trail was worse. Hints, not findings, and small: about 0.1 point a trade over all trades. It does not make the strategy profitable. v6 = v5 with one universe change, made at Ajeeb's request on 2026-11-16: a token can be traded from 3 hours after launch instead of 3 days (universe.min_age_days 3 to 0.125). His hypothesis: the volume in young tokens is genuine, so a young token with serious buyers and sellers should be considered. Judge young tokens apart (python3 -m bot.report, 'By age of the token at entry'). v5 = v4 with entry.min_txns_h1 150 to 300 (2026-11-16 06:30 UTC review; a signal on a thinly traded token has been reliably bad). Universe and entry are unchanged since v6; portfolio, safety, costs and discovery since v4. See reviews/LESSONS.md for the evidence and what would prove each change wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
   "portfolio": {
     "starting_sol": 5.0,
     "position_size_sol": 0.5,
@@ -84,7 +84,7 @@
     "stop_loss_pct": 12,
     "take_profit_1_pct": 20,
     "take_profit_1_fraction": 0.5,
-    "trailing_stop_pct": 10,
+    "trailing_stop_pct": 5,
     "max_hold_hours": 6,
     "liquidity_drop_exit_pct": 30,
     "missing_data_runs_to_write_off": 6

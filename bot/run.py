@@ -295,7 +295,7 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         traded = S.traded_since(v, pos.get("last_vol_h24"))
         pos["suspect"] = S.hold_suspect(
             pos["last_price_usd"], pos.get("last_liq_usd") or pos.get("entry_liq_usd"),
-            pos.get("suspect"), price, liq, traded, gap_s) if verified else None
+            pos.get("suspect"), price, liq, traded, gap_s, now_ts) if verified else None
         if pos["suspect"]:
             funnel["suspect_price"] += 1
             store.append_jsonl(dd / "journal" / "events.jsonl", {
