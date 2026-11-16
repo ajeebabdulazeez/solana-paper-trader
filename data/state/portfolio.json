@@ -20,7 +20,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.85674371348743,
+ "last_sol_usd": 71.87028657616894,
  "positions": [
   {
    "entry_exec_usd": 0.001614772167164824,
@@ -48,14 +48,14 @@
    },
    "fees_sol": 0.004263179884514033,
    "id": 18,
-   "last_liq_usd": 144299.96,
-   "last_price_usd": 0.001706,
-   "last_ts": "2026-11-16T22:15:13Z",
-   "last_vol_h24": 288933.66,
+   "last_liq_usd": 145979.52,
+   "last_price_usd": 0.00175,
+   "last_ts": "2026-11-16T22:20:11Z",
+   "last_vol_h24": 285803.85,
    "missing_runs": 0,
    "opened": "2026-11-16T20:50:12Z",
    "pair": "B4Wmjc6PvjCtU3qSVS3eTT9Mr4M5V5jBkRQctWANTc71",
-   "peak_usd": 0.001717,
+   "peak_usd": 0.00175,
    "rugcheck": {
     "lp_locked_pct": 41.658744728360766,
     "risks": [],
