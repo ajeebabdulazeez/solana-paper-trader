@@ -14,6 +14,68 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v6, 2026-11-16 14:35 UTC review: no rule change (plumbing: single lookups go first to tokens that have had data)
+
+**Health.** 882 cycles since launch, 95 since the 06:30 review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 10.2: one cycle was skipped (none between 12:50 and 13:00), the first skipped cycle since the external scheduler started. One extra cycle (13:30, 34 seconds after the one before; both triggers fired). The newest cycle was 2.3 minutes old when the review started, so no `.kick`. No error in any of the 95 cycles. `api_calls` 46 to 48, watchlist 185 to 215 (cap 300), `allowed_pool_used` 4 or 5. RugCheck ran once (rockstar, 14:30) and parsed: `score_normalised` 1, no risks, LP locked 48.5%. No `safety:*`, `skip:*` or `suspect_price` rows.
+
+**Plumbing fixed: the test the 06:30 review set for the single lookups is met.** `batch_miss` was 13 to 17 per cycle (median 14) and over the 15 single lookups a cycle allows on 31 of the 95 cycles (it was 10 of 100). Twelve tokens on the watchlist have never returned data, all from `profiles_latest`; they take 12 of the 15 lookups every cycle. Six times a token with a live pool was missing from one snapshot and back in the next. Three of the six were on cycles with 16 misses (JAG at 07:35 and 08:15, CYBERDACITY at 08:10), which is the case that review named: a token that has returned data before going unpriced because the lookups ran out. None of the three was in the universe, so no trade was affected. Under v6 it matters more than it did: five of the six tokens that dropped out were under two days old, and young tokens can now be bought.
+
+- `fetch_views` in `bot/run.py` now looks up tokens that have returned data before (`last_ok` set on the watchlist) ahead of tokens that never have. The cap of 15 is unchanged, so `api_calls` does not move. Held tokens were already looked up first and outside the cap.
+- Test added: 18 tokens with no pool and one live token the batch call leaves out. The live token is still priced, on the watchlist and in the snapshot, and the lookups stay at 15. It fails on the old code. 40 pass.
+
+**Strategy: v5 closed no trade and v6 has none closed, so there is nothing to judge.** v5 ran 70 cycles (06:50 to 12:30) with no signal. v6 has run 24 cycles (from 12:35) and opened its first trade on the newest one. Equity 4.5784 SOL (-8.43%; it was 4.5853, and the difference is the cost of the open trade's buy). All versions: 12 closed, 3 wins, -7.00% per trade, unchanged. SOL $71.0 to $71.2.
+
+| # | Token | Opened (UTC, 16 Nov) | Age | Trades in the hour before | 1-hour change at entry | Pool | Status |
+|---|---|---|---|---|---|---|---|
+| 13 | rockstar | 14:30 | 1.15 days | 459 | +8.9% | Meteora, $104k, LP locked 48.5% | open |
+
+- rockstar is the first trade on a token under 3 days old. It passed the entry rules at 14:05, 14:15, 14:20 and 14:25 as well and was held back each time by `liquidity_falling`: the pool's liquidity was 11% to 18% under its one-hour high ($111.9k at 13:55). At 14:30 it was 7% under and the buy went through, at a price 10% below the 14:05 reading.
+- What to expect from it, written before the result. In the three hours before the buy, rockstar's price moved 5% or more between two cycles on 18 of 35 cycles and 8% or more on 8 (largest fall in one cycle: 9.3%). The stop is 12% from the entry and the first target 20%. On a token that moves like this, whichever is hit first says little about the entry.
+- No signal from BLOB (05:35) to rockstar (14:30): 8.9 hours, so the 12-hour rule is not met. Funnel since 06:45, 779 universe-token checks: `h1_weak` 495 (64%), `h6_down` 88, `txns_h1` 88, a token in its cooldown 44, `h1_overheated` 28, `buy_pressure` 23, `m5_dropping` 7, `liquidity_falling` 4, `h24_dumped` 1, signal 1.
+
+**Young tokens: what v6 let in so far (two hours, hints only).**
+
+- 13 tokens have passed the universe since 12:35, 11 a cycle on average (v5: 7). Five are under 3 days old: Anthropig (19 hours), SWJ (1.0 day), rockstar (1.1), HOGE (1.3), HYGG (1.5). None was under 18 hours old, so the youngest band the change opened is still untested. `u:too_young` fell from about 30 a cycle to 2, but most of those tokens fail another test (liquidity, or liquidity against market cap).
+- New measurement: how far the price moves between two cycles, by age. Every pair of consecutive readings of a token inside the v6 universe, whole record:
+
+| Age at the reading | Pairs of readings (tokens) | Median move | 90th percentile | Share that fell 12% or more in one cycle |
+|---|---|---|---|---|
+| under 1 day | 2,982 (33) | 1.9% | 9.8% | 3.05% |
+| 1 to 3 days | 2,882 (20) | 1.3% | 7.3% | 1.87% |
+| 3 days or more | 6,434 (17) | 1.1% | 4.2% | 0.22% |
+
+  A fall of the whole stop distance inside one cycle is 8 times as common in a token 1 to 3 days old as in an older one, and 14 times as common under a day. That is the mechanism behind the stops that filled at -20% to -24% on price in the replay of young tokens. A position is held for up to 72 cycles, so on a young token a stop filled well past its level is the expected case, not the rare one. Not acted on: no young trade has closed, v6 is two hours old, and the remedies named at 12:30 (a smaller position or a higher liquidity floor for young tokens) both need code and one of them is a different section.
+- `python3 -m bot.replay` with the v6 rules still reads 13 closed on 11 tokens, 8 wins, +5.66% a trade, with HOGE's +59.7% carrying it (without HOGE: +1.2%). It was the basis for the 12:30 entry and has no new closed trade in it.
+
+**What the last reviews asked, answered.**
+
+- The 300-trade floor, forward check (entries on 150 to 299 trades opened after 06:45 UTC on 16 Nov, wide replay with `entry.min_txns_h1=150`, tokens 3 to 30 days old): two, both open. DIGS 13:20 (245 trades, a $34k pool outside the universe) at +1.8%; Max 13:55 (259 trades) at -13.2% after costs, its price 10.5% under the entry and 1.5 points short of the stop. 0 closed of the 10 the test needs. On the bot's own universe the floor also blocked rockstar at 12:10 (270 trades, +22.8% in the replay, trailed out 35 minutes later). rockstar is a young token, which the 12:30 entry said not to count for or against the floor; it is noted here so it is not lost.
+- `python3 -m bot.replay --baseline`. Wide record, ages 3 to 30 days: every eligible cycle 18,603 on 42 tokens, 34% wins, -3.60% (was -3.87%); the first passing cycle of each run 50 on 14 tokens, 50% wins, +1.83% (was +0.03% at 06:30). Among the first signals added since is a winner the bot could not trade (GTA6 08:10, +16.7%, outside the universe). It is still mostly the record the number 300 was chosen on, so the wider gap is not new evidence. The bot's-universe row now includes young tokens (50 tokens, -4.29% for a buy at any cycle) and cannot be compared with earlier reviews.
+- Discovery, interim. The 12:30 entry moved this test: read it after a day of v6, not at 14:00 today. So far one token from a deeper page has passed the universe: HOGE (`gecko:tx4`, found 00:45 on 16 Nov), on all 24 cycles since 12:35. The other four young tokens came from `profiles_latest`. Pages unchanged.
+- Trailing exits and stop fills: no exit since BLOB, nothing new. LP locked: rockstar 48.5%. Only Rings (26.2%) and STANK (40.5%) were lower, and both lost; the other ten trades had 60% or more. Three trades, still a hint.
+
+**Changed.**
+
+1. Rulebook: nothing. v6 stays. It is two hours old with no closed trade, it is Ajeeb's experiment, and a signal fired within the last 12 hours.
+2. Plumbing, no rule in it: the order of the single lookups in `fetch_views` (above).
+3. Tests: 1 added. 40 pass.
+
+**For the next review.**
+
+- rockstar: record the exit and, if it is a stop, the price at the stop cycle against the 12% level. It counts in the "under 3 days" row only.
+- The lookup change: on cycles with `batch_miss` over 15, `no_data` should now equal the number of watchlist tokens that have never returned data (12 today), and no token with `last_ok` should miss a snapshot on those cycles.
+- Cycle gaps: one cycle was skipped at 12:55. If skipped cycles start to repeat (more than two in six hours), tell Ajeeb; a young token's stop depends on every cycle more than an old one's.
+- Discovery: after 12:35 UTC on 17 Nov, count the tokens from `gecko:vol5` to `vol8` and `gecko:tx4` to `tx6` that passed the v6 universe and what the trades on them did. HOGE is one.
+- The 300-trade floor: where Max 13:55 and DIGS 13:20 end in the wide replay with `entry.min_txns_h1=150`.
+- Everything under "For the next review" in the 12:30 and 06:30 entries still stands.
+
+**Would prove this review wrong.**
+
+- The lookup change is wrong if `api_calls` rises above 48 with the watchlist the same size, if a `pair lookup` error starts repeating, or if a token that has returned data before still drops out of a snapshot on a cycle with more than 15 misses. In the last case the batch call is the thing to look at, not the order of the lookups.
+- The age table overstates the problem if the first five stops on tokens under 3 days old fill within 3 points of the level, as the stops on older tokens do (2.3 points on average). Then five-minute cycles follow young tokens well enough and no change for them is needed on that account.
+- Leaving v6 alone is wrong by the tests the 12:30 entry set, which are unchanged: young tokens' first 15 closed trades losing more per trade than older tokens' over the same days, a single day of young-token trades costing more than 5% of equity, or more than one `liquidity_drop` or write-off in the first 15.
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles repeat.
+
 ### v6, 2026-11-16 12:30 UTC, at Ajeeb's request: a token can be traded from 3 hours after launch, was 3 days
 
 Not a scheduled review. Ajeeb asked for it after reading the 06:30 note: he believes the volume in young tokens is genuine, not bots, and that a token 3 to 4 hours old with serious buyers and sellers should be considered. It is his experiment and paper money, so the rule is in as a labelled hypothesis and the record will judge it. v5 had run 69 cycles (06:50 to 12:25 UTC) with no error and no trade.

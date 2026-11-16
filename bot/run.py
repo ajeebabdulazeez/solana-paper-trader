@@ -111,8 +111,14 @@ def discover(dex, d, errors, gecko=None, meta=None, now=None):
     return found, pairs, gecko_sample
 
 
-def fetch_views(dex, tokens, must_have, d, now_ms, errors):
-    """Current market view per token. Returns (views, raw_pairs, batch_misses, confirmed_absent)."""
+def fetch_views(dex, tokens, must_have, d, now_ms, errors, known=()):
+    """Current market view per token. Returns (views, raw_pairs, batch_misses, confirmed_absent).
+
+    A token the batch call leaves out gets a single lookup, at most `max_single_lookups` a cycle
+    besides the held tokens. `known` are the tokens that have returned data before: they are
+    looked up first, so tokens that have never had a Solana pool (a dozen or so from the profile
+    feed at any time) cannot use up the lookups and leave a token with a live pool unpriced.
+    """
     raw, answered = [], set()
     size = max(1, int(d.get("batch_size", 30)))
     for i in range(0, len(tokens), size):
@@ -125,7 +131,9 @@ def fetch_views(dex, tokens, must_have, d, now_ms, errors):
     views = S.best_pairs(raw, now_ms, CHAIN)
     missing = [t for t in tokens if t in answered and t not in views]
     urgent = [t for t in missing if t in must_have]
-    others = [t for t in missing if t not in must_have][: int(d.get("max_single_lookups", 15))]
+    others = [t for t in missing if t not in must_have]
+    others.sort(key=lambda t: t not in known)  # stable: known tokens first, order otherwise kept
+    others = others[: int(d.get("max_single_lookups", 15))]
     looked_up = set()
     for t in urgent + others:
         try:
@@ -240,7 +248,8 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     # 2. Fetch current data for held tokens and the watchlist.
     held = {p["token"] for p in state["positions"]}
     tokens = sorted(held) + [t for t in watch if t not in held]
-    views, raw, batch_miss, absent = fetch_views(dex, tokens, held, rules["discovery"], now_ms, errors)
+    known = {t for t, w in watch.items() if w.get("last_ok")}
+    views, raw, batch_miss, absent = fetch_views(dex, tokens, held, rules["discovery"], now_ms, errors, known)
     switched, pool_unverified = refine_pools(
         dex, views, raw, state["positions"], rules["universe"]["allowed_quote_symbols"],
         rules["watchlist"], now_ms, errors)

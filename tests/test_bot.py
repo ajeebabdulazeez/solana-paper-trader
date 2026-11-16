@@ -52,6 +52,7 @@ class FakeDex:
     def __init__(self):
         self.market, self.feed, self.calls, self.fail = {}, [], 0, False
         self.all_pools = {}  # token -> every pool, when the single lookup should show more than one
+        self.hidden = set()  # tokens the batch call leaves out although they have a pool
 
     def boosts_top(self):
         return [{"chainId": "solana", "tokenAddress": t} for t in self.feed]
@@ -78,7 +79,7 @@ class FakeDex:
         self.calls += 1
         if self.fail:
             raise RuntimeError("outage")
-        return [self.market[a] for a in addrs if self.market.get(a)]
+        return [self.market[a] for a in addrs if self.market.get(a) and a not in self.hidden]
 
     def pairs_for_token(self, chain, addr):
         self.calls += 1
@@ -765,6 +766,24 @@ class Cycle(unittest.TestCase):
         wide = R.replay(snaps, R.wide_rules(RULES), cooldown=False)
         self.assertGreaterEqual(len(wide), 2)
         self.assertIn("| WIN |", R.report(wide))
+
+    def test_single_lookups_go_to_tokens_that_have_had_data_before_tokens_that_never_have(self):
+        limit = RULES["discovery"]["max_single_lookups"]
+        ghosts = ["A%02d" % i for i in range(limit + 3)]   # profile-feed tokens with no Solana pool
+        self.dex.feed += ghosts
+        # A live pool, not a buy (1-hour change flat). It sorts after every ghost on the saved watchlist.
+        self.list_token("ZLIVE", chg=(0.5, 0.0, 12.0, 20.0))
+        self.step()
+        self.dex.hidden.add("ZLIVE")                       # from now on the batch call leaves it out
+        before, t1 = self.dex.calls, self.now
+        s = self.step()
+        self.assertEqual(s["batch_miss"], limit + 4)       # more misses than a cycle's single lookups
+        self.assertEqual(self.dex.calls - before, 1 + limit)   # one batch call, and the lookups stay capped
+        self.assertEqual(s["funnel"]["no_data"], limit + 3)    # only the ghosts are without data
+        watch = store.read_json(self.tmp / "data" / "state" / "watchlist.json", {})
+        self.assertEqual(watch["ZLIVE"]["last_ok"], t1.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        snap = store.read_jsonl(sorted((self.tmp / "data" / "snapshots").glob("*/*.jsonl"))[-1])[-1]
+        self.assertIn("ZLIVE", [row[0] for row in snap["rows"]])   # still priced and recorded this cycle
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")
