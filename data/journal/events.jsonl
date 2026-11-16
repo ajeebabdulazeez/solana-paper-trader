@@ -27,3 +27,5 @@
 {"event":"close","id":12,"pnl_pct":21.2,"pnl_sol":0.095179,"reason":"trailing_stop","symbol":"BLOB","ts":"2026-11-16T06:30:19Z"}
 {"event":"open","id":13,"price_usd":0.001189,"score":2.6,"sol_in":0.458528,"symbol":"rockstar","token":"9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump","ts":"2026-11-16T14:30:16Z"}
 {"event":"open","id":14,"price_usd":0.001098,"score":2.44,"sol_in":0.455043,"symbol":"Max","token":"5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump","ts":"2026-11-16T14:40:15Z"}
+{"event":"close","id":13,"pnl_pct":-16.37,"pnl_sol":-0.075071,"reason":"stop_loss","symbol":"rockstar","ts":"2026-11-16T15:20:15Z"}
+{"event":"open","id":15,"price_usd":0.0006393,"score":2.28,"sol_in":0.450297,"symbol":"HOGE","token":"FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump","ts":"2026-11-16T15:20:15Z"}
