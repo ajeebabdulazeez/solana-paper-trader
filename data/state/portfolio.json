@@ -20,7 +20,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.33481229014154,
+ "last_sol_usd": 71.36767317939609,
  "positions": [
   {
    "entry_exec_usd": 0.001614772167164824,
@@ -48,10 +48,10 @@
    },
    "fees_sol": 0.004263179884514033,
    "id": 18,
-   "last_liq_usd": 139117.14,
-   "last_price_usd": 0.001606,
-   "last_ts": "2026-11-16T20:50:12Z",
-   "last_vol_h24": 304799.51,
+   "last_liq_usd": 138341.11,
+   "last_price_usd": 0.001586,
+   "last_ts": "2026-11-16T20:55:09Z",
+   "last_vol_h24": 304000.9,
    "missing_runs": 0,
    "opened": "2026-11-16T20:50:12Z",
    "pair": "B4Wmjc6PvjCtU3qSVS3eTT9Mr4M5V5jBkRQctWANTc71",
@@ -65,12 +65,13 @@
    "rulebook_version": 6,
    "sol_in": 0.45263597690280655,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "NIO",
    "token": "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump",
    "tokens": 19807.493565772416,
    "tokens_remaining": 19807.493565772416,
    "tp1_done": false,
-   "trough_usd": 0.001606
+   "trough_usd": 0.001586
   }
  ],
  "realized_pnl_sol": -0.47364023097193464,
