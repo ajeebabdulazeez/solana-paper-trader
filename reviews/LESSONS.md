@@ -99,6 +99,8 @@ The lookup change from 14:35 passed its test. `batch_miss` was 14 to 17 (median 
 3. README: the strategy paragraph (v7, the 5% trail) and one sentence in the bad-print honesty rule.
 4. Tests: 2 added. 42 pass.
 
+**First live cycle (22:50 UTC).** Pushed just before 22:50 UTC and picked up by the 22:50 cycle: v7, no errors, `api_calls` 50, `batch_miss` 16, universe 15, no signal. NIO was read and carried on as usual (+5.0%, no `suspect_price`), so the changed guard ran on an open position without incident; it has not yet met a bad print. v7 trades start from the 22:50 cycle.
+
 **For the next review.**
 
 - Each new trailing exit: the trail level (best less 5%), the fill, and what `--set exit.trailing_stop_pct=10` gives for the same entry. Keep the table above going.
