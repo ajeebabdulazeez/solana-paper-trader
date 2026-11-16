@@ -24,6 +24,7 @@ RULES = json.loads((REPO / "rulebook.json").read_text())
 COSTS = RULES["costs"]
 T0 = datetime(2026, 11, 14, 12, 0, 0, tzinfo=timezone.utc)
 SOL_USD = 200.0
+YOUNG = RULES["universe"]["min_age_days"] / 2   # an age under the rulebook's floor, whatever the floor is
 
 
 def make_pair(token, symbol, price, liq, now, age_days=7, mcap=2_000_000, vol_h24=500_000, vol_h6=120_000,
@@ -161,7 +162,8 @@ class Rules(unittest.TestCase):
 
     def test_universe_rejections(self):
         u = RULES["universe"]
-        self.assertEqual(S.universe_reject(self.view(age_days=1), u), "too_young")
+        self.assertEqual(S.universe_reject(self.view(age_days=u["min_age_days"] / 2), u), "too_young")
+        self.assertIsNone(S.universe_reject(self.view(age_days=u["min_age_days"]), u))   # at the floor: eligible
         self.assertEqual(S.universe_reject(self.view(age_days=45), u), "too_old")
         self.assertEqual(S.universe_reject(self.view(vol_h24=10_000), u), "volume_h24")
         self.assertEqual(S.universe_reject(self.view(mcap=100_000), u), "mcap_small")
@@ -181,6 +183,33 @@ class Rules(unittest.TestCase):
         self.assertIsNone(S.entry_reject(floor, e, 0))               # exactly the floor is enough
         self.assertEqual(S.entry_reject(self.view(vol_h1=10_000), e, 0), "volume_accel")
         self.assertEqual(S.entry_reject(self.view(), e, 25.0), "liquidity_falling")
+
+    def test_volume_accel_of_a_token_under_six_hours_old_uses_the_hours_it_has_existed(self):
+        # 120k since launch, 40k of it in the last hour.
+        old = self.view(vol_h6=120_000, vol_h1=40_000)                      # 7 days old: 20k an average hour
+        self.assertAlmostEqual(S.volume_accel(old), 2.0)
+        young = self.view(vol_h6=120_000, vol_h1=40_000, age_days=3 / 24)   # 3 hours old: 40k an average hour
+        self.assertAlmostEqual(S.volume_accel(young), 1.0)
+        self.assertEqual(S.entry_reject(young, RULES["entry"], 0), "volume_accel")   # flat volume is not rising
+        newborn = self.view(vol_h6=40_000, vol_h1=40_000, age_days=0.5 / 24)
+        self.assertAlmostEqual(S.volume_accel(newborn), 1.0)                # never divided by less than one hour
+        six = self.view(vol_h6=120_000, vol_h1=40_000, age_days=6 / 24)
+        self.assertAlmostEqual(S.volume_accel(six), 2.0)                    # from six hours on, as before
+
+    def test_report_keeps_young_tokens_apart(self):
+        from bot.report import age_band
+        self.assertEqual([age_band(a) for a in (0.13, 0.99, 1.0, 2.99, 3.0, 20, None)],
+                         ["under 1 day", "under 1 day", "1 to 3 days", "1 to 3 days",
+                          "3 days or more", "3 days or more", "age unknown"])
+        def trade(age, pnl):
+            return {"pnl_sol": pnl / 200, "pnl_pct": pnl, "closed": "2026-11-16T00:00:00Z", "hold_minutes": 30,
+                    "rulebook_version": 6, "exit_reason": "stop_loss", "max_gain_pct": 0.0,
+                    "features": {"age_days": age, "dex": "x"}}
+        r = review([trade(0.2, -20.0), trade(0.5, 30.0), trade(9, -15.0)], [], 5.0)
+        self.assertIn("## By age of the token at entry", r)
+        self.assertIn("| under 1 day | 2 | 50.0% |", r)
+        self.assertIn("| 3 days or more | 1 | 0.0% |", r)
+        self.assertNotIn("| 1 to 3 days |", r)
 
     def test_best_pairs_prefers_a_deep_enough_allowed_quote_pool(self):
         deep = make_pair("TOK", "TOK", 1.0, 300_000, T0, quote="TTWO")
@@ -281,7 +310,7 @@ class Replay(unittest.TestCase):
             chg = (0.5, 8.0, 12.0, 20.0) if k in (2, 3) else (0.5, 0.0, 12.0, 20.0)
             rows = [snapshot_row(S.pair_view(make_pair(tok, tok, p, 100_000, now, chg=chg, vol_m5=50_000, **kw),
                                              int(now.timestamp() * 1000)))
-                    for tok, p, kw in (("RUN", px, {}), ("BABY", px, {"age_days": 1}))]   # BABY: too young
+                    for tok, p, kw in (("RUN", px, {}), ("BABY", px, {"age_days": YOUNG}))]   # BABY: too young
             snaps.append({"ts": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sol_usd": SOL_USD, "rows": rows})
         rows = R.baseline(snaps, RULES)
         self.assertEqual({r["symbol"] for r in rows}, {"RUN"})          # never a token outside the universe
@@ -739,12 +768,17 @@ class Cycle(unittest.TestCase):
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")
-        born = self.now - timedelta(days=2, hours=23)
-        for _ in range(3):
-            self.dex.market["NEW"] = make_pair("NEW", "NEW", 1.0, 100_000, self.now,
+        floor = timedelta(days=RULES["universe"]["min_age_days"])
+        born = self.now - (floor - timedelta(hours=1))
+        for k in range(3):
+            # vol_h6 is everything since launch for a token this young: 30k an hour, 40k in the last one.
+            self.dex.market["NEW"] = make_pair("NEW", "NEW", 1.0, 100_000, self.now, vol_h6=90_000,
                                                age_days=(self.now - born).total_seconds() / 86400)
             s = self.step(minutes=30)
-        self.assertEqual(s["opened"], ["NEW"])  # crossed 3 days on the third run
+            if k < 2:
+                self.assertEqual(s["opened"], [])
+                self.assertEqual(s["funnel"].get("u:too_young"), 1)
+        self.assertEqual(s["opened"], ["NEW"])  # reached the rulebook's minimum age on the third run
         self.assertEqual(len(self.trades()), 0)
 
 

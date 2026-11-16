@@ -110,6 +110,15 @@ def build_status(state: dict, run_summary: dict, trades: list) -> str:
     return "\n".join(out)
 
 
+AGE_BANDS = ["under 1 day", "1 to 3 days", "3 days or more", "age unknown"]
+
+
+def age_band(age_days) -> str:
+    if not isinstance(age_days, (int, float)):
+        return "age unknown"
+    return "under 1 day" if age_days < 1 else "1 to 3 days" if age_days < 3 else "3 days or more"
+
+
 def review(trades: list, runs: list, starting_sol: float) -> str:
     out = ["# Review report", "", "## Overall and by rulebook version", "", HEAD, _line("All", stats(trades, starting_sol))]
     for ver, ts in sorted(group(trades, lambda t: t["rulebook_version"]).items()):
@@ -121,6 +130,13 @@ def review(trades: list, runs: list, starting_sol: float) -> str:
     out += ["", "## By DEX of the entry pool", "", HEAD]
     for dex, ts in sorted(group(trades, lambda t: str((t.get("features") or {}).get("dex"))).items()):
         out.append(_line(dex, stats(ts, starting_sol)))
+    # Tokens under 3 days old are traded since rulebook v6. They move faster and their pools can be
+    # drained between two cycles, so their results are kept apart from the older tokens'.
+    out += ["", "## By age of the token at entry", "", HEAD]
+    by_age = group(trades, lambda t: age_band((t.get("features") or {}).get("age_days")))
+    for band in AGE_BANDS:
+        if band in by_age:
+            out.append(_line(band, stats(by_age[band], starting_sol)))
     out += ["", "## Entry features (median split, expectancy % per trade)", "",
             "| Feature | Median | Low half (n) | High half (n) |", "|---|---|---|---|"]
     for f in ["age_days", "liq_usd", "mcap", "vol_h24", "chg_h1", "chg_h6", "chg_h24",

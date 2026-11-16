@@ -1,7 +1,7 @@
 {
-  "version": 5,
+  "version": 6,
   "updated": "2026-11-16",
-  "notes": "v5 = v4 with one entry change: a buy now needs 300 trades in the last hour (entry.min_txns_h1 150 to 300). Hypothesis from the 2026-11-16 06:30 UTC review: an entry signal on a thinly traded token is noise, because the 1-hour change, the buy/sell ratio and the volume acceleration are then each set by a short burst of trades and the bot buys the top of it. Evidence, all of it hints: every real trade bought on 150 to 299 trades in the hour ended at the stop (0 wins of 5, three of them since v3 raised the floor from 50 to 150); on every recorded token 3 to 30 days old the first cycle of a signal in that band won 1 time in 17 on 10 tokens (-13.8% a trade) against 20 in 43 on 14 tokens (+0.0%) at 300 or more, while a buy at any moment made -3.9%; the result is the same for any floor from 250 to 600. It removes the worst group; on the same record the rules still lose about a round trip's costs per trade, so no edge is shown yet. Expect about half as many trades. Exit, universe, portfolio, safety, costs and discovery are exactly v4's (v4 = v3 with GeckoTerminal's most-traded lists read twice as deep; v3 = v2 with min_txns_h1 50 to 150). See reviews/LESSONS.md for the evidence and what would prove it wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
+  "notes": "v6 = v5 with one universe change, made at Ajeeb's request on 2026-11-16: a token can be traded from 3 hours after launch instead of 3 days (universe.min_age_days 3 to 0.125). His hypothesis: the volume in young tokens is genuine, so a young token with serious buyers and sellers should be considered. Every other test still applies to it: $50k liquidity, $100k of 24-hour volume, 500 trades, the market-cap band, the RugCheck screen, and the entry rules (300 trades in the last hour, more buyers than sellers, rising volume). What the record says, hints only: replayed on the recorded snapshots the change adds 7 trades on 6 tokens under 3 days old, 4 wins, +4.2% a trade, with stops filling at -20% to -26% instead of about -15%; a buy at any moment in a token 6 to 24 hours old made -2.5%, and 6% of those positions were in tokens that left the record while held. The data cannot tell genuine volume from bots; the paper results will show whether it pays. Judge young tokens apart (python3 -m bot.report, 'By age of the token at entry'). v5 = v4 with entry.min_txns_h1 150 to 300 (2026-11-16 06:30 UTC review; a signal on a thinly traded token has been reliably bad). Exit, portfolio, safety, costs and discovery are unchanged since v4. See reviews/LESSONS.md for the evidence and what would prove each change wrong. Every threshold is still an untested guess. Change one section at a time and bump 'version' on every edit so trades can be traced to the rules that produced them.",
   "portfolio": {
     "starting_sol": 5.0,
     "position_size_sol": 0.5,
@@ -45,7 +45,7 @@
     "max_snapshot_rows": 120
   },
   "universe": {
-    "min_age_days": 3,
+    "min_age_days": 0.125,
     "max_age_days": 30,
     "min_liquidity_usd": 50000,
     "min_volume_h24_usd": 100000,

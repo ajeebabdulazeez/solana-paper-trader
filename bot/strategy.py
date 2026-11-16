@@ -235,8 +235,18 @@ def buy_sell_ratio(v: dict) -> float:
 
 
 def volume_accel(v: dict) -> float:
-    """Last hour's volume vs the average hour of the last six."""
-    avg = v["vol_h6"] / 6.0
+    """Last hour's volume vs the average hour of the last six.
+
+    A token under six hours old has no six hours behind it: its "6-hour" volume is everything
+    since launch. Dividing that by six would understate its average hour and make every young
+    token look as if its volume were rising, so the average is taken over the hours the token
+    has existed (never less than one).
+    """
+    hours = 6.0
+    age = v.get("age_days")
+    if age is not None and age * 24.0 < hours:
+        hours = max(1.0, age * 24.0)
+    avg = v["vol_h6"] / hours
     return v["vol_h1"] / avg if avg > 0 else 0.0
 
 

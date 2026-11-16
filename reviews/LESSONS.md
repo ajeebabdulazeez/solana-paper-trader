@@ -14,6 +14,58 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v6, 2026-11-16 12:30 UTC, at Ajeeb's request: a token can be traded from 3 hours after launch, was 3 days
+
+Not a scheduled review. Ajeeb asked for it after reading the 06:30 note: he believes the volume in young tokens is genuine, not bots, and that a token 3 to 4 hours old with serious buyers and sellers should be considered. It is his experiment and paper money, so the rule is in as a labelled hypothesis and the record will judge it. v5 had run 69 cycles (06:50 to 12:25 UTC) with no error and no trade.
+
+**Changed: rulebook v6, universe section only. `universe.min_age_days` 3 to 0.125 (3 hours).** Everything else a token has to pass is unchanged: $50k liquidity, $100k of 24-hour volume, 500 trades in 24 hours, market cap $300k to $50M, liquidity at least 3% of market cap, a SOL, USDC or USDT pool, the RugCheck screen, and the v5 entry rules (300 trades in the last hour, 1.2 buys per sell, rising volume, a 1-hour change of +2% to +25%). Those are what "serious buyers and sellers" means to the bot. 3 hours and 4 hours give the same trades on the record; 3 is the lower end of what he asked for.
+
+**What the record says about it. Hints only.**
+
+- `python3 -m bot.replay --set universe.min_age_days=0.125` (v5 rules otherwise): 13 trades instead of 6. The 7 new ones are on 6 tokens under 3 days old: 4 wins, +4.23% a trade.
+
+| Token | Opened (UTC) | Age | Trades in the hour before | Exit | Net |
+|---|---|---|---|---|---|
+| MORI | 14 Nov 01:40 | 6 hours | 796 | trailing stop (best +20.3%) | +7.52% |
+| Max | 14 Nov 13:10 | 2.7 days | 529 | stop | -20.45% |
+| bill | 15 Nov 02:35 | 7 hours | 10,791 | stop | -23.71% |
+| WOHAIHAO | 15 Nov 02:38 | 1.0 day | 7,230 | trailing stop | +12.80% |
+| GETAJOB | 15 Nov 11:10 | 20 hours | 870 | stop | -26.24% |
+| HOGE | 16 Nov 01:50 | 19 hours | 10,173 | trailing stop (best +114%) | +59.73% |
+| WOHAIHAO | 16 Nov 02:20 | 2.0 days | 18,854 | trailing stop | +19.97% |
+
+- The wins are bigger and so are the losses. The three stops filled at -20% to -24% on price against a 12% level; on older tokens the stop cycle averages -14.3%. A young token moves further inside five minutes than the stop can follow. One trade (HOGE) is most of the +4.23%.
+- A buy at any moment, same exits, by age (the yardstick from 15 Nov, positions in tokens that left the record marked at their last price): 3 to 6 hours old +3.78% (311 cycles on 12 tokens, median -15.4%); 6 to 24 hours -2.52% (2,669 on 33, median -14.4%); 1 to 3 days -4.10% (2,811 on 19); 3 days or more -4.53% (6,274 on 18). So on this record the young tokens were not worse than the old ones on average, and the typical trade in them was still a stopped-out loss. 302 of the 5,791 positions in tokens under 3 days old (5%) were in a token that left the record while held, which mostly means its pool fell under $30k; the last-price mark flatters those.
+- No signal was recorded on a token 3 to 6 hours old, so the youngest band the change opens has no replayed trade at all. Only 12 tokens that young ever passed the other universe numbers.
+- The data cannot tell genuine volume from bots. Trade counts and volume are what DexScreener reports; a launch-day pool with $4M to $13M of volume against $40k to $160k of liquidity (the deeper GeckoTerminal pages found 14 of those on 15 Nov) reads the same either way. The RugCheck screen and the liquidity floor are the only defences, and they are unchanged.
+
+**Plumbing that the change needed (no rule in it).**
+
+1. `volume_accel` in `bot/strategy.py`. It compared the last hour's volume with one sixth of the 6-hour volume. For a token 3 hours old the "6-hour" volume is everything since launch, so every young token would have looked as if its volume had doubled. Under six hours old, the average is now taken over the hours the token has existed (never less than one). From six hours on nothing changes, so no trade made so far is affected. The replay uses the same function.
+2. `python3 -m bot.report` has a new table, "By age of the token at entry" (under 1 day, 1 to 3 days, 3 days or more), so young-token trades can be judged apart.
+3. README: the strategy paragraph, the aim line and a new honesty rule about young tokens.
+4. Tests: 2 added (the volume test for tokens under six hours old; the age table), 3 adjusted to read the age floor from the rulebook instead of assuming 3 days. 39 pass.
+
+**What this does to the open tests.**
+
+- v5's entry change had no trades when v6 replaced it. The trading rules for a token 3 days or older are identical in v5 and v6, so read v5's tests on v6 trades in the "3 days or more" row. Young-token trades must not be counted for or against the 300-trade floor.
+- The discovery test due at 14:00 UTC today was written for a 3-day floor: "no token from the deeper pages has passed the universe" was true because 30 of the 31 they found were under a day old. Those tokens can pass now. Do not put the pages back to 4 and 3 on the old reading. Re-read it after a day of v6: how many tokens from `gecko:vol5` to `vol8` and `gecko:tx4` to `tx6` passed the universe, and what trades on them did.
+- On the latest snapshot (12:25 UTC) v6 adds four tokens to the universe, 7 to 11 (rockstar, HOGE, Anthropig, SWJ, all 19 to 30 hours old); none met the entry rules on that cycle.
+
+**For the next review.**
+
+- Judge young tokens (under 3 days at entry) as their own group. Under about 30 closed trades it is a hint.
+- Watch the stop fills on them: the price at the stop cycle against the 12% level. If they keep filling past -20%, the honest options are a smaller position for young tokens (portfolio) or a higher floor for the pool's liquidity when the token is young (universe). Both are tightenings.
+- Watch for a young token written off (`no_data` exit) or closed on `liquidity_drop`: that is the drained-pool case the replay cannot see.
+- `max_new_trades_per_day` is 10 and `max_open_positions` 5. If young tokens fill those every day, the older tokens are being crowded out and the two groups stop being comparable.
+- Everything in "For the next review" of the 06:30 entry below still stands, except the discovery item, replaced above.
+
+**Would prove this change wrong.**
+
+- Young tokens are not worth trading on these rules if their first 15 closed trades lose more per trade than the older tokens' trades over the same days, or if any single day's young-token trades cost more than 5% of equity. Then raise `universe.min_age_days` again (1 day first: the replay's 1-to-3-day entries were 2 wins of 3).
+- The belief that the volume is genuine is in doubt if young-token positions end on `liquidity_drop` or a write-off more than once in the first 15, or if RugCheck rejects most young signals (`safety:*` rows in the funnel).
+- The `volume_accel` fix is wrong if a token over six hours old ever gets a different value than before (the test pins this), or if young tokens with plainly rising volume are all rejected as `volume_accel`: then look at what `vol_h6` holds for a token that young in `data/snapshots`.
+
 ### v5, 2026-11-16 06:30 UTC review: a buy now needs 300 trades in the last hour, was 150
 
 **Health.** 787 cycles since launch, 100 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.3. The newest cycle was 1.9 minutes old when the review started, so no `.kick`. One extra cycle (01:06, 1.6 minutes after the one before): both triggers fired, the concurrency group ran them in turn. One error in the 100 cycles: GeckoTerminal 429 on page 1 of the trade-count list at 06:30, fetched on the next cycle. No `gecko ... p5` to `p8` or `p4` to `p6` line, so the deeper pages still answer. `allowed_pool_used` 4 or 5, `api_calls` 43 to 48 (was 41 to 47), watchlist 185 to 215 (cap 300), no `pool lookup` error. RugCheck ran twice (Rings 01:45, BLOB 05:35) and both answers parsed: `score_normalised` 1, no risks, LP locked 26.2% and 100.0%. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found in the trading path, so no change to `bot/`.
