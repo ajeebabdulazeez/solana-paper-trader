@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-16T20:20:12Z (UTC), rulebook v6. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-16T20:25:12Z (UTC), rulebook v6. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.6257 SOL** (started with 5.0 SOL, -7.49%)
-- Cash: 3.7686 SOL, open positions: 2, closed trades: 15
-- Watchlist: 249 tokens, entry signals this run: 0
+- Equity: **4.5664 SOL** (started with 5.0 SOL, -8.67%)
+- Cash: 4.1311 SOL, open positions: 1, closed trades: 16
+- Watchlist: 248 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 15 | 33.3% | 20.79% | -16.34% | -3.96% | -0.3023 | 0.61 |
+| All | 16 | 31.2% | 20.79% | -16.7% | -4.98% | -0.3948 | 0.55 |
 
-Max drawdown 10.2%, average hold 114.7 min, simulated fees 0.1398 SOL.
+Max drawdown 10.2%, average hold 129.1 min, simulated fees 0.1479 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 14 | Max | 2026-11-16T14:40:15Z | 0.455 | -8.8% | no |
-| 17 | paws | 2026-11-16T18:00:24Z | 0.474 | -3.7% | no |
+| 17 | paws | 2026-11-16T18:00:24Z | 0.474 | -6.6% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 14 | Max | 2026-11-16T20:25:12Z | stop_loss | -20.33% | -0.0925 |
 | 16 | Rings | 2026-11-16T18:35:37Z | trailing_stop | +23.97% | +0.1108 |
 | 15 | HOGE | 2026-11-16T15:50:12Z | trailing_stop | +17.03% | +0.0767 |
 | 13 | rockstar | 2026-11-16T15:20:15Z | stop_loss | -16.37% | -0.0751 |
@@ -34,4 +34,3 @@ Max drawdown 10.2%, average hold 114.7 min, simulated fees 0.1398 SOL.
 | 9 | FLOAT | 2026-11-15T01:45:11Z | stop_loss | -20.52% | -0.0976 |
 | 8 | paws | 2026-11-15T01:15:10Z | stop_loss | -14.22% | -0.0693 |
 | 7 | WASTED | 2026-11-14T22:25:08Z | trailing_stop | +21.00% | +0.0986 |
-| 6 | STANK | 2026-11-14T13:25:08Z | stop_loss | -18.08% | -0.0864 |
