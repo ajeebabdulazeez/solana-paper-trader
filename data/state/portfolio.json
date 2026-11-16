@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.8894669114797087,
- "closed_count": 13,
+ "cash_sol": 4.13184694600272,
+ "closed_count": 14,
  "day": {
   "date": "2026-11-16",
   "opens": 5,
@@ -15,10 +15,11 @@
   "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-15T15:55:12Z",
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-15T01:45:11Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
+  "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-16T15:50:12Z",
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-15T01:15:10Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 70.37037037037037,
+ "last_sol_usd": 70.78548461185117,
  "positions": [
   {
    "entry_exec_usd": 0.0011040102821190596,
@@ -46,14 +47,14 @@
    },
    "fees_sol": 0.004275213528252161,
    "id": 14,
-   "last_liq_usd": 134190.89,
-   "last_price_usd": 0.001092,
-   "last_ts": "2026-11-16T15:45:14Z",
-   "last_vol_h24": 670010.4,
+   "last_liq_usd": 138432.48,
+   "last_price_usd": 0.001155,
+   "last_ts": "2026-11-16T15:50:12Z",
+   "last_vol_h24": 670083.9,
    "missing_runs": 0,
    "opened": "2026-11-16T14:40:15Z",
    "pair": "Eoe22HdCa9rhtBwKL6nNZmZxfuzF35xkxobcvfaF1vWQ",
-   "peak_usd": 0.00111,
+   "peak_usd": 0.001155,
    "rugcheck": {
     "lp_locked_pct": 79.36390143035248,
     "risks": [
@@ -75,62 +76,9 @@
    "tokens_remaining": 29117.139561115913,
    "tp1_done": false,
    "trough_usd": 0.001069
-  },
-  {
-   "entry_exec_usd": 0.0006429474262067377,
-   "entry_liq_usd": 89757.16,
-   "entry_mid_usd": 0.0006393,
-   "entry_sol_usd": 70.61467820661198,
-   "features": {
-    "age_days": 1.35,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.36,
-    "chg_h1": 18.67,
-    "chg_h24": 2502.0,
-    "chg_h6": 59.96,
-    "chg_m5": 2.09,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1469,
-    "liq_usd": 89757,
-    "mcap": 610814,
-    "quote": "USDC",
-    "score": 2.28,
-    "txns_h1": 1286,
-    "vol_h1": 101893,
-    "vol_h24": 3559651,
-    "volume_accel": 1.67
-   },
-   "fees_sol": 0.007691666904836564,
-   "id": 15,
-   "last_liq_usd": 102734.04,
-   "last_price_usd": 0.0008242,
-   "last_ts": "2026-11-16T15:45:14Z",
-   "last_vol_h24": 3643749.21,
-   "missing_runs": 0,
-   "opened": "2026-11-16T15:20:15Z",
-   "pair": "7CNC9gGegzEfFK8fLXiYUhdtMEeFPQZoND56U1Mxhnor",
-   "peak_usd": 0.0008924,
-   "rugcheck": {
-    "lp_locked_pct": 84.64739651223016,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 6,
-   "sol_in": 0.45029664464009656,
-   "sol_returned": 0.28459655264558015,
-   "sold_tokens": 24494.487616894625,
-   "sold_usd": 20.267061255604265,
-   "suspect": null,
-   "symbol": "HOGE",
-   "token": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
-   "tokens": 48988.97523378925,
-   "tokens_remaining": 24494.487616894625,
-   "tp1_done": true,
-   "trough_usd": 0.0006393
   }
  ],
- "realized_pnl_sol": -0.4897902908753418,
+ "realized_pnl_sol": -0.4131103483468472,
  "starting_sol": 5.0,
  "trade_seq": 15
 }

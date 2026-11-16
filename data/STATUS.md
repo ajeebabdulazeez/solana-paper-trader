@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-16T15:45:14Z (UTC), rulebook v6. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-16T15:50:12Z (UTC), rulebook v6. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.6282 SOL** (started with 5.0 SOL, -7.44%)
-- Cash: 3.8895 SOL, open positions: 2, closed trades: 13
+- Equity: **4.6069 SOL** (started with 5.0 SOL, -7.86%)
+- Cash: 4.1318 SOL, open positions: 1, closed trades: 14
 - Watchlist: 214 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 13 | 23.1% | 20.99% | -16.34% | -7.72% | -0.4898 | 0.37 |
+| All | 14 | 28.6% | 20.0% | -16.34% | -5.96% | -0.4131 | 0.47 |
 
-Max drawdown 10.2%, average hold 122.7 min, simulated fees 0.1176 SOL.
+Max drawdown 10.2%, average hold 116.1 min, simulated fees 0.1285 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 14 | Max | 2026-11-16T14:40:15Z | 0.455 | -0.5% | no |
-| 15 | HOGE | 2026-11-16T15:20:15Z | 0.450 | +28.9% | yes |
+| 14 | Max | 2026-11-16T14:40:15Z | 0.455 | +5.2% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 15 | HOGE | 2026-11-16T15:50:12Z | trailing_stop | +17.03% | +0.0767 |
 | 13 | rockstar | 2026-11-16T15:20:15Z | stop_loss | -16.37% | -0.0751 |
 | 12 | BLOB | 2026-11-16T06:30:19Z | trailing_stop | +21.20% | +0.0952 |
 | 11 | Rings | 2026-11-16T02:05:10Z | stop_loss | -14.96% | -0.0682 |
@@ -34,4 +34,3 @@ Max drawdown 10.2%, average hold 122.7 min, simulated fees 0.1176 SOL.
 | 7 | WASTED | 2026-11-14T22:25:08Z | trailing_stop | +21.00% | +0.0986 |
 | 6 | STANK | 2026-11-14T13:25:08Z | stop_loss | -18.08% | -0.0864 |
 | 5 | WASTED | 2026-11-14T06:05:08Z | trailing_stop | +20.76% | +0.0983 |
-| 4 | :3 | 2026-11-14T05:40:10Z | stop_loss | -15.10% | -0.0718 |
