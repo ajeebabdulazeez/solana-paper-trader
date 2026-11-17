@@ -56,3 +56,4 @@
 {"event":"close","id":25,"pnl_pct":19.8,"pnl_sol":0.083092,"reason":"trailing_stop","symbol":"Leonida","ts":"2026-11-17T16:20:12Z"}
 {"event":"open","id":26,"price_usd":0.0008728,"score":1.63,"sol_in":0.427081,"symbol":"HOGE","token":"FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump","ts":"2026-11-17T16:20:12Z"}
 {"event":"close","id":23,"pnl_pct":-14.96,"pnl_sol":-0.064591,"reason":"stop_loss","symbol":"DIGS","ts":"2026-11-17T16:50:13Z"}
+{"event":"close","id":26,"pnl_pct":-17.68,"pnl_sol":-0.075494,"reason":"stop_loss","symbol":"HOGE","ts":"2026-11-17T17:45:14Z"}

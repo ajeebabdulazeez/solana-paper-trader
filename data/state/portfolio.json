@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.815215831587187,
- "closed_count": 25,
+ "cash_sol": 4.166802970506005,
+ "closed_count": 26,
  "day": {
   "date": "2026-11-17",
   "opens": 8,
@@ -22,65 +22,13 @@
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
   "Dys6SYbjUsy8kksaqrXqo5L2GzgCYDiguGGcS8B5rkrv": "2026-11-17T13:05:10Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
-  "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-16T15:50:12Z",
+  "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-17T17:45:14Z",
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 72.19133278822568,
- "positions": [
-  {
-   "entry_exec_usd": 0.0008776556732653249,
-   "entry_liq_usd": 109328.46,
-   "entry_mid_usd": 0.0008728,
-   "entry_sol_usd": 72.44603788768015,
-   "features": {
-    "age_days": 2.39,
-    "boosts": 10,
-    "buy_sell_ratio_h1": 1.21,
-    "chg_h1": 5.67,
-    "chg_h24": 23.04,
-    "chg_h6": 48.28,
-    "chg_m5": 2.5,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1311,
-    "liq_usd": 109328,
-    "mcap": 833879,
-    "quote": "USDC",
-    "score": 1.63,
-    "txns_h1": 1171,
-    "vol_h1": 94487,
-    "vol_h24": 1623610,
-    "volume_accel": 1.34
-   },
-   "fees_sol": 0.0041354044377930055,
-   "id": 26,
-   "last_liq_usd": 105212.36,
-   "last_price_usd": 0.0008102,
-   "last_ts": "2026-11-17T17:40:12Z",
-   "last_vol_h24": 1558685.59,
-   "missing_runs": 0,
-   "opened": "2026-11-17T16:20:12Z",
-   "pair": "7CNC9gGegzEfFK8fLXiYUhdtMEeFPQZoND56U1Mxhnor",
-   "peak_usd": 0.0009479,
-   "rugcheck": {
-    "lp_locked_pct": 87.61435992055627,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 8,
-   "sol_in": 0.427080887558601,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "HOGE",
-   "token": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
-   "tokens": 34912.01097190449,
-   "tokens_remaining": 34912.01097190449,
-   "tp1_done": false,
-   "trough_usd": 0.0007867
-  }
- ],
- "realized_pnl_sol": -0.7577032808542127,
+ "last_sol_usd": 72.18196457326893,
+ "positions": [],
+ "realized_pnl_sol": -0.8331970294939957,
  "starting_sol": 5.0,
  "trade_seq": 26
 }
