@@ -1,9 +1,9 @@
 {
- "cash_sol": 3.9768995363624047,
+ "cash_sol": 3.5371075721206497,
  "closed_count": 19,
  "day": {
   "date": "2026-11-17",
-  "opens": 2,
+  "opens": 3,
   "start_equity": 4.531866603213844
  },
  "last_exit": {
@@ -22,7 +22,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 72.6164483260553,
+ "last_sol_usd": 72.73531493276717,
  "positions": [
   {
    "entry_exec_usd": 0.002708065343102346,
@@ -50,10 +50,10 @@
    },
    "fees_sol": 0.0042093886313124464,
    "id": 20,
-   "last_liq_usd": 285968.55,
+   "last_liq_usd": 286091.24,
    "last_price_usd": 0.002605,
-   "last_ts": "2026-11-17T11:25:09Z",
-   "last_vol_h24": 430813.17,
+   "last_ts": "2026-11-17T11:30:16Z",
+   "last_vol_h24": 430939.45,
    "missing_runs": 0,
    "opened": "2026-11-17T05:55:09Z",
    "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
@@ -74,9 +74,59 @@
    "tokens_remaining": 11755.481768502064,
    "tp1_done": false,
    "trough_usd": 0.002513
+  },
+  {
+   "entry_exec_usd": 0.0013647866305048926,
+   "entry_liq_usd": 86276.91,
+   "entry_mid_usd": 0.001357,
+   "entry_sol_usd": 72.73531493276717,
+   "features": {
+    "age_days": 0.52,
+    "boosts": 100,
+    "buy_sell_ratio_h1": 1.28,
+    "chg_h1": 17.69,
+    "chg_h24": 4221.0,
+    "chg_h6": 65.2,
+    "chg_m5": 2.6,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0643,
+    "liq_usd": 86277,
+    "mcap": 1341621,
+    "quote": "SOL",
+    "score": 2.46,
+    "txns_h1": 14019,
+    "vol_h1": 87453,
+    "vol_h24": 1398131,
+    "volume_accel": 1.92
+   },
+   "fees_sol": 0.004198959821208774,
+   "id": 21,
+   "last_liq_usd": 86276.91,
+   "last_price_usd": 0.001357,
+   "last_ts": "2026-11-17T11:30:16Z",
+   "last_vol_h24": 1398131.1,
+   "missing_runs": 0,
+   "opened": "2026-11-17T11:30:16Z",
+   "pair": "Hm7Nvb4bxSDYZhtbm2yHEMHCMC6Lq4XTedY4q1we9r7Q",
+   "peak_usd": 0.001357,
+   "rugcheck": {
+    "lp_locked_pct": 99.99952215801022,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 7,
+   "sol_in": 0.4397919642417548,
+   "sol_returned": 0.0,
+   "symbol": "LEOSTAR",
+   "token": "2cMcMEX3Eqo86tUrVe5dgHp5GZNwqQ6crqm22UeZpump",
+   "tokens": 23214.613662589712,
+   "tokens_remaining": 23214.613662589712,
+   "tp1_done": false,
+   "trough_usd": 0.001357
   }
  ],
  "realized_pnl_sol": -0.5812227373751062,
  "starting_sol": 5.0,
- "trade_seq": 20
+ "trade_seq": 21
 }
