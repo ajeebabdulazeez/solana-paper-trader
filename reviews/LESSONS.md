@@ -14,6 +14,89 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v7, 2026-11-17 06:30 UTC review: no rule change, no code change
+
+**Health.** 1,076 cycles since launch, 94 on v7 (from 22:50 UTC on 16 Nov). Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. No cycle was skipped since the last review (the last skipped one was 21:35 on 16 Nov), so no message to Ajeeb. One extra cycle (01:05:08, 44 seconds after the one before; both triggers fired). The newest cycle was under 2 minutes old when the review started, so no `.kick`. One error in the 94 cycles: GeckoTerminal 429 on page 3 of the trade-count list at 05:45, fetched on the next cycle. `api_calls` 48 to 50, `allowed_pool_used` 4, watchlist 212 to 266 (cap 300; 213 now), universe 15 to 18 tokens a cycle (median 17, was 13). RugCheck ran for both signals and both answers parsed: GTA `score_normalised` 1, no risks, LP locked 100.0%; FLOAT 1, no risks, 71.9%. The saved sample still matches what `bot/rugcheck.py` reads (`score_normalised`, `risks[].level`, `lpLockedPct`). No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 42 tests pass.
+
+`batch_miss` is up and I looked for harm, as the 14 Nov 23:35 entry asked once it passed 20. It was 16 to 27 a cycle (median 22, was 15) and over the 15 single lookups on all 94 cycles; `no_data` 14 to 22 (median 18). Read from the 94 versions of `data/state/watchlist.json` in git:
+
+- The rise is mostly tokens that have never returned data: 13 to 20 on the watchlist (median 17, was 12 to 14), every one from `profiles_latest`. The rest are tokens with a data history that the batch call left out: 2 to 7 a cycle. Those are looked up first (the 14:35 change), and 7 is well inside 15.
+- No token with a live pool went unpriced. Three tokens with a data history were missing on a cycle (TRALALERO, shitcoin, GARY; 32 token-cycles in all). Their pools read $7.7k to $14.9k when last seen, under the watchlist's $30k floor, and none came back before it was dropped from the watchlist.
+- The lookups left over (8 to 13 a cycle) go to the never-seen tokens in address order, so the last few in that order get none. I checked whether that hides anything: 10 never-seen tokens returned data for the first time since 12:00 on 16 Nov, and their pools read $2 to $11.6k (seven of them under $1,100). None was near the watchlist floor, and the delay did not follow the address order. No harm found, not changed.
+
+**Strategy: v7 has 1 closed trade, a loss, and 1 open. One trade is not a hint.** v6 ended at 6 closed, 2 wins, -3.26% a trade (-0.0918 SOL): NIO was its last. Equity 4.4165 SOL (-11.67%; it was 4.5425). All versions: 19 closed, 5 wins on four tokens, -6.33% a trade, -0.5812 SOL, max drawdown 11.62%. The day is at -2.5% against a 10% daily limit. SOL $71.2 to $72.9.
+
+| # | Token | Opened (UTC) | Age | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|---|
+| 18 | NIO (v6) | 16 Nov 20:50 | 26.2 days | 300 | +2.2% | +9.0% | 6-hour limit, price at -3.9% | -7.26% |
+| 19 | GTA | 17 Nov 03:25 | 9.4 hours | 3,083 | +9.9% | +16.6% | stop, price at -13.1% | -16.63% |
+| 20 | FLOAT | 17 Nov 05:55 | 19.3 days | 646 | +18.0% | +3.0% | open at +0.8% | |
+
+- NIO is the first trade to end at the 6-hour limit. It was bought on exactly 300 trades in the hour, drifted between -9% and +9% and never came near the stop or the target. Nearly half of its loss is costs (price -3.9%, net -7.26%).
+- GTA is the first trade on a token under a day old. Its price moved 4% or more between two readings on 8 of the 12 cycles it was held (+10.6%, +8.2%, -9.2%, +11.0% among them). The 1-hour change that let it in read -15.9, -9.6, -2.0, -4.7, +4.3, -3.7, +4.5, -3.3, +1.3 and then +9.9 on the ten cycles up to the buy: on a token like this the number changes sign with each reading. It peaked at +16.6% fifteen minutes in, 3.4 points short of the first target. The reading before the stop was -5.6%, the stop cycle -13.1%, and forty minutes later the price was 2.6% over the entry. This is what the 14:35 entry on 16 Nov wrote before rockstar's result: on a token that moves this much, whichever of the stop and the target is hit first says little about the entry.
+- FLOAT was bought on one burst, the shape paws had at 18:00 on 16 Nov. Its trades in the hour went from 137 to 646 in a single cycle (509 trades, $17.5k and +13.7% on price in five minutes), after an hour of almost no trading. From the next cycle on it failed `buy_pressure` (440 buys to 373 sells). It is the third first signal with most of the hour's trades in the last five minutes; the other two (paws, RAMBO) were stops. The 22:30 review tested that idea against all cycles and dropped it; FLOAT's result is one more case, not a reason to reopen it. It is also the token the 300-trade floor blocked at 21:00 on 16 Nov (245 trades, -14.8% in the wide replay) and then let through nine hours later.
+- Stops: all 13 lost, average -16.69%, total -1.0280 SOL. The price at the stop cycle averages -14.5%, 2.5 points past the level, with every cycle on time. The five trailing exits made +0.4796 SOL; the one time stop cost 0.0329.
+- No trailing exit since v7 went live, so the 5% trail has not been used yet: 0 of the 10 the last entry's test needs.
+- Young tokens: 3 closed of the 15 the 12:30 entry asks for (rockstar, HOGE, GTA), 1 win, -5.32% a trade, -0.0731 SOL. Tokens 3 days or older over the same days (Max, Rings, paws, NIO): 4 closed, 1 win, -5.06%, -0.0935 SOL. Level, on seven trades. Young stops: 2 of the 5 the 14:35 entry asks for, 2.5 and 1.1 points past the level, both inside its 3 points. No `liquidity_drop`, no write-off. Today's one young trade cost 1.6% of equity (the test's line is 5% in a day). The day has used 2 of its 10 new trades.
+- The youngest band is seen and still not traded. 20 tokens passed the universe since 22:50, 9 of them under 3 days old when they first did, and 6 of those at about 3 hours old (BAWSAQ on two addresses, LEOSTAR, SENT, GTA, DSP). GTA was bought at 9.4 hours; no token under 6 hours old has given a signal.
+- LP locked: NIO 41.7%, lost. Every closed trade under 50% lost: 4 of 4 (Rings 26.2%, STANK 40.5%, NIO 41.7%, rockstar 48.5%). At 50% or more: 5 wins of 15, GTA (100.0%) among the losers. A 0-of-4 against 5-of-15 split turns up by chance about one time in four, and the figure moves (Rings read 26.2% and 78.8% fifteen hours apart). Still a hint; a floor would be a tightening of the safety section and is allowed if it firms up.
+- 2 signals in the 7.7 hours since 22:50, the last 35 minutes before this review, so the 12-hour rule is not met. Funnel, 1,609 universe-token checks: `h1_weak` 710 (44%), a token in its cooldown 419, `h6_down` 128, `txns_h1` 118, the held token 68, `h1_overheated` 65, `buy_pressure` 40, `m5_dropping` 29, `volume_accel` 27, `h24_dumped` 3, signal 2.
+
+**Two exit ideas tested against a buy at any moment. Neither holds.** Method as in the 06:30 entry on 16 Nov: a position at every eligible cycle, the same entries run through each variant, positions in tokens that left the record kept and marked at their last price, only entries opened 13 hours or more before the end of the record. A scratch script; nothing in `bot/` changed.
+
+1. *A stop moved to the entry price once a trade has been +10% up.* The 14 Nov 13:30 entry named it for trades that peak at +13% to +19% and end at the full stop. There are now three real ones (STANK +17.1%, Max +16.6%, GTA +16.6%). Tested as: before the first target, if an earlier reading was at or over +X%, sell when the price is at or under the entry.
+
+| Variant | Bot's universe, 12,701 entries on 56 tokens | Wide, ages 3 to 30 days, 21,178 entries on 45 tokens |
+|---|---|---|
+| live exits (v7) | -3.60% | -3.26% |
+| break-even after +8% | -3.34% | -3.36% |
+| break-even after +10% | -3.41% | -3.33% |
+| break-even after +15% | -3.51% | -3.25% |
+
+   It moves the mean by +0.3 to -0.1 points and the two records disagree on the sign. On the entry rules' own first signals it is worse at +10% on both (-0.5 points on 36 and on 68 signals): it turns Max's -20.3% into -3.1% and two WOHAIHAO winners (+17.6%, +16.7%) into -12.2% and -12.9%. A "break-even" exit does not fill at zero: the positions it closed ended at -4.7% on average, because the price is already under the entry when the bot looks and the costs come on top. Dropped. The 22:30 review found the same for a first target at 15%.
+
+2. *A wider stop for young tokens.* GTA was stopped and stood above its entry forty minutes later, so the question is whether 12% is inside the noise for a token this young. The opposite:
+
+| Age at entry | Entries (tokens) | 12% stop (live) | 16% stop | 20% stop | Of those stopped at 12%, better with a 20% stop |
+|---|---|---|---|---|---|
+| under 1 day | 3,015 (33) | -2.06% | -2.38% | -2.53% | 18% |
+| 1 to 3 days | 2,973 (20) | -3.73% | -4.48% | -5.35% | 18% |
+| 3 days or more | 6,713 (18) | -4.24% | -3.98% | -3.72% | 44% |
+
+   A young token that has fallen 12% mostly keeps falling: more tokens do worse than better with the wider stop (14 to 8 under a day, 12 to 4 at 1 to 3 days), and the worst single position goes to -91%. GTA coming back was the less common case. For tokens 3 days or older a 20% stop still reads half a point better, as on 16 Nov, with tokens split 5 better to 6 worse: not a case. The stop stays at 12% for all ages.
+
+- The same yardstick by age, updated (live exits): 3 to 6 hours old +3.51% (311 cycles on 12 tokens, median -15.4%, 60% stopped); 6 to 24 hours -2.70% (2,704 on 33, median -14.8%, 54% stopped); 1 to 3 days -3.73% (2,973 on 20, 48% stopped); 3 days or more -4.24% (6,713 on 18, 45% stopped). The price at the stop cycle averages -19.9% for tokens 6 to 24 hours old, -16.0% at 1 to 3 days and -13.6% at 3 days or more. The typical buy of a young token is still a stop, filled further past its level the younger the token.
+
+**What the last reviews asked, answered.**
+
+- `python3 -m bot.replay` with the v7 rules reproduces NIO, GTA and FLOAT, each within 0.1 points of the journal: 20 closed on 15 tokens, 10 wins, +3.78% (it was +5.52% on 18).
+- `python3 -m bot.replay --baseline`, v7 rules. Bot's universe: every eligible cycle 14,217 on 59 tokens, 33% wins, -4.12% (was -4.16%); the first passing cycle of each run 45 on 15 tokens, 51% wins, +3.63% (was +4.88% on 42). Wide, ages 3 to 30 days: every cycle 23,871 on 46 tokens, -3.86% (was -3.49%); first passing cycles 79 on 17 tokens, 52% wins, +3.24% (was +2.97% on 73). The first rows are steady. The three first signals added on the bot's universe since 22:30 averaged -13.8% (NIO, and GTA at 03:25 and 03:45), which is what "do not expect them" meant.
+- The 300-trade floor, forward check (entries on 150 to 299 trades opened after 06:45 UTC on 16 Nov, wide replay with `entry.min_txns_h1=150`, tokens 3 to 30 days old): 6 closed, 1 win. DIGS 13:20 +24.4% (it read +19.7% with the old trail), Max 13:55 -15.8%, STANK 17:10 -18.3%, CJ 17:30 -18.7%, FLOAT 21:00 -14.8%, RAMBO 22:15 -14.3%. The test needs 10 closed and calls the floor wrong at 3 winners or more.
+- The floor's other test (2 winners or fewer in the first 10 closed trades on tokens 3 days or older): 1 of 4 (Max, Rings, paws, NIO). It needs 2 more winners in the next 6 to pass. FLOAT is the fifth.
+- Trailing exits: none new. The table in the 22:30 entry stands at five rows.
+- Discovery, interim (due after 12:35 UTC today, so not read as a test yet). Since 12:35 on 16 Nov 24 tokens have passed the universe. By the feed that found them: `profiles_latest` 11, GeckoTerminal before pages were labelled 7, `boosts_top` 3, one each from `gecko:trend2`, `gecko:tx4` and a trending meta. 59 tokens from the deeper pages (`gecko:vol5` to `vol8`, `gecko:tx4` to `tx6`) were on the watchlist at some point in that time and one of them passed: HOGE, the same one as before. Since the age floor fell to 3 hours it is the profile feed that supplies the young tokens, not the deeper pages.
+- `suspect_price`: no row, so the guard change from 22:30 has still not met a bad print.
+- Watchlist size: peaked at 266 at 22:55 and is back at 213. `api_calls` never passed 50.
+
+**Changed.** Nothing. Rulebook v7 stays; no code change; 42 tests pass. v7 is eight hours old with one closed trade, a signal fired 35 minutes before the review, and the two exit ideas the new trades raised both fail on the record.
+
+**For the next review.**
+
+- FLOAT: record the exit. It counts in the "3 days or more" row, for the floor's test and as the third burst entry.
+- Discovery is due: after 12:35 UTC, count as above. If HOGE is still the only token from a deeper page that passed the universe, put `top_volume_pages` back to 4 and `top_tx_pages` to 3 (one token in 41 hours that the trade-count list's page 4 found; the volume pages 5 to 8 have found none), or keep `top_tx_pages` at 4 for HOGE's sake and say why. That is a discovery-section change and would be the one change for that review.
+- `batch_miss`: the number to watch is `batch_miss` less the never-seen tokens on the watchlist (2 to 7 now). If it nears 15, tokens with a data history start missing lookups. Also count never-seen tokens that first return data with a pool of $30k or more after more than two cycles on the watchlist (0 of 10 so far); one of those would mean the address order is hiding a live token, and the fix is to rotate the leftover lookups.
+- Young tokens: 3 of 15 closed, 2 of 5 stops. Each new trailing exit: the trail level, the fill, and what `--set exit.trailing_stop_pct=10` gives.
+- LP locked under 50%: 0 wins of 4. Two more losers with no winner and it is worth testing as a floor in the safety section (a tightening); check first how often the figure for one token moves across the line between two readings.
+- Everything under "For the next review" in the 16 Nov entries still stands.
+
+**Would prove this review wrong.**
+
+- Leaving the stop alone for young tokens is wrong if the first five young-token stops include three where the price was back above the entry within an hour of the stop (GTA is one of two so far; rockstar was not). Then redo the age table on the longer record before touching anything.
+- Dropping the break-even stop is wrong if, on a week of data, it is ahead by a point or more on both records and on the first signals as well. On today's record it is not ahead on either count.
+- The `batch_miss` verdict is wrong if a token with a pool over $30k is missing from a snapshot on one cycle and back on the next while `batch_miss` less the never-seen count is over 15, or if `api_calls` passes 55.
+- Leaving the rules alone is wrong by the tests the earlier entries set, which are unchanged: the 5% trail (22:30 on 16 Nov), young tokens (12:30), the 300-trade floor (06:30).
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles become regular.
+
 ### v7, 2026-11-16 22:30 UTC review: the trailing stop is 5% under the best price, was 10% (plumbing: a second trigger a minute later cannot confirm a bad price print)
 
 **Health.** 979 cycles since launch, 96 since 14:40 UTC. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 10.0. Two cycles were skipped (none between 18:55 and 19:05, none between 21:30 and 21:40); with the one at 12:55 that is three in ten hours. The last review said to tell Ajeeb at more than two in six hours. It is two, so no message, and the gap never reached 15 minutes. Three extra cycles (17:41, 19:53 and 21:59, each 30 seconds to 2 minutes from its neighbour; both triggers fired). The newest cycle was 1.9 minutes old when the review started, so no `.kick`. No error in any of the 96 cycles. `api_calls` 48 to 50, `allowed_pool_used` 4 to 6, watchlist 208 to 261 (cap 300; it was 185 to 215), universe 9 to 17 tokens a cycle (median 13). RugCheck ran for all 5 signals and every answer parsed: `score_normalised` 1 and no risks on four, 29 with one `warn` on Max; LP locked 41.7% to 84.6%. No `safety:*`, `skip:*` or `suspect_price` rows.
