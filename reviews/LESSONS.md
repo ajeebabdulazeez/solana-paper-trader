@@ -14,6 +14,112 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v8, 2026-11-17 14:30 UTC review: a token can be traded from 1 day after launch, was 3 hours
+
+**Health.** 1,173 cycles since launch, 191 on v7, 99 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. No cycle was skipped, so no message to Ajeeb. One extra cycle (09:05:47, 37 seconds after the one before; both triggers fired). The newest cycle was 2.0 minutes old when the review started, so no `.kick`. No error in any of the 99 cycles. `api_calls` 48 or 49, `allowed_pool_used` 3 to 5, watchlist 206 to 225 (cap 300), universe 15 to 20 tokens a cycle (median 17). RugCheck ran for all 5 signals and every answer parsed: `score_normalised` 1 and no risks on each, LP locked 84.3% (Leonida), 98.3% (bul) and 100.0% (LEOSTAR, BAWSAQ, DIGS). The saved sample still matches what `bot/rugcheck.py` reads. No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 42 tests pass.
+
+- `batch_miss` 16 to 21 a cycle (median 19) and over the 15 single lookups on all 99 cycles, as before. The number the last review said to watch, `batch_miss` less the tokens that have never returned data (15 to 17 on the watchlist, all from `profiles_latest`), was 1 to 5 (median 3): well inside 15. One never-seen token returned data for the first time (BPCat, 07:10, no pool to speak of). No token with a live pool went unpriced.
+- The two large falls the bot acted on were real moves by the guard's own measure, and I checked both by hand. BAWSAQ at 12:25: 36% under the last reading on $26.6k traded, 2.7 times what a pool of that size needs to move that far. bul at 13:05: 23.5% under on $10.2k, 1.7 times the need. Neither was a bad print; the readings that followed are below.
+
+**Strategy: v7 closed 5 trades, 1 win, -12.29% a trade (-0.2697 SOL). Five trades are hints, not findings.** Equity 4.1939 SOL (-16.12%; it was 4.4165). All versions: 23 closed, 6 wins on five tokens, -7.18% a trade, -0.7762 SOL, max drawdown 15.52% (it was 11.62%). The day stands at -7.5% against a 10% daily limit and has used 7 of its 10 new trades. SOL $72.1 to $73.9.
+
+| # | Token | Opened (UTC, 17 Nov) | Age | Trades in the hour before | 1-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|---|
+| 20 | FLOAT | 05:55 | 19.3 days | 646 | +18.0% | +3.0% | 6-hour limit, price at -0.4% | -3.95% |
+| 21 | LEOSTAR | 11:30 | 12.5 hours | 14,019 | +17.7% | +26.0% | half sold at +26.0%, rest trailed out at +15.2% | +15.62% |
+| 22 | BAWSAQ | 12:15 | 16.1 hours | 10,792 | +20.9% | +12.0% | stop, price at -28.3% | -30.55% |
+| 23 | DIGS | 12:45 | 20.0 days | 1,243 | +10.4% | +5.1% | open at -6.9% | |
+| 24 | bul | 13:00 | 9.6 hours | 1,419 | +12.4% | 0.0% | stop, price at -23.5% | -25.92% |
+| 25 | Leonida | 13:55 | 11.8 days | 553 | +2.2% | +3.7% | open at +3.7% | |
+
+- BAWSAQ. Bought at 12:15, +12.0% at 12:20, -28.3% at 12:25: the stop was crossed and passed by 16 points inside one cycle, with the cycle on time. The readings after the stop were -43%, -66%, -80% and -88% (12:45); the pool went from $101k to $33k and the token left the snapshots at 13:20. Selling at -28% was the good outcome here. Half an hour before the buy the price had been 43% lower (11:45); it rose 77% in the 30 minutes to the buy.
+- LEOSTAR. Reached the first target at 12:50 (+26.0%, a jump from +14.3% in one cycle on $59.8k) and the kept half was sold on the next cycle at +15.2%, 4.5 points under its trail level (+19.7%). At 13:00 it read +24.7%. At 13:05 the price was 78% lower than five minutes before, the pool had gone from $98k to $45k, and the token left the snapshots. The bot was out by ten minutes.
+- bul (Raydium, $97k pool). -23.5% on the first cycle after the buy, 11.5 points past the stop. The next reading was -3.6%, it was above the entry 30 minutes after the stop (+2.6% at 13:35) and at -23.4% by 14:30. A token that swings 20% between two readings cannot be held with a 12% stop read every five minutes: the stop fills wherever the price happens to be.
+- FLOAT never moved more than +3.0% or -6.7% and went out at the 6-hour limit with the price 0.4% under the entry: the loss is the costs. The last review recorded it as the third first signal bought on one burst (paws and RAMBO were stops); this one was flat.
+- Stops: all 15 lost, average -18.23%, total -1.2742 SOL. The price at the stop cycle now averages -16.0% (it was -14.5% on 13). By age at entry: 3 days or more, 11 stops, -14.6% on average, 2.6 points past the level; 1 to 3 days, one stop at -14.5% (rockstar); under a day, three stops at -13.1%, -28.3% and -23.5%, 9.6 points past the level on average. Every one of those cycles was on time. The six trailing exits made +0.5483 SOL; the two time stops cost 0.0503.
+- LP locked said nothing today: the four tokens under a day old read 98% to 100%, and three of them lost. A locked pool does not stop holders selling. Under 50%: still 0 wins of 4, no new trade. At 50% or more: 6 wins of 19.
+- 5 signals in the 8 hours since the last review, so the 12-hour rule is not met. Funnel, 1,719 universe-token checks: `h1_weak` 884 (51%), a token in its cooldown 291, `h6_down` 157, the held token 99, `txns_h1` 92, `buy_pressure` 78, `h1_overheated` 68, `m5_dropping` 23, `volume_accel` 17, `h24_dumped` 4, `liquidity_falling` 1, signal 5.
+
+**The young tokens: the test set when the 3-hour floor went in is met.** The 12:30 entry on 16 Nov wrote: young tokens are not worth trading on these rules "if any single day's young-token trades cost more than 5% of equity. Then raise `universe.min_age_days` again (1 day first)".
+
+- Today's four trades on tokens under 3 days old were all on tokens under a day old (GTA 9.4 hours, LEOSTAR 12.5, BAWSAQ 16.1, bul 9.6): -0.0747, +0.0687, -0.1342 and -0.1120 SOL, together -0.2523 SOL. The day started at 4.5319 SOL, so that is 5.6% of equity. The line was 5%.
+- Under a day old, all real trades: 4 closed, 1 win, -14.37% a trade. 1 to 3 days old: 2 closed (rockstar, HOGE), 1 win, +0.33%. Young together: 6 of the 15 closed trades that entry asked for, 2 wins, -9.47% a trade, -0.2507 SOL. Tokens 3 days or older over the same two days (Max, Rings, paws, NIO, FLOAT): 5 closed, 1 win, -4.84%, -0.1108 SOL. Young tokens are losing about twice as much a trade, on 6 against 5.
+- The 14:35 entry's test (the age table overstates the problem if the first five young-token stops fill within 3 points of the level): four so far at 2.5, 1.1, 16.3 and 11.5 points. It has failed with one to go. The table did not overstate.
+- The 12:30 entry's other test (more than one `liquidity_drop` or write-off in the first 15 young trades): none by the letter. But BAWSAQ lost 88% in the half hour after the buy and LEOSTAR 78% in one cycle ten minutes after the sale. Those are the drained-pool cases that test was written for; the bot was a cycle ahead of one of them.
+- Why 5-minute cycles cannot handle this band, from the record. For every reading of a token inside the universe, what happened in the six hours after it (the longest a position is held):
+
+| Age at the reading | Readings (tokens) | Price halved, or the token left the snapshots, within 6 hours | Tokens that did so at least once |
+|---|---|---|---|
+| under 1 day | 3,619 (41) | 29.6% | 32 of 41 |
+| 1 to 3 days | 3,440 (20) | 20.2% | 15 of 20 |
+| 3 days or more | 8,594 (19) | 1.2% | 3 of 19 |
+
+  (A token leaves the snapshots when its pool falls under the watchlist's $30k floor; these had $50k or more at the reading. The snapshots have never been at their 120-row cap, so rank is not the reason.)
+
+**The entry rules on tokens under a day old, on the record.** The yardstick from 15 Nov, with positions kept to their exit whatever it was. Two readings that point different ways, both given.
+
+| Age at entry | A buy at every eligible cycle (entries up to 01:30 today) | Ended worse than -25% | Price at the stop cycle | The entry rules' first signals (whole record) | Ended worse than -25% |
+|---|---|---|---|---|---|
+| under 1 day | 3,205 on 40 tokens, -1.95%, median -14.8% | 10.3% | -19.3% | 13 on 8 tokens, 4 wins, -20.92% | 6 of 13 |
+| 1 to 3 days | 3,272 on 20, -3.56% | 4.4% | -15.9% | 11 on 4, 6 wins, +4.58% | 0 of 11 |
+| 3 days or more | 7,731 on 19, -4.70% | 0.9% | -14.0% | 29 on 8, 15 wins, +4.35% | 0 of 29 |
+
+- For the change: on tokens under a day old the rules' own signals did far worse than a buy at any moment in the same band, and far worse than their signals on older tokens. One position in ten in that band ends worse than -25% against one in a hundred for tokens 3 days or older, and the stop fills 5 points further out. The 13 first signals: MORI +7.5%, bill -23.7%, GETAJOB -26.2%, HOGE +59.7%, GTA -16.6% and -17.8%, LEOSTAR +15.8%, -75.1%, -75.4%, +11.5% and -75.5%, BAWSAQ -30.5%, bul -25.8%. Two of the eight tokens have a positive average.
+- Against it, plainly. Nine of the 13 are from today, five of them one token (LEOSTAR). Before today the four first signals under a day old averaged +4.3% (2 wins, HOGE's +59.7% carrying it), which is why the 12:30 entry on 16 Nov let the band in. A buy at any moment in the band did not lose more on average than in older tokens (-1.95% against -4.70%), though that figure stops at 01:30 today and marks 5.7% of its positions at their last price before the token vanished, which flatters it. And with the floor at 1 day the replay of the whole record is about level with v7: 16 closed on 11 tokens, 7 wins, +1.88%, against 24 closed on 18 tokens, 11 wins, +1.30%. So this is not a finding that young tokens have worse returns. It is a finding that their results here are set by where the price happens to be when the bot looks: LEOSTAR ended at +15.6% with a 5% trail and would have ended at -26.7% with the 10% trail of two days ago, the same token, the same entry.
+- `python3 -m bot.replay --baseline` shows the same thing from the other side. v7, bot's universe: every eligible cycle 15,939 on 62 tokens, -3.97% (was -4.12%); cycles the entry rules passed 108 on 18 tokens, -3.67%; the first passing cycle of each run 53 on 18, 47% wins, -1.80% (it was +3.63% on 45). With `--set universe.min_age_days=1`: every cycle 12,238 on 38 tokens, -4.43%; passing cycles 79 on 11, +5.27%; first passing cycles 40 on 11, 52% wins, +4.41%. Wide, ages 3 to 30 days: every cycle 26,677 on 46 tokens, -3.38% (was -3.86%); first passing cycles 90 on 17, 51% wins, +3.30% (was +3.24% on 79). The rules' picks beat a buy at any moment by 7 to 10 points on tokens a day old or more and by 0.3 to 2 points once tokens under a day old are in. The first figure is read off the record the rules were shaped on. Do not expect it.
+
+**Changed: rulebook v8, universe section only. `universe.min_age_days` 0.125 to 1. A risk limit set off by its own test, on hints.**
+
+- Why act on six trades. The test was written before the trades, on the day the band was opened, and it names this step. The mechanism was measured before the trades too (14:35 on 16 Nov: a fall of the whole stop distance inside one cycle is 14 times as common under a day old as at 3 days or more) and today's stops did what it said. The proof gate needs a max drawdown under 25%; it is at 15.5% after one such day.
+- Why 1 day and not 3. "1 day first" is what the test says, and picking the floor after seeing the tables would be choosing the number that makes the past look best. The 1-to-3-day band is not cleared: its tokens halve or vanish within six hours nearly as often (20% of readings), its one real stop filled 2.5 points past the level, and its good replay numbers are two tokens (WOHAIHAO and HOGE, 9 of the 11 first signals). It stays in as Ajeeb's experiment with a test of its own, below.
+- What it does not do. Entry, exit, portfolio, safety, costs and discovery are untouched. A token found at 3 hours old stays on the watchlist and is recorded in the snapshots as before; it becomes tradable when it turns a day old if it still passes everything else. The `volume_accel` handling for tokens under six hours old stays in the code and is no longer reached by a trade. DIGS (20 days) and Leonida (11.8 days) are open, labelled v7, and are managed as before.
+- What it costs. On the latest snapshot the universe goes from 16 tokens to 13 (GTA, BAWSAQ and DSP, 17 to 22 hours old, drop out). Of the 28 tokens that passed the universe since the band opened, 11 were under a day old when they first did. Fewer trades, and no chance at a launch-day run like HOGE's +59.7% in the replay.
+- What it does to the open tests. The young-token tests carry on for tokens 1 to 3 days old only: 2 of 15 closed (rockstar, HOGE), 1 stop. The 300-trade floor and the 5% trail are read as before. v7 ends at 5 closed trades plus the two open ones.
+- Ajeeb: this narrows the rule you asked for on 16 Nov, on the test written into this file that day. The band under a day old was open for 26 hours and took 4 trades. If you want it kept running regardless, say so and it goes back. The honest way to keep it would be a smaller position for tokens under a day old (it needs code in `bot/portfolio.py` and is a different section), so that one stop at -30% costs what a normal stop does.
+
+**What the last reviews asked, answered.**
+
+- `python3 -m bot.replay` with the v7 rules reproduces FLOAT, LEOSTAR, BAWSAQ and bul, each within 0.2 points of the journal: 24 closed on 18 tokens, 11 wins, +1.30% (it was +3.78% on 20).
+- Trailing exits, the first under the 5% trail (1 of the 10 the 22:30 entry's test needs):
+
+| # | Token | Half sold at the target | Best while held | Trail level (best less 5%) | Kept half sold at | Under the level | The same entry with a 10% trail |
+|---|---|---|---|---|---|---|---|
+| 21 | LEOSTAR | +26.0% | +26.0% | +19.7% | +15.2% | 4.5 points | -26.66% for the trade (kept half sold at -72.6%), against +15.78% |
+
+  Better with 5% by 42 points, because the token collapsed two cycles later. That is one trade and mostly luck; it counts as one "better", and the test's average will be bent by it, so read the count as well.
+- The 06:30 review's test for the young-token stop (wrong if three of the first five young stops were back above the entry within an hour): 2 of 4 (GTA and bul were; rockstar and BAWSAQ were not). A wider stop would have changed nothing for BAWSAQ (its first reading under the entry was already -28.3%), and the 06:30 table had young tokens doing worse with one, so the two that came back do not make a case for it.
+- The 300-trade floor, forward check (entries on 150 to 299 trades opened after 06:45 UTC on 16 Nov, wide replay with `entry.min_txns_h1=150`, tokens 3 to 30 days old): 7 closed, 1 win. New: GTA$ 13:35 today (153 trades, a $40k pool) -15.2%. paws 08:55 today (155 trades) is open at -11.1%. The test needs 10 closed and calls the floor wrong at 3 winners or more.
+- The floor's other test (2 winners or fewer in the first 10 closed trades on tokens 3 days or older): 1 of 5 (Max, Rings, paws, NIO, FLOAT). It needs 2 more winners in the next 5; DIGS and Leonida are the sixth and seventh.
+- "The 1-hour change fell into the band from above the cap" (Rings on 16 Nov, and now bul, whose 1-hour change read +34% and +40% on the two cycles before the buy, and BAWSAQ, +25.6% on the cycle before). The 06:30 entry on 16 Nov said to test it against all cycles if it repeated. Tested as: a reading over +25% in the 15 minutes before the signal. It fails. First signals with that shape made +5.33% (26 on 12 tokens, 14 wins) and without it -8.66% (27 on 13); with the floor at 1 day, +8.41% against 0.00%. The shape fits three stops and describes most of the winners as well. Dropped.
+- Discovery: due, and it fails. Since 12:35 on 16 Nov 28 tokens have passed the universe. By the feed that found them: `profiles_latest` 13, GeckoTerminal before pages were labelled 7, `boosts_top` 5, one each from `gecko:tx4`, `gecko:trend2` and a trending meta. 76 tokens from the deeper pages (`gecko:vol5` to `vol8`, `gecko:tx4` to `tx6`) were on the watchlist at some point in those 26 hours and one passed the universe: HOGE, still the only one. The last review said to put `top_volume_pages` back to 4 and `top_tx_pages` to 3 on this reading. Not done today: one section per review, and the universe change is the one that limits losses. The pages cost nothing meanwhile (`api_calls` 48 or 49, no 429).
+- The youngest band, for the record: 24 tokens passed the universe since 22:50 on 16 Nov, 8 of them under a day old when they first did, 4 at about 3 hours old (BAWSAQ on two addresses, SENT, LEOSTAR). The four bought were 9 to 16 hours old. No token under 6 hours old ever gave a signal.
+- `suspect_price`: no row. Watchlist peaked at 225. `api_calls` never passed 49.
+
+**Changed, in full.**
+
+1. Rulebook v8: `universe.min_age_days` 0.125 to 1, `version`, `updated`, `notes`.
+2. README: the strategy paragraph (v8, 1 to 30 days) and the honesty rule about young tokens.
+3. No change to `bot/` or `tests/`: the tests read the age floor from the rulebook. 42 pass.
+
+**For the next review.**
+
+- First: `u:too_young` should be up by about 3 a cycle and `universe_ok` down by the same from the first v8 cycle, with no new error. v8 trades start from that cycle.
+- DIGS and Leonida: record the exits. Both count in the "3 days or more" row and for the floor's test.
+- Discovery is overdue and is the named candidate for the next change: `top_volume_pages` 8 to 4 and `top_tx_pages` 6 to 3, or keep `top_tx_pages` at 4 for HOGE's sake and say why. With the age floor at 1 day the deeper pages matter even less than before, since 30 of the first 31 tokens they found were under a day old; a token found young does stay on the watchlist and can age in, which is how HOGE was traded at 1.35 days.
+- Tokens 1 to 3 days old: each closed trade, and for each stop the price at the stop cycle against the 12% level.
+- What the floor blocks, forward: in `python3 -m bot.replay --set universe.min_age_days=0.125`, the entries on tokens under a day old opened after the first v8 cycle. Count a position "lost from the record" as a loss at its last price, not as nothing.
+- Each new trailing exit: the trail level, the fill, and what `--set exit.trailing_stop_pct=10` gives.
+- `batch_miss` less the never-seen tokens: 1 to 5 now, the line is 15.
+- LP locked under 50%: 0 wins of 4, unchanged. Everything under "For the next review" in the earlier entries still stands.
+
+**Would prove this review wrong.**
+
+- The 1-day floor costs more than it saves if the next 10 replayed entries on tokens under a day old (as above, lost positions counted at their last price) average better than the bot's own closed trades over the same days and no more than one of them ends worse than -25%. Then the 17 Nov trades were one bad day, and the band can go back in, with a smaller position if Ajeeb wants it.
+- The floor is too low, and should go to 3 days, if the first five stops on tokens 1 to 3 days old include two that fill past -20% on price (rockstar's -14.5% is the first of the five), if one day's trades on tokens 1 to 3 days old cost more than 5% of equity, or if after 15 closed trades in that band they lose more per trade than older tokens over the same days.
+- It changed nothing that matters if v8's first 15 closed trades still show a stop cycle averaging worse than -16% on price: then the gap past the stop is not about age and the next thing to look at is the minimum pool size.
+- Putting discovery off was wrong if `api_calls` passes 55 or GeckoTerminal 429s start repeating before the next review.
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles become regular.
+
 ### v7, 2026-11-17 06:30 UTC review: no rule change, no code change
 
 **Health.** 1,076 cycles since launch, 94 on v7 (from 22:50 UTC on 16 Nov). Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. No cycle was skipped since the last review (the last skipped one was 21:35 on 16 Nov), so no message to Ajeeb. One extra cycle (01:05:08, 44 seconds after the one before; both triggers fired). The newest cycle was under 2 minutes old when the review started, so no `.kick`. One error in the 94 cycles: GeckoTerminal 429 on page 3 of the trade-count list at 05:45, fetched on the next cycle. `api_calls` 48 to 50, `allowed_pool_used` 4, watchlist 212 to 266 (cap 300; 213 now), universe 15 to 18 tokens a cycle (median 17, was 13). RugCheck ran for both signals and both answers parsed: GTA `score_normalised` 1, no risks, LP locked 100.0%; FLOAT 1, no risks, 71.9%. The saved sample still matches what `bot/rugcheck.py` reads (`score_normalised`, `risks[].level`, `lpLockedPct`). No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 42 tests pass.
