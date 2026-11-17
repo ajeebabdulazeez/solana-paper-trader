@@ -38,3 +38,4 @@
 {"event":"close","id":14,"pnl_pct":-20.33,"pnl_sol":-0.092506,"reason":"stop_loss","symbol":"Max","ts":"2026-11-16T20:25:12Z"}
 {"event":"close","id":17,"pnl_pct":-16.63,"pnl_sol":-0.078858,"reason":"stop_loss","symbol":"paws","ts":"2026-11-16T20:35:12Z"}
 {"event":"open","id":18,"price_usd":0.001606,"score":2.05,"sol_in":0.452636,"symbol":"NIO","token":"7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump","ts":"2026-11-16T20:50:12Z"}
+{"event":"close","id":18,"pnl_pct":-7.26,"pnl_sol":-0.032865,"reason":"time_stop","symbol":"NIO","ts":"2026-11-17T02:55:08Z"}

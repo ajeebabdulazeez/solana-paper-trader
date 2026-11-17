@@ -1,6 +1,6 @@
 {
- "cash_sol": 4.073723792125259,
- "closed_count": 17,
+ "cash_sol": 4.493494998331202,
+ "closed_count": 18,
  "day": {
   "date": "2026-11-17",
   "opens": 0,
@@ -10,6 +10,7 @@
   "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump": "2026-11-16T20:25:12Z",
   "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": "2026-11-14T13:25:08Z",
   "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring": "2026-11-16T18:35:37Z",
+  "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump": "2026-11-17T02:55:08Z",
   "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump": "2026-11-13T19:55:09Z",
   "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump": "2026-11-16T06:30:19Z",
   "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump": "2026-11-16T15:20:15Z",
@@ -20,61 +21,9 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.73362287368802,
- "positions": [
-  {
-   "entry_exec_usd": 0.001614772167164824,
-   "entry_liq_usd": 139117.14,
-   "entry_mid_usd": 0.001606,
-   "entry_sol_usd": 71.33481229014154,
-   "features": {
-    "age_days": 26.2,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.44,
-    "chg_h1": 2.16,
-    "chg_h24": 24.17,
-    "chg_h6": 7.07,
-    "chg_m5": 2.05,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.0909,
-    "liq_usd": 139117,
-    "mcap": 1530396,
-    "quote": "SOL",
-    "score": 2.05,
-    "txns_h1": 300,
-    "vol_h1": 23750,
-    "vol_h24": 304800,
-    "volume_accel": 1.42
-   },
-   "fees_sol": 0.004263179884514033,
-   "id": 18,
-   "last_liq_usd": 137150.0,
-   "last_price_usd": 0.001548,
-   "last_ts": "2026-11-17T02:50:11Z",
-   "last_vol_h24": 288079.31,
-   "missing_runs": 0,
-   "opened": "2026-11-16T20:50:12Z",
-   "pair": "B4Wmjc6PvjCtU3qSVS3eTT9Mr4M5V5jBkRQctWANTc71",
-   "peak_usd": 0.00175,
-   "rugcheck": {
-    "lp_locked_pct": 41.658744728360766,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 6,
-   "sol_in": 0.45263597690280655,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "NIO",
-   "token": "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump",
-   "tokens": 19807.493565772416,
-   "tokens_remaining": 19807.493565772416,
-   "tp1_done": false,
-   "trough_usd": 0.001458
-  }
- ],
- "realized_pnl_sol": -0.47364023097193464,
+ "last_sol_usd": 71.70851194121248,
+ "positions": [],
+ "realized_pnl_sol": -0.5065050016687985,
  "starting_sol": 5.0,
  "trade_seq": 18
 }
