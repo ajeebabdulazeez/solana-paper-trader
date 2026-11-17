@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.3954776464564174,
+ "cash_sol": 3.661375302932783,
  "closed_count": 21,
  "day": {
   "date": "2026-11-17",
@@ -23,7 +23,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 73.29479768786126,
+ "last_sol_usd": 73.3211009174312,
  "positions": [
   {
    "entry_exec_usd": 0.0013647866305048926,
@@ -49,16 +49,16 @@
     "vol_h24": 1398131,
     "volume_accel": 1.92
    },
-   "fees_sol": 0.004198959821208774,
+   "fees_sol": 0.007545179200486992,
    "id": 21,
-   "last_liq_usd": 93057.18,
-   "last_price_usd": 0.001551,
-   "last_ts": "2026-11-17T12:45:12Z",
-   "last_vol_h24": 1504935.85,
+   "last_liq_usd": 98022.09,
+   "last_price_usd": 0.00171,
+   "last_ts": "2026-11-17T12:50:11Z",
+   "last_vol_h24": 1593370.51,
    "missing_runs": 0,
    "opened": "2026-11-17T11:30:16Z",
    "pair": "Hm7Nvb4bxSDYZhtbm2yHEMHCMC6Lq4XTedY4q1we9r7Q",
-   "peak_usd": 0.001551,
+   "peak_usd": 0.00171,
    "rugcheck": {
     "lp_locked_pct": 99.99952215801022,
     "risks": [],
@@ -67,13 +67,15 @@
    },
    "rulebook_version": 7,
    "sol_in": 0.4397919642417548,
-   "sol_returned": 0.0,
+   "sol_returned": 0.26589765647636543,
+   "sold_tokens": 11607.306831294856,
+   "sold_usd": 19.741257393011963,
    "suspect": null,
    "symbol": "LEOSTAR",
    "token": "2cMcMEX3Eqo86tUrVe5dgHp5GZNwqQ6crqm22UeZpump",
    "tokens": 23214.613662589712,
-   "tokens_remaining": 23214.613662589712,
-   "tp1_done": false,
+   "tokens_remaining": 11607.306831294856,
+   "tp1_done": true,
    "trough_usd": 0.001288
   },
   {
@@ -102,10 +104,10 @@
    },
    "fees_sol": 0.004159291593886017,
    "id": 23,
-   "last_liq_usd": 51389.86,
-   "last_price_usd": 0.0003214,
-   "last_ts": "2026-11-17T12:45:12Z",
-   "last_vol_h24": 851156.45,
+   "last_liq_usd": 50780.78,
+   "last_price_usd": 0.0003144,
+   "last_ts": "2026-11-17T12:50:11Z",
+   "last_vol_h24": 857489.67,
    "missing_runs": 0,
    "opened": "2026-11-17T12:45:12Z",
    "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
@@ -119,12 +121,13 @@
    "rulebook_version": 7,
    "sol_in": 0.4318583187772033,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "DIGS",
    "token": "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump",
    "tokens": 96932.62129836259,
    "tokens_remaining": 96932.62129836259,
    "tp1_done": false,
-   "trough_usd": 0.0003214
+   "trough_usd": 0.0003144
   }
  ],
  "realized_pnl_sol": -0.7328720705246246,
