@@ -101,9 +101,11 @@ The running record of what paper results have shown and why each rulebook versio
 2. README: the strategy paragraph (v8, 1 to 30 days) and the honesty rule about young tokens.
 3. No change to `bot/` or `tests/`: the tests read the age floor from the rulebook. 42 pass.
 
+**First live cycle (14:45 UTC).** Pushed at 14:41 UTC and picked up by the 14:45 cycle: v8, no errors, `api_calls` 48, `batch_miss` 19, `universe_ok` 12 (16 on the cycle before), no signal (6 `h1_weak`, 3 `h6_down`, 2 tokens in their cooldown). `u:too_young` went from 2 to 13, more than the 4 tokens that left the universe: the age test comes first, so tokens under a day old that used to be counted under another reason (mostly liquidity) are now counted there. DIGS (-4.0%) and Leonida (-3.9%) were read and carried on as usual. v8 trades start from the 14:45 cycle.
+
 **For the next review.**
 
-- First: `u:too_young` should be up by about 3 a cycle and `universe_ok` down by the same from the first v8 cycle, with no new error. v8 trades start from that cycle.
+- First: confirm v8 cycles stay clean (`universe_ok` about 12 to 14, `u:too_young` about 13, no new error).
 - DIGS and Leonida: record the exits. Both count in the "3 days or more" row and for the floor's test.
 - Discovery is overdue and is the named candidate for the next change: `top_volume_pages` 8 to 4 and `top_tx_pages` 6 to 3, or keep `top_tx_pages` at 4 for HOGE's sake and say why. With the age floor at 1 day the deeper pages matter even less than before, since 30 of the first 31 tokens they found were under a day old; a token found young does stay on the watchlist and can age in, which is how HOGE was traded at 1.35 days.
 - Tokens 1 to 3 days old: each closed trade, and for each stop the price at the stop cycle against the 12% level.
