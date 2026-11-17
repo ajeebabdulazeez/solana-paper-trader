@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.661375302932783,
- "closed_count": 21,
+ "cash_sol": 3.9039823396116695,
+ "closed_count": 22,
  "day": {
   "date": "2026-11-17",
   "opens": 5,
@@ -8,6 +8,7 @@
  },
  "last_exit": {
   "2NWgu4fqN2AxS5pp5v3f3SH54qArP9JepQFJm58gpump": "2026-11-17T04:25:09Z",
+  "2cMcMEX3Eqo86tUrVe5dgHp5GZNwqQ6crqm22UeZpump": "2026-11-17T12:55:10Z",
   "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump": "2026-11-16T20:25:12Z",
   "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": "2026-11-14T13:25:08Z",
   "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring": "2026-11-16T18:35:37Z",
@@ -23,61 +24,8 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 73.3211009174312,
+ "last_sol_usd": 73.40058401911337,
  "positions": [
-  {
-   "entry_exec_usd": 0.0013647866305048926,
-   "entry_liq_usd": 86276.91,
-   "entry_mid_usd": 0.001357,
-   "entry_sol_usd": 72.73531493276717,
-   "features": {
-    "age_days": 0.52,
-    "boosts": 100,
-    "buy_sell_ratio_h1": 1.28,
-    "chg_h1": 17.69,
-    "chg_h24": 4221.0,
-    "chg_h6": 65.2,
-    "chg_m5": 2.6,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.0643,
-    "liq_usd": 86277,
-    "mcap": 1341621,
-    "quote": "SOL",
-    "score": 2.46,
-    "txns_h1": 14019,
-    "vol_h1": 87453,
-    "vol_h24": 1398131,
-    "volume_accel": 1.92
-   },
-   "fees_sol": 0.007545179200486992,
-   "id": 21,
-   "last_liq_usd": 98022.09,
-   "last_price_usd": 0.00171,
-   "last_ts": "2026-11-17T12:50:11Z",
-   "last_vol_h24": 1593370.51,
-   "missing_runs": 0,
-   "opened": "2026-11-17T11:30:16Z",
-   "pair": "Hm7Nvb4bxSDYZhtbm2yHEMHCMC6Lq4XTedY4q1we9r7Q",
-   "peak_usd": 0.00171,
-   "rugcheck": {
-    "lp_locked_pct": 99.99952215801022,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 7,
-   "sol_in": 0.4397919642417548,
-   "sol_returned": 0.26589765647636543,
-   "sold_tokens": 11607.306831294856,
-   "sold_usd": 19.741257393011963,
-   "suspect": null,
-   "symbol": "LEOSTAR",
-   "token": "2cMcMEX3Eqo86tUrVe5dgHp5GZNwqQ6crqm22UeZpump",
-   "tokens": 23214.613662589712,
-   "tokens_remaining": 11607.306831294856,
-   "tp1_done": true,
-   "trough_usd": 0.001288
-  },
   {
    "entry_exec_usd": 0.00032340107229954647,
    "entry_liq_usd": 51389.86,
@@ -104,10 +52,10 @@
    },
    "fees_sol": 0.004159291593886017,
    "id": 23,
-   "last_liq_usd": 50780.78,
-   "last_price_usd": 0.0003144,
-   "last_ts": "2026-11-17T12:50:11Z",
-   "last_vol_h24": 857489.67,
+   "last_liq_usd": 50325.01,
+   "last_price_usd": 0.0003085,
+   "last_ts": "2026-11-17T12:55:10Z",
+   "last_vol_h24": 861980.13,
    "missing_runs": 0,
    "opened": "2026-11-17T12:45:12Z",
    "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
@@ -127,10 +75,10 @@
    "tokens": 96932.62129836259,
    "tokens_remaining": 96932.62129836259,
    "tp1_done": false,
-   "trough_usd": 0.0003144
+   "trough_usd": 0.0003085
   }
  ],
- "realized_pnl_sol": -0.7328720705246246,
+ "realized_pnl_sol": -0.6641593416111274,
  "starting_sol": 5.0,
  "trade_seq": 23
 }
