@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-17T12:15:12Z (UTC), rulebook v7. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-17T12:20:12Z (UTC), rulebook v7. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.3866 SOL** (started with 5.0 SOL, -12.27%)
+- Equity: **4.4566 SOL** (started with 5.0 SOL, -10.87%)
 - Cash: 3.5222 SOL, open positions: 2, closed trades: 20
-- Watchlist: 217 tokens, entry signals this run: 1
+- Watchlist: 218 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -18,8 +18,8 @@ Max drawdown 11.97%, average hold 150.3 min, simulated fees 0.1811 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 21 | LEOSTAR | 2026-11-17T11:30:16Z | 0.440 | +0.2% | no |
-| 22 | BAWSAQ | 2026-11-17T12:15:12Z | 0.439 | +0.0% | no |
+| 21 | LEOSTAR | 2026-11-17T11:30:16Z | 0.440 | +4.3% | no |
+| 22 | BAWSAQ | 2026-11-17T12:15:12Z | 0.439 | +12.0% | no |
 
 ## Last 10 closed
 
