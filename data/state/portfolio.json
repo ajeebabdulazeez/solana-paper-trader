@@ -1,9 +1,9 @@
 {
- "cash_sol": 3.9615471237425086,
+ "cash_sol": 3.5222258531012844,
  "closed_count": 20,
  "day": {
   "date": "2026-11-17",
-  "opens": 3,
+  "opens": 4,
   "start_equity": 4.531866603213844
  },
  "last_exit": {
@@ -22,7 +22,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 73.2278481012658,
+ "last_sol_usd": 73.13966146167778,
  "positions": [
   {
    "entry_exec_usd": 0.0013647866305048926,
@@ -50,10 +50,10 @@
    },
    "fees_sol": 0.004198959821208774,
    "id": 21,
-   "last_liq_usd": 89320.24,
-   "last_price_usd": 0.001441,
-   "last_ts": "2026-11-17T12:10:12Z",
-   "last_vol_h24": 1451830.47,
+   "last_liq_usd": 86681.25,
+   "last_price_usd": 0.00136,
+   "last_ts": "2026-11-17T12:15:12Z",
+   "last_vol_h24": 1458628.53,
    "missing_runs": 0,
    "opened": "2026-11-17T11:30:16Z",
    "pair": "Hm7Nvb4bxSDYZhtbm2yHEMHCMC6Lq4XTedY4q1we9r7Q",
@@ -74,9 +74,59 @@
    "tokens_remaining": 23214.613662589712,
    "tp1_done": false,
    "trough_usd": 0.001288
+  },
+  {
+   "entry_exec_usd": 0.0015718613084222466,
+   "entry_liq_usd": 95556.88,
+   "entry_mid_usd": 0.001563,
+   "entry_sol_usd": 73.13966146167778,
+   "features": {
+    "age_days": 0.67,
+    "boosts": 500,
+    "buy_sell_ratio_h1": 1.75,
+    "chg_h1": 20.89,
+    "chg_h24": 1734.0,
+    "chg_h6": 27.43,
+    "chg_m5": -0.24,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0614,
+    "liq_usd": 95557,
+    "mcap": 1555628,
+    "quote": "SOL",
+    "score": 2.82,
+    "txns_h1": 10792,
+    "vol_h1": 131943,
+    "vol_h24": 2630059,
+    "volume_accel": 1.61
+   },
+   "fees_sol": 0.004196606353206119,
+   "id": 22,
+   "last_liq_usd": 95556.88,
+   "last_price_usd": 0.001563,
+   "last_ts": "2026-11-17T12:15:12Z",
+   "last_vol_h24": 2630059.0,
+   "missing_runs": 0,
+   "opened": "2026-11-17T12:15:12Z",
+   "pair": "B8a1mw1vfm5pnm4RgUd8zhbtBnkPB2fBMdikU33Z1jqv",
+   "peak_usd": 0.001563,
+   "rugcheck": {
+    "lp_locked_pct": 99.99961659548251,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 7,
+   "sol_in": 0.43932127064122395,
+   "sol_returned": 0.0,
+   "symbol": "BAWSAQ",
+   "token": "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump",
+   "tokens": 20246.614932965036,
+   "tokens_remaining": 20246.614932965036,
+   "tp1_done": false,
+   "trough_usd": 0.001563
   }
  ],
  "realized_pnl_sol": -0.5986609120157368,
  "starting_sol": 5.0,
- "trade_seq": 21
+ "trade_seq": 22
 }
