@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.372178779100048,
+ "cash_sol": 3.6254620207228165,
  "closed_count": 23,
  "day": {
   "date": "2026-11-17",
@@ -25,7 +25,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 71.96920843369861,
+ "last_sol_usd": 72.62511049593121,
  "positions": [
   {
    "entry_exec_usd": 0.00032340107229954647,
@@ -53,10 +53,10 @@
    },
    "fees_sol": 0.004159291593886017,
    "id": 23,
-   "last_liq_usd": 49624.04,
-   "last_price_usd": 0.000302,
-   "last_ts": "2026-11-17T16:00:25Z",
-   "last_vol_h24": 966443.56,
+   "last_liq_usd": 49908.65,
+   "last_price_usd": 0.0003037,
+   "last_ts": "2026-11-17T16:05:13Z",
+   "last_vol_h24": 965988.98,
    "missing_runs": 0,
    "opened": "2026-11-17T12:45:12Z",
    "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
@@ -102,16 +102,16 @@
     "vol_h24": 204390,
     "volume_accel": 3.44
    },
-   "fees_sol": 0.0040987940157474635,
+   "fees_sol": 0.007381624375660873,
    "id": 25,
-   "last_liq_usd": 58189.55,
-   "last_price_usd": 0.0005337,
-   "last_ts": "2026-11-17T16:00:25Z",
-   "last_vol_h24": 208144.55,
+   "last_liq_usd": 60160.66,
+   "last_price_usd": 0.000565,
+   "last_ts": "2026-11-17T16:05:13Z",
+   "last_vol_h24": 207791.71,
    "missing_runs": 0,
    "opened": "2026-11-17T13:55:10Z",
    "pair": "5GxdoPcK2LJ6QYcJ3uvtC37tgsFHma55ULFkufTYe49R",
-   "peak_usd": 0.0005337,
+   "peak_usd": 0.000565,
    "rugcheck": {
     "lp_locked_pct": 84.29444043302328,
     "risks": [],
@@ -120,13 +120,15 @@
    },
    "rulebook_version": 7,
    "sol_in": 0.41975880314949265,
-   "sol_returned": 0.0,
+   "sol_returned": 0.2532832416227685,
+   "sold_tokens": 33165.37871274527,
+   "sold_usd": 18.633139327249314,
    "suspect": null,
    "symbol": "Leonida",
    "token": "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump",
    "tokens": 66330.75742549053,
-   "tokens_remaining": 66330.75742549053,
-   "tp1_done": false,
+   "tokens_remaining": 33165.37871274527,
+   "tp1_done": true,
    "trough_usd": 0.0004299
   }
  ],
