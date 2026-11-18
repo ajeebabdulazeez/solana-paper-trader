@@ -26,7 +26,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 74.85935616008457,
+ "last_sol_usd": 74.81587561374796,
  "positions": [
   {
    "entry_exec_usd": 0.000675326836166429,
@@ -54,10 +54,10 @@
    },
    "fees_sol": 0.004083401485253003,
    "id": 27,
-   "last_liq_usd": 73147.49,
-   "last_price_usd": 0.0006714,
-   "last_ts": "2026-11-18T06:40:11Z",
-   "last_vol_h24": 1440098.53,
+   "last_liq_usd": 71628.85,
+   "last_price_usd": 0.0006446,
+   "last_ts": "2026-11-18T06:45:12Z",
+   "last_vol_h24": 1431188.95,
    "missing_runs": 0,
    "opened": "2026-11-18T06:40:11Z",
    "pair": "DQnoiJies9KrPJUiuCLExiCWh8jCrofL3zzUhgdL55kR",
@@ -71,12 +71,13 @@
    "rulebook_version": 8,
    "sol_in": 0.4166802970506005,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "BAWSAQ",
    "token": "4La95NEVJdYK9kr375SfKPXnLA8ef8GtsjfVfW27pump",
    "tokens": 45735.98486179479,
    "tokens_remaining": 45735.98486179479,
    "tp1_done": false,
-   "trough_usd": 0.0006714
+   "trough_usd": 0.0006446
   }
  ],
  "realized_pnl_sol": -0.8331970294939957,
