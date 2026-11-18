@@ -1,9 +1,9 @@
 {
- "cash_sol": 4.028385599052993,
+ "cash_sol": 3.625547039147694,
  "closed_count": 28,
  "day": {
   "date": "2026-11-18",
-  "opens": 2,
+  "opens": 3,
   "start_equity": 4.166802970506005
  },
  "last_exit": {
@@ -27,9 +27,60 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 73.66647904140876,
- "positions": [],
+ "last_sol_usd": 73.65253077975376,
+ "positions": [
+  {
+   "entry_exec_usd": 0.0011525973386058614,
+   "entry_liq_usd": 78011.99,
+   "entry_mid_usd": 0.001146,
+   "entry_sol_usd": 73.65253077975376,
+   "features": {
+    "age_days": 1.06,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.21,
+    "chg_h1": 21.39,
+    "chg_h24": 2442.0,
+    "chg_h6": 199.0,
+    "chg_m5": -0.35,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0691,
+    "liq_usd": 78012,
+    "mcap": 1129745,
+    "quote": "SOL",
+    "score": 2.4,
+    "txns_h1": 612,
+    "vol_h1": 73101,
+    "vol_h24": 724636,
+    "volume_accel": 1.99
+   },
+   "fees_sol": 0.004014192799526497,
+   "id": 29,
+   "last_liq_usd": 78011.99,
+   "last_price_usd": 0.001146,
+   "last_ts": "2026-11-18T16:05:15Z",
+   "last_vol_h24": 724635.68,
+   "missing_runs": 0,
+   "opened": "2026-11-18T16:05:15Z",
+   "pair": "EJHur4FVts85xqWskjUAoaUBMAvccEDXUTUpPZe9gUEn",
+   "peak_usd": 0.001146,
+   "rugcheck": {
+    "lp_locked_pct": 100,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 8,
+   "sol_in": 0.40283855990529926,
+   "sol_returned": 0.0,
+   "symbol": "JESTER",
+   "token": "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump",
+   "tokens": 25485.41714446777,
+   "tokens_remaining": 25485.41714446777,
+   "tp1_done": false,
+   "trough_usd": 0.001146
+  }
+ ],
  "realized_pnl_sol": -0.9716144009470078,
  "starting_sol": 5.0,
- "trade_seq": 28
+ "trade_seq": 29
 }
