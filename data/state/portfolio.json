@@ -27,7 +27,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 74.23701298701299,
+ "last_sol_usd": 74.1918732961184,
  "positions": [
   {
    "entry_exec_usd": 0.001750365326595889,
@@ -55,10 +55,10 @@
    },
    "fees_sol": 0.004052093436734797,
    "id": 28,
-   "last_liq_usd": 159872.78,
-   "last_price_usd": 0.001741,
-   "last_ts": "2026-11-18T13:55:12Z",
-   "last_vol_h24": 2024287.86,
+   "last_liq_usd": 159351.95,
+   "last_price_usd": 0.001725,
+   "last_ts": "2026-11-18T14:00:24Z",
+   "last_vol_h24": 2019631.22,
    "missing_runs": 0,
    "opened": "2026-11-18T13:55:12Z",
    "pair": "7CNC9gGegzEfFK8fLXiYUhdtMEeFPQZoND56U1Mxhnor",
@@ -72,12 +72,13 @@
    "rulebook_version": 8,
    "sol_in": 0.41041868734695947,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "HOGE",
    "token": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
    "tokens": 17234.94041570809,
    "tokens_remaining": 17234.94041570809,
    "tp1_done": false,
-   "trough_usd": 0.001741
+   "trough_usd": 0.001725
   }
  ],
  "realized_pnl_sol": -0.8958131265304057,
