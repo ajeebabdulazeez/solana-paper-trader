@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.625547039147694,
+ "cash_sol": 3.890391865763406,
  "closed_count": 28,
  "day": {
   "date": "2026-11-18",
@@ -27,7 +27,7 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 72.61061946902655,
+ "last_sol_usd": 72.58580927513502,
  "positions": [
   {
    "entry_exec_usd": 0.0011525973386058614,
@@ -53,16 +53,16 @@
     "vol_h24": 724636,
     "volume_accel": 1.99
    },
-   "fees_sol": 0.004014192799526497,
+   "fees_sol": 0.007355121576489874,
    "id": 29,
-   "last_liq_usd": 80220.07,
-   "last_price_usd": 0.001221,
-   "last_ts": "2026-11-18T16:40:13Z",
-   "last_vol_h24": 723180.13,
+   "last_liq_usd": 90113.81,
+   "last_price_usd": 0.001536,
+   "last_ts": "2026-11-18T16:45:14Z",
+   "last_vol_h24": 761128.8,
    "missing_runs": 0,
    "opened": "2026-11-18T16:05:15Z",
    "pair": "EJHur4FVts85xqWskjUAoaUBMAvccEDXUTUpPZe9gUEn",
-   "peak_usd": 0.001221,
+   "peak_usd": 0.001536,
    "rugcheck": {
     "lp_locked_pct": 100,
     "risks": [],
@@ -71,13 +71,15 @@
    },
    "rulebook_version": 8,
    "sol_in": 0.40283855990529926,
-   "sol_returned": 0.0,
+   "sol_returned": 0.26484482661571207,
+   "sold_tokens": 12742.708572233885,
+   "sold_usd": 19.466480091240754,
    "suspect": null,
    "symbol": "JESTER",
    "token": "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump",
    "tokens": 25485.41714446777,
-   "tokens_remaining": 25485.41714446777,
-   "tp1_done": false,
+   "tokens_remaining": 12742.708572233885,
+   "tp1_done": true,
    "trough_usd": 0.001112
   }
  ],
