@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-18T16:25:12Z (UTC), rulebook v8. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-18T16:30:21Z (UTC), rulebook v8. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.0225 SOL** (started with 5.0 SOL, -19.55%)
+- Equity: **4.0266 SOL** (started with 5.0 SOL, -19.47%)
 - Cash: 3.6255 SOL, open positions: 1, closed trades: 28
-- Watchlist: 192 tokens, entry signals this run: 0
+- Watchlist: 190 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -18,7 +18,7 @@ Max drawdown 19.43%, average hold 132.1 min, simulated fees 0.2496 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 29 | JESTER | 2026-11-18T16:05:15Z | 0.403 | -0.6% | no |
+| 29 | JESTER | 2026-11-18T16:05:15Z | 0.403 | +0.1% | no |
 
 ## Last 10 closed
 
