@@ -14,6 +14,74 @@ The running record of what paper results have shown and why each rulebook versio
 
 ## Log
 
+### v8, 2026-11-18 06:30 UTC review: no rule change, no code change (14 hours without a signal; no relaxation the record supports)
+
+**Health.** 1,367 cycles since launch, 192 on v8, 97 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. No cycle was skipped, so no message to Ajeeb. One extra cycle (01:11:07, 56 seconds after the one before; both triggers fired). The newest cycle was 1.8 minutes old when the review started, so no `.kick`. No error in any of the 97 cycles. `api_calls` 45 to 50, `allowed_pool_used` 3 or 4, universe 16 or 17 tokens a cycle, `u:too_young` 13 to 21 (median 15), snapshot rows 64 to 71 (cap 120), watchlist 240 to 283 (cap 300; 251 now). RugCheck was not called, because there was no signal; the saved sample still matches what `bot/rugcheck.py` reads (`score_normalised`, `risks[].level`, `lpLockedPct`). No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 42 tests pass.
+
+- `batch_miss` 11 to 18 a cycle (median 14), over the 15 single lookups on 23 of the 97 cycles. Never-seen tokens on the watchlist: 6 to 14 (median 7; the six on it now are all from `profiles_latest`). `batch_miss` less the never-seen tokens: 4 to 8 (median 6; it was 0 to 6), the line is 15.
+- The day's limits: the day rolled over at 00:00 UTC (0 of 10 new trades used, the 10% loss limit counted from 4.1668 SOL). No signal came between 22:30 and midnight, so the limits of 17 Nov (-8.1%, 8 of 10 trades) were never put to the test.
+
+**Strategy: nothing to judge. No trade was opened or closed since HOGE's stop at 17:45 on 17 Nov.** v8 still has 1 closed trade, a loss. All versions: 26 closed, 7 wins, -6.84% a trade, -0.8332 SOL, equity 4.1668 SOL (-16.66%), max drawdown 16.66%, nothing open. SOL $73.6 to $75.1. The exit, entry-feature and left-on-the-table figures are the ones in the 22:30 entry below, to the digit: stops 17 of 17 lost (-18.00% on average), trailing exits 7 of 7 won, the average trade was up 16.2% at its best and realised -6.84%.
+
+**No signal for 14.2 hours (last: HOGE at 16:20 on 17 Nov, 172 cycles ago). The 12-hour rule is met. Nothing relaxed, because every modest relaxation buys losers on the record.**
+
+- A gap this long has happened once before: 15.1 hours from FLOAT (23:50 on 14 Nov) to Leonida (14:55 on 15 Nov). The next longest are 12.8 and 10.8.
+- Funnel since the last signal, 2,751 universe-token checks: `h1_weak` 1,441 (52%), a token in its cooldown 383, `h6_down` 337, `buy_pressure` 239, `txns_h1` 181, `h1_overheated` 62, `h24_dumped` 43, `m5_dropping` 25, `volume_accel` 24, the held token 16, signal 0. The universe was 12 to 17 tokens a cycle (median 16), 21 different tokens in all. Their median 1-hour change was -0.3% and 37% of readings were at +2% or better: a flat night, not a falling one.
+- Of the 18 tokens inside the universe since 22:30, 15 are 3 days or older and 12 are tokens the bot has already traded (the six it has not: SWJ, MORI, NVDA, CHILL, JOB, mihao). It is the same small set as on 15 Nov.
+- What each relaxation the rule allows would have bought since 16:20 on 17 Nov (`python3 -m bot.replay --set ...` on the bot's universe; "open" is marked at the 06:30 price after costs):
+
+| Change tried | Trades it adds since the last signal |
+|---|---|
+| `entry.h1_change_min_pct` 2 to 1 | none (to 0: BAWSAQ 06:30 today, open at -3.0%) |
+| `entry.h6_change_min_pct` 0 to -5 or -10 | none |
+| `entry.min_buy_sell_ratio_h1` 1.2 to 1.1 | NIO 17:45, stop, -18.1%; Max 19:05, stop, -18.0%; JOB 21:10, 6-hour limit, +4.0% (best +17.3%); DIGS 05:35 today, open at -8.9%; BAWSAQ 05:50 today, open at -11.1% |
+| `entry.min_volume_accel` 1.2 to 1.0 | none |
+| `entry.h1_change_max_pct` 25 to 35 | Max 22:40, stop, -16.7% |
+| `entry.m5_change_min_pct` -3 to -5 | Max 22:45, half sold at the target, rest trailed out, +21.8% (best +42.1%) |
+| `entry.min_txns_h1` 300 to 250, 200 or 150 | none |
+| `entry.h24_change_min_pct` -30 to -40 | none |
+| `portfolio.token_cooldown_hours` 12 to 6 | HOGE 02:05 today, stop, -16.5% |
+| `universe.min_liquidity_usd` 50k to 40k | CHILL 20:10, 6-hour limit, -5.4% |
+| `universe.max_age_days` 30 to 35 | DacityCoin 18:55, 6-hour limit, -13.6%; :3 02:50 today, stop, -20.8% |
+| `universe.min_volume_h24_usd` 100k to 50k, `min_liq_to_mcap` 0.03 to 0.02, `min_market_cap_usd` 300k to 200k | none |
+
+- The one relaxation that would have added trades in number, buy pressure at 1.1, adds two full stops, one small win and two positions that are underwater. That is the third time this table has been drawn (15 Nov 13:30 and 22:30) and the third time it says the same.
+- The one winner in the table is not a case for its row. Max at 22:40 (blocked as overheated) and Max at 22:45 (blocked as `m5_dropping`) are the same token bought five minutes and 5.7% apart: the first was stopped at 23:25 with the price 12.7% under it, -16.7% net; the second never fell more than 9.5% under its lower entry and ended at +21.8%. Over the whole record `m5_change_min_pct` at -5 adds exactly that one trade (its other two differences are WASTED on 14 Nov and DIGS on 17 Nov bought one cycle earlier). One trade in 4.6 days does not end a drought, and it is the single winner among some twenty variants tried, which is what searching finds.
+- So the bottleneck is not a threshold. Sixteen tokens on a flat night produce no moment the rules call a buy, and the moments just outside the rules lost. Relaxing one anyway would be buying trades the record says lose, on an account that is 16.66% down with a 25% drawdown line.
+
+**What the last reviews asked, answered.**
+
+- The 6-hour change (candidate: `entry.h6_change_min_pct` 0 to 30). No entry was closed after 22:30 on 17 Nov, real or in the replay with the live rules: 0 of the 6 under +30% that the test needs. The entries in the table above are not live-rule entries and do not count; for the record they do not lean its way either (at buy pressure 1.1, Max at +35.9% over six hours was a full stop and JOB at +26.4% the small win).
+- 24-hour volume over 100 times the pool: no token inside the universe since ANT's last cycle at 21:35 on 17 Nov. The highest since 22:30 were BAWSAQ at 63 times and BLOB at 54; the next is 16. No second case, no cap.
+- Pools that go to $0 in one cycle (walked from the 98 versions of `data/state/watchlist.json` since 22:30): 19 in 8 hours, about 57 a day (it was 44). Nineteen addresses under seven names (NVIDIANS, GTA and GTAVI four times each, Spud three times, GTA6 twice, :3, ANT). All are pumpswap pools against SOL of $52k to $377k, 0.7 to 3.8 hours old, with 3,900 to 14,600 trades in their last hour and $3.3M to $12.1M of reported volume. All were found by GeckoTerminal's most-traded-by-volume list (15 on pages 5 to 8, 4 on pages 2 and 3). None had passed the universe (all under a day old), none gave a signal, none came back. The "ANT" among them is a new address carrying yesterday's name, 1.4 hours old when it was emptied. Seven more pools read under half on the next cycle without going to zero: CHOO twice ($82k and $30k, the batch call answering with a different pool, as before) and five outside the universe.
+- What the 1-day floor blocks, forward (`--set universe.min_age_days=0.125`, entries on tokens under a day old opened after 14:45 on 17 Nov): one. JALU, 04:10 today, 9.4 hours old, 10,147 trades in the hour: stop, price at -16.3%, -19.1% net. 1 of the 10 the test needs.
+- Tokens 1 to 3 days old: no new trade (3 of 15 closed, 2 of 5 stops). BAWSAQ turned a day old and has been inside the universe on 110 cycles since, with a $70k pool; it is the token that stood 88% under the bot's buy price half an hour after the buy on 17 Nov. Its cooldown ended at 00:25 and the entry rules have not passed it (`h1_weak` 60, `buy_pressure` 23, `h6_down` 9, `h24_dumped` 8).
+- The 300-trade floor, forward check (entries on 150 to 299 trades, wide replay, tokens 3 to 30 days old, opened after 06:45 UTC on 16 Nov): 9 closed, 1 win. New: GTA$ 03:30 today (156 trades, a $33k pool), stop, -15.3%. DIGS 03:25 today (209 trades) is open at -1.1%. The test called the floor wrong at 3 winners or more in 10 closed; with 1 in 9 it can no longer get there. That test is settled for the floor. Its other test (2 winners or fewer in the first 10 closed trades on tokens 3 days or older) is unchanged at 2 of 7.
+- The cooldown blocked one buy: HOGE at 02:05 today passed the entry rules 8.3 hours after its stop. In the replay with no cooldown it is a stop, -16.5%. With Rings and HOGE on 16 Nov, three cases for keeping it and none against.
+- Trailing exits: none new (2 of 10). `suspect_price`: no row.
+- `python3 -m bot.replay` with the v8 rules: 19 closed on 12 tokens, 8 wins, +0.93%, unchanged. `--baseline`: every eligible cycle 14,954 on 43 tokens, -4.45% (was -4.69%); cycles the entry rules passed 84 on 12, +4.45%; the first passing cycle of each run 45 on 12, 49% wins, +2.98% (was +3.42% on 44). The one added first signal is HOGE at 02:05, the stop the cooldown kept the bot out of.
+- Discovery since 22:30: the 18 tokens inside the universe came from `boosts_top` 6, GeckoTerminal before pages were labelled 5, `profiles_latest` 3, and one each from a trending meta, `gecko:trend2`, `gecko:tx4` (HOGE) and `gecko:vol7` (NVDA). `api_calls` never passed 50, no 429, and the watchlist peaked at 283, under its cap. None of the conditions for reopening the pages is met.
+
+**Changed.** Nothing. Rulebook v8 stays; no code change; 42 tests pass. No trade has closed since the last review, so no test set by an earlier entry has moved except the 300-trade floor's forward check, which now cannot fail. The 12-hour rule allows a relaxation and does not require one; the table above is the reason none was made.
+
+**For the next review.**
+
+- First: cycles, errors, and whether a signal has come. If one has, RugCheck's answer and the fill.
+- Where the open replay entries end: DIGS 05:35 and BAWSAQ 05:50 with `entry.min_buy_sell_ratio_h1=1.1`, BAWSAQ 06:30 with `entry.h1_change_min_pct=0`, DIGS 03:25 with `entry.min_txns_h1=150` (wide, ages 3 to 30 days).
+- The 6-hour change: 0 of 6. Keep the two groups apart from the first trade closed after 22:30 on 17 Nov.
+- BAWSAQ, if it is bought: it is the first trade on a token the bot has already seen lose most of its value in half an hour. Record the stop against the 12% level; it counts in the 1-to-3-day row.
+- Pools that go to $0: the count per day (57 now) and whether any had passed the universe (none of 82 so far).
+- `batch_miss` less the never-seen tokens: 4 to 8 now, the line is 15. The watchlist against its 300 cap.
+- Everything under "For the next review" in the earlier entries still stands.
+
+**Would prove this review wrong.**
+
+- Not relaxing was wrong if DIGS 05:35 and BAWSAQ 05:50 (bought with buy pressure at 1.1) both end as winners and the next 12 hours again bring no signal. Then `entry.min_buy_sell_ratio_h1` 1.2 to 1.1 is the relaxation to make, as a hypothesis, and NIO and Max in the table above are the cost to set against it.
+- If the gap passes 24 hours (16:20 UTC today) with cycles arriving, the rules as they have stood since v5 are opening under one trade a day, and the 06:30 entry of 16 Nov set the line: three such days and the universe has to grow before any entry rule can be judged. Count from today.
+- Reading the Max pair as noise is wrong if, on a week of data, `entry.m5_change_min_pct` at -5 adds five or more trades on four or more tokens and they average better than the live rules' trades over the same days. On today's record it adds one.
+- Leaving the rules alone is wrong by the tests the earlier entries set, which are unchanged: the 6-hour change and the volume cap (22:30 on 17 Nov), the 1-day floor (14:30 on 17 Nov), the 5% trail (22:30 on 16 Nov), tokens 1 to 3 days old (12:30 on 16 Nov, narrowed at 14:30 on 17 Nov).
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles become regular.
+
 ### v8, 2026-11-17 22:30 UTC review: no rule change, no code change
 
 **Health.** 1,270 cycles since launch, 95 on v8 (from 14:45 UTC), 96 since the last review. Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.3. No cycle was skipped, so no message to Ajeeb. One extra cycle (18:30:18, 75 seconds after the one before; both triggers fired). The newest cycle was 1.9 minutes old when the review started, so no `.kick`. No error in any of the 96 cycles. `api_calls` 48 to 51, `allowed_pool_used` 3 to 5, universe 12 to 17 tokens a cycle (median 16), `u:too_young` 2 to 16 (median 10), snapshot rows 54 to 66 (cap 120). RugCheck ran for the one signal and the answer parsed: HOGE `score_normalised` 1, no risks, LP locked 87.6%. The saved sample still matches what `bot/rugcheck.py` reads (`score_normalised`, `risks[].level`, `lpLockedPct`). No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 42 tests pass.
