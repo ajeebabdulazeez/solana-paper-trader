@@ -1,9 +1,9 @@
 {
- "cash_sol": 4.166802970506005,
+ "cash_sol": 3.7501226734554045,
  "closed_count": 26,
  "day": {
   "date": "2026-11-18",
-  "opens": 0,
+  "opens": 1,
   "start_equity": 4.166802970506005
  },
  "last_exit": {
@@ -26,9 +26,60 @@
   "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": "2026-11-16T20:35:12Z",
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z"
  },
- "last_sol_usd": 74.89655172413792,
- "positions": [],
+ "last_sol_usd": 74.85935616008457,
+ "positions": [
+  {
+   "entry_exec_usd": 0.000675326836166429,
+   "entry_liq_usd": 73147.49,
+   "entry_mid_usd": 0.0006714,
+   "entry_sol_usd": 74.85935616008457,
+   "features": {
+    "age_days": 1.38,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.36,
+    "chg_h1": 11.22,
+    "chg_h24": 17.17,
+    "chg_h6": 25.1,
+    "chg_m5": 9.52,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.1129,
+    "liq_usd": 73147,
+    "mcap": 648006,
+    "quote": "SOL",
+    "score": 1.73,
+    "txns_h1": 855,
+    "vol_h1": 50412,
+    "vol_h24": 1440099,
+    "volume_accel": 1.27
+   },
+   "fees_sol": 0.004083401485253003,
+   "id": 27,
+   "last_liq_usd": 73147.49,
+   "last_price_usd": 0.0006714,
+   "last_ts": "2026-11-18T06:40:11Z",
+   "last_vol_h24": 1440098.53,
+   "missing_runs": 0,
+   "opened": "2026-11-18T06:40:11Z",
+   "pair": "DQnoiJies9KrPJUiuCLExiCWh8jCrofL3zzUhgdL55kR",
+   "peak_usd": 0.0006714,
+   "rugcheck": {
+    "lp_locked_pct": 74.16921668158572,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 8,
+   "sol_in": 0.4166802970506005,
+   "sol_returned": 0.0,
+   "symbol": "BAWSAQ",
+   "token": "4La95NEVJdYK9kr375SfKPXnLA8ef8GtsjfVfW27pump",
+   "tokens": 45735.98486179479,
+   "tokens_remaining": 45735.98486179479,
+   "tp1_done": false,
+   "trough_usd": 0.0006714
+  }
+ ],
  "realized_pnl_sol": -0.8331970294939957,
  "starting_sol": 5.0,
- "trade_seq": 26
+ "trade_seq": 27
 }
