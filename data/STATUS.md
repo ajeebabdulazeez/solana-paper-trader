@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-18T22:15:13Z (UTC), rulebook v8. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-18T22:20:15Z (UTC), rulebook v8. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **4.1523 SOL** (started with 5.0 SOL, -16.95%)
 - Cash: 4.1523 SOL, open positions: 0, closed trades: 29
-- Watchlist: 241 tokens, entry signals this run: 0
+- Watchlist: 242 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -28,3 +28,7 @@ Max drawdown 19.43%, average hold 130.3 min, simulated fees 0.2603 SOL.
 | 21 | LEOSTAR | 2026-11-17T12:55:10Z | trailing_stop | +15.62% | +0.0687 |
 | 22 | BAWSAQ | 2026-11-17T12:25:10Z | stop_loss | -30.55% | -0.1342 |
 | 20 | FLOAT | 2026-11-17T11:55:10Z | time_stop | -3.95% | -0.0174 |
+
+## Errors in the last run
+
+- gecko h24_volume_usd_desc p1: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_volume_usd_desc&page=1
