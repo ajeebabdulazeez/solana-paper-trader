@@ -748,6 +748,63 @@ class Cycle(unittest.TestCase):
         self.assertTrue(any(e.startswith("pool lookup") for e in s["errors"]))
         self.assertEqual(len(self.state()["positions"]), 1)
 
+    def test_token_gecko_keeps_listing_while_dexscreener_shows_an_empty_pool_has_its_pools_recorded_once(self):
+        from bot.run import NOLIQ_AFTER_MIN
+        week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        self.list_token("REF", chg=(0.0, 0.0, 0.0, 0.0))        # a quiet SOL-quoted token for the SOL price
+        # GeckoTerminal lists both with a real pool. DexScreener's batch call answers for GHOST with an
+        # empty pool from the first cycle on, though the full lookup knows a deep one. GONE is read at
+        # $90k once and is then emptied: the ordinary case, which must not be sampled.
+        self.gecko.pools = [gecko_pool("GHOST", S.WSOL, 120_000, week), gecko_pool("GONE", S.WSOL, 90_000, week)]
+        self.set("GHOST", 1.0, liq=0)
+        live = make_pair("GHOST", "GHOST", 1.0, 120_000, self.now)
+        live["pairAddress"] = "PAIRLIVE"
+        self.dex.all_pools["GHOST"] = [self.dex.market["GHOST"], live]
+        self.set("GONE", 1.0, liq=90_000, chg=(0.0, 0.0, 0.0, 0.0))
+        f = self.tmp / "data" / "debug" / "no_liquidity_pairs.json"
+        start = self.now
+
+        def next_listing():                                     # cycles until GeckoTerminal's page comes round
+            n = 0
+            while True:
+                asked = len(self.gecko.asked)
+                s, n = self.step(), n + 1
+                if ("trending", 1) in self.gecko.asked[asked:]:
+                    return s, n
+
+        next_listing()                                          # found; a first reading proves nothing
+        self.set("GONE", 1.0, liq=0)
+        self.assertFalse(f.exists())
+        self.dex.fail_single = True                             # a failing lookup is logged, never fatal
+        while True:
+            late = (self.now - start).total_seconds() / 60 >= NOLIQ_AFTER_MIN
+            s, _ = next_listing()
+            self.assertFalse(f.exists())                        # too soon, or the lookup failed
+            if late:
+                break
+        self.assertTrue(any(e.startswith("no-liquidity sample") for e in s["errors"]))
+        self.dex.fail_single = False
+        calls = self.dex.calls
+        s = self.step()                                         # GeckoTerminal is on other pages: nothing to compare
+        self.assertEqual((self.dex.calls, f.exists()), (calls + 1, False))
+        calls = self.dex.calls
+        s, cycles = next_listing()
+        self.assertEqual(self.dex.calls, calls + cycles + 1)    # one batch call a cycle, one lookup for the sample
+        d = store.read_json(f, {})
+        self.assertEqual(list(d), ["GHOST"])                    # GONE had a pool when found: emptied, not hidden
+        g = d["GHOST"]
+        self.assertEqual((g["source"], g["batch_pool"]["liq_usd"], g["batch_pool"]["pair"]),
+                         ("gecko:trend1", 0, "PAIRGHOST"))
+        self.assertEqual((g["pairs_in_batch"], g["pools_returned"]), (1, 2))
+        self.assertEqual([(p["pair"], p["liq_usd"]) for p in g["pools"]], [("PAIRLIVE", 120_000), ("PAIRGHOST", 0)])
+        self.assertEqual(s["errors"], ["takeovers_latest: feed down"])
+        calls = self.dex.calls
+        _, cycles = next_listing()                              # taken once, not every time it is listed
+        self.assertEqual(self.dex.calls, calls + cycles)
+        self.assertEqual(store.read_json(f, {})["GHOST"]["ts"], g["ts"])
+        self.assertEqual(self.state()["positions"], [])         # a diagnostic: nothing was bought on it
+        self.assertEqual(self.trades(), [])
+
     def hidden_sol_pool(self, token="EXO", sol_liq=90_000, exotic_liq=150_000, sol_age=7, exotic_age=7):
         """Batch call shows only an exotic-quoted pool; the full lookup also shows a SOL pool."""
         if "REF" not in self.dex.market:   # a quiet SOL-quoted token, so the run can derive the SOL price
