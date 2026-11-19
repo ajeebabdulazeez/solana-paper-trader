@@ -1,6 +1,6 @@
 # Paper trading status
 
-Updated 2026-11-19T18:40:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-19T18:45:15Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **4.0266 SOL** (started with 5.0 SOL, -19.47%)
 - Cash: 4.0266 SOL, open positions: 0, closed trades: 31
@@ -31,4 +31,4 @@ Max drawdown 19.47%, average hold 135.5 min, simulated fees 0.276 SOL.
 
 ## Errors in the last run
 
-- gecko h24_tx_count_desc p3: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_tx_count_desc&page=3
+- gecko h24_tx_count_desc p4: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_tx_count_desc&page=4
