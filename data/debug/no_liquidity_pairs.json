@@ -66,5 +66,34 @@
   "source": "gecko:vol8",
   "symbol": "V\u200aT\u200aC",
   "ts": "2026-11-19T15:10:18Z"
+ },
+ "JeUwZALeRJAGqxPQ4D7Wfx4JCagKWHQEcnETBtSorv5": {
+  "batch_pool": {
+   "age_days": 0.9171086805555556,
+   "dex": "pumpswap",
+   "liq_usd": 0.01,
+   "pair": "7WrFUqwRwko64Vf9iHFXujLX6ZLK3kBMswxDmjYh7WJu",
+   "quote": "SOL",
+   "txns_h1": 0,
+   "vol_h24": 4414038.37
+  },
+  "first_seen": "2026-11-19T15:05:11Z",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 0.92,
+    "dex": "pumpswap",
+    "liq_usd": 0,
+    "pair": "7WrFUqwRwko64Vf9iHFXujLX6ZLK3kBMswxDmjYh7WJu",
+    "price_usd": 9.876e-07,
+    "quote": "SOL",
+    "txns_h24": 11748,
+    "vol_h24": 4414038
+   }
+  ],
+  "pools_returned": 1,
+  "source": "gecko:vol5",
+  "symbol": "Apocrycoin",
+  "ts": "2026-11-19T15:45:14Z"
  }
 }
