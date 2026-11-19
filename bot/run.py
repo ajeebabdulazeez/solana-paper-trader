@@ -19,9 +19,9 @@ from .rugcheck import RugCheck, assess, compact
 CHAIN = "solana"
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 QUOTE_SAMPLES = 8  # how many quote-rejected tokens to record in data/debug/quote_reject_pairs.json
-NOLIQ_SAMPLES = 8  # how many tokens to record in data/debug/no_liquidity_pairs.json (see step 5c)
-NOLIQ_AFTER_MIN = 30  # ...and how long the two sources must have disagreed before one is recorded
 POOL_LOOKUPS = 12  # per cycle: full pool lookups for tokens whose batch pool has a quote we do not trade
+HIDDEN_LOOKUPS = 4  # per cycle: full pool lookups for tokens whose batch pool is empty though GeckoTerminal lists one
+HIDDEN_RECHECK_MIN = 30  # a token whose lookup showed no live pool is not looked up again sooner than this
 GECKO_SKIP_AFTER = 2  # a GeckoTerminal page that fails this many cycles running is skipped until its next turn
 GECKO_KINDS = {"trending": "trend", "h24_volume_usd_desc": "vol", "h24_tx_count_desc": "tx"}  # source labels
 
@@ -152,7 +152,17 @@ def fetch_views(dex, tokens, must_have, d, now_ms, errors, known=()):
     return views, raw, len(missing), absent
 
 
-def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors):
+def hidden_candidate(w, now) -> bool:
+    """May this watchlist token, whose batch pool is too thin, get a first (or repeated) pool lookup?"""
+    if not w or w.get("alt_pool"):
+        return False
+    if w.get("last_ok") and w.get("low_since") != w["first_seen"]:
+        return False  # the batch call has shown a real pool for it before: emptied, not hidden
+    checked = w.get("pools_checked")
+    return not checked or hours_since(now, checked) * 60 >= HIDDEN_RECHECK_MIN
+
+
+def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors, watch=None, listed=(), now=None):
     """Correct the one-pool-per-token view that the batch call gives. Changes `views` in place.
 
     The batch call returns a single pool per token and not always the deepest one (STANK on
@@ -163,9 +173,18 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors):
        least the watchlist's minimum liquidity, the token is judged and traded on that pool, and
        its age is that of its oldest pool. Otherwise nothing changes and it stays rejected.
     2. An open position is priced on the pool it was opened on whenever the data has that pool.
+    3. A token GeckoTerminal lists on this cycle (`listed`, so with a pool over its reserve floor)
+       whose batch pool has been under the watchlist floor ever since the token was found gets one
+       full pool lookup. The batch call can answer with a dead pool while the traded one exists
+       (ANT `A9MDA...` on 2026-11-19: an empty meteoradbc launch pool came back, the lookup showed a
+       $145k pumpswap pool against SOL). If the lookup shows an allowed-quote pool over the floor,
+       the token is judged on it as in 1, the pool is remembered in the watchlist (`alt_pool`) and
+       the lookup is repeated every cycle until the batch call returns a deep enough pool itself
+       or the lookup no longer shows one. If it shows none, the token is not looked up again for
+       HIDDEN_RECHECK_MIN minutes. At most HIDDEN_LOOKUPS lookups a cycle, remembered pools first.
 
     Returns (tokens switched to an allowed-quote pool, held tokens whose own pool could not be
-    checked because the lookup failed).
+    checked because the lookup failed, lookups made for 3, tokens judged on a pool found by 3).
     """
     by_pair = {p.get("pairAddress"): p for p in raw if p.get("chainId") == CHAIN}
     held = {pos["token"]: pos.get("pair") for pos in positions}
@@ -173,8 +192,20 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors):
     exotic = [t for t, v in views.items() if t not in held
               and not S.allowed_pool(v, allowed) and S.watch_reject(v, wl) is None]
     exotic.sort(key=lambda t: views[t]["liq_usd"] or 0, reverse=True)
-    switched, unverified = 0, set()
-    for t in urgent + exotic[:POOL_LOOKUPS]:
+    watch = watch if watch is not None else {}
+
+    def thin(t):
+        return t in views and t not in held and S.watch_reject(views[t], wl) == "watch_liquidity"
+
+    for t, w in watch.items():
+        if w.get("alt_pool") and t in views and t not in held and S.watch_reject(views[t], wl) is None:
+            del w["alt_pool"]  # the batch call now returns a deep enough pool itself
+    hidden = sorted(t for t, w in watch.items() if w.get("alt_pool") and thin(t))
+    if now is not None:
+        hidden += sorted(t for t in listed if thin(t) and hidden_candidate(watch.get(t), now))
+    hidden = hidden[:HIDDEN_LOOKUPS]
+    switched, unverified, checked, uncovered = 0, set(), 0, 0
+    for t in urgent + exotic[:POOL_LOOKUPS] + hidden:
         try:
             pools = dex.pairs_for_token(CHAIN, t)
         except Exception as e:  # keep the batch view this cycle; never stop the run
@@ -189,20 +220,32 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors):
         mine = [v for v in mine if v["token"] == t]
         cur = views.get(t)
         pick = S.best_pairs(pools, now_ms, CHAIN, allowed, wl["min_liquidity_usd"]).get(t)
-        if pick and S.allowed_pool(pick, allowed, wl["min_liquidity_usd"]) \
-                and not (cur and S.allowed_pool(cur, allowed)):
+        found_allowed = bool(pick) and S.allowed_pool(pick, allowed, wl["min_liquidity_usd"])
+        is_hidden = t in hidden
+        if is_hidden:
+            checked += 1
+            if not found_allowed:
+                watch[t].pop("alt_pool", None)
+                watch[t]["pools_checked"] = iso(now) if now is not None else None
+                continue
+        if found_allowed and (is_hidden or not (cur and S.allowed_pool(cur, allowed))):
             ages = [v["age_days"] for v in mine + ([cur] if cur else []) if v["age_days"] is not None]
             if ages:
                 pick["age_days"] = max(ages)  # the token is as old as its oldest pool
             views[t] = pick
-            switched += 1
+            if is_hidden:
+                watch[t]["alt_pool"] = pick["pair"]
+                watch[t].pop("pools_checked", None)
+                uncovered += 1
+            else:
+                switched += 1
     for t, pair in held.items():
         p = by_pair.get(pair) if pair else None
         if p:
             v = S.pair_view(p, now_ms)
             if v["token"] == t and v["price_usd"] is not None and v["price_usd"] > 0:
                 views[t] = v
-    return switched, unverified
+    return switched, unverified, checked, uncovered
 
 
 def snapshot_row(v):
@@ -252,11 +295,16 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     tokens = sorted(held) + [t for t in watch if t not in held]
     known = {t for t, w in watch.items() if w.get("last_ok")}
     views, raw, batch_miss, absent = fetch_views(dex, tokens, held, rules["discovery"], now_ms, errors, known)
-    switched, pool_unverified = refine_pools(
+    listed = {t for t, src in found.items() if src.startswith("gecko")}
+    switched, pool_unverified, hidden_checked, hidden_used = refine_pools(
         dex, views, raw, state["positions"], rules["universe"]["allowed_quote_symbols"],
-        rules["watchlist"], now_ms, errors)
+        rules["watchlist"], now_ms, errors, watch, listed, now)
     if switched:
         funnel["allowed_pool_used"] = switched
+    if hidden_checked:
+        funnel["hidden_pool_checked"] = hidden_checked
+    if hidden_used:
+        funnel["hidden_pool_used"] = hidden_used
     raw += meta_pairs
     sol_usd = S.sol_usd_from(raw)
     if sol_usd is None:
@@ -354,7 +402,7 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
         state["day"] = {"date": today, "start_equity": eq, "opens": 0}
 
     # 5. Screen the watchlist.
-    wl, candidates, snap, quote_rejected, no_liquidity = rules["watchlist"], [], [], [], []
+    wl, candidates, snap, quote_rejected = rules["watchlist"], [], [], []
     for t in list(watch):
         w, v = watch[t], views.get(t)
         if v is None:
@@ -366,12 +414,6 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
             w["low_since"] = w.get("low_since") or now_iso
             w["too_old"] = wr == "watch_too_old"
             funnel[wr] += 1
-            # GeckoTerminal lists a pool of this token with enough reserve on this very cycle, and
-            # the pool the batch call answers with has been too thin ever since the token was found.
-            if (wr == "watch_liquidity" and found.get(t, "").startswith("gecko")
-                    and w["low_since"] == w["first_seen"]
-                    and hours_since(now, w["first_seen"]) * 60 >= NOLIQ_AFTER_MIN):
-                no_liquidity.append(t)
             continue
         w["low_since"] = None
         snap.append(v)
@@ -419,34 +461,6 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
                 store.write_json(qfile, qdbg)
         except Exception as e:  # a diagnostic must never stop the run
             errors.append(f"quote sample: {e}")
-
-    # 5c. Diagnostic for reviews (changes no decision): the two data sources disagree about a
-    # token. GeckoTerminal has listed it again just now with a pool over its reserve floor, while
-    # the one pool DexScreener's batch call returns for it has read under the watchlist floor on
-    # every cycle since it was found, at least NOLIQ_AFTER_MIN minutes ago. Both ANT pools (17 and
-    # 19 Nov 2026) read $0 like that for four hours and $120k from the cycle they turned a day old.
-    # Record every pool of a few such tokens, one extra lookup per cycle, each token once, so a
-    # review can see whether the batch call hides a live pool behind a dead one.
-    if no_liquidity:
-        try:
-            nfile = dd / "debug" / "no_liquidity_pairs.json"
-            ndbg = store.read_json(nfile, {})
-            todo = [t for t in no_liquidity if t not in ndbg]
-            if todo and len(ndbg) < NOLIQ_SAMPLES:
-                t = todo[0]
-                v = views[t]
-                in_batch = sum(1 for p in raw if (p.get("baseToken") or {}).get("address") == t)
-                pools = dex.pairs_for_token(CHAIN, t)
-                ndbg[t] = {"ts": now_iso, "symbol": v["symbol"], "source": found[t],
-                           "first_seen": watch[t]["first_seen"],
-                           "batch_pool": {"pair": v["pair"], "dex": v["dex"], "quote": v["quote_symbol"],
-                                          "liq_usd": v["liq_usd"], "age_days": v["age_days"],
-                                          "txns_h1": v["buys_h1"] + v["sells_h1"], "vol_h24": v["vol_h24"]},
-                           "pairs_in_batch": in_batch, "pools_returned": len(pools),
-                           "pools": S.pool_briefs(pools, t, now_ms, CHAIN)}
-                store.write_json(nfile, ndbg)
-        except Exception as e:  # a diagnostic must never stop the run
-            errors.append(f"no-liquidity sample: {e}")
 
     # 6. Open new paper positions, best score first, behind the safety check.
     day_chg = (eq / state["day"]["start_equity"] - 1.0) * 100.0 if state["day"]["start_equity"] else 0.0

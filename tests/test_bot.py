@@ -748,62 +748,114 @@ class Cycle(unittest.TestCase):
         self.assertTrue(any(e.startswith("pool lookup") for e in s["errors"]))
         self.assertEqual(len(self.state()["positions"]), 1)
 
-    def test_token_gecko_keeps_listing_while_dexscreener_shows_an_empty_pool_has_its_pools_recorded_once(self):
-        from bot.run import NOLIQ_AFTER_MIN
+    def ghost(self, token, live_liq=120_000, dead_age=7, **kw):
+        """Batch call shows only an empty pool of `token`; the full lookup also shows a live SOL pool."""
+        self.set(token, 1.0, liq=0, age_days=dead_age)
+        live = make_pair(token, token, 1.0, live_liq, self.now, **kw)
+        live["pairAddress"] = "PAIRLIVE" + token
+        self.dex.all_pools[token] = [self.dex.market[token], live]
+        return live
+
+    def watch(self):
+        return store.read_json(self.tmp / "data" / "state" / "watchlist.json", {})
+
+    def test_token_whose_batch_pool_is_empty_is_judged_on_the_live_pool_a_full_lookup_shows(self):
         week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
-        self.list_token("REF", chg=(0.0, 0.0, 0.0, 0.0))        # a quiet SOL-quoted token for the SOL price
-        # GeckoTerminal lists both with a real pool. DexScreener's batch call answers for GHOST with an
-        # empty pool from the first cycle on, though the full lookup knows a deep one. GONE is read at
-        # $90k once and is then emptied: the ordinary case, which must not be sampled.
-        self.gecko.pools = [gecko_pool("GHOST", S.WSOL, 120_000, week), gecko_pool("GONE", S.WSOL, 90_000, week)]
-        self.set("GHOST", 1.0, liq=0)
-        live = make_pair("GHOST", "GHOST", 1.0, 120_000, self.now)
-        live["pairAddress"] = "PAIRLIVE"
-        self.dex.all_pools["GHOST"] = [self.dex.market["GHOST"], live]
-        self.set("GONE", 1.0, liq=90_000, chg=(0.0, 0.0, 0.0, 0.0))
-        f = self.tmp / "data" / "debug" / "no_liquidity_pairs.json"
-        start = self.now
+        quiet = (0.0, 0.0, 0.0, 0.0)
+        self.list_token("REF", chg=quiet)                       # a quiet SOL-quoted token for the SOL price
+        # GeckoTerminal lists five tokens with a real pool. DexScreener's batch call answers for four of
+        # them with an empty pool from the first cycle on (ANT, 2026-11-19: a dead launch pool came back
+        # while a $145k pool was trading). The full lookup knows a deep SOL pool of GHOST (a buy by the
+        # entry rules), WAIT (quiet) and ELDER (its dead pool is 33 days old, the live one 10), and
+        # nothing better for STALE. GONE is read at $90k once and is then emptied: the ordinary case.
+        self.gecko.pools = [gecko_pool(t, S.WSOL, 120_000, week) for t in ("GHOST", "WAIT", "ELDER", "STALE", "GONE")]
+        ghost = self.ghost("GHOST")
+        wait = self.ghost("WAIT", chg=quiet)
+        self.ghost("ELDER", dead_age=33, age_days=10)
+        self.set("STALE", 1.0, liq=0)
+        self.set("GONE", 1.0, liq=90_000, chg=quiet)
 
-        def next_listing():                                     # cycles until GeckoTerminal's page comes round
-            n = 0
-            while True:
-                asked = len(self.gecko.asked)
-                s, n = self.step(), n + 1
-                if ("trending", 1) in self.gecko.asked[asked:]:
-                    return s, n
+        s = self.step()                                         # found by GeckoTerminal and looked up at once
+        self.assertEqual(s["opened"], ["GHOST"])                # old code: an empty pool, never seen again
+        self.assertEqual((s["funnel"].get("hidden_pool_checked"), s["funnel"].get("hidden_pool_used")), (4, 3))
+        self.assertEqual(s["funnel"].get("u:too_old"), 1)       # ELDER is as old as its oldest pool
+        self.assertEqual(self.dex.calls, 1 + 4)                 # the batch call and one lookup each, not GONE
+        pos = self.state()["positions"][0]
+        self.assertEqual((pos["pair"], pos["entry_liq_usd"]), ("PAIRLIVEGHOST", 120_000))
+        w = self.watch()
+        self.assertEqual((w["WAIT"]["alt_pool"], w["WAIT"]["liq"], w["WAIT"]["low_since"]), ("PAIRLIVEWAIT", 120_000, None))
+        self.assertEqual((w["STALE"].get("alt_pool"), w["STALE"]["liq"]), (None, 0))
+        self.assertIn("pools_checked", w["STALE"])
+        del self.dex.all_pools["ELDER"], self.dex.market["ELDER"]   # out of the way of the call counts below
 
-        next_listing()                                          # found; a first reading proves nothing
-        self.set("GONE", 1.0, liq=0)
-        self.assertFalse(f.exists())
+        self.set("GONE", 1.0, liq=0)                            # emptied after a real reading
+        calls = self.dex.calls
+        s = self.step()                                         # GeckoTerminal is on other pages now
+        self.assertEqual(s["funnel"].get("hidden_pool_checked"), 1)   # WAIT, every cycle; STALE is not asked again
+        self.assertEqual(self.dex.calls, calls + 4)             # batch, ELDER (now missing), GHOST's own pool, WAIT
+        self.assertEqual(self.watch()["WAIT"]["liq"], 120_000)
+
         self.dex.fail_single = True                             # a failing lookup is logged, never fatal
-        while True:
-            late = (self.now - start).total_seconds() / 60 >= NOLIQ_AFTER_MIN
-            s, _ = next_listing()
-            self.assertFalse(f.exists())                        # too soon, or the lookup failed
-            if late:
-                break
-        self.assertTrue(any(e.startswith("no-liquidity sample") for e in s["errors"]))
+        s = self.step()
+        self.assertTrue(any(e.startswith("pool lookup WAIT") for e in s["errors"]))
+        self.assertEqual(s["closed"], [])
+        self.assertEqual((self.watch()["WAIT"]["alt_pool"], self.watch()["WAIT"]["liq"]), ("PAIRLIVEWAIT", 0))
         self.dex.fail_single = False
+        self.step()
+        w = self.watch()["WAIT"]
+        self.assertEqual((w["alt_pool"], w["liq"], w["low_since"]), ("PAIRLIVEWAIT", 120_000, None))
+
+        while ("trending", 1) not in self.gecko.asked[-2:] or len(self.gecko.asked) <= 2:
+            s = self.step()                                     # GeckoTerminal lists them all again
+        # STALE is asked once more (HIDDEN_RECHECK_MIN has passed); GONE never is: it had a pool once.
+        self.assertEqual(s["funnel"].get("hidden_pool_checked"), 2)
+        self.assertEqual(s["funnel"].get("hidden_pool_used"), 1)
+
+        self.dex.market["WAIT"] = wait                          # the batch call returns the live pool itself
         calls = self.dex.calls
-        s = self.step()                                         # GeckoTerminal is on other pages: nothing to compare
-        self.assertEqual((self.dex.calls, f.exists()), (calls + 1, False))
-        calls = self.dex.calls
-        s, cycles = next_listing()
-        self.assertEqual(self.dex.calls, calls + cycles + 1)    # one batch call a cycle, one lookup for the sample
-        d = store.read_json(f, {})
-        self.assertEqual(list(d), ["GHOST"])                    # GONE had a pool when found: emptied, not hidden
-        g = d["GHOST"]
-        self.assertEqual((g["source"], g["batch_pool"]["liq_usd"], g["batch_pool"]["pair"]),
-                         ("gecko:trend1", 0, "PAIRGHOST"))
-        self.assertEqual((g["pairs_in_batch"], g["pools_returned"]), (1, 2))
-        self.assertEqual([(p["pair"], p["liq_usd"]) for p in g["pools"]], [("PAIRLIVE", 120_000), ("PAIRGHOST", 0)])
-        self.assertEqual(s["errors"], ["takeovers_latest: feed down"])
-        calls = self.dex.calls
-        _, cycles = next_listing()                              # taken once, not every time it is listed
-        self.assertEqual(self.dex.calls, calls + cycles)
-        self.assertEqual(store.read_json(f, {})["GHOST"]["ts"], g["ts"])
-        self.assertEqual(self.state()["positions"], [])         # a diagnostic: nothing was bought on it
-        self.assertEqual(self.trades(), [])
+        s = self.step()
+        self.assertNotIn("hidden_pool_checked", s["funnel"])
+        self.assertNotIn("alt_pool", self.watch()["WAIT"])
+        self.assertEqual(self.watch()["WAIT"]["liq"], 120_000)
+
+        ghost["liquidity"]["usd"] = 20                          # the live pool is drained
+        s = self.step()
+        self.assertEqual(s["closed"][0][1], "liquidity_drop")   # the position was on that pool and follows it
+        s = self.step()
+        self.assertEqual(s["funnel"].get("hidden_pool_checked"), 1)
+        self.assertNotIn("hidden_pool_used", s["funnel"])
+        self.assertNotIn("alt_pool", self.watch()["GHOST"])     # nothing live any more: an ordinary dead token
+        self.assertEqual([e for e in s["errors"] if "feed down" not in e], [])
+
+    def test_hidden_pool_lookups_are_capped_and_not_repeated_too_soon(self):
+        from bot.run import HIDDEN_LOOKUPS, HIDDEN_RECHECK_MIN, hidden_candidate, iso
+        week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        quiet = (0.0, 0.0, 0.0, 0.0)
+        self.list_token("REF", chg=quiet)
+        names = ["G%d" % i for i in range(HIDDEN_LOOKUPS + 2)]
+        self.gecko.pools = [gecko_pool(t, S.WSOL, 120_000, week) for t in names]
+        for t in names:
+            self.ghost(t, chg=quiet)
+        s = self.step()
+        self.assertEqual(s["funnel"].get("hidden_pool_checked"), HIDDEN_LOOKUPS)
+        self.assertEqual(self.dex.calls, 1 + HIDDEN_LOOKUPS)
+        s = self.step()                                         # remembered pools come first and fill the budget
+        self.assertEqual((s["funnel"].get("hidden_pool_checked"), s["funnel"].get("hidden_pool_used")),
+                         (HIDDEN_LOOKUPS, HIDDEN_LOOKUPS))
+        self.assertEqual(self.dex.calls, 2 * (1 + HIDDEN_LOOKUPS))
+        self.assertEqual(self.state()["positions"], [])
+
+        first = iso(self.now - timedelta(hours=2))
+        ago = lambda m: iso(self.now - timedelta(minutes=m))    # noqa: E731
+        never = {"first_seen": first, "last_ok": None, "low_since": None}
+        low = {"first_seen": first, "last_ok": ago(5), "low_since": first}
+        self.assertTrue(hidden_candidate(never, self.now))
+        self.assertTrue(hidden_candidate(low, self.now))
+        self.assertFalse(hidden_candidate(dict(low, low_since=ago(60)), self.now))      # it had a pool: emptied
+        self.assertFalse(hidden_candidate(dict(low, alt_pool="P"), self.now))           # already followed
+        self.assertFalse(hidden_candidate(dict(low, pools_checked=ago(HIDDEN_RECHECK_MIN - 1)), self.now))
+        self.assertTrue(hidden_candidate(dict(low, pools_checked=ago(HIDDEN_RECHECK_MIN)), self.now))
+        self.assertFalse(hidden_candidate(None, self.now))
 
     def hidden_sol_pool(self, token="EXO", sol_liq=90_000, exotic_liq=150_000, sol_age=7, exotic_age=7):
         """Batch call shows only an exotic-quoted pool; the full lookup also shows a SOL pool."""
