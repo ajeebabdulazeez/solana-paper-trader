@@ -1,6 +1,6 @@
 # Paper trading status
 
-Updated 2026-11-19T12:50:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-19T12:55:11Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **4.1340 SOL** (started with 5.0 SOL, -17.32%)
 - Cash: 4.1340 SOL, open positions: 0, closed trades: 30
@@ -28,12 +28,3 @@ Max drawdown 19.43%, average hold 138.0 min, simulated fees 0.2683 SOL.
 | 24 | bul | 2026-11-17T13:05:10Z | stop_loss | -25.92% | -0.1120 |
 | 21 | LEOSTAR | 2026-11-17T12:55:10Z | trailing_stop | +15.62% | +0.0687 |
 | 22 | BAWSAQ | 2026-11-17T12:25:10Z | stop_loss | -30.55% | -0.1342 |
-
-## Errors in the last run
-
-- gecko trending p2: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/trending_pools?page=2
-- pool lookup 79rE2ac8: HTTP 429 for https://api.dexscreener.com/token-pairs/v1/solana/79rE2ac8JhN3U12QLhymgDmCTiwBN1d4maTcK1fhpump
-- pool lookup HZbiEpF2: HTTP 429 for https://api.dexscreener.com/token-pairs/v1/solana/HZbiEpF2oM658EpjNRRqxharz5L9Ddm8akpSH2R5pump
-- pool lookup 8HXsCMy8: HTTP 429 for https://api.dexscreener.com/token-pairs/v1/solana/8HXsCMy8ma8QP2yVZXG5SZYyaTZw5AUrUDha1G4upump
-- pool lookup EadD2LMp: HTTP 429 for https://api.dexscreener.com/token-pairs/v1/solana/EadD2LMp6EbH9PrbXUFWcrZKMhoKVrZN1gpwRhH5pump
-- pool lookup HWqyVJee: HTTP 429 for https://api.dexscreener.com/token-pairs/v1/solana/HWqyVJee2XWGRwpA78XAdf4yhttSSGfHgcmaB3espump
