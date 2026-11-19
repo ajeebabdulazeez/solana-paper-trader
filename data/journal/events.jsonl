@@ -65,3 +65,4 @@
 {"chg_pct":34.03,"event":"tp1","id":29,"price_usd":0.001536,"sol_received":0.264845,"symbol":"JESTER","ts":"2026-11-18T16:45:14Z"}
 {"event":"close","id":29,"pnl_pct":30.76,"pnl_sol":0.12391,"reason":"trailing_stop","symbol":"JESTER","ts":"2026-11-18T17:25:10Z"}
 {"event":"open","id":30,"price_usd":0.0004125,"score":3.43,"sol_in":0.41523,"symbol":"DIGS","token":"9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump","ts":"2026-11-19T05:20:12Z"}
+{"event":"close","id":30,"pnl_pct":-4.4,"pnl_sol":-0.018267,"reason":"time_stop","symbol":"DIGS","ts":"2026-11-19T11:20:12Z"}

@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.737065763912546,
- "closed_count": 29,
+ "cash_sol": 4.134028467535076,
+ "closed_count": 30,
  "day": {
   "date": "2026-11-19",
   "opens": 1,
@@ -17,7 +17,7 @@
   "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump": "2026-11-13T19:55:09Z",
   "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump": "2026-11-16T06:30:19Z",
   "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump": "2026-11-16T15:20:15Z",
-  "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump": "2026-11-17T16:50:13Z",
+  "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump": "2026-11-19T11:20:12Z",
   "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-17T16:20:12Z",
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-17T11:55:10Z",
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
@@ -28,61 +28,9 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 74.38045375218151,
- "positions": [
-  {
-   "entry_exec_usd": 0.00041496723058218597,
-   "entry_liq_usd": 62720.29,
-   "entry_mid_usd": 0.0004125,
-   "entry_sol_usd": 74.46465856548022,
-   "features": {
-    "age_days": 21.7,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.21,
-    "chg_h1": 11.12,
-    "chg_h24": 30.75,
-    "chg_h6": 7.75,
-    "chg_m5": 1.58,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1595,
-    "liq_usd": 62720,
-    "mcap": 393331,
-    "quote": "SOL",
-    "score": 3.43,
-    "txns_h1": 748,
-    "vol_h1": 39860,
-    "vol_h24": 1313207,
-    "volume_accel": 2.83
-   },
-   "fees_sol": 0.004076147646618081,
-   "id": 30,
-   "last_liq_usd": 63707.55,
-   "last_price_usd": 0.0004169,
-   "last_ts": "2026-11-19T11:15:14Z",
-   "last_vol_h24": 1200499.93,
-   "missing_runs": 0,
-   "opened": "2026-11-19T05:20:12Z",
-   "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
-   "peak_usd": 0.0004616,
-   "rugcheck": {
-    "lp_locked_pct": 99.8698731920867,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 8,
-   "sol_in": 0.4152295293236162,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "DIGS",
-   "token": "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump",
-   "tokens": 73780.2745090652,
-   "tokens_remaining": 73780.2745090652,
-   "tp1_done": false,
-   "trough_usd": 0.0003907
-  }
- ],
- "realized_pnl_sol": -0.8477047067638388,
+ "last_sol_usd": 74.42646657232939,
+ "positions": [],
+ "realized_pnl_sol": -0.8659715324649246,
  "starting_sol": 5.0,
  "trade_seq": 30
 }
