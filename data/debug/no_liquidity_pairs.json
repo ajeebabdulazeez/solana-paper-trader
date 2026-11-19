@@ -28,6 +28,55 @@
   "symbol": "DCTY",
   "ts": "2026-11-19T15:05:11Z"
  },
+ "A9MDAAggN8WBzuEwWH6LouKzt6BYaziiH7nsSxxUwyYN": {
+  "batch_pool": {
+   "age_days": 0.13646787037037036,
+   "dex": "meteoradbc",
+   "liq_usd": null,
+   "pair": "95v34fcdHa1gpkcYiEoiyFmVxM4xZBFvtfdgmwQuFQ7Z",
+   "quote": "SOL",
+   "txns_h1": 0,
+   "vol_h24": 0.0
+  },
+  "first_seen": "2026-11-19T21:20:14Z",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 0.14,
+    "dex": "pumpswap",
+    "liq_usd": 145157,
+    "pair": "G7UA8nwML6UXaW5qjLBbuWN9tTHTEPJq1Wcg4LkYGU4j",
+    "price_usd": 4.334e-06,
+    "quote": "SOL",
+    "txns_h24": 19050,
+    "vol_h24": 4858675
+   },
+   {
+    "age_days": 0.14,
+    "dex": "meteora",
+    "liq_usd": 0,
+    "pair": "GvJEF3NCitRbkUddvhKaQcpDWXjgipdgqbXVfaGADG2V",
+    "price_usd": 5.499e-06,
+    "quote": "SOL",
+    "txns_h24": 11,
+    "vol_h24": 0
+   },
+   {
+    "age_days": 0.14,
+    "dex": "meteoradbc",
+    "liq_usd": 0,
+    "pair": "95v34fcdHa1gpkcYiEoiyFmVxM4xZBFvtfdgmwQuFQ7Z",
+    "price_usd": 1.625e-15,
+    "quote": "SOL",
+    "txns_h24": 1,
+    "vol_h24": 0
+   }
+  ],
+  "pools_returned": 3,
+  "source": "gecko:vol5",
+  "symbol": "ANT",
+  "ts": "2026-11-19T22:30:17Z"
+ },
  "AK6fWMcm3Xz9SqPUstXrub2hVqoC4Drt9Z8RWgyjog1M": {
   "batch_pool": {
    "age_days": 0.06465064814814815,
