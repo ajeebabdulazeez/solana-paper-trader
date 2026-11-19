@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.7206256207815684,
- "closed_count": 30,
+ "cash_sol": 4.02656294598323,
+ "closed_count": 31,
  "day": {
   "date": "2026-11-19",
   "opens": 2,
@@ -18,6 +18,7 @@
   "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump": "2026-11-16T06:30:19Z",
   "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump": "2026-11-16T15:20:15Z",
   "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump": "2026-11-19T11:20:12Z",
+  "9rbKkz2BDQBVgZmrHY6d7PTq2ge91gkpEyE4y9PPpump": "2026-11-19T15:15:14Z",
   "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-17T16:20:12Z",
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-17T11:55:10Z",
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
@@ -28,61 +29,9 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 75.13935340022296,
- "positions": [
-  {
-   "entry_exec_usd": 0.002740933703411986,
-   "entry_liq_usd": 129028.05,
-   "entry_mid_usd": 0.002726,
-   "entry_sol_usd": 75.0,
-   "features": {
-    "age_days": 1.54,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.5,
-    "chg_h1": 15.96,
-    "chg_h24": 85.17,
-    "chg_h6": 95.11,
-    "chg_m5": -2.08,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.0475,
-    "liq_usd": 129028,
-    "mcap": 2714970,
-    "quote": "SOL",
-    "score": 1.8,
-    "txns_h1": 2067,
-    "vol_h1": 85567,
-    "vol_h24": 1554033,
-    "volume_accel": 1.2
-   },
-   "fees_sol": 0.004067014233767537,
-   "id": 31,
-   "last_liq_usd": 131416.37,
-   "last_price_usd": 0.002811,
-   "last_ts": "2026-11-19T15:10:18Z",
-   "last_vol_h24": 1589950.24,
-   "missing_runs": 0,
-   "opened": "2026-11-19T14:15:14Z",
-   "pair": "6Ecx5Lm5dinVma1xWMEumj6ABZL3g1Xx4t5rxQxELzdn",
-   "peak_usd": 0.003252,
-   "rugcheck": {
-    "lp_locked_pct": 100,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 9,
-   "sol_in": 0.4134028467535076,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "Leonida",
-   "token": "9rbKkz2BDQBVgZmrHY6d7PTq2ge91gkpEyE4y9PPpump",
-   "tokens": 11200.631157464373,
-   "tokens_remaining": 11200.631157464373,
-   "tp1_done": false,
-   "trough_usd": 0.002726
-  }
- ],
- "realized_pnl_sol": -0.8659715324649246,
+ "last_sol_usd": 75.01434308663224,
+ "positions": [],
+ "realized_pnl_sol": -0.9734370540167709,
  "starting_sol": 5.0,
  "trade_seq": 31
 }

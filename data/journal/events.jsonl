@@ -67,3 +67,4 @@
 {"event":"open","id":30,"price_usd":0.0004125,"score":3.43,"sol_in":0.41523,"symbol":"DIGS","token":"9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump","ts":"2026-11-19T05:20:12Z"}
 {"event":"close","id":30,"pnl_pct":-4.4,"pnl_sol":-0.018267,"reason":"time_stop","symbol":"DIGS","ts":"2026-11-19T11:20:12Z"}
 {"event":"open","id":31,"price_usd":0.002726,"score":1.8,"sol_in":0.413403,"symbol":"Leonida","token":"9rbKkz2BDQBVgZmrHY6d7PTq2ge91gkpEyE4y9PPpump","ts":"2026-11-19T14:15:14Z"}
+{"event":"close","id":31,"pnl_pct":-26.0,"pnl_sol":-0.107466,"reason":"stop_loss","symbol":"Leonida","ts":"2026-11-19T15:15:14Z"}

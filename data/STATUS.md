@@ -1,29 +1,24 @@
 # Paper trading status
 
-Updated 2026-11-19T15:10:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-19T15:15:14Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.1396 SOL** (started with 5.0 SOL, -17.21%)
-- Cash: 3.7206 SOL, open positions: 1, closed trades: 30
-- Watchlist: 195 tokens, entry signals this run: 0
+- Equity: **4.0266 SOL** (started with 5.0 SOL, -19.47%)
+- Cash: 4.0266 SOL, open positions: 0, closed trades: 31
+- Watchlist: 193 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 30 | 26.7% | 21.27% | -16.14% | -6.17% | -0.866 | 0.47 |
+| All | 31 | 25.8% | 21.27% | -16.57% | -6.81% | -0.9734 | 0.44 |
 
-Max drawdown 19.43%, average hold 138.0 min, simulated fees 0.2683 SOL.
-
-## Open positions
-
-| # | Token | Opened | SOL in | Change vs entry | TP1 hit |
-|---|---|---|---|---|---|
-| 31 | Leonida | 2026-11-19T14:15:14Z | 0.413 | +3.1% | no |
+Max drawdown 19.47%, average hold 135.5 min, simulated fees 0.276 SOL.
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 31 | Leonida | 2026-11-19T15:15:14Z | stop_loss | -26.00% | -0.1075 |
 | 30 | DIGS | 2026-11-19T11:20:12Z | time_stop | -4.40% | -0.0183 |
 | 29 | JESTER | 2026-11-18T17:25:10Z | trailing_stop | +30.76% | +0.1239 |
 | 28 | HOGE | 2026-11-18T15:05:11Z | stop_loss | -18.47% | -0.0758 |
@@ -33,4 +28,3 @@ Max drawdown 19.43%, average hold 138.0 min, simulated fees 0.2683 SOL.
 | 25 | Leonida | 2026-11-17T16:20:12Z | trailing_stop | +19.80% | +0.0831 |
 | 24 | bul | 2026-11-17T13:05:10Z | stop_loss | -25.92% | -0.1120 |
 | 21 | LEOSTAR | 2026-11-17T12:55:10Z | trailing_stop | +15.62% | +0.0687 |
-| 22 | BAWSAQ | 2026-11-17T12:25:10Z | stop_loss | -30.55% | -0.1342 |
