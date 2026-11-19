@@ -1,0 +1,31 @@
+{
+ "13SYY7yXs4z1Vd5qSRA14BvMXvmSHg2qeXP1hjn39oBg": {
+  "batch_pool": {
+   "age_days": 0.1948474537037037,
+   "dex": "pumpswap",
+   "liq_usd": 0.0,
+   "pair": "AmYrDR8m2juARDcP5FnkX6M1ifWVeUsMcNkbFSvi2DPb",
+   "quote": "SOL",
+   "txns_h1": 0,
+   "vol_h24": 4791429.99
+  },
+  "first_seen": "2026-11-19T11:45:14Z",
+  "pairs_in_batch": 1,
+  "pools": [
+   {
+    "age_days": 0.19,
+    "dex": "pumpswap",
+    "liq_usd": 0,
+    "pair": "AmYrDR8m2juARDcP5FnkX6M1ifWVeUsMcNkbFSvi2DPb",
+    "price_usd": 9.325e-07,
+    "quote": "SOL",
+    "txns_h24": 12552,
+    "vol_h24": 4791430
+   }
+  ],
+  "pools_returned": 1,
+  "source": "gecko:vol5",
+  "symbol": "DCTY",
+  "ts": "2026-11-19T15:05:11Z"
+ }
+}
