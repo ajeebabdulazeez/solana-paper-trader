@@ -29,7 +29,7 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 73.02837708318116,
+ "last_sol_usd": 73.01138898517303,
  "positions": [
   {
    "entry_exec_usd": 0.0012578279193166263,
@@ -57,10 +57,10 @@
    },
    "fees_sol": 0.004013281472991615,
    "id": 32,
-   "last_liq_usd": 126441.35,
-   "last_price_usd": 0.001223,
-   "last_ts": "2026-11-19T23:50:13Z",
-   "last_vol_h24": 817319.88,
+   "last_liq_usd": 126286.22,
+   "last_price_usd": 0.001219,
+   "last_ts": "2026-11-19T23:55:12Z",
+   "last_vol_h24": 823489.2,
    "missing_runs": 0,
    "opened": "2026-11-19T23:45:17Z",
    "pair": "B4Wmjc6PvjCtU3qSVS3eTT9Mr4M5V5jBkRQctWANTc71",
@@ -80,7 +80,7 @@
    "tokens": 23148.539124006442,
    "tokens_remaining": 23148.539124006442,
    "tp1_done": false,
-   "trough_usd": 0.001223
+   "trough_usd": 0.001219
   }
  ],
  "realized_pnl_sol": -0.9734370540167709,
