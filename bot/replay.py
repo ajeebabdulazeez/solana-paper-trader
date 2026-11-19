@@ -71,7 +71,8 @@ def wide_rules(rules: dict) -> dict:
     r = copy.deepcopy(rules)
     r["universe"].update(min_age_days=0, max_age_days=1e9, min_liquidity_usd=0, min_volume_h24_usd=0,
                          min_market_cap_usd=0, max_market_cap_usd=1e18, min_txns_h24=0,
-                         min_liq_to_mcap=0, allowed_quote_symbols=None)
+                         min_liq_to_mcap=0, allowed_quote_symbols=None,
+                         max_volume_h24_to_liquidity=None)
     return r
 
 

@@ -298,6 +298,13 @@ def universe_reject(v: dict, r: dict):
         return "txns_h24"
     if v["liq_usd"] / v["mcap"] < r["min_liq_to_mcap"]:
         return "liq_to_mcap"
+    # A day's volume of hundreds of times the pool is one machine trading at a steady rate, not a
+    # crowd: ANT on 17 Nov 2026 and a second ANT on 19 Nov, about $47M a day through a pool of $125k
+    # to $155k, and the first pool read $0 one cycle after it had passed every other test here.
+    # Optional key: a rulebook without it (and `--wide` in the replay) applies no cap.
+    cap = r.get("max_volume_h24_to_liquidity")
+    if cap is not None and v["vol_h24"] > cap * v["liq_usd"]:
+        return "volume_to_liquidity"
     return None
 
 

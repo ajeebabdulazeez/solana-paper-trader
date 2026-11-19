@@ -172,6 +172,18 @@ class Rules(unittest.TestCase):
         thin = S.pair_view(make_pair("T", "T", 1.0, 20_000, T0), int(T0.timestamp() * 1000))
         self.assertEqual(S.universe_reject(thin, u), "liquidity")
 
+    def test_volume_far_above_the_pool_is_outside_the_universe(self):
+        # ANT, 17 and 19 Nov 2026: about $47M a day through a pool of about $125k, every other test passed.
+        u = RULES["universe"]
+        cap = u["max_volume_h24_to_liquidity"]
+        self.assertEqual(S.universe_reject(self.view(vol_h24=100_000 * cap * 2), u), "volume_to_liquidity")
+        self.assertEqual(S.universe_reject(self.view(vol_h24=100_000 * cap + 1), u), "volume_to_liquidity")
+        self.assertIsNone(S.universe_reject(self.view(vol_h24=100_000 * cap), u))    # at the cap: eligible
+        self.assertGreaterEqual(cap, 120)   # inuhao (116) and FOOD (107) were real tokens, not machines
+        old = {k: v for k, v in u.items() if k != "max_volume_h24_to_liquidity"}
+        self.assertIsNone(S.universe_reject(self.view(vol_h24=100_000 * cap * 2), old))   # no key, no cap
+        self.assertIsNone(S.universe_reject(self.view(vol_h24=100_000 * cap * 2), dict(u, max_volume_h24_to_liquidity=None)))
+
     def test_entry_rejections(self):
         e = RULES["entry"]
         self.assertEqual(S.entry_reject(self.view(chg=(0.5, 60.0, 80.0, 90.0)), e, 0), "h1_overheated")
@@ -824,6 +836,23 @@ class Cycle(unittest.TestCase):
         self.assertEqual(watch["ZLIVE"]["last_ok"], t1.strftime("%Y-%m-%dT%H:%M:%SZ"))
         snap = store.read_jsonl(sorted((self.tmp / "data" / "snapshots").glob("*/*.jsonl"))[-1])[-1]
         self.assertIn("ZLIVE", [row[0] for row in snap["rows"]])   # still priced and recorded this cycle
+
+    def test_machine_traded_pool_is_never_bought_and_never_sent_to_rugcheck(self):
+        cap = RULES["universe"]["max_volume_h24_to_liquidity"]
+        self.dex.feed += ["ANT", "CROWD"]
+        for k in range(2):
+            # Both pass every entry rule. ANT turns its pool over at more than twice the cap, CROWD just under it.
+            self.dex.market["ANT"] = make_pair("ANT", "ANT", 1.0, 125_000, self.now, vol_h24=125_000 * cap * 2.5)
+            self.dex.market["CROWD"] = make_pair("CROWD", "CROWD", 1.0, 125_000, self.now, vol_h24=125_000 * cap * 0.9)
+            s = self.step()
+            self.assertEqual(s["funnel"].get("u:volume_to_liquidity"), 1)
+            self.assertNotIn("ANT", s["opened"])
+        held = [p["symbol"] for p in store.read_json(self.tmp / "data" / "state" / "portfolio.json", {})["positions"]]
+        self.assertEqual(held, ["CROWD"])                      # the cap blocks the machine, not the busy token
+        cache = store.read_json(self.tmp / "data" / "state" / "rugcheck_cache.json", {})
+        self.assertNotIn("ANT", cache)                         # stopped at the universe, before any safety call
+        snap = store.read_jsonl(sorted((self.tmp / "data" / "snapshots").glob("*/*.jsonl"))[-1])[-1]
+        self.assertIn("ANT", [row[0] for row in snap["rows"]])  # still recorded, so reviews can watch it
 
     def test_young_token_waits_on_watchlist_until_old_enough(self):
         self.dex.feed.append("NEW")
