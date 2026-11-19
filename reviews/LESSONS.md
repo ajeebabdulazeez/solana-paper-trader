@@ -81,6 +81,12 @@ The running record of what paper results have shown and why each rulebook versio
 
 - Why no rule change. v9 has no closed trade. No test set by an earlier entry has reached its count: the 6-hour change stands at 2 of 6, the 1-day floor's forward check at 5 of 10, the 1-to-3-day band at 5 of 15 trades and 3 of 5 stops, the trail at 3 of 10, the 300-trade floor's second test at 9 of 10, the volume test at 2 of 3. There was a signal 8.9 hours after the one before and another is open now, so the 12-hour rule gives no ground for a relaxation. The record is 30 trades, 8 winners, -6.17% a trade, no edge shown, and it has been through four versions in six days; the useful thing a review can do for it now is leave the rules alone until the counts come in.
 
+**After the review's cut at 14:30: the first live cycles of the new code, and the first signal RugCheck has turned down.**
+
+- Pushed at 14:44 UTC and picked up by the 14:45 cycle. 14:45 and 14:50: v9, no errors, `api_calls` 47 on both (47 on the two cycles before), `batch_miss` 20 and 21, `universe_ok` 17, `u:volume_to_liquidity` 1, no signal. No token met the diagnostic's conditions, so `data/debug/no_liquidity_pairs.json` does not exist yet. Leonida was read and carried on as usual (+13.5% on price at 14:50).
+- At 14:35, before the push, the entry rules passed NVDA (`NVDAV...`, an Orca pool against USDC of $129k, 10.7 days old, on the watchlist since 17 Nov from `gecko:vol7`) and the safety check refused it: `safety:rugcheck_score` 1, the first `safety:*` row in 1,759 cycles. RugCheck's answer parsed: `score_normalised` 81 against the 30 allowed, LP locked 0%, four risks at level `danger` (mint authority still enabled, permanent control enabled, freeze authority still enabled, low liquidity) and one `warn`. No trade, as the rule says. The token trades at $153 to $157, so it is a tokenised Nvidia share, and the signal came five minutes after the New York open (14:30 UTC): +2.5% in one cycle, trades in the hour from 286 to 512. An issuer that can mint and freeze is what the screen is there to refuse, whatever the asset behind it, and the safety section is not for loosening.
+- Two things follow for reading the record. The replay has no RugCheck, so `python3 -m bot.replay` will show an NVDA entry at 14:35 that the bot did not make, and `--baseline` will count it as a first signal: leave it out when comparing the replay with the journal. And for the 12-hour rule this was a signal by the letter (the entry and universe filters passed it), but it could never become a trade; the answer is cached for 6 hours, so any NVDA signal until 20:35 is refused without a call. A review that counts hours without a signal should say whether it counted this one.
+
 **For the next review.**
 
 - First: cycles, errors, and `data/debug/no_liquidity_pairs.json`. If it exists, read each entry: does `pools` hold a pool of $30k or more that `batch_pool` is not? What are that pool's age and the batch pool's? Check that `api_calls` stayed under 50 and that no `no-liquidity sample` error repeats.
@@ -93,6 +99,7 @@ The running record of what paper results have shown and why each rulebook versio
 - Drawdown: 19.43% on closed trades against the gate's 25%. If it passes 22%, say so at the top of the entry.
 - Pools that go to $0: the count per day (66 now) and whether any had passed the universe (none of 153). `batch_miss` less the never-seen tokens: 2 to 9 now, the line is 15.
 - Any token inside the universe between 100 and 150 times its pool, and every token the cap blocks.
+- NVDA (`NVDAV...`): how many `safety:rugcheck_score` rows it produced, and whether any other token is refused. If tokenised shares keep passing the entry rules at the New York open, that is a pattern to write down, not a reason to touch the safety section.
 - Follow tokens by address, not by name. Everything under "For the next review" in the earlier entries still stands.
 
 **Would prove this review wrong.**
