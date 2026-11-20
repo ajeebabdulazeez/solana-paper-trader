@@ -49,34 +49,34 @@
  },
  "BijBWkhN1U2rGHJa9pNJoQVkNK4pbmq2xsCRXZCjSrF8": {
   "age_days": 0.05,
-  "cycles": 3,
+  "cycles": 4,
   "dex": "pumpswap",
   "first_age_days": 0.04,
   "first_liq_usd": 110044,
   "first_ts": "2026-11-20T20:50:19Z",
-  "last_ts": "2026-11-20T21:00:26Z",
-  "liq_usd": 109635,
+  "last_ts": "2026-11-20T21:05:13Z",
+  "liq_usd": 112825,
   "pair": "6xXNgtoF7kVa8cjjChfzY3UCZ1M4XdSc43LCK3wY7REP",
   "quote": "SOL",
   "symbol": "DCTY",
   "verdicts": {
-   "u:too_young": 3
+   "u:too_young": 4
   }
  },
  "DYDSuJumtLMPg8B24p1xVT4yQSjRSawmk261cQs5EeXw": {
-  "age_days": 0.45,
-  "cycles": 113,
+  "age_days": 0.46,
+  "cycles": 114,
   "dex": "pumpswap",
   "first_age_days": 0.07,
   "first_liq_usd": 135462,
   "first_ts": "2026-11-20T11:45:16Z",
-  "last_ts": "2026-11-20T21:00:26Z",
-  "liq_usd": 117921,
+  "last_ts": "2026-11-20T21:05:13Z",
+  "liq_usd": 119370,
   "pair": "BMvYnTVFRS9grzn5Eo36JZ7gC1RFjWdrzPef4fEHexnP",
   "quote": "SOL",
   "symbol": "ANT",
   "verdicts": {
-   "u:too_young": 113
+   "u:too_young": 114
   }
  },
  "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw": {
