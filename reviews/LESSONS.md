@@ -11,8 +11,150 @@ The running record of what paper results have shown and why each rulebook versio
 5. Change at most one rulebook section per review, bump `version`, and write the entry below: what the data showed, what changed, and what result would prove the change wrong.
 6. Never loosen a safety rule to get more trades. Never tune to hit a return target.
 7. Once a version looks good, stop changing it: the proof gate needs 100+ trades on one frozen version.
+8. Keep the "Open tests" table below current: move a count when a trade moves it, strike a test when it is decided and say so in the entry. This file is too long to read in one session with the data (325 KB on 20 Nov). A review reads the table, the last two entries in full, and any entry the table points to for a test it is about to decide. A test is decided by the wording in the entry that set it, not by the table's summary of it.
+
+## Open tests (as of the 14:30 UTC review on 20 Nov 2026)
+
+Each line: what would change, where the test was set, the count now. "Real" means the bot's own closed trades.
+
+| Section | Test, and what follows | Set in the entry of | Count now |
+|---|---|---|---|
+| entry | 6-hour change: `h6_change_min_pct` 0 to 30 if, of the first 6 real entries under +30% opened after 22:30 on 17 Nov, one or none wins while the entries at +30% or more over the same days average 5 points better. Dropped for good if 3 of the 6 win or the other group does no better. In between, carry to 10. Do not move the 30. | 22:30, 17 Nov | 4 of 6, no winner, -12.28%; the other group 4, 1 winner, -7.52% (gap 4.8) |
+| entry | `min_volume_accel` 1.2 to 1.0 becomes a candidate if by 22:30 on 21 Nov it has added 3 or more replay trades on 3 or more tokens that average better than the real trades of the same days | 22:30, 18 Nov | 4 added on 4 tokens, -3.13%; real 5 at -15.30%. Read it at the close |
+| entry | The rules as a whole against no rule: the first 15 first signals in `--baseline` opened after 14:30 on 20 Nov, on 8 or more tokens, against every eligible cycle of the same days. Worse: stop testing thresholds, the entry needs a new idea that clears the bar in the 14:30 entry of 20 Nov. Better by 3 points or more: 18 to 20 Nov were three bad days | 14:30, 20 Nov | 0 of 15 |
+| entry | The 300-trade floor: its count is closed. The forward check reopens if the next five entries in the band it blocks (wide replay, 150 to 299 trades, 3 to 30 days old, after 13:55 on 19 Nov) hold 3 winners and none ends on the liquidity rule | 14:30, 19 Nov; 06:30, 20 Nov | 0 of 5 closed (FLOAT 14:00 on 20 Nov open) |
+| universe | `min_age_days` 1 to 3 if the first five stops on tokens 1 to 3 days old include two past -20% on price, or one day's trades in that band cost over 5% of equity, or after 15 closed trades in the band they lose more a trade than older tokens over the same days | 14:30, 17 Nov | 4 of 5 stops, one past -20%: the next decides. 6 of 15 trades, -4.55% against -7.36% on 12 older |
+| universe | The band under a day old can go back in (smaller position if Ajeeb wants) if the next 10 replay entries under a day old (`--set universe.min_age_days=0.125`, opened after 14:45 on 17 Nov, a lost position counted at its last price) average better than the real trades of the same days and no more than one ends worse than -25% | 14:30, 17 Nov | 8 of 10: 4 winners, +2.58%, worst -24.35%; real 9 at -10.77% |
+| universe | The cap (150 times the pool) comes out if 3 of the first 5 tokens it blocks are still inside the other limits a day later with half their pool or more. To 250 if two blocked tokens between 150 and 250 would have been replay winners. To 120 if a token at 100 to 150 passes for an hour and its pool is gone within a day. "Not needed" if it blocks nothing more by 3 Dec | 06:30, 19 Nov | 0 of 1 blocked; nothing between 100 and 150 |
+| universe | Minimum pool size is the next thing to look at if the first 15 closed trades from v8 on show a stop cycle averaging worse than -16% on price | 14:30, 17 Nov | 9 of 15 trades, 7 stops at -15.1% |
+| exit | The 5% trail goes back to 10% if over the first 10 trailing exits since 22:30 on 16 Nov the 10% trail does better by over 2 points a trade or on 5 of the 10. Within 1 point: leave the exit section alone for good | 22:30, 16 Nov | 3 of 10 |
+| discovery | `top_volume_pages` 8 to 4 if `api_calls` passes 55, GeckoTerminal 429s repeat, the watchlist sits at 300 while a token over the floor is dropped, or a token found only by `gecko:vol5` to `vol8` is bought and ends on `liquidity_drop` or a write-off | 22:30, 17 Nov | none met (`api_calls` peak 51) |
+| code | The hidden-pool lookup (`refine_pools`, third case) is reverted if `pool lookup` errors repeat, `api_calls` passes 55, or a token is bought on an uncovered pool the batch call was right to call empty. Judged "not worth its code" on 26 Nov if it has only ever shown tokens gone within the hour | 22:30, 19 Nov | no error; 5 tokens shown: three under a day old and gone within 13 hours, one still followed, one 266 days old |
+| health | Tell Ajeeb if cycles are regularly over 15 minutes apart. Raise `max_single_lookups` if `batch_miss` less the never-seen tokens reaches 13 | every entry | gap 5.0 minutes; 0 to 5 |
+
+Decided, do not reopen without new grounds: the 12% stop against 16%, 20% and 30%, the break-even stop after +10%, the first target at 15% (exit tables of 16 Nov and 20 Nov); `m5_change_min_pct` at -5 (20 Nov); a cap on a 5-minute change of +10% (not carried, 20 Nov); the 300-trade floor back to 150 (20 Nov); the deeper GeckoTerminal pages (17 Nov).
 
 ## Log
+
+### v9, 2026-11-20 14:30 UTC review: no rule change, no code change (drawdown past the 22% line; the week-of-data tests are read: the 12% stop stays; since 18 Nov the entry rules pick worse moments than no rule)
+
+**Drawdown first, as the last two entries asked: equity is 3.8438 SOL, -23.12%, under the 22% line (3.90 SOL), and nothing is open.** HOGE and Huss were both stopped since 06:30. The proof gate's line is 25%, 3.75 SOL: 0.094 SOL away. A stop now costs about 0.062 SOL (a position is 10% of equity), so one more does not cross it and two with no winner between them do. My reading of the gate: it judges one frozen version on its own trades, and no version is frozen, so crossing 25% closes nothing by itself. It is still a quarter of the paper stake gone in a week with no edge shown. The rules give no licence to steer the number with sizes or stops, and this review did not.
+
+**Health.** 2,047 cycles since launch, 387 on v9, 98 since the last review (06:30 to 14:30). Last 6 hours: 73 cycles, median gap 5.0 minutes, longest 5.2. No cycle was skipped, so no message to Ajeeb. One extra cycle (10:30:44, 35 seconds after the cycle that stopped HOGE; nothing was held by then and it changed nothing). The newest cycle was 2.0 minutes old when the review started, so no `.kick`. No error in any of the 98 cycles. `api_calls` 41 to 51 (median 46; the line is 55), `allowed_pool_used` 1, universe 14 to 16 tokens a cycle, `u:too_young` 10 to 16 (median 12), watchlist 184 to 220. RugCheck was called once and the answer parsed: Huss `score_normalised` 1, no risks, LP locked 91.7%. The saved sample still matches what `bot/rugcheck.py` reads (`score_normalised`, `risks[].level`, `lpLockedPct`). No `safety:*`, `skip:*` or `suspect_price` rows. No bug found, so no change to `bot/`. 47 tests pass.
+
+- `batch_miss` 11 to 18 a cycle (median 14), over the 15 single lookups on 21 of the 98. Never-seen tokens on the watchlist: 10 to 13 (median 11, all from `profiles_latest`). `batch_miss` less the never-seen tokens: 0 to 5 (median 3; it was 4 to 6), the line is 15, act at 13.
+- The day: 20 Nov started at 4.0128 SOL, has used 2 of its 10 new trades and stands at -4.21% against the 10% limit.
+- What I read: the entries of 06:30 on 20 Nov, 22:30 on 19 Nov and 22:30 on 17 Nov in full, and the "Would prove this review wrong" list of every entry back to 13 Nov. Not the whole file: it is 325 KB. That is the third review to say so, so this one adds the "Open tests" table above and step 8 of "How to review". The table was built from those lists; where it and an entry differ, the entry is right.
+
+**Strategy: v9 has 4 closed trades, all stops (-18.02% a trade, -0.2902 SOL). Four trades are not a hint.** v8 and v9 as one series: 9 closed, 1 win, -10.77% a trade, -0.3985 SOL. All versions: 34 closed, 8 wins on seven tokens, -7.56% a trade, -1.1562 SOL, max drawdown 23.12%. SOL $70.7 to $72.8.
+
+| # | Token | Opened (UTC, 20 Nov) | Age | Trades in the hour before | 1-hour change at entry | 6-hour change at entry | Best while held | Exit | Net |
+|---|---|---|---|---|---|---|---|---|---|
+| 33 | HOGE (v9) | 06:25 | 4.98 days | 371 | +9.9% | +14.5% | +18.4% | stop, price at -13.0% | -15.04% |
+| 34 | Huss (v9) | 12:55 | 3.81 days | 833 | +7.0% | +33.4% | 0.0% | stop, price at -13.7% | -16.39% |
+
+- HOGE, trade 33 (`FVzqG...`, now 1 win and 3 stops on this token). +17.3% at 07:30 and +18.4% at its best, 1.6 points short of the first target; between +3% and +15% for the next two and a half hours while trades in the hour fell from 408 to 61; then -4.7% at 10:15, -11.9% at 10:20 on $9.3k traded in five minutes, and -13.0% at 10:30, 1.0 point past the stop with the cycle on time. Afterwards: -21.1% at 12:05, -1.2% at 12:55, -12% at 14:25. The stop was neither clearly right nor clearly wrong. It is the ninth loser that was up 10% or more first.
+- Huss, trade 34 (`CUg7A...`, found by `gecko:trend2`, a pumpswap pool against SOL of $52.5k, $2.5k over the universe's floor; LP locked 91.7%; up 317% on the day). At 12:45 the price was 8.3% above the later entry with the 1-hour change at +21%. It fell 8% in the next cycle, and the bot bought on the cycle after that, when the 5-minute change read -1.4% (the floor is -3) and the 1-hour change +7.0%. -6.4% on the next cycle and -13.7% at 13:10, fifteen minutes after the buy, 1.7 points past the stop. Ten minutes after the stop it was at -4.0%, at +2.6% by 13:25, and it has moved between -14.5% and +7.4% of the entry since. A $50k pool moves 6% on $9k of trades, so for this token a 12% stop is inside an hour's noise. NIO (01:05), Leonida (15:15 on 19 Nov) and now Huss were all back within a few points of the entry soon after their stops. That is the question the exit table below answers.
+- One signal since 06:30 (Huss), 1.6 hours before the review; the one before was HOGE at 06:25. The 12-hour rule is not met and no threshold was relaxed.
+- Funnel, 1,487 universe-token checks: `h1_weak` 781 (53%), `txns_h1` 253, a token in its cooldown 143, `h6_down` 141, the held token 50, `buy_pressure` 32, `h1_overheated` 30, `h24_dumped` 25, `volume_accel` 16, `m5_dropping` 15, signal 1. Seventeen different tokens were inside the universe; their median 1-hour change was +0.3% and 39% of readings were at +2% or better.
+- Stops: all 23 lost, average -17.90%, total -1.8429 SOL, the price at the stop cycle averaging -15.6%. By age at entry: 3 days or more, 16 stops at -14.3% on price; 1 to 3 days, four at -16.4%; under a day, three at -21.6%. From v8 on: 7 stops at -15.1% (9 of the 15 trades that test reads). Both of today's filled within 2 points of the level with the cycle on time, so the cycles are not the problem. The eight trailing exits made +0.7553 SOL, the three 6-hour exits cost 0.0686.
+- Left on the table: the average trade was up 15.7% at its best and realised -7.56%.
+- LP locked: HOGE 84.2% and Huss 91.7%, both lost. Under 50%: 0 wins of 4. At 50% or more: 8 wins of 30.
+
+**The record is a week old, so the tests that asked for "a week of data" were read. Four are decided; none changes a rule.** One scratch measurement did it, by the method of 06:30 on 16 Nov: a position opened at every eligible cycle and run through each exit variant, the same entries compared, a position whose token left the record marked at its last price, only entries opened 13 hours or more before the end of the record.
+
+| Exit variant | Bot's universe (v9): 23,946 entries on 52 tokens | Per token | Wide, ages 3 to 30 days: 50,354 on 69 | Per token |
+|---|---|---|---|---|
+| live (12% stop, 5% trail, 6 hours) | -4.34% | -5.55% | -3.59% | -3.17% |
+| stop 8% | -4.23% | -4.77% | -3.65% | -3.18% |
+| stop 16% | -4.08% | -6.34% | -3.32% | -3.03% |
+| stop 20% | -3.95% | -7.04% | -3.09% | -2.96% |
+| stop 30% | -3.87% | -8.17% | -2.97% | -3.15% |
+| hold at most 2 hours | -3.49% | -4.29% | -3.13% | -2.66% |
+| hold at most 1 hour | -3.18% | -3.63% | -2.91% | -2.38% |
+| first target 15% | -4.25% | -5.37% | -3.57% | -2.86% |
+| trail 10% | -4.48% | -5.67% | -3.76% | -3.35% |
+| stop moved to the entry after +10% | -4.43% | -5.51% | -3.77% | -3.15% |
+
+- The 12% stop (the test of 06:30 on 16 Nov: wrong "if the exit table, redone on a week of data, shows a 20% stop ahead by 2 points or more on both records and on the per-token average as well"). A 20% stop is ahead by 0.39 and 0.50 points, and on the bot's universe the per-token average is 1.5 points worse with it. Of the entries stopped at 12%, 32% and 37% end better with a 20% stop; by token, 13 do better and 27 worse on the bot's universe, 29 and 26 wide. On tokens 1 to 3 days old the wider stop loses more (-4.81% against -3.83%). Not met by a wide margin. The stop stays at 12%, and Huss, NIO and Leonida coming back after their stops is the less common case, as it was for GTA on 17 Nov.
+- The break-even stop (the test of 06:30 on 17 Nov: ahead by a point on both records and on the first signals). It is behind on both records (by 0.09 and 0.18) and within 0.3 either way on the first signals. Dropped. HOGE today would have been saved by it; nine cases like HOGE do not outweigh the positions it sells at the entry that then go on.
+- `m5_change_min_pct` at -5 (the test of 06:30 on 18 Nov: five or more added trades on four or more tokens). In a week it adds one trade (Max, 22:45 on 17 Nov, +21.8%) and moves three others by one cycle. Not met; closed.
+- "The entry section still needs a different idea if after a week the first signals at 300 or more, with WASTED and BLOB left out, are still level with a buy at any moment on the wide record" (06:30 on 16 Nov). They are: -2.47% on 106 first signals and 24 tokens (-6.83% per token) against -3.59% (-3.17% per token). Level. The 06:30 entry today drew that conclusion from the floor's own tests; this is the third reading that says it.
+- Every variant still lands between -2.4% and -8.2%, around the 3% a round trip costs. Shorter holds lose less only because less happens in an hour. Exits move the losses around; they are not where an edge is.
+
+**The finding of this review: the entry rules' lead over "no rule" was made on 13 to 15 Nov. Since 18 Nov the cycles they pick have done worse than all cycles, on both records.** `--baseline` with today's rules, split by the day the position was opened:
+
+| Opened | Bot's universe: every eligible cycle | Cycles the rules passed | First passing cycle of each run | Wide, 3 to 30 days: every cycle | Passed | First passing |
+|---|---|---|---|---|---|---|
+| 13 to 15 Nov | -4.61% (7,610 on 30 tokens) | +8.58% (55 on 5) | +10.21% (20 on 5, 14 wins) | -3.37% (15,055 on 38) | +5.53% (82 on 12) | +2.58% (37 on 12) |
+| 16 and 17 Nov | -4.20% (6,872 on 27) | -2.93% (28 on 11) | -2.24% (24 on 11, 8 wins) | -3.61% (16,415 on 39) | +4.85% (147 on 12) | +3.07% (62 on 12) |
+| 18 to 20 Nov | -3.99% (11,103 on 28) | -6.97% (34 on 9) | -9.70% (18 on 9, 2 wins) | -3.02% (21,066 on 47) | -11.99% (85 on 13) | -12.53% (33 on 13, 3 wins) |
+
+- Over the whole record `--baseline` reads: every eligible cycle 25,585 on 52 tokens, -4.23% (was -4.47%); cycles the rules passed 117 on 17, +1.31% (was +1.87% on 109); first passing cycle 62 on 17, 39% wins, -0.39% (was +0.28% on 58). The last row is under zero for the first time and has fallen at eight of the nine reviews since it was first read. The whole-week lead of 5.5 points is the first three days: five tokens, WASTED twelve times, and the days the 300-trade floor was chosen on.
+- The bot's own trades opened since 18 Nov say the same: 8 closed, 1 winner (JESTER), -9.90% a trade.
+- The 15 Nov entry set this up: wrong "if `--baseline` on a week of data still shows passing cycles no better than all cycles and the rules are still unchanged: at that point the entry section needs a different idea, not another threshold". By the letter the week's passing cycles are better, so it is not met. By the split, the lead on the bot's universe was 13 to 15 points on 13 to 15 Nov and 1 to 2 points on 16 and 17 Nov, and since 18 Nov the picks are 3 to 6 points worse than all cycles; on the wide record they were ahead until 17 Nov and are 9 points worse since. Three days on 9 and 13 tokens is a hint. It is also the same days the four v9 trades came from, so it is not independent of the trades.
+- I then asked the yardstick about the premise itself, one cut, chosen because the rules are built on it: a buy at any eligible cycle, by the 1-hour change at that cycle (whole record).
+
+| 1-hour change at the buy | under -10% | -10 to -2% | -2 to +2% | +2 to +10% | +10 to +25% | over +25% |
+|---|---|---|---|---|---|---|
+| Bot's universe, by cycle | -2.6% | -3.9% | -4.1% | -4.8% | -6.3% | -4.4% |
+| Bot's universe, per token | -6.3% | -7.5% | -7.0% | -5.9% | -7.4% | -7.3% |
+| Wide 3 to 30 days, by cycle | -0.9% | -3.3% | -3.7% | -3.9% | -5.2% | +4.0% |
+| Wide 3 to 30 days, per token | -1.5% | -3.0% | -4.7% | -5.6% | -5.7% | -4.6% |
+
+- The band the rules buy in (+2% to +25%) is the worse part of the table on three of the four rows: -5.2% against -3.8% for the other cycles on the bot's universe, -4.2% against -2.9% wide. On 15 Nov, with two and a half days, the same cut showed nothing; with a week it leans against buying the last hour's rise. It does not say buy the fall: the best band still loses 1% to 6%, no band covers the costs on both records, and the bot's own trades split the other way (bought under +11.2%, -10.99%; above, -4.13%).
+- The same yardstick on the 6-hour candidate, read now so the count's verdict is not the only number when it comes: cycles with the 6-hour change at +30% or more and the 1-hour change inside the entry band lose 3.0% on the bot's universe (-6.6% per token) and 5.0% wide (-8.7% per token), against 6.6% (-6.0% per token) and 4.6% (-5.6% per token) for the same band at 0 to +30%. Better on one row of four. No cell of the 6-hour by 1-hour grid is above zero per token on both records, in the whole week or in either half of it.
+- What follows. No threshold in the entry section is the obvious fix, and the entry rules have now gone three days picking worse than chance. That is not yet a finding and there is no tested idea to put in their place, so nothing changes today. It is written as a test with a count ("the rules as a whole" in the table above), and the bar a new entry idea has to clear is fixed now, before one is found: on the any-moment yardstick its cycles beat all cycles by 3 points or more (a round trip's cost) by cycle and per token, on both records, in both halves of the record, on 20 tokens or more.
+
+**The open counts.**
+
+- The 6-hour change: 4 of the 6 real entries under +30%, no winner, -12.28% (BAWSAQ, DIGS, NIO, HOGE). At +30% or more over the same days: 4, 1 winner, -7.52% (HOGE, JESTER, Leonida, Huss). The gap is 4.8 points and the test needs 5 at its end. On all real trades: under +30%, 17 on 11 tokens, no winner, -15.28%; +30% or more, 17 on 13 tokens, 8 winners, +0.15%. The row the last entry asked to be printed beside it, the baseline's first signals opened after 22:30 on 17 Nov: under +30%, 9 on 5 tokens, no winner, -10.41%; +30% or more, 9 on 6 tokens, 2 winners, -9.00%. Level. Not acted on; the number stays at 30.
+- The 1-day floor's forward check: 8 of 10. Three new replay entries on tokens under a day old, all of the ordinary kind (found by `profiles_latest`, never on an uncovered pool): FIONA `B34nX...` 08:55 +12.71%, LOOSY `HF2RB...` 11:20 +21.77%, SWJ `gHZhq...` 13:15 -16.51%. The eight: 4 winners, +2.58% a trade, the worst -24.35%, none lost from the record. The bot's own trades over the same days: 9 at -10.77%. Two entries to go, and as it stands the test would be met. If it is, the 14:30 entry of 17 Nov says the band can go back in, and the review that reads it should say three things with it: the replay has no RugCheck, the same days' real trades lost at any age, and the two stops of 17 Nov that filled at -28% and -24% on price are why the floor is there.
+- Tokens 1 to 3 days old: no new trade. 4 of 5 stops (one past -20% on price); 6 of 15 trades (2 wins, -4.55%, -0.1201 SOL) against 12 on older tokens over the same days (2 wins, -7.36%, -0.3691 SOL). The next stop in the band still decides the 3-day floor.
+- `min_volume_accel` at 1.0 (window closes 22:30 on 21 Nov): DIGS 05:35 closed at the 6-hour limit, -5.64%. Four added trades on four tokens (HOGE -15.80%, Leonida +23.31%, FLOAT -14.38%, DIGS -5.64%), -3.13% a trade, against the five real trades of the same days at -15.30%. Read it at the close, for what it is: four trades that lose 3% each.
+- The cooldown: NIO 03:50 in `--no-cooldown` ended at the 6-hour limit, -4.51%. Five cases for keeping it, none against. Huss passed the rules again at 13:20, ten minutes after its stop; that replay entry is open at +2.2% (best +11.9%). Record how it ends.
+- The 300-trade floor's blocked band (wide, 150 to 299 trades): FLOAT 14:00 today on 288 trades, open at -9.3%. 0 of 5 closed.
+- Trailing exits: none new (3 of 10). RugCheck refusals: none new (three so far).
+- `python3 -m bot.replay` reproduces HOGE and Huss within 0.2 points of the journal: 29 closed on 17 tokens, 10 wins, -1.88% (it was -0.87% on 27); without the two entries RugCheck refused, 27 closed, 9 wins, -2.23%.
+- The cap (`universe.max_volume_h24_to_liquidity` 150): no token blocked (`u:volume_to_liquidity` 0 on all 98 cycles), none inside the universe between 100 and 150 times. The highest ratios were ANTS (`ejrz9...`) 38, SHIT 35, Leonida 32, mihao 22; the median is 6.6. With the cap removed the replay makes the same trades.
+- A 5-minute change of +10% or more (not carried, 06:30 today): a buy at every eligible cycle loses 5.69% with it (341 cycles on 39 tokens) against 4.21% without. 1.5 points; the line was 3 across 40 tokens.
+
+**Tokens followed on an uncovered pool: `data/debug/hidden_pool_tokens.json` names five, and one answers the last entry's question.**
+
+- ANTHROPIC `Pren1...`: a raydium pool against USDC of $395k to $427k behind an empty batch pool, 266 days old, `watch_too_old` on 4 cycles between 07:45 and 08:40. This is the token the run record could not name at 23:10 on 19 Nov: judged, read as too old and dropped on the same cycle, found again when its page came round. The last entry's reading of the code is confirmed. Four lookups in eight hours is far under the line (30 cycles in a day) for remembering such a token, so no code change.
+- It also settles a point the 22:30 entry of 19 Nov left open: the batch call hides a live pool behind a dead one for old tokens too, not only in a token's first day. So "a hidden token becomes visible by itself at one day old" was too strong. What the record can say: of the five tokens uncovered in eight hours, four were under a day old and one was 266 days; none was between 1 and 30 days, which is the only range where it could change a trade. Keep the count by age.
+- ANT `A9MDA...`: followed until 07:50 (14 cycles in the file, 96 in the day's snapshots). Its ratio went from 136 to 176 in one cycle at 06:50, when the pool went from $150k to $117k with the price up 1.3% (liquidity taken out, the step this kind has shown before), and stood at 182 with a pool of $125k and the price up 60% since midnight when the pool read $0 at 07:55. It was 12.7 hours old and never reached the age floor. The third of its kind, the first seen from its first hours to its end, and the cap would have blocked it had it lived to a day.
+- 牛逼 `73HcK...` (09:05 to 09:25, $120k to $126k, 11,700 to 14,700 trades an hour) and 蚂蚁 `93Dxv...` (10:25 to 10:35, $128k to $132k, 13,000 to 14,800): both about an hour old, both at $0 on the next cycle. `u:too_young` throughout.
+- ANT `DYDSu...` (a fourth ANT of this kind, found 11:45 by `gecko:vol8`): pumpswap against SOL, $114k to $148k, 5,800 to 6,200 trades in every hour, 1.08 to 1.11 buys per sell, 24-hour volume at 67 times its pool and rising 10 to 25 an hour. `u:too_young` on all 34 cycles; it turns a day old at about 10:10 on 21 Nov if its pool is still there.
+- `hidden_pool_checked` read 1 or more on 86 of the 98 cycles and 4 on ten; `api_calls` peaked at 51. No `pool lookup` or `hidden sample` error.
+- ANT `ANTBT...` (the $1.4M raydium pool against USDC) turns a day old at about 17:00 today; not yet inside the universe.
+- Pools that go to $0 in one cycle (walked from the 98 versions of `data/state/watchlist.json` since 06:30): 20 in 8 hours, about 60 a day (it was 54). Twenty addresses under fifteen names (DCTY three times, apocry, PATRICK and 蚂蚁 twice each), pools of $74k to $187k, every one found by GeckoTerminal's most-traded-by-volume list (pages 3 to 8). None had passed the universe, none came back. One more pool read under half without going to zero (MANDY, $70k to $3k); it was not inside the universe.
+- Discovery: the 17 tokens inside the universe came from `boosts_top` 4, GeckoTerminal before pages were labelled 4, `profiles_latest` 3, `gecko:trend2` 2 (Rings, Huss), and one each from a trending meta, `gecko:tx4` (HOGE), `gecko:tx6` (ANTS) and `gecko:vol7` (NVDA). No 429. None of the conditions for reopening the pages is met.
+
+**Changed. No rule: rulebook v9 stays. No code change. In this file: the "Open tests" table and step 8 of "How to review".**
+
+- Why no rule change. v9 has four closed trades. The tests that came due today (the stop, the break-even stop, the 5-minute floor, the week-old check on the 300-trade floor) all say leave it. The counts that could change a rule have not reached their ends: the 6-hour change 4 of 6, the 3-day floor 4 of 5 stops, the 1-day floor's forward check 8 of 10, the trail 3 of 10, and the volume test's window closes tomorrow. The last signal was 1.6 hours before the review, so the 12-hour rule gives no ground for a relaxation, and a relaxation would add entries of a kind that has lost for three days.
+- Why not act on the finding. The honest name for the last three days is "the entry rules are doing worse than chance", and the honest size of it is 18 first signals on 9 tokens. Tightening a threshold on that would be the fourth entry fix shaped on a handful of losers, and there is no replacement idea that passes the yardstick. Cutting the position size or the number of trades to slow the loss would only steer the drawdown figure. The cost of waiting is real paper money, about 0.06 SOL a stop, and it is accepted here knowingly.
+
+**For the next review.**
+
+- First: cycles, errors, equity against 3.75 SOL (say so at the top if it is under), and the "Open tests" table: move every count a new trade moves.
+- The 1-day floor's forward check is at 8 of 10 and would be met as it stands. Read the next two entries with the three cautions above, and name each as ordinary or uncovered.
+- `min_volume_accel` 1.0: the window closes at 22:30 on 21 Nov. The 6-hour change: 4 of 6; print the baseline row beside it.
+- The rules against no rule: the first signals in `--baseline` opened after 14:30 today, beside every eligible cycle of the same days. 0 of 15.
+- The next stop on a token 1 to 3 days old: its price at the stop cycle against -20%.
+- ANT `DYDSu...`: its ratio, when its pool goes, and what the file shows if it reaches a day old (about 10:10 on 21 Nov). ANT `ANTBT...` from 17:00 today. Any uncovered token between 1 and 30 days old: name it and say what the universe said.
+- Where Huss 13:20 (`--no-cooldown`) and FLOAT 14:00 (the blocked band) end.
+- Follow tokens by address, not by name.
+
+**Would prove this review wrong.**
+
+- Reading 18 to 20 Nov as a hint and changing nothing is wrong either way by the new test: of the first 15 first signals in `--baseline` opened after 14:30 on 20 Nov (8 or more tokens), if they average worse than every eligible cycle of the same days, the entry rules are worse than no rule on six days running and the entry section stops being tuned by thresholds until an idea clears the bar set above. If they average better by 3 points or more, the three days were three bad days and this entry made too much of them.
+- Closing the stop question is wrong if a later exit table, on two weeks of data, shows a 20% stop ahead by 2 points on both records and per token. On one week it is ahead by half a point and behind per token.
+- The bar for a new entry idea is too high if nothing clears it by 27 Nov while some idea clears it on every count but one. Then say which count and why it should not bind; do not lower the bar on the day an idea is found.
+- The "Open tests" table is wrong wherever it differs from the entry that set a test. If a later review finds such a line, correct the table and say which entry it misread.
+- Waiting on the 6-hour change, the 3-day floor, the 1-day floor's forward check, the trail and the cap is wrong by the tests in the table, which are unchanged.
+- The health verdict is wrong if the gap between cycles grows past 15 minutes or skipped cycles become regular.
 
 ### v9, 2026-11-20 06:30 UTC review: no rule change (plumbing: every token judged on an uncovered pool is now named; NIO stopped; the 300-trade floor's second test closes at 2 winners in 10)
 
