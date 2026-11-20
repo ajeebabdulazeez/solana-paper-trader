@@ -76,3 +76,4 @@
 {"event":"close","id":34,"pnl_pct":-16.39,"pnl_sol":-0.064052,"reason":"stop_loss","symbol":"Huss","ts":"2026-11-20T13:10:19Z"}
 {"event":"open","id":35,"price_usd":0.003581,"score":7.13,"sol_in":0.384383,"symbol":"FLOAT","token":"Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr","ts":"2026-11-20T21:20:16Z"}
 {"chg_pct":31.02,"event":"tp1","id":35,"price_usd":0.004692,"sol_received":0.238033,"symbol":"FLOAT","ts":"2026-11-20T21:55:13Z"}
+{"event":"close","id":35,"pnl_pct":20.16,"pnl_sol":0.077501,"reason":"trailing_stop","symbol":"FLOAT","ts":"2026-11-20T22:15:16Z"}
