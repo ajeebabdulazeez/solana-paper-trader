@@ -1,18 +1,18 @@
 {
  "A9MDAAggN8WBzuEwWH6LouKzt6BYaziiH7nsSxxUwyYN": {
-  "age_days": 0.49,
-  "cycles": 5,
+  "age_days": 0.5,
+  "cycles": 6,
   "dex": "pumpswap",
   "first_age_days": 0.48,
   "first_liq_usd": 150381,
   "first_ts": "2026-11-20T06:45:14Z",
-  "last_ts": "2026-11-20T07:05:12Z",
-  "liq_usd": 119715,
+  "last_ts": "2026-11-20T07:10:14Z",
+  "liq_usd": 120152,
   "pair": "G7UA8nwML6UXaW5qjLBbuWN9tTHTEPJq1Wcg4LkYGU4j",
   "quote": "SOL",
   "symbol": "ANT",
   "verdicts": {
-   "u:too_young": 5
+   "u:too_young": 6
   }
  }
 }
