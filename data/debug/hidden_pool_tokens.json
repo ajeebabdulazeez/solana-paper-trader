@@ -1,4 +1,20 @@
 {
+ "73HcKWZX72vYK7HuR4bRZ7Wxinn75LoZxt2wLW3qmHig": {
+  "age_days": 0.03,
+  "cycles": 1,
+  "dex": "pumpswap",
+  "first_age_days": 0.03,
+  "first_liq_usd": 119923,
+  "first_ts": "2026-11-20T09:05:12Z",
+  "last_ts": "2026-11-20T09:05:12Z",
+  "liq_usd": 119923,
+  "pair": "5t2CoySzpyMAVxZoqbfHXQKsKHrFQALegDB291x6wrRL",
+  "quote": "SOL",
+  "symbol": "\u725b\u903c",
+  "verdicts": {
+   "u:too_young": 1
+  }
+ },
  "A9MDAAggN8WBzuEwWH6LouKzt6BYaziiH7nsSxxUwyYN": {
   "age_days": 0.53,
   "cycles": 14,
