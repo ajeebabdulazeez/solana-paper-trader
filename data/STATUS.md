@@ -1,8 +1,8 @@
 # Paper trading status
 
-Updated 2026-11-20T08:35:11Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-20T08:40:15Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.0071 SOL** (started with 5.0 SOL, -19.86%)
+- Equity: **3.9957 SOL** (started with 5.0 SOL, -20.09%)
 - Cash: 3.5708 SOL, open positions: 1, closed trades: 32
 - Watchlist: 208 tokens, entry signals this run: 0
 
@@ -18,7 +18,7 @@ Max drawdown 20.65%, average hold 133.7 min, simulated fees 0.2837 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 33 | HOGE | 2026-11-20T06:25:12Z | 0.397 | +11.7% | no |
+| 33 | HOGE | 2026-11-20T06:25:12Z | 0.397 | +8.8% | no |
 
 ## Last 10 closed
 

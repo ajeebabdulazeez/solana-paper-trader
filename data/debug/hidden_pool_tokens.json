@@ -16,19 +16,19 @@
   }
  },
  "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw": {
-  "age_days": 266.3,
-  "cycles": 3,
+  "age_days": 266.31,
+  "cycles": 4,
   "dex": "raydium",
   "first_age_days": 266.27,
   "first_liq_usd": 395243,
   "first_ts": "2026-11-20T07:45:13Z",
-  "last_ts": "2026-11-20T08:25:11Z",
-  "liq_usd": 427859,
+  "last_ts": "2026-11-20T08:40:15Z",
+  "liq_usd": 427205,
   "pair": "4QobaAdVKMJzECYzdemPHZgYMxfHZX5fxvy4vQFcomJZ",
   "quote": "USDC",
   "symbol": "ANTHROPIC",
   "verdicts": {
-   "watch_too_old": 3
+   "watch_too_old": 4
   }
  }
 }
