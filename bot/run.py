@@ -22,6 +22,7 @@ QUOTE_SAMPLES = 8  # how many quote-rejected tokens to record in data/debug/quot
 POOL_LOOKUPS = 12  # per cycle: full pool lookups for tokens whose batch pool has a quote we do not trade
 HIDDEN_LOOKUPS = 4  # per cycle: full pool lookups for tokens whose batch pool is empty though GeckoTerminal lists one
 HIDDEN_RECHECK_MIN = 30  # a token whose lookup showed no live pool is not looked up again sooner than this
+HIDDEN_SAMPLES = 40  # how many tokens judged on such a pool to name in data/debug/hidden_pool_tokens.json
 GECKO_SKIP_AFTER = 2  # a GeckoTerminal page that fails this many cycles running is skipped until its next turn
 GECKO_KINDS = {"trending": "trend", "h24_volume_usd_desc": "vol", "h24_tx_count_desc": "tx"}  # source labels
 
@@ -183,8 +184,9 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors, watch=
        or the lookup no longer shows one. If it shows none, the token is not looked up again for
        HIDDEN_RECHECK_MIN minutes. At most HIDDEN_LOOKUPS lookups a cycle, remembered pools first.
 
-    Returns (tokens switched to an allowed-quote pool, held tokens whose own pool could not be
-    checked because the lookup failed, lookups made for 3, tokens judged on a pool found by 3).
+    Returns (number of tokens switched to an allowed-quote pool, held tokens whose own pool could
+    not be checked because the lookup failed, number of lookups made for 3, the tokens judged on a
+    pool found by 3).
     """
     by_pair = {p.get("pairAddress"): p for p in raw if p.get("chainId") == CHAIN}
     held = {pos["token"]: pos.get("pair") for pos in positions}
@@ -204,7 +206,7 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors, watch=
     if now is not None:
         hidden += sorted(t for t in listed if thin(t) and hidden_candidate(watch.get(t), now))
     hidden = hidden[:HIDDEN_LOOKUPS]
-    switched, unverified, checked, uncovered = 0, set(), 0, 0
+    switched, unverified, checked, uncovered = 0, set(), 0, []
     for t in urgent + exotic[:POOL_LOOKUPS] + hidden:
         try:
             pools = dex.pairs_for_token(CHAIN, t)
@@ -236,7 +238,7 @@ def refine_pools(dex, views, raw, positions, allowed, wl, now_ms, errors, watch=
             if is_hidden:
                 watch[t]["alt_pool"] = pick["pair"]
                 watch[t].pop("pools_checked", None)
-                uncovered += 1
+                uncovered.append(t)
             else:
                 switched += 1
     for t, pair in held.items():
@@ -296,9 +298,10 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
     known = {t for t, w in watch.items() if w.get("last_ok")}
     views, raw, batch_miss, absent = fetch_views(dex, tokens, held, rules["discovery"], now_ms, errors, known)
     listed = {t for t, src in found.items() if src.startswith("gecko")}
-    switched, pool_unverified, hidden_checked, hidden_used = refine_pools(
+    switched, pool_unverified, hidden_checked, hidden_tokens = refine_pools(
         dex, views, raw, state["positions"], rules["universe"]["allowed_quote_symbols"],
         rules["watchlist"], now_ms, errors, watch, listed, now)
+    hidden_used = len(hidden_tokens)
     if switched:
         funnel["allowed_pool_used"] = switched
     if hidden_checked:
@@ -461,6 +464,32 @@ def run(now=None, dex=None, rug=None, gecko=None) -> dict:
                 store.write_json(qfile, qdbg)
         except Exception as e:  # a diagnostic must never stop the run
             errors.append(f"quote sample: {e}")
+
+    # 5c. Diagnostic for reviews (changes no decision, makes no API call): name every token judged
+    # on a pool that only the full lookup showed (refine_pools, case 3), with what the watchlist and
+    # universe tests said about it on each cycle. Without it a token that is judged and dropped on
+    # the same cycle (its oldest pool is over the watchlist's age limit) is counted in the funnel
+    # under `hidden_pool_used` and appears nowhere by name.
+    if hidden_tokens:
+        try:
+            hfile = dd / "debug" / "hidden_pool_tokens.json"
+            hdbg = store.read_json(hfile, {})
+            for t in hidden_tokens:
+                v = views.get(t)
+                if v is None or (t not in hdbg and len(hdbg) >= HIDDEN_SAMPLES):
+                    continue
+                ur = S.watch_reject(v, wl) or S.universe_reject(v, rules["universe"])
+                verdict = "universe_ok" if ur is None else ur if ur.startswith("watch_") else "u:" + ur
+                age = None if v["age_days"] is None else round(v["age_days"], 2)
+                rec = hdbg.setdefault(t, {"first_ts": now_iso, "first_liq_usd": round(v["liq_usd"] or 0),
+                                          "first_age_days": age, "cycles": 0, "verdicts": {}})
+                rec.update(symbol=v["symbol"], pair=v["pair"], dex=v["dex"], quote=v["quote_symbol"],
+                           last_ts=now_iso, liq_usd=round(v["liq_usd"] or 0), age_days=age,
+                           cycles=rec["cycles"] + 1)
+                rec["verdicts"][verdict] = rec["verdicts"].get(verdict, 0) + 1
+            store.write_json(hfile, hdbg)
+        except Exception as e:  # a diagnostic must never stop the run
+            errors.append(f"hidden sample: {e}")
 
     # 6. Open new paper positions, best score first, behind the safety check.
     day_chg = (eq / state["day"]["start_equity"] - 1.0) * 100.0 if state["day"]["start_equity"] else 0.0

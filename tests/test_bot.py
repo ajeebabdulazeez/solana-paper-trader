@@ -857,6 +857,66 @@ class Cycle(unittest.TestCase):
         self.assertTrue(hidden_candidate(dict(low, pools_checked=ago(HIDDEN_RECHECK_MIN)), self.now))
         self.assertFalse(hidden_candidate(None, self.now))
 
+    def test_tokens_judged_on_an_uncovered_pool_are_named_for_the_review(self):
+        from unittest import mock
+        from bot.run import iso
+        week = (self.now - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        quiet = (0.0, 0.0, 0.0, 0.0)
+        self.list_token("REF", chg=quiet)
+        # GeckoTerminal lists three tokens whose batch pool is empty while a live SOL pool exists. WAIT
+        # is quiet and stays on the watchlist. KID is younger than the universe allows. ANCIENT's dead
+        # pool is older than the watchlist allows: it is judged on the live pool, read as too old and
+        # dropped on the same cycle, so only a funnel count ever showed it (19 and 20 Nov 2026: eight
+        # cycles with `hidden_pool_used` 2 and one token on the watchlist to show for it).
+        self.gecko.pools = [gecko_pool(t, S.WSOL, 120_000, week) for t in ("WAIT", "KID", "ANCIENT")]
+        old = RULES["watchlist"]["max_age_days"] + 5
+        self.ghost("WAIT", chg=quiet)
+        self.ghost("KID", dead_age=YOUNG, age_days=YOUNG, chg=quiet)
+        self.ghost("ANCIENT", dead_age=old, age_days=10, chg=quiet)
+        f = self.tmp / "data" / "debug" / "hidden_pool_tokens.json"
+
+        s = self.step()
+        self.assertEqual((s["funnel"].get("hidden_pool_checked"), s["funnel"].get("hidden_pool_used")), (3, 3))
+        self.assertEqual(self.dex.calls, 1 + 3)                 # the diagnostic makes no call of its own
+        self.assertEqual(s["opened"], [])
+        self.assertNotIn("ANCIENT", self.watch())               # gone from every other file already
+        d = store.read_json(f, {})
+        self.assertEqual(sorted(d), ["ANCIENT", "KID", "WAIT"])
+        self.assertEqual(d["ANCIENT"]["verdicts"], {"watch_too_old": 1})
+        self.assertEqual((d["ANCIENT"]["pair"], d["ANCIENT"]["quote"], d["ANCIENT"]["liq_usd"], d["ANCIENT"]["age_days"]),
+                         ("PAIRLIVEANCIENT", "SOL", 120_000, old))
+        self.assertEqual(d["KID"]["verdicts"], {"u:too_young": 1})
+        self.assertEqual(d["WAIT"]["verdicts"], {"universe_ok": 1})
+
+        self.dex.all_pools["WAIT"][1]["liquidity"]["usd"] = 110_000
+        self.step()                                             # GeckoTerminal is on other pages now
+        d = store.read_json(f, {})
+        self.assertEqual((d["WAIT"]["cycles"], d["KID"]["cycles"], d["ANCIENT"]["cycles"]), (2, 2, 1))
+        self.assertEqual((d["WAIT"]["first_ts"], d["WAIT"]["last_ts"]), (iso(T0), iso(T0 + timedelta(minutes=5))))
+        self.assertEqual((d["WAIT"]["first_liq_usd"], d["WAIT"]["liq_usd"]), (120_000, 110_000))
+
+        # The file holds a fixed number of tokens. One found after that is still judged on its live pool
+        # and counted, the tokens already in the file go on being updated, and ANCIENT, listed again, is
+        # looked up and dropped a second time.
+        self.gecko.pools.append(gecko_pool("LATE", S.WSOL, 120_000, week))
+        self.ghost("LATE", chg=quiet)
+        steps = 2
+        with mock.patch("bot.run.HIDDEN_SAMPLES", 3):
+            while ("trending", 1) not in self.gecko.asked[-2:] or len(self.gecko.asked) <= 2:
+                s, steps = self.step(), steps + 1
+        self.assertEqual((s["funnel"].get("hidden_pool_checked"), s["funnel"].get("hidden_pool_used")), (4, 4))
+        self.assertEqual(self.watch()["LATE"]["alt_pool"], "PAIRLIVELATE")
+        d = store.read_json(f, {})
+        self.assertEqual(sorted(d), ["ANCIENT", "KID", "WAIT"])
+        self.assertEqual(d["ANCIENT"]["verdicts"], {"watch_too_old": 2})
+        self.assertEqual((d["WAIT"]["cycles"], d["WAIT"]["verdicts"]), (steps, {"universe_ok": steps}))
+
+        f.write_text("not json")                                # a broken diagnostic is logged, never fatal
+        s = self.step()
+        self.assertTrue(any(e.startswith("hidden sample") for e in s["errors"]))
+        self.assertEqual(s["funnel"].get("hidden_pool_used"), 3)
+        self.assertEqual(self.watch()["WAIT"]["alt_pool"], "PAIRLIVEWAIT")
+
     def hidden_sol_pool(self, token="EXO", sol_liq=90_000, exotic_liq=150_000, sol_age=7, exotic_age=7):
         """Batch call shows only an exotic-quoted pool; the full lookup also shows a SOL pool."""
         if "REF" not in self.dex.market:   # a quiet SOL-quoted token, so the run can derive the SOL price
