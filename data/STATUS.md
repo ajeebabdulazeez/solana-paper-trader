@@ -1,6 +1,6 @@
 # Paper trading status
 
-Updated 2026-11-20T05:00:21Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-20T05:05:11Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **3.9675 SOL** (started with 5.0 SOL, -20.65%)
 - Cash: 3.9675 SOL, open positions: 0, closed trades: 32
