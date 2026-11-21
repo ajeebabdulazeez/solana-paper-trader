@@ -1,6 +1,6 @@
 # Paper trading status
 
-Updated 2026-11-21T00:45:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-21T00:50:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **3.9213 SOL** (started with 5.0 SOL, -21.57%)
 - Cash: 3.9213 SOL, open positions: 0, closed trades: 35
@@ -28,3 +28,7 @@ Max drawdown 23.12%, average hold 131.3 min, simulated fees 0.3093 SOL.
 | 28 | HOGE | 2026-11-18T15:05:11Z | stop_loss | -18.47% | -0.0758 |
 | 27 | BAWSAQ | 2026-11-18T07:30:16Z | stop_loss | -15.03% | -0.0626 |
 | 26 | HOGE | 2026-11-17T17:45:14Z | stop_loss | -17.68% | -0.0755 |
+
+## Errors in the last run
+
+- gecko h24_volume_usd_desc p5: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_volume_usd_desc&page=5
