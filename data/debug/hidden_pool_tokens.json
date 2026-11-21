@@ -96,17 +96,33 @@
   }
  },
  "ERtsRBmba64WowxMEW3j7o4fLp4KxCn3SoU5XYmfYEjt": {
-  "age_days": 0.04,
-  "cycles": 1,
+  "age_days": 0.05,
+  "cycles": 2,
   "dex": "pumpswap",
   "first_age_days": 0.04,
   "first_liq_usd": 115797,
   "first_ts": "2026-11-21T16:55:14Z",
-  "last_ts": "2026-11-21T16:55:14Z",
-  "liq_usd": 115797,
+  "last_ts": "2026-11-21T17:00:25Z",
+  "liq_usd": 115637,
   "pair": "GpnLt3dAkaqDCxJcKZ2V1FK5KWhPV4CUpxow1PNvdn7b",
   "quote": "SOL",
   "symbol": "DCTY",
+  "verdicts": {
+   "u:too_young": 2
+  }
+ },
+ "FRoxViKDWn3R5Liii9qmhuBVPpy4nSVkt5mBfRMPSLhW": {
+  "age_days": 0.05,
+  "cycles": 1,
+  "dex": "pumpswap",
+  "first_age_days": 0.05,
+  "first_liq_usd": 105513,
+  "first_ts": "2026-11-21T17:00:25Z",
+  "last_ts": "2026-11-21T17:00:25Z",
+  "liq_usd": 105513,
+  "pair": "H1k1gzSAfpCs3aJUhSiSsBPDDoT1XvnPRLYXB2sskmsn",
+  "quote": "SOL",
+  "symbol": "win",
   "verdicts": {
    "u:too_young": 1
   }
@@ -176,19 +192,19 @@
   }
  },
  "wzGUPtVnXoXriWFJpVkR7aGkLbGY4PhQrdqPVw7UPN2": {
-  "age_days": 0.25,
-  "cycles": 39,
+  "age_days": 0.26,
+  "cycles": 40,
   "dex": "pumpswap",
   "first_age_days": 0.12,
   "first_liq_usd": 140798,
   "first_ts": "2026-11-21T13:50:19Z",
-  "last_ts": "2026-11-21T16:55:14Z",
-  "liq_usd": 130006,
+  "last_ts": "2026-11-21T17:00:25Z",
+  "liq_usd": 130115,
   "pair": "5YStBXc4547vFKBzya6FVUGXT8AijzWL9V8qTWjYqqXj",
   "quote": "SOL",
   "symbol": "ANT",
   "verdicts": {
-   "u:too_young": 39
+   "u:too_young": 40
   }
  }
 }
