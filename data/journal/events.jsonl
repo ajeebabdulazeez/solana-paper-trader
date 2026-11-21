@@ -86,3 +86,4 @@
 {"event":"close","id":37,"pnl_pct":14.57,"pnl_sol":0.057883,"reason":"trailing_stop","symbol":"SHIT","ts":"2026-11-21T17:10:16Z"}
 {"event":"close","id":38,"pnl_pct":-16.96,"pnl_sol":-0.068214,"reason":"stop_loss","symbol":"greg","ts":"2026-11-21T18:00:24Z"}
 {"event":"open","id":39,"price_usd":0.002967,"score":5.37,"sol_in":0.396161,"symbol":"Rings","token":"65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring","ts":"2026-11-21T21:20:19Z"}
+{"chg_pct":45.2,"event":"tp1","id":39,"price_usd":0.004308,"sol_received":0.278821,"symbol":"Rings","ts":"2026-11-21T22:00:24Z"}
