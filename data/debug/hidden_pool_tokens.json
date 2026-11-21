@@ -1,16 +1,32 @@
 {
  "26zq1ZGWNPL2nAkKTkwYq8PWTNqGNGCkGHxmRibr1Wgu": {
   "age_days": 0.06,
-  "cycles": 1,
+  "cycles": 2,
   "dex": "pumpswap",
   "first_age_days": 0.06,
   "first_liq_usd": 111038,
   "first_ts": "2026-11-21T20:55:14Z",
-  "last_ts": "2026-11-21T20:55:14Z",
-  "liq_usd": 111038,
+  "last_ts": "2026-11-21T20:59:53Z",
+  "liq_usd": 112115,
   "pair": "DbbGTnJc7Y3w6kHwvNyjVaScn1RtVVEBazAZJ1yVTp8o",
   "quote": "SOL",
   "symbol": "FIONA",
+  "verdicts": {
+   "u:too_young": 2
+  }
+ },
+ "2PhhxqAAMoXm8nUzug8eRS6jVeeKVrYGH2dPfbLFzKr8": {
+  "age_days": 0.06,
+  "cycles": 1,
+  "dex": "pumpswap",
+  "first_age_days": 0.06,
+  "first_liq_usd": 132047,
+  "first_ts": "2026-11-21T20:59:53Z",
+  "last_ts": "2026-11-21T20:59:53Z",
+  "liq_usd": 132047,
+  "pair": "6yQ1sN55AWhqVvfSKxkpfqW2YQccvFuHwXH2YyG1MzAC",
+  "quote": "SOL",
+  "symbol": "ANT",
   "verdicts": {
    "u:too_young": 1
   }
