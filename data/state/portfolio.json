@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.1724663649759766,
+ "cash_sol": 3.4067944296795627,
  "closed_count": 36,
  "day": {
   "date": "2026-11-21",
@@ -30,7 +30,7 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 70.49540345143168,
+ "last_sol_usd": 70.50151756034109,
  "positions": [
   {
    "entry_exec_usd": 0.001855087158029199,
@@ -56,16 +56,16 @@
     "vol_h24": 2463247,
     "volume_accel": 1.76
    },
-   "fees_sol": 0.003985968294382147,
+   "fees_sol": 0.0071735465089730315,
    "id": 37,
-   "last_liq_usd": 127929.61,
-   "last_price_usd": 0.002122,
-   "last_ts": "2026-11-21T17:00:25Z",
-   "last_vol_h24": 2521770.85,
+   "last_liq_usd": 132351.34,
+   "last_price_usd": 0.002262,
+   "last_ts": "2026-11-21T17:05:15Z",
+   "last_vol_h24": 2528938.67,
    "missing_runs": 0,
    "opened": "2026-11-21T16:20:17Z",
    "pair": "D1LXpkFpbQr1YwVgWYQsed93czdz8hA7s9g7yb8LMFfe",
-   "peak_usd": 0.002122,
+   "peak_usd": 0.002262,
    "rugcheck": {
     "lp_locked_pct": 99.42333388387006,
     "risks": [
@@ -79,13 +79,15 @@
    },
    "rulebook_version": 9,
    "sol_in": 0.3971936588764294,
-   "sol_returned": 0.0,
+   "sol_returned": 0.23432806470358608,
+   "sold_tokens": 7441.927980112544,
+   "sold_usd": 16.745213270051558,
    "suspect": null,
    "symbol": "SHIT",
    "token": "Fn95NtGXWPaJXc4N5y9rVkUq1NwZbjBNJzPVvNRLpump",
    "tokens": 14883.855960225088,
-   "tokens_remaining": 14883.855960225088,
-   "tp1_done": false,
+   "tokens_remaining": 7441.927980112544,
+   "tp1_done": true,
    "trough_usd": 0.001814
   },
   {
@@ -114,10 +116,10 @@
    },
    "fees_sol": 0.004011382824559437,
    "id": 38,
-   "last_liq_usd": 66590.82,
-   "last_price_usd": 0.0006772,
-   "last_ts": "2026-11-21T17:00:25Z",
-   "last_vol_h24": 728264.45,
+   "last_liq_usd": 65788.23,
+   "last_price_usd": 0.0006596,
+   "last_ts": "2026-11-21T17:05:15Z",
+   "last_vol_h24": 741785.12,
    "missing_runs": 0,
    "opened": "2026-11-21T17:00:25Z",
    "pair": "4s8CAbVgaDHoPkkbitjdQZ4TfqXKuczHWdfy8HLVUbdQ",
@@ -131,12 +133,13 @@
    "rulebook_version": 9,
    "sol_in": 0.4022765649118875,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "greg",
    "token": "4Ye6Y6Vaic8cyPdfW2f9PcLhXkysBtSmV84G8X7spump",
    "tokens": 41217.730130235155,
    "tokens_remaining": 41217.730130235155,
    "tp1_done": false,
-   "trough_usd": 0.0006772
+   "trough_usd": 0.0006596
   }
  ],
  "realized_pnl_sol": -1.0280634112357077,
