@@ -17,34 +17,34 @@
  },
  "2PhhxqAAMoXm8nUzug8eRS6jVeeKVrYGH2dPfbLFzKr8": {
   "age_days": 0.13,
-  "cycles": 23,
+  "cycles": 24,
   "dex": "pumpswap",
   "first_age_days": 0.06,
   "first_liq_usd": 132047,
   "first_ts": "2026-11-21T20:59:53Z",
-  "last_ts": "2026-11-21T22:45:17Z",
-  "liq_usd": 118450,
+  "last_ts": "2026-11-21T22:50:16Z",
+  "liq_usd": 119282,
   "pair": "6yQ1sN55AWhqVvfSKxkpfqW2YQccvFuHwXH2YyG1MzAC",
   "quote": "SOL",
   "symbol": "ANT",
   "verdicts": {
-   "u:too_young": 23
+   "u:too_young": 24
   }
  },
  "5nEAxkHgswSsHLtZTy9H9oaB2wVGjQFSXZbaLA1nedUj": {
   "age_days": 0.05,
-  "cycles": 6,
+  "cycles": 7,
   "dex": "pumpswap",
   "first_age_days": 0.03,
   "first_liq_usd": 118142,
   "first_ts": "2026-11-21T22:20:16Z",
-  "last_ts": "2026-11-21T22:45:17Z",
-  "liq_usd": 125284,
+  "last_ts": "2026-11-21T22:50:16Z",
+  "liq_usd": 126076,
   "pair": "2RH8UdCZMfoojvF9DN7q8LGB2LqWiCoAtWLn7bzE9JME",
   "quote": "SOL",
   "symbol": "Singularit",
   "verdicts": {
-   "u:too_young": 6
+   "u:too_young": 7
   }
  },
  "6aZEwm86xU6mRCjzfWqQxoFSNgzDY7goTvVUqno5eYLp": {
