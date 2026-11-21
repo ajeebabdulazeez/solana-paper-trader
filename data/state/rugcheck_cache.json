@@ -44,6 +44,20 @@
   },
   "ts": "2026-11-20T06:25:12Z"
  },
+ "Fn95NtGXWPaJXc4N5y9rVkUq1NwZbjBNJzPVvNRLpump": {
+  "c": {
+   "lp_locked_pct": 99.42333388387006,
+   "risks": [
+    [
+     "High holder correlation",
+     "warn"
+    ]
+   ],
+   "score": 2201,
+   "score_normalised": 30
+  },
+  "ts": "2026-11-21T16:20:17Z"
+ },
  "NVDAVuiB7hwd3m5Wa1JuHNovPaPG6BH1QNztbKFxNjv": {
   "c": {
    "lp_locked_pct": 0,
