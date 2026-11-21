@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-21T09:25:14Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-21T09:30:22Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
 - Equity: **3.9719 SOL** (started with 5.0 SOL, -20.56%)
 - Cash: 3.9719 SOL, open positions: 0, closed trades: 36
-- Watchlist: 199 tokens, entry signals this run: 0
+- Watchlist: 200 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -28,3 +28,7 @@ Max drawdown 23.12%, average hold 128.1 min, simulated fees 0.3195 SOL.
 | 29 | JESTER | 2026-11-18T17:25:10Z | trailing_stop | +30.76% | +0.1239 |
 | 28 | HOGE | 2026-11-18T15:05:11Z | stop_loss | -18.47% | -0.0758 |
 | 27 | BAWSAQ | 2026-11-18T07:30:16Z | stop_loss | -15.03% | -0.0626 |
+
+## Errors in the last run
+
+- gecko h24_volume_usd_desc p2: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_volume_usd_desc&page=2
