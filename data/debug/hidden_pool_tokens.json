@@ -16,35 +16,35 @@
   }
  },
  "2PhhxqAAMoXm8nUzug8eRS6jVeeKVrYGH2dPfbLFzKr8": {
-  "age_days": 0.15,
-  "cycles": 30,
+  "age_days": 0.16,
+  "cycles": 31,
   "dex": "pumpswap",
   "first_age_days": 0.06,
   "first_liq_usd": 132047,
   "first_ts": "2026-11-21T20:59:53Z",
-  "last_ts": "2026-11-21T23:20:17Z",
-  "liq_usd": 124953,
+  "last_ts": "2026-11-21T23:25:15Z",
+  "liq_usd": 125524,
   "pair": "6yQ1sN55AWhqVvfSKxkpfqW2YQccvFuHwXH2YyG1MzAC",
   "quote": "SOL",
   "symbol": "ANT",
   "verdicts": {
-   "u:too_young": 30
+   "u:too_young": 31
   }
  },
  "5nEAxkHgswSsHLtZTy9H9oaB2wVGjQFSXZbaLA1nedUj": {
   "age_days": 0.08,
-  "cycles": 13,
+  "cycles": 14,
   "dex": "pumpswap",
   "first_age_days": 0.03,
   "first_liq_usd": 118142,
   "first_ts": "2026-11-21T22:20:16Z",
-  "last_ts": "2026-11-21T23:20:17Z",
-  "liq_usd": 130957,
+  "last_ts": "2026-11-21T23:25:15Z",
+  "liq_usd": 130258,
   "pair": "2RH8UdCZMfoojvF9DN7q8LGB2LqWiCoAtWLn7bzE9JME",
   "quote": "SOL",
   "symbol": "Singularit",
   "verdicts": {
-   "u:too_young": 13
+   "u:too_young": 14
   }
  },
  "6aZEwm86xU6mRCjzfWqQxoFSNgzDY7goTvVUqno5eYLp": {
@@ -145,18 +145,18 @@
  },
  "BBasaev7qFAvcPwcYfrc5EpzbSQf8vPK3U2bGEL7h1Py": {
   "age_days": 0.07,
-  "cycles": 6,
+  "cycles": 7,
   "dex": "pumpswap",
   "first_age_days": 0.05,
   "first_liq_usd": 97166,
   "first_ts": "2026-11-21T22:55:13Z",
-  "last_ts": "2026-11-21T23:20:17Z",
-  "liq_usd": 106260,
+  "last_ts": "2026-11-21T23:25:15Z",
+  "liq_usd": 105935,
   "pair": "CmtjoZnzLbF2MDWvMC6R4mFqu8oidt2s6UDXcHdVQvNG",
   "quote": "SOL",
   "symbol": "SIDOOR",
   "verdicts": {
-   "u:too_young": 6
+   "u:too_young": 7
   }
  },
  "BijBWkhN1U2rGHJa9pNJoQVkNK4pbmq2xsCRXZCjSrF8": {
