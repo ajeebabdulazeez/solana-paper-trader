@@ -84,3 +84,4 @@
 {"event":"open","id":38,"price_usd":0.0006772,"score":5.67,"sol_in":0.402277,"symbol":"greg","token":"4Ye6Y6Vaic8cyPdfW2f9PcLhXkysBtSmV84G8X7spump","ts":"2026-11-21T17:00:25Z"}
 {"chg_pct":22.6,"event":"tp1","id":37,"price_usd":0.002262,"sol_received":0.234328,"symbol":"SHIT","ts":"2026-11-21T17:05:15Z"}
 {"event":"close","id":37,"pnl_pct":14.57,"pnl_sol":0.057883,"reason":"trailing_stop","symbol":"SHIT","ts":"2026-11-21T17:10:16Z"}
+{"event":"close","id":38,"pnl_pct":-16.96,"pnl_sol":-0.068214,"reason":"stop_loss","symbol":"greg","ts":"2026-11-21T18:00:24Z"}
