@@ -48,19 +48,19 @@
   }
  },
  "AmHUZjTmqJMiyvaJb5oDFViw1Bcg1CgCd9hta37qEaQq": {
-  "age_days": 0.04,
-  "cycles": 1,
+  "age_days": 0.05,
+  "cycles": 2,
   "dex": "pumpswap",
   "first_age_days": 0.04,
   "first_liq_usd": 111812,
   "first_ts": "2026-11-21T19:00:24Z",
-  "last_ts": "2026-11-21T19:00:24Z",
-  "liq_usd": 111812,
+  "last_ts": "2026-11-21T19:05:14Z",
+  "liq_usd": 113251,
   "pair": "3DmBgjfDDYgAaGq1GKC3XCVqtU8KaNkmfpNkT62LEYc8",
   "quote": "SOL",
   "symbol": "CLAUDIA",
   "verdicts": {
-   "u:too_young": 1
+   "u:too_young": 2
   }
  },
  "AogHmS3pfpUBqzUwcynZtcqPdy69EViqERpBAA9RKGSc": {
