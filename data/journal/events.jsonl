@@ -93,3 +93,4 @@
 {"event":"close","id":40,"pnl_pct":-13.94,"pnl_sol":-0.057561,"reason":"stop_loss","symbol":"FIONA","ts":"2026-11-22T03:50:17Z"}
 {"event":"open","id":41,"price_usd":0.000316,"score":4.65,"sol_in":0.407148,"symbol":"DIGS","token":"9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump","ts":"2026-11-22T05:45:17Z"}
 {"event":"open","id":42,"price_usd":0.00719,"score":6.27,"sol_in":0.407032,"symbol":"BLOB","token":"8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump","ts":"2026-11-22T07:15:19Z"}
+{"chg_pct":27.27,"event":"tp1","id":42,"price_usd":0.009151,"sol_received":0.250476,"symbol":"BLOB","ts":"2026-11-22T07:50:21Z"}
