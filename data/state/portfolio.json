@@ -33,7 +33,7 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 69.05940594059406,
+ "last_sol_usd": 69.03169526025006,
  "positions": [
   {
    "entry_exec_usd": 0.0003178860039090977,
@@ -61,10 +61,10 @@
    },
    "fees_sol": 0.00403573921117114,
    "id": 41,
-   "last_liq_usd": 58369.9,
-   "last_price_usd": 0.0003212,
-   "last_ts": "2026-11-22T07:15:19Z",
-   "last_vol_h24": 688487.58,
+   "last_liq_usd": 57336.11,
+   "last_price_usd": 0.0003111,
+   "last_ts": "2026-11-22T07:20:16Z",
+   "last_vol_h24": 689346.73,
    "missing_runs": 0,
    "opened": "2026-11-22T05:45:17Z",
    "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
@@ -112,10 +112,10 @@
    },
    "fees_sol": 0.004035161594647612,
    "id": 42,
-   "last_liq_usd": 236117.85,
-   "last_price_usd": 0.00719,
-   "last_ts": "2026-11-22T07:15:19Z",
-   "last_vol_h24": 201245.24,
+   "last_liq_usd": 234461.93,
+   "last_price_usd": 0.007097,
+   "last_ts": "2026-11-22T07:20:16Z",
+   "last_vol_h24": 223812.94,
    "missing_runs": 0,
    "opened": "2026-11-22T07:15:19Z",
    "pair": "Hr9qopJXCuak38rxDpZduUFhdAK2BfjtoXbfQZVn2EwU",
@@ -129,12 +129,13 @@
    "rulebook_version": 9,
    "sol_in": 0.40703231892952246,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "BLOB",
    "token": "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump",
    "tokens": 3850.5919800007678,
    "tokens_remaining": 3850.5919800007678,
    "tp1_done": false,
-   "trough_usd": 0.00719
+   "trough_usd": 0.007097
   }
  ],
  "realized_pnl_sol": -0.9285215776577218,
