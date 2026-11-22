@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.9806179713868026,
- "closed_count": 42,
+ "cash_sol": 4.2402820717025085,
+ "closed_count": 43,
  "day": {
   "date": "2026-11-22",
   "opens": 4,
@@ -14,6 +14,7 @@
   "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump": "2026-11-16T20:25:12Z",
   "5wsjHxT5nW5jQuVupXUNnYszF3WoWCfGGk9LMcsCJzY8": "2026-11-14T13:25:08Z",
   "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring": "2026-11-21T22:10:17Z",
+  "7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump": "2026-11-22T11:55:15Z",
   "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump": "2026-11-20T01:05:11Z",
   "8Mi9E1V2bdPeAaRkR5yxUsAvpzP6UBUEEUrYmgKNpump": "2026-11-13T19:55:09Z",
   "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump": "2026-11-22T07:57:07Z",
@@ -33,63 +34,9 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 70.59295715049944,
- "positions": [
-  {
-   "entry_exec_usd": 0.0007401673897362806,
-   "entry_liq_usd": 73016.42,
-   "entry_mid_usd": 0.0007359,
-   "entry_sol_usd": 70.5956869527446,
-   "features": {
-    "age_days": 1.64,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.28,
-    "chg_h1": 21.98,
-    "chg_h24": 788.0,
-    "chg_h6": 34.86,
-    "chg_m5": 13.55,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1044,
-    "liq_usd": 73016,
-    "mcap": 699472,
-    "quote": "SOL",
-    "score": 2.25,
-    "txns_h1": 831,
-    "vol_h1": 61166,
-    "vol_h24": 2784590,
-    "volume_accel": 1.75
-   },
-   "fees_sol": 0.007308128517665276,
-   "id": 43,
-   "last_liq_usd": 85978.26,
-   "last_price_usd": 0.001014,
-   "last_ts": "2026-11-22T11:50:17Z",
-   "last_vol_h24": 2885830.68,
-   "missing_runs": 0,
-   "opened": "2026-11-22T11:25:15Z",
-   "pair": "58XqWPXDGp3GfU9DAFxs8C1GJwTLdHdQhJRofAF5yWTV",
-   "peak_usd": 0.001014,
-   "rugcheck": {
-    "lp_locked_pct": 76.28141417111955,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 9,
-   "sol_in": 0.41515296011545944,
-   "sol_returned": 0.2432403797005077,
-   "sold_tokens": 19603.860826806693,
-   "sold_usd": 17.407258999804927,
-   "suspect": null,
-   "symbol": "Singularity",
-   "token": "7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump",
-   "tokens": 39207.721653613386,
-   "tokens_remaining": 19603.860826806693,
-   "tp1_done": true,
-   "trough_usd": 0.0007359
-  }
- ],
- "realized_pnl_sol": -0.8474694481982469,
+ "last_sol_usd": 70.61041813023436,
+ "positions": [],
+ "realized_pnl_sol": -0.759717928297493,
  "starting_sol": 5.0,
  "trade_seq": 43
 }
