@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-22T20:20:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-22T20:25:14Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.2041 SOL** (started with 5.0 SOL, -15.92%)
+- Equity: **4.1910 SOL** (started with 5.0 SOL, -16.18%)
 - Cash: 3.7385 SOL, open positions: 1, closed trades: 44
-- Watchlist: 248 tokens, entry signals this run: 0
+- Watchlist: 247 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -18,7 +18,7 @@ Max drawdown 23.12%, average hold 123.0 min, simulated fees 0.3932 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 45 | FLOAT | 2026-11-22T18:50:17Z | 0.415 | +13.5% | no |
+| 45 | FLOAT | 2026-11-22T18:50:17Z | 0.415 | +10.1% | no |
 
 ## Last 10 closed
 
@@ -34,7 +34,3 @@ Max drawdown 23.12%, average hold 123.0 min, simulated fees 0.3932 SOL.
 | 37 | SHIT | 2026-11-21T17:10:16Z | trailing_stop | +14.57% | +0.0579 |
 | 36 | Rings | 2026-11-21T02:05:13Z | trailing_stop | +12.90% | +0.0506 |
 | 35 | FLOAT | 2026-11-20T22:15:16Z | trailing_stop | +20.16% | +0.0775 |
-
-## Errors in the last run
-
-- gecko h24_tx_count_desc p5: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_tx_count_desc&page=5
