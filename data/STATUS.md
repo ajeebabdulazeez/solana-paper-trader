@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-22T14:10:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-22T14:15:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.3077 SOL** (started with 5.0 SOL, -13.85%)
+- Equity: **4.2465 SOL** (started with 5.0 SOL, -15.07%)
 - Cash: 3.8163 SOL, open positions: 1, closed trades: 43
-- Watchlist: 204 tokens, entry signals this run: 0
+- Watchlist: 202 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -18,7 +18,7 @@ Max drawdown 23.12%, average hold 124.9 min, simulated fees 0.3854 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 44 | DESSA | 2026-11-22T14:05:15Z | 0.424 | +17.7% | no |
+| 44 | DESSA | 2026-11-22T14:05:15Z | 0.424 | +3.3% | no |
 
 ## Last 10 closed
 
