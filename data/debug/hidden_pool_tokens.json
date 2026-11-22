@@ -337,18 +337,18 @@
  },
  "C6rZceZKzd7HJJrzfpABFPMrqTPaGAV8D44pdsyxT2Eq": {
   "age_days": 0.04,
-  "cycles": 4,
+  "cycles": 5,
   "dex": "pumpswap",
   "first_age_days": 0.03,
   "first_liq_usd": 111352,
   "first_ts": "2026-11-22T18:45:18Z",
-  "last_ts": "2026-11-22T19:00:23Z",
-  "liq_usd": 120246,
+  "last_ts": "2026-11-22T19:05:16Z",
+  "liq_usd": 122387,
   "pair": "6aMCDg5fP4Q2VkqkNpTqzgoJmzd7pAqxRqkzTygBPXpF",
   "quote": "SOL",
   "symbol": "DCTY",
   "verdicts": {
-   "u:too_young": 4
+   "u:too_young": 5
   }
  },
  "DYDSuJumtLMPg8B24p1xVT4yQSjRSawmk261cQs5EeXw": {
