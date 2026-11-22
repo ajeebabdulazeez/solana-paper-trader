@@ -92,3 +92,4 @@
 {"event":"suspect_price","id":40,"last_price_usd":0.001853,"liq_usd":151262.1,"price_usd":0.002323,"symbol":"FIONA","traded_usd":2764,"ts":"2026-11-22T03:30:20Z"}
 {"event":"close","id":40,"pnl_pct":-13.94,"pnl_sol":-0.057561,"reason":"stop_loss","symbol":"FIONA","ts":"2026-11-22T03:50:17Z"}
 {"event":"open","id":41,"price_usd":0.000316,"score":4.65,"sol_in":0.407148,"symbol":"DIGS","token":"9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump","ts":"2026-11-22T05:45:17Z"}
+{"event":"open","id":42,"price_usd":0.00719,"score":6.27,"sol_in":0.407032,"symbol":"BLOB","token":"8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump","ts":"2026-11-22T07:15:19Z"}
