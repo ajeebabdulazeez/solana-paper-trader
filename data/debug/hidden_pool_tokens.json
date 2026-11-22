@@ -145,18 +145,18 @@
  },
  "9YwwWWPkcnRp2aSJxKvCH91BALUt5cG8KFogfZpsUFpe": {
   "age_days": 0.05,
-  "cycles": 6,
+  "cycles": 7,
   "dex": "pumpswap",
   "first_age_days": 0.03,
   "first_liq_usd": 110701,
   "first_ts": "2026-11-22T16:00:26Z",
-  "last_ts": "2026-11-22T16:25:13Z",
-  "liq_usd": 117715,
+  "last_ts": "2026-11-22T16:30:20Z",
+  "liq_usd": 119573,
   "pair": "FfU7BAZbFR3F5hU9kqFTbWiB2TrPULWaKzpKMoWX4r4C",
   "quote": "SOL",
   "symbol": "CLAUDIA",
   "verdicts": {
-   "u:too_young": 6
+   "u:too_young": 7
   }
  },
  "A9MDAAggN8WBzuEwWH6LouKzt6BYaziiH7nsSxxUwyYN": {
@@ -256,19 +256,19 @@
   }
  },
  "BYPTnJqouGUf8aprD9h9bbWdue5VgjFik7ds7CKvf9Qx": {
-  "age_days": 0.04,
-  "cycles": 5,
+  "age_days": 0.05,
+  "cycles": 6,
   "dex": "pumpswap",
   "first_age_days": 0.03,
   "first_liq_usd": 124144,
   "first_ts": "2026-11-22T16:05:14Z",
-  "last_ts": "2026-11-22T16:25:13Z",
-  "liq_usd": 128333,
+  "last_ts": "2026-11-22T16:30:20Z",
+  "liq_usd": 129792,
   "pair": "6xpfUA8pG7rqGKApbRp9tqripvAVjU14wtjwCwyPnTHz",
   "quote": "SOL",
   "symbol": "MCAT",
   "verdicts": {
-   "u:too_young": 5
+   "u:too_young": 6
   }
  },
  "BijBWkhN1U2rGHJa9pNJoQVkNK4pbmq2xsCRXZCjSrF8": {
@@ -464,19 +464,19 @@
   }
  },
  "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": {
-  "age_days": 0.82,
-  "cycles": 71,
+  "age_days": 0.83,
+  "cycles": 72,
   "dex": "meteora",
   "first_age_days": 0.33,
   "first_liq_usd": 34370,
   "first_ts": "2026-11-22T04:35:14Z",
-  "last_ts": "2026-11-22T16:25:13Z",
-  "liq_usd": 32902,
+  "last_ts": "2026-11-22T16:30:20Z",
+  "liq_usd": 32636,
   "pair": "3peugE6Fm4fpaVvrV2KBFN3nvLbCGEhGoUXDDxAHuscR",
   "quote": "SOL",
   "symbol": "SIDOOR",
   "verdicts": {
-   "u:too_young": 71
+   "u:too_young": 72
   }
  }
 }
