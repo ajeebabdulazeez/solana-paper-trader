@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.7161355148583737,
- "closed_count": 39,
+ "cash_sol": 4.071478422342279,
+ "closed_count": 40,
  "day": {
   "date": "2026-11-22",
   "opens": 1,
@@ -20,6 +20,7 @@
   "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump": "2026-11-16T15:20:15Z",
   "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump": "2026-11-19T11:20:12Z",
   "9rbKkz2BDQBVgZmrHY6d7PTq2ge91gkpEyE4y9PPpump": "2026-11-19T15:15:14Z",
+  "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump": "2026-11-22T03:50:17Z",
   "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-17T16:20:12Z",
   "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-20T22:15:16Z",
   "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump": "2026-11-20T13:10:19Z",
@@ -32,61 +33,9 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 69.3828351012536,
- "positions": [
-  {
-   "entry_exec_usd": 0.001927392930052896,
-   "entry_liq_usd": 136901.55,
-   "entry_mid_usd": 0.001917,
-   "entry_sol_usd": 70.21197471178878,
-   "features": {
-    "age_days": 2.17,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.21,
-    "chg_h1": 14.11,
-    "chg_h24": 27.77,
-    "chg_h6": 11.65,
-    "chg_m5": -0.18,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.0725,
-    "liq_usd": 136902,
-    "mcap": 1887567,
-    "quote": "SOL",
-    "score": 2.11,
-    "txns_h1": 2600,
-    "vol_h1": 238612,
-    "vol_h24": 3179431,
-    "volume_accel": 1.75
-   },
-   "fees_sol": 0.004064519730476874,
-   "id": 40,
-   "last_liq_usd": 130774.73,
-   "last_price_usd": 0.001767,
-   "last_ts": "2026-11-22T03:45:17Z",
-   "last_vol_h24": 3022703.83,
-   "missing_runs": 0,
-   "opened": "2026-11-22T01:00:26Z",
-   "pair": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
-   "peak_usd": 0.002228,
-   "rugcheck": {
-    "lp_locked_pct": 69.51254714824063,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 9,
-   "sol_in": 0.41290394609537484,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "FIONA",
-   "token": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
-   "tokens": 14893.394604454965,
-   "tokens_remaining": 14893.394604454965,
-   "tp1_done": false,
-   "trough_usd": 0.001753
-  }
- ],
- "realized_pnl_sol": -0.8709605390462525,
+ "last_sol_usd": 69.2524115755627,
+ "positions": [],
+ "realized_pnl_sol": -0.9285215776577218,
  "starting_sol": 5.0,
  "trade_seq": 40
 }
