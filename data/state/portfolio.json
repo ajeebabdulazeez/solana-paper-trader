@@ -63,10 +63,10 @@
    },
    "fees_sol": 0.004076949274397494,
    "id": 45,
-   "last_liq_usd": 386131.63,
-   "last_price_usd": 0.00416,
-   "last_ts": "2026-11-22T19:20:20Z",
-   "last_vol_h24": 402782.73,
+   "last_liq_usd": 385799.8,
+   "last_price_usd": 0.004152,
+   "last_ts": "2026-11-22T19:25:15Z",
+   "last_vol_h24": 402822.99,
    "missing_runs": 0,
    "opened": "2026-11-22T18:50:17Z",
    "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
@@ -86,7 +86,7 @@
    "tokens": 6530.255370941055,
    "tokens_remaining": 6530.255370941055,
    "tp1_done": false,
-   "trough_usd": 0.00416
+   "trough_usd": 0.004152
   }
  ],
  "realized_pnl_sol": -0.8461014512050133,
