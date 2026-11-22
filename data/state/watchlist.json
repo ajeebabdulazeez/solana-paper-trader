@@ -1,7 +1,7 @@
 {
  "145hQTcjnmxhVm6RgCmywWWkiufV3Q56gtqf4RF3EBgj": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:00:25Z",
   "pools_checked": "2026-11-22T20:40:17Z",
@@ -11,7 +11,7 @@
  },
  "1AJSpWv8WFapJsVhiQXxif6k3dgmcDMP6dVUUMpbybR": {
   "first_seen": "2026-11-22T15:30:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:50:19Z",
   "source": "gecko:vol7",
@@ -20,7 +20,7 @@
  },
  "23vu8bnWQuLvsRLTiTcxt3i3YWTdxqCqamTi2gTCU4pz": {
   "first_seen": "2026-11-22T20:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:30:21Z",
   "source": "profiles_latest",
@@ -29,7 +29,7 @@
  },
  "2F9bdBS6wNDvLP1AAEw5mHrJe2mNXkhPZJdsggkTpump": {
   "first_seen": "2026-11-20T10:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 979497,
   "low_since": null,
   "source": "gecko:tx6",
@@ -37,7 +37,7 @@
  },
  "2Gt16sPz97kjvVXAz7aRbKG718hmY9HiyboieZKBpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4134,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -46,8 +46,8 @@
  },
  "2KRbMf4itijwsTHb5dQtiBpfptyNmhpVzmpdj4qqN2yx": {
   "first_seen": "2026-11-20T23:10:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 30195,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 30226,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "BANDANA",
@@ -55,8 +55,8 @@
  },
  "2MdCPWNFufmJSZhajSvi1yqBFTB24GQ4ipjNcB8Vpump": {
   "first_seen": "2026-11-22T15:35:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 28134,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 29114,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "profiles_latest",
   "symbol": "FOAM",
@@ -64,7 +64,7 @@
  },
  "2ShsPccWG7P4qBCynx6EQkEB9ga2GWgemZnTEn86pump": {
   "first_seen": "2026-11-22T19:15:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 15,
   "low_since": "2026-11-22T19:20:20Z",
   "source": "profiles_latest",
@@ -73,7 +73,7 @@
  },
  "2eStC4PwJqfp2wLT2FbRjvwmU8SQkPoWqA6HFx1gpump": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1520,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "profiles_latest",
@@ -82,7 +82,7 @@
  },
  "2ffmm3EfCjgueUr7MKWmdRuP1bSGgJF7a4jvqMnppump": {
   "first_seen": "2026-11-22T17:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 9247,
   "low_since": "2026-11-22T17:50:18Z",
   "source": "profiles_latest",
@@ -97,7 +97,7 @@
  },
  "2kBH6UcR8TitebUbKNYNvjUkSFWaiFBJ7nAPTKQwpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 7253,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -106,7 +106,7 @@
  },
  "2q68mqEbjwmnMjs1o3KZDNZVyMv6RZKkHcm64iinpump": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 26899,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:degen",
@@ -115,8 +115,8 @@
  },
  "2w4jvePDKqNfzn8g358kGhoJn8vRhvQUYck4xLB1pump": {
   "first_seen": "2026-11-22T16:15:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 4628,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 4632,
   "low_since": "2026-11-22T16:15:18Z",
   "source": "profiles_latest",
   "symbol": "poorcat",
@@ -124,15 +124,15 @@
  },
  "2wh7dPQV4w1tgVQzYzJB683fqxcTkU4A8WeaoNZJpump": {
   "first_seen": "2026-11-21T10:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 104090,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 104151,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "AODT"
  },
  "33q5Kax2piZ6mwyuxbEn8cbWD9XzTZ9Bkykfj4emuNBd": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 14783,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "meta:cat",
@@ -141,7 +141,7 @@
  },
  "37dRkSVpirqLLh2m8jdx2JXBFcNqFi7pdBgqDodppump": {
   "first_seen": "2026-11-22T15:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 2045,
   "low_since": "2026-11-22T15:25:15Z",
   "source": "profiles_latest",
@@ -150,7 +150,7 @@
  },
  "3BeJ9zCgQhaqKMu2HgKJ79yQBChD1Pf3hPwRX44fpump": {
   "first_seen": "2026-11-22T16:55:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 26699,
   "low_since": "2026-11-22T16:55:16Z",
   "source": "meta:cat",
@@ -159,8 +159,8 @@
  },
  "3D7YQcnXi6RMjWxheiE8VLuGXJTtgQkmyugGYvzjpump": {
   "first_seen": "2026-11-22T05:10:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 31673,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 33282,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "snowball",
@@ -168,16 +168,16 @@
  },
  "3N6Mp8YQuVDfEtyuyJS72s4MRrgQuKY34gvYZD5Kpump": {
   "first_seen": "2026-11-22T02:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 75465,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 75958,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "PushCoin"
  },
  "3NLPK4MtmJXgpFxhgyxth3Vmf7VmhdDAvnk6G6XYpump": {
   "first_seen": "2026-11-22T15:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 3190,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 3194,
   "low_since": "2026-11-22T15:05:14Z",
   "source": "profiles_latest",
   "symbol": "Plurality",
@@ -185,7 +185,7 @@
  },
  "3TWgDvYBL2YPET2LxnWAwsMeoA8aL4DutNuwat2pKCjC": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 28188,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "meta:cat",
@@ -194,8 +194,8 @@
  },
  "3b7WvfRxRaoMuq4j6JWJzrL5mym3Km3QzfX5dqCopump": {
   "first_seen": "2026-11-22T18:35:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 12580,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 12513,
   "low_since": "2026-11-22T18:35:16Z",
   "source": "boosts_top",
   "symbol": "Bigfoot",
@@ -203,7 +203,7 @@
  },
  "3bzeQJqDPfQQbxJ6VmtMkXyyQEJrj9HS1SMvHR1Hpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 7039,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -212,7 +212,7 @@
  },
  "3e8uuctBvWyE3JsrhR5eJRuxhserb4WE6oZSvcGGpump": {
   "first_seen": "2026-11-22T20:20:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1314,
   "low_since": "2026-11-22T20:20:18Z",
   "source": "profiles_latest",
@@ -221,8 +221,8 @@
  },
  "3eJ4Ww7Z2eMbNMFPrDcn4cv7WD6CQgGWXNj41eCBpump": {
   "first_seen": "2026-11-22T20:35:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 8730,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 7841,
   "low_since": "2026-11-22T20:35:15Z",
   "source": "profiles_latest",
   "symbol": "Incidents",
@@ -230,7 +230,7 @@
  },
  "3esA88fPY1vaXdPTPxjsL76DYDA73DDSs6J6KfmHGfWx": {
   "first_seen": "2026-11-22T16:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:05:14Z",
   "pools_checked": "2026-11-22T18:05:14Z",
@@ -240,7 +240,7 @@
  },
  "3fGoNjPohYRVPk9iJuwEW5WuURU5gmAdSRgNgeaanexQ": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 13436,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "meta:dog",
@@ -249,7 +249,7 @@
  },
  "3gDAjymqTF19GVw4TcB8sAKd3yLR2dfEzJ4Wztm2pump": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6594,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:degen",
@@ -258,8 +258,8 @@
  },
  "3hi7qBus11Xg9Pmj7xuuK9pjmKF7UUhT5uh7SXQbhsQt": {
   "first_seen": "2026-11-22T18:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 34310,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 31189,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "IF",
@@ -267,7 +267,7 @@
  },
  "3kSWzSWE988DRfdc4sW9Sn2Wqc6jL4pz7nqURXgD6DwP": {
   "first_seen": "2026-11-22T15:20:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:20:17Z",
   "pools_checked": "2026-11-22T20:40:17Z",
@@ -277,7 +277,7 @@
  },
  "3zomtMhRRsBpLZeJLS86fgueXE7xAhoN8dnymNh8pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5540,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -286,15 +286,15 @@
  },
  "412ECWXN3jGbd1kn8ck7eeupWttkmrFkNm9JqfAzpump": {
   "first_seen": "2026-11-22T17:10:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 75058,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 74630,
   "low_since": null,
   "source": "gecko:trend2",
   "symbol": "shiit"
  },
  "412zDygnwP9DzitnQVgRKUFFTDmrYScFch6P2k39pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 21172,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -303,7 +303,7 @@
  },
  "41rsz6TV4HuHMCP5rtcnQ5FPza16HKhHkSC8oAp1pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5172,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -312,8 +312,8 @@
  },
  "4775QEyTS7ECpvhbeEg1a5XUjpK6CtEJwRpw6vvwpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 5748,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 5690,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
   "symbol": "\u30cb\u30fc\u30ca",
@@ -321,8 +321,8 @@
  },
  "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 342217,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 341525,
   "low_since": null,
   "source": "gecko",
   "symbol": "mihao"
@@ -335,23 +335,23 @@
  },
  "4Ye6Y6Vaic8cyPdfW2f9PcLhXkysBtSmV84G8X7spump": {
   "first_seen": "2026-11-21T10:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 43611,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 43468,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "greg"
  },
  "4npJ3avxnGhCzKbWQpLrQXAHsjWzKr4JqBsbu5Fspump": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 59502,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 58576,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "cateball"
  },
  "4pccdU3KnLxfbey63BhQB4xJMLHbP3mdZWiXwN6epump": {
   "first_seen": "2026-11-22T20:35:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:35:15Z",
   "source": "profiles_latest",
@@ -360,7 +360,7 @@
  },
  "4zEh89StirBvyHgiphKHNYAi8Fa6FVzVZjNUffcQpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5078,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -369,7 +369,7 @@
  },
  "58rUgmCEJYj1rax9QFjXuHwj3gkwJN1LhdKedyUwoZa6": {
   "first_seen": "2026-11-22T14:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5585,
   "low_since": "2026-11-22T14:45:18Z",
   "source": "meta:degen",
@@ -378,25 +378,25 @@
  },
  "5HkbS1Tp2XnBrFKq1eb1xcimxBGSTV5j6sCNLVdvLiEr": {
   "first_seen": "2026-11-22T17:25:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:25:14Z",
-  "pools_checked": "2026-11-22T20:05:13Z",
+  "pools_checked": "2026-11-22T20:45:16Z",
   "source": "gecko:vol6",
   "symbol": "CATEMAS",
   "too_old": false
  },
  "5MqbKwaf8TrrYhtb7ZxHuBK7wENyxffhkxAH8C3b4yuE": {
   "first_seen": "2026-11-22T19:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 202849,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 207669,
   "low_since": null,
   "source": "gecko:vol7",
   "symbol": "XVIDIA"
  },
  "5SRer48NRfmhsut1n4ZwSAVUJAErNjdKcXTMVaxdpump": {
   "first_seen": "2026-11-22T16:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 14490,
   "low_since": "2026-11-22T16:05:14Z",
   "source": "meta:cat",
@@ -405,7 +405,7 @@
  },
  "5bVoNpJsYRx6QRvfPkxvWpygMycWwJiZsNKsLR13pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4208,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -414,15 +414,15 @@
  },
  "5h2BLx2aN1JrDfa1QAmKU7WWAkuA7rrrhAzk9mVkpump": {
   "first_seen": "2026-11-20T21:15:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 723419,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 724682,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "UODF"
  },
  "5kqi4kDq56H9UfHq14jXtmy189zpyxaYdXCQ4qHvDtHW": {
   "first_seen": "2026-11-20T22:40:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 99441,
   "low_since": null,
   "source": "boosts_top",
@@ -430,15 +430,15 @@
  },
  "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump": {
   "first_seen": "2026-11-13T13:43:28Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 92061,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 92344,
   "low_since": null,
   "source": "meta:dog",
   "symbol": "Max"
  },
  "5tLjUZvsJ6fFBMspY2j2G5b8TNM8YXMjGYsNeVGLjxQ": {
   "first_seen": "2026-11-22T18:10:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:30:21Z",
   "source": "gecko:vol8",
@@ -447,7 +447,7 @@
  },
  "61uiuu5aAc2HG1ZQaHd3opfLnK6cM4FQnE1jRi28pump": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 13112,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:dog",
@@ -456,8 +456,8 @@
  },
  "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring": {
   "first_seen": "2026-11-15T18:20:12Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 140487,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 140721,
   "low_since": null,
   "source": "gecko:trend2",
   "symbol": "Rings",
@@ -465,7 +465,7 @@
  },
  "67fPCASQWqYuN3AcwC3eid4nrzBjd3D8kh6LJsbrpump": {
   "first_seen": "2026-11-22T20:10:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:10:19Z",
   "source": "profiles_latest",
@@ -474,16 +474,16 @@
  },
  "6C9r2gzu8Pr54hTevHo3x5gSj9JqtpApj7obJnrtpump": {
   "first_seen": "2026-11-21T16:10:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 80563,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 80564,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "ROCKET"
  },
  "6EiCk8WmoLai1ziCHa8D2aujGdB7rYr3xGs3x2avpump": {
   "first_seen": "2026-11-22T16:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 16577,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 18770,
   "low_since": "2026-11-22T16:45:16Z",
   "source": "profiles_latest",
   "symbol": "casual",
@@ -491,7 +491,7 @@
  },
  "6P7oshQyAiGE1Wa2FGFM4WRjipEzwYGf7k6ckqnqiBDk": {
   "first_seen": "2026-11-22T17:20:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:00:23Z",
   "source": "gecko:vol5",
@@ -500,7 +500,7 @@
  },
  "6RE3WnDYmkKquontjFXD2me6vuqjan45EHVCtL3kpump": {
   "first_seen": "2026-11-22T15:10:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 3787,
   "low_since": "2026-11-22T15:10:18Z",
   "source": "boosts_top",
@@ -509,7 +509,7 @@
  },
  "6WFtGCSnhDHtufXhCaPHbc2newgKxmt87eRSUZDURHfv": {
   "first_seen": "2026-11-22T15:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:20:19Z",
   "source": "gecko:vol4",
@@ -518,7 +518,7 @@
  },
  "6Z6qeAuA45G8RrxG7hjZVdPHn1rNHtedJy9WAXg9pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 9646,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -527,8 +527,8 @@
  },
  "6ZbWPYxFf8XyQ6dncrPAef1yz4W9nRF6rX3CYuE7pump": {
   "first_seen": "2026-11-22T17:35:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 25507,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 25125,
   "low_since": "2026-11-22T18:10:17Z",
   "source": "gecko:tx2",
   "symbol": "\u6500\u8c79\u8c79",
@@ -536,7 +536,7 @@
  },
  "6aZ8h9su1ta8bBFCJNuzQVAkcxPHEDy3nevZtgCCpump": {
   "first_seen": "2026-11-22T17:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:30:21Z",
   "source": "boosts_top",
@@ -545,7 +545,7 @@
  },
  "6e5a5QMg4Jf3ti8t9RYo3Yb8FZAYqwe8Tg5WMVaYpump": {
   "first_seen": "2026-11-22T17:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1377,
   "low_since": "2026-11-22T17:10:19Z",
   "source": "profiles_latest",
@@ -554,16 +554,16 @@
  },
  "71m6i7HRdHvPPEWJAUHbUL542sCKdfk32m2VcxAopump": {
   "first_seen": "2026-11-22T15:10:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 733385,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 733831,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "USOI"
  },
  "7CvW68FD9KjNYGByfykhaNps7VNPLN8dFwMRfmgQpump": {
   "first_seen": "2026-11-22T15:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 22870,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 22201,
   "low_since": "2026-11-22T15:05:14Z",
   "source": "takeovers_latest",
   "symbol": "CUNTS",
@@ -571,24 +571,24 @@
  },
  "7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump": {
   "first_seen": "2026-11-21T16:40:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 74137,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 71983,
   "low_since": null,
   "source": "gecko:trend1",
   "symbol": "Singularity"
  },
  "7SL2VnfYsChvog5oQY9Nmtqu1wceaMiQzWoqoLQpump": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 133191,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 131651,
   "low_since": null,
   "source": "gecko",
   "symbol": "NIO"
  },
  "7Y2NE9owdL29eQxSpAPu5EkPUM4X9RJsawTMQ8Yqpump": {
   "first_seen": "2026-11-22T17:25:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 3484,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 3513,
   "low_since": "2026-11-22T17:25:14Z",
   "source": "profiles_latest",
   "symbol": "tremp",
@@ -596,7 +596,7 @@
  },
  "7YoAymCyauHAXus3snMEKcLgRx546MrHuBW3EuUNKKQs": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 9080,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "meta:dog",
@@ -611,7 +611,7 @@
  },
  "7i8AXjBdKGjGpRo4Ex5aDKUaX55xed5Hrgoww1G9pump": {
   "first_seen": "2026-11-20T23:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 35792,
   "low_since": null,
   "source": "boosts_top",
@@ -619,25 +619,16 @@
  },
  "7pkdB6GHX8yxdxiZFeDiNwRY8aD56eAB11QpRd54PLMT": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 7220,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:degen",
   "symbol": "btc",
   "too_old": false
  },
- "7rRgxeCnZJxBW6yi9CSQZ6yFX8vgudjY45NmBQ1AHPPo": {
-  "first_seen": "2026-11-22T14:40:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 0,
-  "low_since": "2026-11-22T14:40:18Z",
-  "source": "boosts_top",
-  "symbol": "HIPPO",
-  "too_old": false
- },
  "7wH5YKNnhcjyqUUXZwsdQWK26JVj9ejfNwDFfR1VCyod": {
   "first_seen": "2026-11-22T15:55:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 10781,
   "low_since": "2026-11-22T15:55:18Z",
   "source": "meta:cat",
@@ -646,7 +637,7 @@
  },
  "7z5KZpYj7BEnGKGCY3kDkaX32ueBSNp8QjvFq8Lxpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 7853,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -655,7 +646,7 @@
  },
  "7zeVHs7n7TFQf9X86MZNzBcEEVTnyyECeNbAghL3pump": {
   "first_seen": "2026-11-22T19:15:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:15:18Z",
   "source": "boosts_top",
@@ -664,7 +655,7 @@
  },
  "81QvEpd65iGBHN95sWi6efrmsViwXf1BsWdKaeXwWbbo": {
   "first_seen": "2026-11-22T17:25:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:45:18Z",
   "source": "gecko:vol6",
@@ -673,8 +664,8 @@
  },
  "848TM75nmuyK4hVsthw6qNWd5iVkY2nHJi3M1Trfbonk": {
   "first_seen": "2026-11-22T17:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 6122,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 6129,
   "low_since": "2026-11-22T17:50:18Z",
   "source": "profiles_latest",
   "symbol": "Inu",
@@ -682,7 +673,7 @@
  },
  "84cAEWqiDsV5xXh6CB69Hi3HcnumBbdjH4THfyorpump": {
   "first_seen": "2026-11-22T19:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6277,
   "low_since": "2026-11-22T19:45:16Z",
   "source": "meta:internet-animals",
@@ -691,7 +682,7 @@
  },
  "89S7oVB4hui8ceJqhHreWB7fcxdthfvoB7z2pfJtpump": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 11362,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:degen",
@@ -700,7 +691,7 @@
  },
  "8HyG5qPSp1M5Ez8KvL67NktTyCtHvr6Xn87b2UHNpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4494,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -709,7 +700,7 @@
  },
  "8JgUhcwQpK6VXhMRTWmnAbPdYyATdU9jZss5gPKZ9CJe": {
   "first_seen": "2026-11-22T18:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:15:18Z",
   "pools_checked": "2026-11-22T18:15:18Z",
@@ -719,8 +710,8 @@
  },
  "8U9611BhPXG8ubN77wkeN7Gs1ooAXQLy65KQDZr9pump": {
   "first_seen": "2026-11-22T20:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 0,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 16389,
   "low_since": "2026-11-22T20:40:17Z",
   "source": "profiles_latest",
   "symbol": "ASS",
@@ -728,7 +719,7 @@
  },
  "8VWH6ntFczuCzTgGeNVarnRDfi6utetSBn3JfTLxpump": {
   "first_seen": "2026-11-22T20:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:40:17Z",
   "source": "profiles_latest",
@@ -737,8 +728,8 @@
  },
  "8Y6GQsN7FnZ9ygvUYY6C7ybiHVUomcwwhWFbR61Jpump": {
   "first_seen": "2026-11-22T19:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 1658,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 1659,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "profiles_latest",
   "symbol": "SIGIL",
@@ -746,8 +737,8 @@
  },
  "8eyeL2ndAM1r3bShu8LLkAma8FkgzsFg1LMMCbjHpump": {
   "first_seen": "2026-11-22T15:50:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 2735,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 2675,
   "low_since": "2026-11-22T15:50:19Z",
   "source": "profiles_latest",
   "symbol": "FRANK",
@@ -755,15 +746,15 @@
  },
  "8iJjQDTr2HVWcw696Sj4WkzitJDDEiB5ukr2rJ8gpump": {
   "first_seen": "2026-11-17T19:05:10Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 104232,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 104399,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "XCAT"
  },
  "8jjJztqnvx62yAtj4rwUQWxboU52MqBjtZztc76tpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4068,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -772,7 +763,7 @@
  },
  "8mJmkdnmdpdVg7K8DurM6bdjpEqFta2BRYBgFsD8pump": {
   "first_seen": "2026-11-22T20:25:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1360,
   "low_since": "2026-11-22T20:25:14Z",
   "source": "profiles_latest",
@@ -781,8 +772,8 @@
  },
  "8nq3Jmgd1tpbroiuVMehQyC266ZUZJU2BTad8Nigpump": {
   "first_seen": "2026-11-22T15:30:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 11395,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 11513,
   "low_since": "2026-11-22T15:30:20Z",
   "source": "boosts_top",
   "symbol": "STANK",
@@ -790,23 +781,23 @@
  },
  "8s11PkgQt4ZzdZ7oo84hK5t9HG1EvdgAjcg4W7Lpump": {
   "first_seen": "2026-11-16T05:30:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 226687,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 227691,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "BLOB"
  },
  "934ebXak4Cb1J7UNNSVcMzNEztRR4GhKaimrXxdMQsy5": {
   "first_seen": "2026-11-22T20:35:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 217396,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 218920,
   "low_since": null,
   "source": "gecko:vol2",
   "symbol": "CATME"
  },
  "9Eu7WS2WqzQ4jvW4zXH7PaxDH8rpNDUrLuHKrUbbpump": {
   "first_seen": "2026-11-22T20:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:30:21Z",
   "source": "boosts_top",
@@ -815,7 +806,7 @@
  },
  "9GtiYgB7hK3VTznQbwskzB5jW3teMaLwyHPDoWubdQTw": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:30:21Z",
   "source": "gecko:vol3",
@@ -824,7 +815,7 @@
  },
  "9HQQTPne4M8C1mKCzoxZ1Yc8c7ob2rjXqaMPpDYvodQq": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:55:15Z",
   "source": "gecko:vol5",
@@ -833,15 +824,15 @@
  },
  "9Pq7aLAbhDG2tTnS22cm6kuysZVcZpLFE368HWuypump": {
   "first_seen": "2026-11-16T18:15:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 128622,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 128479,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "JOB"
  },
  "9QSjVAg5rDfBZPhvKwZcB63St3r6bqohP3Adurkjpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 18917,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -850,8 +841,8 @@
  },
  "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump": {
   "first_seen": "2026-11-15T07:50:10Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 53301,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 53718,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "DIGS",
@@ -859,7 +850,7 @@
  },
  "9SeCSdbPzz95KomGUGEV9Shn2zGXNmMJhE9J72Hipump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5468,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -868,8 +859,8 @@
  },
  "9WLkGszniwQjErPAYgwso71SbnJdz4p7HvEoWjNCpump": {
   "first_seen": "2026-11-22T14:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 8916,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 8056,
   "low_since": "2026-11-22T14:45:18Z",
   "source": "profiles_latest",
   "symbol": "Jupiter",
@@ -877,7 +868,7 @@
  },
  "9YwwWWPkcnRp2aSJxKvCH91BALUt5cG8KFogfZpsUFpe": {
   "first_seen": "2026-11-22T16:00:26Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:30:21Z",
   "pools_checked": "2026-11-22T17:30:21Z",
@@ -887,7 +878,7 @@
  },
  "9ZtbETDNjnST9Y2zs82FZYy49xUMPgqXRh46YjjRpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 16219,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -896,8 +887,8 @@
  },
  "9cmXfuC26anZtH9AUWVzpUxU1UJ7PPogYxftYTepump": {
   "first_seen": "2026-11-15T21:30:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 45593,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 44995,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "WISHMAS",
@@ -905,8 +896,8 @@
  },
  "9g4Pib6AM3oVdP9YA7ZcssAXAuhoUzkjR8w27doYpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 21004,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 21058,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
   "symbol": "Pepper",
@@ -914,8 +905,8 @@
  },
  "9hjBLBrc7WZW2H8UQvBAvG5WiTZotXUv2Bdcn4f4pump": {
   "first_seen": "2026-11-18T15:15:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 76813,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 76794,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "DCTY",
@@ -923,7 +914,7 @@
  },
  "9ref3puA9wJ41bH65P7GvAVmC4JeWBAQC5SVaAzHpump": {
   "first_seen": "2026-11-22T19:35:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1373,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "gecko:tx2",
@@ -932,15 +923,15 @@
  },
  "9rjf8XzpL6ihKKjSFo4SjCaxoP1b82nV4kJn4qTWpump": {
   "first_seen": "2026-11-20T14:00:24Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 2048943,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 2049364,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "UODF"
  },
  "9yWFUKC2TNzZs6e1PzGg4kLx9yYrqiTfoT1qcsNNpump": {
   "first_seen": "2026-11-22T19:10:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6667,
   "low_since": "2026-11-22T19:10:17Z",
   "source": "meta:degen",
@@ -949,7 +940,7 @@
  },
  "A37ozuu1D1pP1cM27y1HYkSArVQbgsZNN7Va74yNpump": {
   "first_seen": "2026-11-22T18:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:00:25Z",
   "source": "profiles_latest",
@@ -958,15 +949,15 @@
  },
  "AAb2JkmKSJgvz4bFZoB8432Qj2Gkt7M3o7Rg3vqjpump": {
   "first_seen": "2026-11-19T03:10:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 43352,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 43122,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "Founder"
  },
  "ACHRgAkH9qoRXhi7grXLDoJN3QjwR3Kp1UnJN7uwEwFa": {
   "first_seen": "2026-11-22T16:20:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1634,
   "low_since": "2026-11-22T16:20:19Z",
   "source": "profiles_latest",
@@ -975,15 +966,15 @@
  },
  "AEQVFeGb3P2BE9hEC5zgQtPmuo7yjYj1CVBGvhUjcRR9": {
   "first_seen": "2026-11-22T19:55:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 173838,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 178091,
   "low_since": null,
   "source": "gecko:vol3",
   "symbol": "MCAT"
  },
  "AHDP4wVa73GQYSP6AhrC2f5eE5CfkpCyyzwLg5WQpump": {
   "first_seen": "2026-11-22T16:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1637,
   "low_since": "2026-11-22T16:45:16Z",
   "source": "profiles_latest",
@@ -992,7 +983,7 @@
  },
  "ANP1wJHYWYQPfrZvg8FnjduwfBVJhRV3xqKcs3yapump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 10245,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1001,15 +992,15 @@
  },
  "ANTBTZQ1EUuTxUs3tfeampxdqTWPHmwyJmcWj4xoAyNe": {
   "first_seen": "2026-11-19T18:05:11Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 129114,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 129103,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "ANT"
  },
  "AZCyNKNLoEn4NCVr3NEReUFqTFjvC9ZgK6jk2SRnpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 3578,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1018,15 +1009,15 @@
  },
  "AdJvgG6UGRPhXpkB6bUc1tH53FTAGPWeBNzbE797pump": {
   "first_seen": "2026-11-19T18:55:11Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 426535,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 427046,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "VTC"
  },
  "AkKFSkpPnBRiQHZ82Acwrj9KR4LDfp2WDn7EgjeyML64": {
   "first_seen": "2026-11-22T18:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:05:14Z",
   "source": "profiles_latest",
@@ -1035,8 +1026,8 @@
  },
  "AmWkeZitTEJMv7h37eQWzK5WEeGJJhiPvFUowXYKpump": {
   "first_seen": "2026-11-21T10:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 1046830,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 1047364,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "USEF"
@@ -1049,7 +1040,7 @@
  },
  "AvxFBjWydMYWD7C8pHzSkGxNYAFWr7aNBbAKm84bpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 8366,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1058,7 +1049,7 @@
  },
  "AyYNfPtftg2zDP4ZbgcoQMggQtwLh4zpfVVmUJs2thto": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 20908,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1067,8 +1058,8 @@
  },
  "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump": {
   "first_seen": "2026-11-19T21:05:11Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 106539,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 105679,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "FIONA",
@@ -1076,7 +1067,7 @@
  },
  "B5PD4d1YXJXJGBQyh5b7Y4eGe6SR4gqG1JZ6hwtfpump": {
   "first_seen": "2026-11-22T17:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:05:15Z",
   "source": "profiles_latest",
@@ -1091,7 +1082,7 @@
  },
  "B9p6rbwAJkjecik5v8JMjFUvAUGrnMrZwK26cUDLbZvb": {
   "first_seen": "2026-11-22T18:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:05:16Z",
   "pools_checked": "2026-11-22T19:05:16Z",
@@ -1101,8 +1092,8 @@
  },
  "BEcNCmXWhf4A42ZnPHv4Yctw5tL1jAJjPDW8BKdjpump": {
   "first_seen": "2026-11-22T20:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 4575,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 5309,
   "low_since": "2026-11-22T20:30:21Z",
   "source": "profiles_latest",
   "symbol": "retire",
@@ -1110,7 +1101,7 @@
  },
  "BJyqZdnN8ymSVwKmWSFPpUb4mpoXoxzwmgv8rf6bajje": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 12095,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1119,8 +1110,8 @@
  },
  "BKAAmHwnUmWm5HNWWjefekD5bAuJ1P7LEGXh1HDDAbJ6": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 4137,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 4205,
   "low_since": "2026-11-22T20:00:25Z",
   "source": "takeovers_latest",
   "symbol": "STONKS",
@@ -1128,32 +1119,23 @@
  },
  "BM95hXrPEdAdpDRq2YPAvVXwPoMfuRLvSY853duuZyyv": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 96275,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 100837,
   "low_since": null,
   "source": "gecko:vol4",
   "symbol": "XVIDIA"
  },
  "BTfrbtJhHnnvi8RsTK32hMusBHwi8ijUWFRECsAmpump": {
   "first_seen": "2026-11-20T13:20:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 962763,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 965306,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "EXEN"
  },
- "BVGFN5s6GzeDhTQnSLBohbWnjncoAba9hVjBx2pvpump": {
-  "first_seen": "2026-11-22T14:40:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 0,
-  "low_since": "2026-11-22T14:40:18Z",
-  "source": "profiles_latest",
-  "symbol": "Pumpfun",
-  "too_old": false
- },
  "BW2pMhQQSwGui8bW1iW1AJUUhYtEAYMDhBAkVHDmSrcX": {
   "first_seen": "2026-11-22T20:15:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:15:19Z",
   "source": "profiles_latest",
@@ -1162,7 +1144,7 @@
  },
  "BYPTnJqouGUf8aprD9h9bbWdue5VgjFik7ds7CKvf9Qx": {
   "first_seen": "2026-11-22T16:05:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:35:15Z",
   "pools_checked": "2026-11-22T17:35:15Z",
@@ -1170,18 +1152,9 @@
   "symbol": "MCAT",
   "too_old": false
  },
- "Bakfadv5TcSPohJmr3LfNdyLdZU3gWyw7Pq1ZdhxAHX3": {
-  "first_seen": "2026-11-22T13:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 0,
-  "low_since": "2026-11-22T14:40:18Z",
-  "source": "gecko:vol5",
-  "symbol": "GTACAT",
-  "too_old": false
- },
  "BcRsL1rWC4FTovmdnu9AQFb8q8XCoqHAkrD5wwm55yfF": {
   "first_seen": "2026-11-22T15:45:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 43,
   "low_since": "2026-11-22T15:45:17Z",
   "source": "boosts_top",
@@ -1190,7 +1163,7 @@
  },
  "BhK2mLdooMz3x2p9AHkiw3bdeCztLCeorQDm5dYhpump": {
   "first_seen": "2026-11-22T16:30:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:30:20Z",
   "source": "profiles_latest",
@@ -1199,7 +1172,7 @@
  },
  "BoGkuR3drddPvf9kDxLMTXq1UQnashReTC9kM9wCqmVT": {
   "first_seen": "2026-11-22T19:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:50:18Z",
   "source": "profiles_latest",
@@ -1208,7 +1181,7 @@
  },
  "Br7ocsCiiAyCFcuCBaRAhSLCioddpJajE9cTqQa7g2KU": {
   "first_seen": "2026-11-22T14:35:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T14:45:18Z",
   "source": "gecko:vol1",
@@ -1217,23 +1190,23 @@
  },
  "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 365216,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 363040,
   "low_since": null,
   "source": "gecko",
   "symbol": "FLOAT"
  },
  "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi": {
   "first_seen": "2026-11-22T15:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 135341,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 127018,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "MCAT"
  },
  "C4yDhKwkikpVGCQWD9BT2SJyHAtRFFnKPDM9Nyshpump": {
   "first_seen": "2026-11-22T16:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 8923,
   "low_since": "2026-11-22T16:45:16Z",
   "source": "meta:degen",
@@ -1242,8 +1215,8 @@
  },
  "C5eGEXJZYvXEbKdyvPtasksjGNV4xvMowpKM92bVv47f": {
   "first_seen": "2026-11-20T01:00:22Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 29817,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 29173,
   "low_since": "2026-11-22T20:25:14Z",
   "source": "profiles_latest",
   "symbol": "MACCA",
@@ -1251,7 +1224,7 @@
  },
  "C6rZceZKzd7HJJrzfpABFPMrqTPaGAV8D44pdsyxT2Eq": {
   "first_seen": "2026-11-22T18:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:10:19Z",
   "pools_checked": "2026-11-22T20:10:19Z",
@@ -1261,7 +1234,7 @@
  },
  "CAW777xcHVTQZ4CRwVQGB8CV1BVKPm5bNVxFJHWFKiH8": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 21912,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1270,7 +1243,7 @@
  },
  "CENNjjm7cgHsA1d79xxxX3dhKqmeapGRKefbJKgXpump": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4233,
   "low_since": "2026-11-22T20:00:25Z",
   "source": "meta:dog",
@@ -1279,8 +1252,8 @@
  },
  "CH3WtieJabaXvVyAQqMgd1kNQL14WKJLmbXqiX4qpump": {
   "first_seen": "2026-11-22T19:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 5726,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 5214,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "profiles_latest",
   "symbol": "Monkey",
@@ -1288,7 +1261,7 @@
  },
  "CJWLJ4H329oii6iWVxcZ65xnibutsNvRtMCb1HGqpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4898,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1297,7 +1270,7 @@
  },
  "CMx7yon2cLzHcXqgHsKJhuU3MmME6noWLQk2rAycBAGS": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 12800,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
@@ -1306,15 +1279,15 @@
  },
  "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump": {
   "first_seen": "2026-11-20T12:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 62352,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 61549,
   "low_since": null,
   "source": "gecko:trend2",
   "symbol": "Huss"
  },
  "CYTUg8qLd45EGbx7MXxSwR5PSMNoUck5SetxxSDHpump": {
   "first_seen": "2026-11-22T19:35:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6366,
   "low_since": "2026-11-22T19:35:14Z",
   "source": "meta:stonks",
@@ -1323,7 +1296,7 @@
  },
  "CYxJXm41422oDxpR3TcBgo6kg3XMsJu1N5DBtE2ALBA": {
   "first_seen": "2026-11-22T18:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:30:21Z",
   "source": "profiles_latest",
@@ -1332,7 +1305,7 @@
  },
  "CdWFddWqGndr4miRc1rgVMzJxUygJSBVU7FSixrepump": {
   "first_seen": "2026-11-22T19:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "profiles_latest",
@@ -1341,7 +1314,7 @@
  },
  "Cfmo6asAsZFx6GGQvAt4Ajxn8hN6vgWGpaSrjQKRpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 13941,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1350,24 +1323,24 @@
  },
  "ChaY4QmYPpVwtGHTnzS3xTiSSt7fba7kSECaweuHGXfh": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 114840,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 113892,
   "low_since": null,
   "source": "gecko:vol5",
   "symbol": "NFL"
  },
  "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump": {
   "first_seen": "2026-11-20T20:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 49475,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 49159,
   "low_since": null,
   "source": "takeovers_latest",
   "symbol": "ber"
  },
  "CrJPSvj625TnPdWS42aG5ybMcHeFvnNqq5AExVespump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 15868,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 16402,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
   "symbol": "Momota",
@@ -1375,7 +1348,7 @@
  },
  "D2XvLipYuPFgJ42kB6U4ihmHENStT7h2BS2iN5NtzZKg": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5693,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "meta:dog",
@@ -1384,7 +1357,7 @@
  },
  "D5g1GhzxVtHLsLwQLmkHX6BFvGtdqucVtYXamfRir7qX": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:00:23Z",
   "source": "gecko:vol5",
@@ -1393,8 +1366,8 @@
  },
  "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump": {
   "first_seen": "2026-11-19T10:05:11Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 41631,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 41753,
   "low_since": null,
   "source": "gecko:tx5",
   "symbol": "Christmax",
@@ -1402,15 +1375,15 @@
  },
  "DDmGnuvroxVrb7CSyjYcezFU8gnAfhKasg4ZZezmpump": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 46127,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 45923,
   "low_since": null,
   "source": "gecko",
   "symbol": "AMD"
  },
  "DFzeUzRnzbaVDziEhx8THxDD71GnBSpqUkuUnN2Qpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5447,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1419,7 +1392,7 @@
  },
  "DJ6TUsgGg9H5mwZ5MbDfjWob65ck6jnjLxzNxvG4rct": {
   "first_seen": "2026-11-22T14:50:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T14:50:16Z",
   "pools_checked": "2026-11-22T20:10:19Z",
@@ -1429,8 +1402,8 @@
  },
  "DJcHva2UJnRUPxzVfczcYyqxRtpwDTPcok6irtNmpump": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 6937,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 6717,
   "low_since": "2026-11-22T19:25:15Z",
   "source": "profiles_latest",
   "symbol": "SINGULARTY",
@@ -1438,7 +1411,7 @@
  },
  "DL1LDi4CHxoYnJkrRznzCfjmCRBWAsycQ7dRcsmmpump": {
   "first_seen": "2026-11-22T17:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "profiles_latest",
@@ -1447,7 +1420,7 @@
  },
  "DMTYjnstLyY55z4T658ABQmw2JGP3fEMTYQdntDHpump": {
   "first_seen": "2026-11-22T18:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:00:23Z",
   "source": "profiles_latest",
@@ -1456,7 +1429,7 @@
  },
  "DNtjT6zLf5LAdVCKGzESdqobeRGXVsoaZw18atoGpump": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "profiles_latest",
@@ -1477,7 +1450,7 @@
  },
  "DZvFAebHx4tGwchGmF2uSDhD21s88uNG1JPGKnrnoRhB": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 8838,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1486,7 +1459,7 @@
  },
  "DcRcBtM7XopjPnmBUTmp8eWMTztkhVJUkuXeEsqApump": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 10277,
   "low_since": "2026-11-22T18:40:19Z",
   "source": "meta:degen",
@@ -1495,17 +1468,17 @@
  },
  "DdrQxyuYsu2itsMbQVuSxt7DFk7cDf3H9fRWXr5HbHN": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:40:19Z",
-  "pools_checked": "2026-11-22T19:20:20Z",
+  "pools_checked": "2026-11-22T20:45:16Z",
   "source": "gecko:vol5",
   "symbol": "Koop",
   "too_old": false
  },
  "DhoLzNvTB1QGtVc9Z3hJUmwfbC49wMSkYGiBfrU2pump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6970,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1514,7 +1487,7 @@
  },
  "DiEV12zj3uddSxKMhikvZzDAMdCxV2fzd49ZgWbopump": {
   "first_seen": "2026-11-22T20:05:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:05:13Z",
   "source": "profiles_latest",
@@ -1523,7 +1496,7 @@
  },
  "DnmhiZeYkZxCy1UzN2MpsGg4jip8sDav4nREdfthpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 3875,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1532,7 +1505,7 @@
  },
  "Dor8iRexwiNfrD9MT3NobDQvwz97qwDV2ZKwPJDmpump": {
   "first_seen": "2026-11-22T20:05:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 1502,
   "low_since": "2026-11-22T20:10:19Z",
   "source": "profiles_latest",
@@ -1541,7 +1514,7 @@
  },
  "DxBsDjY8xYwfHkSUky6auBJ3MG69AtWbpAwB5HnDpump": {
   "first_seen": "2026-11-22T15:50:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:50:19Z",
   "source": "profiles_latest",
@@ -1550,15 +1523,15 @@
  },
  "EJAxERvKU4kEVXn3NarjvRtgaMaJyP9ZuMeKA7JJpump": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 84800,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 85111,
   "low_since": null,
   "source": "gecko",
   "symbol": "CHOO"
  },
  "EJu78KrhDyaLn3p8Y89dgVGDgLKxU4rzSE7fER5yNVDA": {
   "first_seen": "2026-11-22T14:55:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 7549,
   "low_since": "2026-11-22T14:55:14Z",
   "source": "meta:degen",
@@ -1567,7 +1540,7 @@
  },
  "ENoD8J2J6wNHkcJkvVBkwq5JMiR1oNBfBZRkoHCQogyT": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6560,
   "low_since": "2026-11-22T16:25:13Z",
   "source": "meta:degen",
@@ -1576,24 +1549,24 @@
  },
  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
   "first_seen": "2026-11-19T00:15:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 2216104,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 2217719,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "USDC"
  },
  "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump": {
   "first_seen": "2026-11-21T19:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 59624,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 59065,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "chud"
  },
  "EVbsBwxqdbMqadwAsVZ6KP9SJiaNmLSHAAb4W2mUpump": {
   "first_seen": "2026-11-17T21:05:10Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 46739,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 46364,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "LUNO",
@@ -1601,8 +1574,8 @@
  },
  "Eh2zcpFTKQkH2ivAzyMCg2CuVBW8mx4bkWKRDSmcEray": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 15666,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 14762,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "boosts_top",
   "symbol": "DOOMSDAY",
@@ -1616,8 +1589,8 @@
  },
  "EoV9JQYi57tqjyQbWLdXVarYpEu82FsP8SDnkbFmpump": {
   "first_seen": "2026-11-22T19:10:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 15890,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 15954,
   "low_since": "2026-11-22T19:10:17Z",
   "source": "boosts_top",
   "symbol": "Bust",
@@ -1625,7 +1598,7 @@
  },
  "EsSzJa8xsyehSvVsNUy6t1KxMXgZYYaJKBAqyJxT3bid": {
   "first_seen": "2026-11-16T17:30:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 49519,
   "low_since": null,
   "source": "profiles_latest",
@@ -1633,7 +1606,7 @@
  },
  "Et13xumwzoFRfFAnvji17zWpEF8mPJN9xmPUBLaFpump": {
   "first_seen": "2026-11-22T19:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:25:15Z",
   "source": "profiles_latest",
@@ -1642,15 +1615,15 @@
  },
  "EvH3RsJ8NhSazw8yJdAi44kG3H1a5FvhrVZVnJKNpump": {
   "first_seen": "2026-11-18T22:55:10Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 66801,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 67268,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "WOFI"
  },
  "EwUVBpdM5vw1CJHRMSLywzVjyQSJZpy6qboxEPBKpump": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 22446,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "boosts_top",
@@ -1659,7 +1632,7 @@
  },
  "F1KTnYvvoo1hoqYi8SGBfiM6rSqtJ38SwYtuiiYwpump": {
   "first_seen": "2026-11-22T17:55:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:55:13Z",
   "source": "profiles_latest",
@@ -1668,7 +1641,7 @@
  },
  "F8KURH9W3dCx3ngg8E1DgJji4tqZQ7Wf8JpLLUQnpump": {
   "first_seen": "2026-11-22T19:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:45:16Z",
   "source": "profiles_latest",
@@ -1683,8 +1656,8 @@
  },
  "FD3ib3uP9upX5qUSSjhpZj7yBGN1HjyT5hzztQvMpump": {
   "first_seen": "2026-11-22T16:20:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 2631,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 2658,
   "low_since": "2026-11-22T16:20:19Z",
   "source": "profiles_latest",
   "symbol": "Star",
@@ -1692,7 +1665,7 @@
  },
  "FDPV4HXf5DTMpDmqeeJwxCb3kpU1WP9HoSnxHfC5ypu": {
   "first_seen": "2026-11-22T16:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:45:17Z",
   "source": "gecko:vol7",
@@ -1701,7 +1674,7 @@
  },
  "FTggXu7nYowpXjScSw7BZjtZDXywLNjK88CGhydDGgMS": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 9077,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
@@ -1710,15 +1683,15 @@
  },
  "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": {
   "first_seen": "2026-11-16T00:45:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 94923,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 94665,
   "low_since": null,
   "source": "gecko:tx4",
   "symbol": "HOGE"
  },
  "FfgtU4bMte3JRZGX7kcNVywxiGoSqUTga8eZxTSFpump": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 27042,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
@@ -1727,7 +1700,7 @@
  },
  "FjY3AexjRS2FWGgeZnaqr9LrMN2WDQnbNkAR57zVNrBw": {
   "first_seen": "2026-11-22T16:00:26Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:05:14Z",
   "source": "gecko:vol5",
@@ -1736,7 +1709,7 @@
  },
  "Fp4JkqEcKYKBKhb9iMu9NSDeo71HWgq2q9QtXaaKpump": {
   "first_seen": "2026-11-13T13:52:31Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 73548,
   "low_since": null,
   "source": "gecko",
@@ -1744,8 +1717,8 @@
  },
  "FryQiSLqU7NfPvpQJRiYrVuvRRW66uB4FLorrKmjpump": {
   "first_seen": "2026-11-22T19:20:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 17495,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 17033,
   "low_since": "2026-11-22T19:20:20Z",
   "source": "profiles_latest",
   "symbol": "earball",
@@ -1753,15 +1726,15 @@
  },
  "FuKY3dk7QmpbDdQRjzbjB3G6PiCuqKNvN4dAWDpwpump": {
   "first_seen": "2026-11-22T19:05:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 53699,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 62026,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "OpenIndex"
  },
  "FzaCYkfFyTYUN2whdXzBC4LX5gFuzL2yPFTnrGDKr5xj": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 4384,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "meta:internet-animals",
@@ -1770,15 +1743,15 @@
  },
  "G4MwNXFJkJTNj53DiL2GKezHUZ5QeMr5GCKmxJZaNhxv": {
   "first_seen": "2026-11-22T18:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 184745,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 189809,
   "low_since": null,
   "source": "gecko:vol5",
   "symbol": "Rings"
  },
  "GAdg5dJgNNmuBUh4N8PXM7YXKjTADmPuu3pZ2C8Zpump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 6080,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1787,8 +1760,8 @@
  },
  "GCZ2wKbAC9CwSvmSNnxCJjWu26PoGtaAit32QCUniSon": {
   "first_seen": "2026-11-22T18:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 7851,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 7833,
   "low_since": "2026-11-22T18:25:15Z",
   "source": "profiles_latest",
   "symbol": "UNISON",
@@ -1796,7 +1769,7 @@
  },
  "GFk1Rs91Vq9fx54N3a79nV6N3miRF4t9nsjYVEvUzK5": {
   "first_seen": "2026-11-22T18:40:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:45:18Z",
   "source": "gecko:vol4",
@@ -1805,16 +1778,25 @@
  },
  "GKjAe1bQXXLoEitJYSuyw6qt97tTVoKkGEgWPEo6pump": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 21954,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
   "symbol": "Clippy",
   "too_old": false
  },
+ "GMGpmQBZf43nHVqaKezZKBxEFQzc5rtrMUFWuZRxpump": {
+  "first_seen": "2026-11-22T20:45:16Z",
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 0,
+  "low_since": "2026-11-22T20:45:16Z",
+  "source": "profiles_latest",
+  "symbol": "LIQUID",
+  "too_old": false
+ },
  "GZvsuLA5yw9QbvvCQ58uFyBvmz6D1ht3PmCgNhDKpump": {
   "first_seen": "2026-11-22T18:50:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T18:50:17Z",
   "source": "boosts_top",
@@ -1823,7 +1805,7 @@
  },
  "GcHWoxAPC8eYx9nKaTYvDBRqaW9K1osyvyAF6kn4EU9y": {
   "first_seen": "2026-11-20T08:35:11Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 47573,
   "low_since": null,
   "source": "profiles_latest",
@@ -1831,15 +1813,15 @@
  },
  "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": {
   "first_seen": "2026-11-13T14:18:57Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 81107,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 80225,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "WASTED"
  },
  "GhEgybDFGFU4oEouFZWYSiaxsLiepSGbvR6XLJLnpump": {
   "first_seen": "2026-11-22T16:00:26Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:00:26Z",
   "source": "profiles_latest",
@@ -1848,7 +1830,7 @@
  },
  "GtYejECKAfDj6m74qxfyh2eXq1AxpBf6sii5DjBcgejG": {
   "first_seen": "2026-11-22T19:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:25:14Z",
   "pools_checked": "2026-11-22T20:25:14Z",
@@ -1858,7 +1840,7 @@
  },
  "Gyk9Z93Ri2JUjqES9HTpc7pxCJTLD7vhBhEjBhyApump": {
   "first_seen": "2026-11-22T19:30:21Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 15920,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "meta:internet-animals",
@@ -1867,7 +1849,7 @@
  },
  "HELio3Xy1xAJhbMA9fWZMpeNDjoeiM5LrmCJrrrxZ5zM": {
   "first_seen": "2026-11-22T20:10:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:10:19Z",
   "source": "profiles_latest",
@@ -1876,8 +1858,8 @@
  },
  "HGHJCdysTaaYDJKwwQ3UmcodCw9xjpfFDvcShVVBpump": {
   "first_seen": "2026-11-22T18:50:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 9545,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 9451,
   "low_since": "2026-11-22T18:50:17Z",
   "source": "takeovers_latest",
   "symbol": "sexcoin",
@@ -1885,7 +1867,7 @@
  },
  "HPP8nv9Qkmuxu3sU7BcgtbpZ67bkW8TrSJ9bG2utkC8C": {
   "first_seen": "2026-11-22T19:50:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:50:18Z",
   "pools_checked": "2026-11-22T20:35:15Z",
@@ -1895,7 +1877,7 @@
  },
  "Hcxrdr64HCnXVVzDET1XnjX21EsxJ8YNsvcojVYNbWYj": {
   "first_seen": "2026-11-22T15:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:05:14Z",
   "source": "gecko:vol4",
@@ -1904,7 +1886,7 @@
  },
  "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC": {
   "first_seen": "2026-11-22T15:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 29552,
   "low_since": "2026-11-22T15:40:17Z",
   "source": "meta:ai",
@@ -1913,7 +1895,7 @@
  },
  "Hgxr7XFJ278RUEGfsVPeTYwCeuopTixvU66KNyfiVBVS": {
   "first_seen": "2026-11-22T14:50:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:10:18Z",
   "pools_checked": "2026-11-22T15:10:18Z",
@@ -1923,7 +1905,7 @@
  },
  "Hgz8vhRHf1epTfB17NPRXjhcp1RfqWRAtDvSgVRRpump": {
   "first_seen": "2026-11-22T15:35:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:30:21Z",
   "source": "profiles_latest",
@@ -1932,7 +1914,7 @@
  },
  "HjjvrRzP4KmQxhi8s1MWn2pyCRaP7QfyMQzkXo3U3u1B": {
   "first_seen": "2026-11-22T14:45:18Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:40:17Z",
   "source": "gecko:vol5",
@@ -1941,7 +1923,7 @@
  },
  "HrYww9Q3xcraCfgNi9NYc5gmKEcV6rKQa8GYq2WSYyPh": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 5733,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
@@ -1950,7 +1932,7 @@
  },
  "JAMX6baX3kHEw22oKxGRWEwMEYHNoHLRykHJVFvXC7Nj": {
   "first_seen": "2026-11-22T19:55:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:55:15Z",
   "pools_checked": "2026-11-22T20:40:17Z",
@@ -1960,15 +1942,15 @@
  },
  "Jd3NCawdFiDNWpLiTtsMqoeoBMjC1ZQMrMScRVzpump": {
   "first_seen": "2026-11-21T15:50:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 99072,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 99790,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "NOHR"
  },
  "K1kqx4JfYsc6rCBYyW38NGU8YC2dTxguzUbRWtHPhzJ": {
   "first_seen": "2026-11-22T16:25:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T16:25:13Z",
   "pools_checked": "2026-11-22T20:25:14Z",
@@ -1978,7 +1960,7 @@
  },
  "MmJKyaspqG2Pui4A3VzEYVGb2F3BvPrqUC1n7Rb9JBR": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:15:17Z",
   "pools_checked": "2026-11-22T19:15:18Z",
@@ -1988,7 +1970,7 @@
  },
  "MoR1whCWjcLiUqAan4GHLRcn8wK4Jktk2DyDryNmeta": {
   "first_seen": "2026-11-13T20:30:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 178843,
   "low_since": null,
   "source": "profiles_latest",
@@ -1996,7 +1978,7 @@
  },
  "N1KAREmTmvocVnf5gZSRN5DGeNFwLvbEqouiv47ox1a": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:20:18Z",
   "source": "gecko:vol5",
@@ -2005,7 +1987,7 @@
  },
  "NVDAVuiB7hwd3m5Wa1JuHNovPaPG6BH1QNztbKFxNjv": {
   "first_seen": "2026-11-17T22:10:12Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 889884,
   "low_since": null,
   "source": "gecko:vol7",
@@ -2013,7 +1995,7 @@
  },
  "Pvy48WrMxPvDBck8o3P79GpCTQH7WtKm2jgpTU3hGUN": {
   "first_seen": "2026-11-22T14:50:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:10:18Z",
   "source": "gecko:vol6",
@@ -2022,7 +2004,7 @@
  },
  "QLxoZSjfaPBUQ4HKmCvEyczZtADFVLXE5v9zWkQCnpq": {
   "first_seen": "2026-11-22T20:00:25Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T20:00:25Z",
   "source": "gecko:vol4",
@@ -2031,23 +2013,23 @@
  },
  "TSPMowYjNS39wpLgS2T3ZF3TP2mnCkusdCDZ28apump": {
   "first_seen": "2026-11-22T17:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 749921,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 749939,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "USAR"
  },
  "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": {
   "first_seen": "2026-11-18T14:15:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 119365,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 119607,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "JESTER"
  },
  "VP9UaBXLM4KYRvyjisu65rz8BU5xNAbewU7LVmyU2x4": {
   "first_seen": "2026-11-22T19:45:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 15107,
   "low_since": "2026-11-22T19:45:16Z",
   "source": "meta:cat",
@@ -2056,8 +2038,8 @@
  },
  "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk": {
   "first_seen": "2026-11-22T19:20:20Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 22265,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 22262,
   "low_since": "2026-11-22T19:20:20Z",
   "source": "meta:cat",
   "symbol": "WEN",
@@ -2066,7 +2048,7 @@
  "XsYzw7XHj8K2WHeoeNQVyevMmzjzXfcJ8tQ4FmdN1DL": {
   "alt_pool": "AwAZxy7kvMkKfNrKJNoyQpyQaNwHyhE3irHD4W2ueswN",
   "first_seen": "2026-11-22T19:25:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 95801,
   "low_since": null,
   "source": "gecko:vol6",
@@ -2074,7 +2056,7 @@
  },
  "cpdTa5F3Trz2h5vvFfHT7jSM7F5CGvzxfQQRnaQpump": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 15304,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "boosts_top",
@@ -2083,15 +2065,15 @@
  },
  "dkpuQdjegjU8zcwYrBzYrLW11wvtjwonBsQhjLApump": {
   "first_seen": "2026-11-21T15:10:16Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 85653,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 85481,
   "low_since": null,
   "source": "profiles_latest",
   "symbol": "RIEMANN"
  },
  "dog1viwbb2vWDpER5FrJ4YFG6gq6XuyFohUe9TXN65u": {
   "first_seen": "2026-11-22T17:40:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 23896,
   "low_since": "2026-11-22T17:40:17Z",
   "source": "meta:dog",
@@ -2100,8 +2082,8 @@
  },
  "e5nisbZQpTJS8cZwFP48hmr6AvpK6VN6TTtSfVfRQbM": {
   "first_seen": "2026-11-22T20:10:19Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 4184,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 4070,
   "low_since": "2026-11-22T20:10:19Z",
   "source": "profiles_latest",
   "symbol": "COPIUM",
@@ -2109,16 +2091,16 @@
  },
  "ejrz94zR4A2ScS8LdvRaQih2xUxaE2ydreqUNKmpump": {
   "first_seen": "2026-11-19T06:45:13Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 181235,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 181659,
   "low_since": null,
   "source": "gecko:tx6",
   "symbol": "ANTS"
  },
  "kPqBsUZuogprbq15ZpACwDzbUHSAxTxbhRrxmrDpump": {
   "first_seen": "2026-11-22T04:00:24Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 28160,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 27780,
   "low_since": "2026-11-22T19:40:17Z",
   "source": "profiles_latest",
   "symbol": "CATEMAS",
@@ -2126,7 +2108,7 @@
  },
  "mo7mapMrCsyci5w1td1wgrKPtNeCfjfkKi96DknWi5N": {
   "first_seen": "2026-11-22T15:20:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 15945,
   "low_since": "2026-11-22T15:20:17Z",
   "source": "meta:cat",
@@ -2135,15 +2117,15 @@
  },
  "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
   "first_seen": "2026-11-22T03:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 159567,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 160424,
   "low_since": null,
   "source": "boosts_top",
   "symbol": "DESSA"
  },
  "pepo1CFNU2RXf7yXX7HNXazXwxsq8WrPvDHpHriwoLY": {
   "first_seen": "2026-11-22T17:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 24522,
   "low_since": "2026-11-22T17:15:17Z",
   "source": "meta:character",
@@ -2158,7 +2140,7 @@
  },
  "smJ8bHgekWZUwQRvQgAymAvN8kpcxgmnAX3erZybonk": {
   "first_seen": "2026-11-22T19:10:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T19:15:18Z",
   "source": "profiles_latest",
@@ -2167,7 +2149,7 @@
  },
  "ugoS4WapQHvJ3PND8GJAhFH16prwLkvY5nmFyY3mtNq": {
   "first_seen": "2026-11-16T17:05:09Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 126474,
   "low_since": null,
   "source": "profiles_latest",
@@ -2175,8 +2157,8 @@
  },
  "v4GK8f24ZJJa5qLoTJ4mJ5d6jsNUXHScwGaRHdfpump": {
   "first_seen": "2026-11-22T14:25:14Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 14670,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 14661,
   "low_since": "2026-11-22T18:55:15Z",
   "source": "gecko:tx4",
   "symbol": "MCAT",
@@ -2184,8 +2166,8 @@
  },
  "vxG5uciceD6c92HFS3wuSgc1ZLKovWwZbntMM24pump": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
-  "liq": 14252,
+  "last_ok": "2026-11-22T20:45:16Z",
+  "liq": 13671,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "boosts_top",
   "symbol": "PEPECLAUS",
@@ -2193,7 +2175,7 @@
  },
  "zShePAovhZXZ2pkYCgVBeHaVUDMvpsx5SL2watjzero": {
   "first_seen": "2026-11-22T15:15:17Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T15:15:17Z",
   "source": "profiles_latest",
@@ -2202,7 +2184,7 @@
  },
  "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": {
   "first_seen": "2026-11-22T13:05:15Z",
-  "last_ok": "2026-11-22T20:40:17Z",
+  "last_ok": "2026-11-22T20:45:16Z",
   "liq": 0,
   "low_since": "2026-11-22T17:05:15Z",
   "pools_checked": "2026-11-22T17:05:15Z",
