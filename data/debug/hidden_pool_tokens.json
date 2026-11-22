@@ -417,18 +417,18 @@
  },
  "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": {
   "age_days": 0.74,
-  "cycles": 45,
+  "cycles": 46,
   "dex": "meteora",
   "first_age_days": 0.33,
   "first_liq_usd": 34370,
   "first_ts": "2026-11-22T04:35:14Z",
-  "last_ts": "2026-11-22T14:20:18Z",
-  "liq_usd": 32762,
+  "last_ts": "2026-11-22T14:25:14Z",
+  "liq_usd": 32849,
   "pair": "3peugE6Fm4fpaVvrV2KBFN3nvLbCGEhGoUXDDxAHuscR",
   "quote": "SOL",
   "symbol": "SIDOOR",
   "verdicts": {
-   "u:too_young": 45
+   "u:too_young": 46
   }
  }
 }
