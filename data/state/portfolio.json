@@ -32,7 +32,7 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 69.49321266968326,
+ "last_sol_usd": 69.46085672082718,
  "positions": [
   {
    "entry_exec_usd": 0.001927392930052896,
@@ -60,10 +60,10 @@
    },
    "fees_sol": 0.004064519730476874,
    "id": 40,
-   "last_liq_usd": 134120.4,
-   "last_price_usd": 0.001853,
-   "last_ts": "2026-11-22T03:25:14Z",
-   "last_vol_h24": 3058852.73,
+   "last_liq_usd": 132077.43,
+   "last_price_usd": 0.001802,
+   "last_ts": "2026-11-22T03:35:17Z",
+   "last_vol_h24": 3061927.03,
    "missing_runs": 0,
    "opened": "2026-11-22T01:00:26Z",
    "pair": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
@@ -77,12 +77,7 @@
    "rulebook_version": 9,
    "sol_in": 0.41290394609537484,
    "sol_returned": 0.0,
-   "suspect": {
-    "liq": 151262.1,
-    "price": 0.002323,
-    "runs": 1,
-    "ts": 1795318220.633038
-   },
+   "suspect": null,
    "symbol": "FIONA",
    "token": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
    "tokens": 14893.394604454965,
