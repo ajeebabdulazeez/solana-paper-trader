@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.344288684529888,
+ "cash_sol": 3.5875290642303956,
  "closed_count": 41,
  "day": {
   "date": "2026-11-22",
@@ -33,7 +33,7 @@
   "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump": "2026-11-14T22:25:08Z",
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z"
  },
- "last_sol_usd": 70.62349587722413,
+ "last_sol_usd": 70.62549293863309,
  "positions": [
   {
    "entry_exec_usd": 0.0003178860039090977,
@@ -61,10 +61,10 @@
    },
    "fees_sol": 0.00403573921117114,
    "id": 41,
-   "last_liq_usd": 59549.67,
-   "last_price_usd": 0.0003215,
-   "last_ts": "2026-11-22T11:35:14Z",
-   "last_vol_h24": 735938.91,
+   "last_liq_usd": 60079.42,
+   "last_price_usd": 0.0003264,
+   "last_ts": "2026-11-22T11:40:17Z",
+   "last_vol_h24": 737191.48,
    "missing_runs": 0,
    "opened": "2026-11-22T05:45:17Z",
    "pair": "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg",
@@ -110,16 +110,16 @@
     "vol_h24": 2784590,
     "volume_accel": 1.75
    },
-   "fees_sol": 0.004075764800577297,
+   "fees_sol": 0.007308128517665276,
    "id": 43,
-   "last_liq_usd": 78991.82,
-   "last_price_usd": 0.000861,
-   "last_ts": "2026-11-22T11:35:14Z",
-   "last_vol_h24": 2830683.14,
+   "last_liq_usd": 80639.22,
+   "last_price_usd": 0.0008928,
+   "last_ts": "2026-11-22T11:40:17Z",
+   "last_vol_h24": 2849025.28,
    "missing_runs": 0,
    "opened": "2026-11-22T11:25:15Z",
    "pair": "58XqWPXDGp3GfU9DAFxs8C1GJwTLdHdQhJRofAF5yWTV",
-   "peak_usd": 0.000861,
+   "peak_usd": 0.0008928,
    "rugcheck": {
     "lp_locked_pct": 76.28141417111955,
     "risks": [],
@@ -128,13 +128,15 @@
    },
    "rulebook_version": 9,
    "sol_in": 0.41515296011545944,
-   "sol_returned": 0.0,
+   "sol_returned": 0.2432403797005077,
+   "sold_tokens": 19603.860826806693,
+   "sold_usd": 17.407258999804927,
    "suspect": null,
    "symbol": "Singularity",
    "token": "7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump",
    "tokens": 39207.721653613386,
-   "tokens_remaining": 39207.721653613386,
-   "tp1_done": false,
+   "tokens_remaining": 19603.860826806693,
+   "tp1_done": true,
    "trough_usd": 0.0007359
   }
  ],
