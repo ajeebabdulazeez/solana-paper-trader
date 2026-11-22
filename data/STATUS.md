@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-22T01:30:20Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-22T01:35:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.1283 SOL** (started with 5.0 SOL, -17.43%)
+- Equity: **4.1123 SOL** (started with 5.0 SOL, -17.75%)
 - Cash: 3.7161 SOL, open positions: 1, closed trades: 39
-- Watchlist: 255 tokens, entry signals this run: 0
+- Watchlist: 254 tokens, entry signals this run: 0
 
 ## Closed trades
 
@@ -18,7 +18,7 @@ Max drawdown 23.12%, average hold 122.3 min, simulated fees 0.3483 SOL.
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 40 | FIONA | 2026-11-22T01:00:26Z | 0.413 | +1.4% | no |
+| 40 | FIONA | 2026-11-22T01:00:26Z | 0.413 | -2.6% | no |
 
 ## Last 10 closed
 
@@ -34,3 +34,7 @@ Max drawdown 23.12%, average hold 122.3 min, simulated fees 0.3483 SOL.
 | 32 | NIO | 2026-11-20T01:05:11Z | stop_loss | -14.66% | -0.0590 |
 | 31 | Leonida | 2026-11-19T15:15:14Z | stop_loss | -26.00% | -0.1075 |
 | 30 | DIGS | 2026-11-19T11:20:12Z | time_stop | -4.40% | -0.0183 |
+
+## Errors in the last run
+
+- gecko h24_volume_usd_desc p8: HTTP 429 for https://api.geckoterminal.com/api/v2/networks/solana/pools?sort=h24_volume_usd_desc&page=8
