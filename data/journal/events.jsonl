@@ -97,3 +97,4 @@
 {"event":"close","id":42,"pnl_pct":23.37,"pnl_sol":0.095111,"reason":"trailing_stop","symbol":"BLOB","ts":"2026-11-22T07:57:07Z"}
 {"event":"open","id":43,"price_usd":0.0007359,"score":2.25,"sol_in":0.415153,"symbol":"Singularity","token":"7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump","ts":"2026-11-22T11:25:15Z"}
 {"chg_pct":21.32,"event":"tp1","id":43,"price_usd":0.0008928,"sol_received":0.24324,"symbol":"Singularity","ts":"2026-11-22T11:40:17Z"}
+{"event":"close","id":41,"pnl_pct":-3.45,"pnl_sol":-0.014059,"reason":"time_stop","symbol":"DIGS","ts":"2026-11-22T11:45:18Z"}
