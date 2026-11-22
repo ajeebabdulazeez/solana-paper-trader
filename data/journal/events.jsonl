@@ -102,3 +102,4 @@
 {"event":"open","id":44,"price_usd":0.003575,"score":5.2,"sol_in":0.424028,"symbol":"DESSA","token":"npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump","ts":"2026-11-22T14:05:15Z"}
 {"event":"close","id":44,"pnl_pct":-20.37,"pnl_sol":-0.086384,"reason":"stop_loss","symbol":"DESSA","ts":"2026-11-22T14:45:18Z"}
 {"event":"open","id":45,"price_usd":0.004403,"score":3.96,"sol_in":0.41539,"symbol":"FLOAT","token":"Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr","ts":"2026-11-22T18:50:17Z"}
+{"event":"close","id":45,"pnl_pct":-16.49,"pnl_sol":-0.068492,"reason":"stop_loss","symbol":"FLOAT","ts":"2026-11-22T23:00:25Z"}
