@@ -369,18 +369,18 @@
  },
  "CBYY7BY5fBbBa1bKNbmVuDNAuVbxLBxqFro97mkdfg8K": {
   "age_days": 0.09,
-  "cycles": 6,
+  "cycles": 7,
   "dex": "pumpswap",
   "first_age_days": 0.07,
   "first_liq_usd": 103947,
   "first_ts": "2026-11-22T22:50:18Z",
-  "last_ts": "2026-11-22T23:15:17Z",
-  "liq_usd": 105129,
+  "last_ts": "2026-11-22T23:20:19Z",
+  "liq_usd": 105456,
   "pair": "ECNBS3ydZYkv2fDQHLuS2oTmsnvXBUjLF6WrrumZvyPH",
   "quote": "SOL",
   "symbol": "OpenIndex",
   "verdicts": {
-   "u:too_young": 6
+   "u:too_young": 7
   }
  },
  "DYDSuJumtLMPg8B24p1xVT4yQSjRSawmk261cQs5EeXw": {
@@ -529,18 +529,18 @@
  },
  "XsYzw7XHj8K2WHeoeNQVyevMmzjzXfcJ8tQ4FmdN1DL": {
   "age_days": 3.26,
-  "cycles": 48,
+  "cycles": 49,
   "dex": "raydium",
   "first_age_days": 3.1,
   "first_liq_usd": 95833,
   "first_ts": "2026-11-22T19:25:15Z",
-  "last_ts": "2026-11-22T23:15:17Z",
+  "last_ts": "2026-11-22T23:20:19Z",
   "liq_usd": 95801,
   "pair": "AwAZxy7kvMkKfNrKJNoyQpyQaNwHyhE3irHD4W2ueswN",
   "quote": "USDC",
   "symbol": "ANTx",
   "verdicts": {
-   "u:volume_h24": 48
+   "u:volume_h24": 49
   }
  },
  "gEmvnPA66jKNPrYBC3ENMgsHEFpPyArS6t5CuPyEo8E": {
