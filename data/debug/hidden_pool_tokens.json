@@ -257,18 +257,18 @@
  },
  "B9p6rbwAJkjecik5v8JMjFUvAUGrnMrZwK26cUDLbZvb": {
   "age_days": 0.1,
-  "cycles": 4,
+  "cycles": 5,
   "dex": "pumpswap",
   "first_age_days": 0.09,
   "first_liq_usd": 102893,
   "first_ts": "2026-11-22T18:05:14Z",
-  "last_ts": "2026-11-22T18:20:18Z",
-  "liq_usd": 104410,
+  "last_ts": "2026-11-22T18:25:15Z",
+  "liq_usd": 105476,
   "pair": "F815efjC2uKAUyfxy1kKpQZD66WNnucLFgR2Ynuju7jw",
   "quote": "SOL",
   "symbol": "MCAT",
   "verdicts": {
-   "u:too_young": 4
+   "u:too_young": 5
   }
  },
  "BBasaev7qFAvcPwcYfrc5EpzbSQf8vPK3U2bGEL7h1Py": {
