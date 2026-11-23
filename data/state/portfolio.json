@@ -35,7 +35,7 @@
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z",
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z"
  },
- "last_sol_usd": 71.17691154422789,
+ "last_sol_usd": 71.19978284473399,
  "positions": [
   {
    "entry_exec_usd": 0.0006179791991367103,
@@ -63,10 +63,10 @@
    },
    "fees_sol": 0.004042703501819921,
    "id": 46,
-   "last_liq_usd": 58498.33,
-   "last_price_usd": 0.0006143,
-   "last_ts": "2026-11-23T04:25:14Z",
-   "last_vol_h24": 349077.75,
+   "last_liq_usd": 58071.78,
+   "last_price_usd": 0.0006038,
+   "last_ts": "2026-11-23T04:30:21Z",
+   "last_vol_h24": 349809.89,
    "missing_runs": 0,
    "opened": "2026-11-23T04:25:14Z",
    "pair": "HQBfT5FrSDKj1scAUC62uqvxrzrM4F9FHooT9u4pCfj2",
@@ -80,12 +80,13 @@
    "rulebook_version": 9,
    "sol_in": 0.40854070036398404,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "chud",
    "token": "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump",
    "tokens": 46588.81428807842,
    "tokens_remaining": 46588.81428807842,
    "tp1_done": false,
-   "trough_usd": 0.0006143
+   "trough_usd": 0.0006038
   }
  ],
  "realized_pnl_sol": -0.9145929963601611,
