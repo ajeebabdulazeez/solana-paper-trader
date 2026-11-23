@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.6768663032758564,
- "closed_count": 45,
+ "cash_sol": 4.0162730750776285,
+ "closed_count": 46,
  "day": {
   "date": "2026-11-23",
   "opens": 1,
@@ -27,6 +27,7 @@
   "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump": "2026-11-20T13:10:19Z",
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
   "Dys6SYbjUsy8kksaqrXqo5L2GzgCYDiguGGcS8B5rkrv": "2026-11-17T13:05:10Z",
+  "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump": "2026-11-23T04:55:14Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
   "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-20T10:30:09Z",
   "Fn95NtGXWPaJXc4N5y9rVkUq1NwZbjBNJzPVvNRLpump": "2026-11-21T17:10:16Z",
@@ -35,61 +36,9 @@
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z",
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z"
  },
- "last_sol_usd": 71.18798361401912,
- "positions": [
-  {
-   "entry_exec_usd": 0.0006179791991367103,
-   "entry_liq_usd": 58498.33,
-   "entry_mid_usd": 0.0006143,
-   "entry_sol_usd": 71.17691154422789,
-   "features": {
-    "age_days": 2.3,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.27,
-    "chg_h1": 6.68,
-    "chg_h24": -19.29,
-    "chg_h6": 12.96,
-    "chg_m5": 0.31,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.0972,
-    "liq_usd": 58498,
-    "mcap": 601765,
-    "quote": "SOL",
-    "score": 1.63,
-    "txns_h1": 621,
-    "vol_h1": 26541,
-    "vol_h24": 349078,
-    "volume_accel": 1.28
-   },
-   "fees_sol": 0.004042703501819921,
-   "id": 46,
-   "last_liq_usd": 57992.16,
-   "last_price_usd": 0.0006039,
-   "last_ts": "2026-11-23T04:50:16Z",
-   "last_vol_h24": 349915.09,
-   "missing_runs": 0,
-   "opened": "2026-11-23T04:25:14Z",
-   "pair": "HQBfT5FrSDKj1scAUC62uqvxrzrM4F9FHooT9u4pCfj2",
-   "peak_usd": 0.0006182,
-   "rugcheck": {
-    "lp_locked_pct": 72.53730170314563,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 9,
-   "sol_in": 0.40854070036398404,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "chud",
-   "token": "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump",
-   "tokens": 46588.81428807842,
-   "tokens_remaining": 46588.81428807842,
-   "tp1_done": false,
-   "trough_usd": 0.0005859
-  }
- ],
- "realized_pnl_sol": -0.9145929963601611,
+ "last_sol_usd": 71.20075046904316,
+ "positions": [],
+ "realized_pnl_sol": -0.9837269249223728,
  "starting_sol": 5.0,
  "trade_seq": 46
 }
