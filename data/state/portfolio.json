@@ -1,9 +1,9 @@
 {
- "cash_sol": 3.649002505926562,
+ "cash_sol": 3.23767236619564,
  "closed_count": 49,
  "day": {
   "date": "2026-11-23",
-  "opens": 5,
+  "opens": 6,
   "start_equity": 4.08540700363984
  },
  "last_exit": {
@@ -38,7 +38,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 73.44352864659045,
+ "last_sol_usd": 73.35228605548802,
  "positions": [
   {
    "entry_exec_usd": 0.002333575103974,
@@ -66,10 +66,10 @@
    },
    "fees_sol": 0.004027223614403646,
    "id": 50,
-   "last_liq_usd": 153231.46,
-   "last_price_usd": 0.002614,
-   "last_ts": "2026-11-23T18:45:20Z",
-   "last_vol_h24": 1246483.74,
+   "last_liq_usd": 152877.12,
+   "last_price_usd": 0.002604,
+   "last_ts": "2026-11-23T18:50:19Z",
+   "last_vol_h24": 1246888.39,
    "missing_runs": 0,
    "opened": "2026-11-23T15:00:29Z",
    "pair": "DEXTCER4k9dwbxTMU8zNVVwGevVmvHMB183pF2xxZwvH",
@@ -90,9 +90,59 @@
    "tokens_remaining": 13078.87292471069,
    "tp1_done": false,
    "trough_usd": 0.002321
+  },
+  {
+   "entry_exec_usd": 0.0005046570914505206,
+   "entry_liq_usd": 54854.05,
+   "entry_mid_usd": 0.0005016,
+   "entry_sol_usd": 73.35228605548802,
+   "features": {
+    "age_days": 5.92,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.77,
+    "chg_h1": 23.99,
+    "chg_h24": 44.75,
+    "chg_h6": 37.31,
+    "chg_m5": -0.57,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.1098,
+    "liq_usd": 54854,
+    "mcap": 499452,
+    "quote": "SOL",
+    "score": 5.29,
+    "txns_h1": 501,
+    "vol_h1": 43323,
+    "vol_h24": 194603,
+    "volume_accel": 2.99
+   },
+   "fees_sol": 0.00405665069865461,
+   "id": 51,
+   "last_liq_usd": 54854.05,
+   "last_price_usd": 0.0005016,
+   "last_ts": "2026-11-23T18:50:19Z",
+   "last_vol_h24": 194602.6,
+   "missing_runs": 0,
+   "opened": "2026-11-23T18:50:19Z",
+   "pair": "sVVcu9n1FbKwYS39gWw76NAE2jWBckCBdbC6jquaWC6",
+   "peak_usd": 0.0005016,
+   "rugcheck": {
+    "lp_locked_pct": 99.99984419398979,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 9,
+   "sol_in": 0.4113301397309219,
+   "sol_returned": 0.0,
+   "symbol": "LUNO",
+   "token": "EVbsBwxqdbMqadwAsVZ6KP9SJiaNmLSHAAb4W2mUpump",
+   "tokens": 59197.5065374477,
+   "tokens_remaining": 59197.5065374477,
+   "tp1_done": false,
+   "trough_usd": 0.0005016
   }
  ],
  "realized_pnl_sol": -0.9455527711927106,
  "starting_sol": 5.0,
- "trade_seq": 50
+ "trade_seq": 51
 }
