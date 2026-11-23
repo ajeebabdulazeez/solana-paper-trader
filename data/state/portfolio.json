@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.6146457675698658,
+ "cash_sol": 3.848024786879742,
  "closed_count": 46,
  "day": {
   "date": "2026-11-23",
@@ -36,7 +36,7 @@
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z",
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z"
  },
- "last_sol_usd": 71.9708955818059,
+ "last_sol_usd": 71.97775628626692,
  "positions": [
   {
    "entry_exec_usd": 0.0021719419448168794,
@@ -62,16 +62,16 @@
     "vol_h24": 212874,
     "volume_accel": 4.03
    },
-   "fees_sol": 0.0040081365375388145,
+   "fees_sol": 0.007190945679799498,
    "id": 47,
-   "last_liq_usd": 116395.25,
-   "last_price_usd": 0.002476,
-   "last_ts": "2026-11-23T07:40:17Z",
-   "last_vol_h24": 291887.03,
+   "last_liq_usd": 119560.19,
+   "last_price_usd": 0.002612,
+   "last_ts": "2026-11-23T07:45:18Z",
+   "last_vol_h24": 297047.25,
    "missing_runs": 0,
    "opened": "2026-11-23T06:45:18Z",
    "pair": "FBqXu5ezPbBv4vKTFD83QPerYGcotcvqzrtAbSXHQs2m",
-   "peak_usd": 0.002476,
+   "peak_usd": 0.002612,
    "rugcheck": {
     "lp_locked_pct": 99.99977326634604,
     "risks": [],
@@ -80,13 +80,15 @@
    },
    "rulebook_version": 9,
    "sol_in": 0.4016273075077628,
-   "sol_returned": 0.0,
+   "sol_returned": 0.23337901930987598,
+   "sold_tokens": 6553.466129816716,
+   "sold_usd": 17.027189634961577,
    "suspect": null,
    "symbol": "NOHR",
    "token": "Jd3NCawdFiDNWpLiTtsMqoeoBMjC1ZQMrMScRVzpump",
    "tokens": 13106.932259633431,
-   "tokens_remaining": 13106.932259633431,
-   "tp1_done": false,
+   "tokens_remaining": 6553.466129816716,
+   "tp1_done": true,
    "trough_usd": 0.00216
   }
  ],
