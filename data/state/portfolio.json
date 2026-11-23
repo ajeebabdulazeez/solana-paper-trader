@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.662434713414719,
- "closed_count": 50,
+ "cash_sol": 4.014963606255601,
+ "closed_count": 51,
  "day": {
   "date": "2026-11-23",
   "opens": 6,
@@ -28,6 +28,7 @@
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
   "Dys6SYbjUsy8kksaqrXqo5L2GzgCYDiguGGcS8B5rkrv": "2026-11-17T13:05:10Z",
   "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump": "2026-11-23T04:55:14Z",
+  "EVbsBwxqdbMqadwAsVZ6KP9SJiaNmLSHAAb4W2mUpump": "2026-11-23T21:25:15Z",
   "FSkyjfqB26u6c2GSgpACrjbxp9yQAR8rutxprVNppump": "2026-11-14T05:40:10Z",
   "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump": "2026-11-20T10:30:09Z",
   "Fn95NtGXWPaJXc4N5y9rVkUq1NwZbjBNJzPVvNRLpump": "2026-11-21T17:10:16Z",
@@ -38,61 +39,9 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 72.71872060206962,
- "positions": [
-  {
-   "entry_exec_usd": 0.0005046570914505206,
-   "entry_liq_usd": 54854.05,
-   "entry_mid_usd": 0.0005016,
-   "entry_sol_usd": 73.35228605548802,
-   "features": {
-    "age_days": 5.92,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.77,
-    "chg_h1": 23.99,
-    "chg_h24": 44.75,
-    "chg_h6": 37.31,
-    "chg_m5": -0.57,
-    "dex": "pumpswap",
-    "liq_to_mcap": 0.1098,
-    "liq_usd": 54854,
-    "mcap": 499452,
-    "quote": "SOL",
-    "score": 5.29,
-    "txns_h1": 501,
-    "vol_h1": 43323,
-    "vol_h24": 194603,
-    "volume_accel": 2.99
-   },
-   "fees_sol": 0.00405665069865461,
-   "id": 51,
-   "last_liq_usd": 51891.89,
-   "last_price_usd": 0.0004499,
-   "last_ts": "2026-11-23T21:20:18Z",
-   "last_vol_h24": 326012.67,
-   "missing_runs": 0,
-   "opened": "2026-11-23T18:50:19Z",
-   "pair": "sVVcu9n1FbKwYS39gWw76NAE2jWBckCBdbC6jquaWC6",
-   "peak_usd": 0.0005969,
-   "rugcheck": {
-    "lp_locked_pct": 99.99984419398979,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 9,
-   "sol_in": 0.4113301397309219,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "LUNO",
-   "token": "EVbsBwxqdbMqadwAsVZ6KP9SJiaNmLSHAAb4W2mUpump",
-   "tokens": 59197.5065374477,
-   "tokens_remaining": 59197.5065374477,
-   "tp1_done": false,
-   "trough_usd": 0.0004499
-  }
- ],
- "realized_pnl_sol": -0.9262351468543604,
+ "last_sol_usd": 72.61293279895833,
+ "positions": [],
+ "realized_pnl_sol": -0.9850363937444002,
  "starting_sol": 5.0,
  "trade_seq": 51
 }
