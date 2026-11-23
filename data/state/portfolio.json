@@ -38,7 +38,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 76.03189273244726,
+ "last_sol_usd": 76.38041243878776,
  "positions": [
   {
    "entry_exec_usd": 0.002333575103974,
@@ -66,14 +66,14 @@
    },
    "fees_sol": 0.004027223614403646,
    "id": 50,
-   "last_liq_usd": 146772.61,
-   "last_price_usd": 0.002321,
-   "last_ts": "2026-11-23T15:00:29Z",
-   "last_vol_h24": 1482753.15,
+   "last_liq_usd": 149225.17,
+   "last_price_usd": 0.002375,
+   "last_ts": "2026-11-23T15:05:33Z",
+   "last_vol_h24": 1466813.25,
    "missing_runs": 0,
    "opened": "2026-11-23T15:00:29Z",
    "pair": "DEXTCER4k9dwbxTMU8zNVVwGevVmvHMB183pF2xxZwvH",
-   "peak_usd": 0.002321,
+   "peak_usd": 0.002375,
    "rugcheck": {
     "lp_locked_pct": 99.9999458940922,
     "risks": [],
@@ -83,6 +83,7 @@
    "rulebook_version": 9,
    "sol_in": 0.4054447228807291,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "DESSA",
    "token": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
    "tokens": 13078.87292471069,
