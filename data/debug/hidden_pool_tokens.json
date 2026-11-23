@@ -369,34 +369,34 @@
  },
  "CBYY7BY5fBbBa1bKNbmVuDNAuVbxLBxqFro97mkdfg8K": {
   "age_days": 0.13,
-  "cycles": 17,
+  "cycles": 18,
   "dex": "pumpswap",
   "first_age_days": 0.07,
   "first_liq_usd": 103947,
   "first_ts": "2026-11-22T22:50:18Z",
-  "last_ts": "2026-11-23T00:10:19Z",
-  "liq_usd": 114988,
+  "last_ts": "2026-11-23T00:15:16Z",
+  "liq_usd": 116624,
   "pair": "ECNBS3ydZYkv2fDQHLuS2oTmsnvXBUjLF6WrrumZvyPH",
   "quote": "SOL",
   "symbol": "OpenIndex",
   "verdicts": {
-   "u:too_young": 17
+   "u:too_young": 18
   }
  },
  "DE3LbTcvxo4DKcdMj4nFdwAYf2pcwQWJRr9tVEg1s5pQ": {
-  "age_days": 0.05,
-  "cycles": 9,
+  "age_days": 0.06,
+  "cycles": 10,
   "dex": "pumpswap",
   "first_age_days": 0.02,
   "first_liq_usd": 103403,
   "first_ts": "2026-11-22T23:30:21Z",
-  "last_ts": "2026-11-23T00:10:19Z",
-  "liq_usd": 120040,
+  "last_ts": "2026-11-23T00:15:16Z",
+  "liq_usd": 122997,
   "pair": "95n6TD9AAW9A1iApa7dmy2LcsT13qyUEQxyJY3tUft1q",
   "quote": "SOL",
   "symbol": "ZOL",
   "verdicts": {
-   "u:too_young": 9
+   "u:too_young": 10
   }
  },
  "DYDSuJumtLMPg8B24p1xVT4yQSjRSawmk261cQs5EeXw": {
@@ -545,18 +545,18 @@
  },
  "XsYzw7XHj8K2WHeoeNQVyevMmzjzXfcJ8tQ4FmdN1DL": {
   "age_days": 3.3,
-  "cycles": 59,
+  "cycles": 60,
   "dex": "raydium",
   "first_age_days": 3.1,
   "first_liq_usd": 95833,
   "first_ts": "2026-11-22T19:25:15Z",
-  "last_ts": "2026-11-23T00:10:19Z",
-  "liq_usd": 95272,
+  "last_ts": "2026-11-23T00:15:16Z",
+  "liq_usd": 95156,
   "pair": "AwAZxy7kvMkKfNrKJNoyQpyQaNwHyhE3irHD4W2ueswN",
   "quote": "USDC",
   "symbol": "ANTx",
   "verdicts": {
-   "u:volume_h24": 59
+   "u:volume_h24": 60
   }
  },
  "gEmvnPA66jKNPrYBC3ENMgsHEFpPyArS6t5CuPyEo8E": {
