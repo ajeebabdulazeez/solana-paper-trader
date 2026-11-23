@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-23T21:00:27Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-23T21:05:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.1018 SOL** (started with 5.0 SOL, -17.96%)
-- Cash: 3.2377 SOL, open positions: 2, closed trades: 49
-- Watchlist: 285 tokens, entry signals this run: 0
+- Equity: **4.0726 SOL** (started with 5.0 SOL, -18.55%)
+- Cash: 3.6624 SOL, open positions: 1, closed trades: 50
+- Watchlist: 284 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 49 | 32.7% | 20.66% | -16.11% | -4.1% | -0.9456 | 0.6 |
+| All | 50 | 34.0% | 19.72% | -16.11% | -3.93% | -0.9262 | 0.6 |
 
-Max drawdown 23.12%, average hold 120.2 min, simulated fees 0.4373 SOL.
+Max drawdown 23.12%, average hold 125.1 min, simulated fees 0.4454 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 50 | DESSA | 2026-11-23T15:00:29Z | 0.405 | +3.7% | no |
-| 51 | LUNO | 2026-11-23T18:50:19Z | 0.411 | +5.8% | no |
+| 51 | LUNO | 2026-11-23T18:50:19Z | 0.411 | +0.5% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 50 | DESSA | 2026-11-23T21:05:18Z | time_stop | +4.76% | +0.0193 |
 | 49 | SIDOOR | 2026-11-23T13:25:16Z | stop_loss | -16.22% | -0.0668 |
 | 48 | FIONA | 2026-11-23T12:15:19Z | trailing_stop | +14.20% | +0.0577 |
 | 47 | NOHR | 2026-11-23T08:00:25Z | trailing_stop | +11.78% | +0.0473 |
@@ -34,4 +34,3 @@ Max drawdown 23.12%, average hold 120.2 min, simulated fees 0.4373 SOL.
 | 43 | Singularity | 2026-11-22T11:55:15Z | trailing_stop | +21.14% | +0.0878 |
 | 41 | DIGS | 2026-11-22T11:45:18Z | time_stop | -3.45% | -0.0141 |
 | 42 | BLOB | 2026-11-22T07:57:07Z | trailing_stop | +23.37% | +0.0951 |
-| 40 | FIONA | 2026-11-22T03:50:17Z | stop_loss | -13.94% | -0.0576 |

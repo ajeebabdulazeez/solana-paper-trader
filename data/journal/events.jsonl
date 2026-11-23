@@ -115,3 +115,4 @@
 {"event":"close","id":49,"pnl_pct":-16.22,"pnl_sol":-0.066848,"reason":"stop_loss","symbol":"SIDOOR","ts":"2026-11-23T13:25:16Z"}
 {"event":"open","id":50,"price_usd":0.002321,"score":2.3,"sol_in":0.405445,"symbol":"DESSA","token":"npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump","ts":"2026-11-23T15:00:29Z"}
 {"event":"open","id":51,"price_usd":0.0005016,"score":5.29,"sol_in":0.41133,"symbol":"LUNO","token":"EVbsBwxqdbMqadwAsVZ6KP9SJiaNmLSHAAb4W2mUpump","ts":"2026-11-23T18:50:19Z"}
+{"event":"close","id":50,"pnl_pct":4.76,"pnl_sol":0.019318,"reason":"time_stop","symbol":"DESSA","ts":"2026-11-23T21:05:18Z"}
