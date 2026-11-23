@@ -36,7 +36,7 @@
   "VAYMVikuYQpWz5sXCeCsQDeho2QcGqDSNq9rhCspump": "2026-11-18T17:25:10Z",
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-22T14:45:18Z"
  },
- "last_sol_usd": 71.59487776484283,
+ "last_sol_usd": 71.65546731826512,
  "positions": [
   {
    "entry_exec_usd": 0.0021719419448168794,
@@ -64,14 +64,14 @@
    },
    "fees_sol": 0.0040081365375388145,
    "id": 47,
-   "last_liq_usd": 108231.57,
-   "last_price_usd": 0.00216,
-   "last_ts": "2026-11-23T06:45:18Z",
-   "last_vol_h24": 212873.8,
+   "last_liq_usd": 112920.4,
+   "last_price_usd": 0.002348,
+   "last_ts": "2026-11-23T06:50:17Z",
+   "last_vol_h24": 223407.87,
    "missing_runs": 0,
    "opened": "2026-11-23T06:45:18Z",
    "pair": "FBqXu5ezPbBv4vKTFD83QPerYGcotcvqzrtAbSXHQs2m",
-   "peak_usd": 0.00216,
+   "peak_usd": 0.002348,
    "rugcheck": {
     "lp_locked_pct": 99.99977326634604,
     "risks": [],
@@ -81,6 +81,7 @@
    "rulebook_version": 9,
    "sol_in": 0.4016273075077628,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "NOHR",
    "token": "Jd3NCawdFiDNWpLiTtsMqoeoBMjC1ZQMrMScRVzpump",
    "tokens": 13106.932259633431,
