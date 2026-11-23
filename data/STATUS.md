@@ -1,10 +1,10 @@
 # Paper trading status
 
-Updated 2026-11-23T10:25:16Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-23T10:30:22Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.0636 SOL** (started with 5.0 SOL, -18.73%)
-- Cash: 4.0636 SOL, open positions: 0, closed trades: 47
-- Watchlist: 227 tokens, entry signals this run: 0
+- Equity: **4.0574 SOL** (started with 5.0 SOL, -18.85%)
+- Cash: 3.6572 SOL, open positions: 1, closed trades: 47
+- Watchlist: 232 tokens, entry signals this run: 1
 
 ## Closed trades
 
@@ -13,6 +13,12 @@ Updated 2026-11-23T10:25:16Z (UTC), rulebook v9. **Simulated trades only. No rea
 | All | 47 | 31.9% | 21.09% | -16.11% | -4.24% | -0.9364 | 0.59 |
 
 Max drawdown 23.12%, average hold 122.7 min, simulated fees 0.4191 SOL.
+
+## Open positions
+
+| # | Token | Opened | SOL in | Change vs entry | TP1 hit |
+|---|---|---|---|---|---|
+| 48 | FIONA | 2026-11-23T10:30:22Z | 0.406 | +0.0% | no |
 
 ## Last 10 closed
 
