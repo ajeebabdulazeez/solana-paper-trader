@@ -44,6 +44,44 @@
   },
   "ts": "2026-11-22T05:45:17Z"
  },
+ "ANTBTZQ1EUuTxUs3tfeampxdqTWPHmwyJmcWj4xoAyNe": {
+  "c": {
+   "lp_locked_pct": 0,
+   "risks": [
+    [
+     "Mint Authority still enabled",
+     "danger"
+    ],
+    [
+     "Permanent Control Enabled",
+     "danger"
+    ],
+    [
+     "Freeze Authority still enabled",
+     "danger"
+    ],
+    [
+     "Large Amount of LP Unlocked",
+     "danger"
+    ],
+    [
+     "Low Liquidity",
+     "danger"
+    ],
+    [
+     "Low amount of LP Providers",
+     "warn"
+    ],
+    [
+     "Mutable metadata",
+     "warn"
+    ]
+   ],
+   "score": 139592,
+   "score_normalised": 82
+  },
+  "ts": "2026-11-23T09:15:18Z"
+ },
  "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump": {
   "c": {
    "lp_locked_pct": 69.51254714824063,
