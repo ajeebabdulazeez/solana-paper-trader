@@ -132,36 +132,6 @@
   },
   "ts": "2026-11-23T06:45:18Z"
  },
- "NVDAVuiB7hwd3m5Wa1JuHNovPaPG6BH1QNztbKFxNjv": {
-  "c": {
-   "lp_locked_pct": 0,
-   "risks": [
-    [
-     "Mint Authority still enabled",
-     "danger"
-    ],
-    [
-     "Permanent Control Enabled",
-     "danger"
-    ],
-    [
-     "Freeze Authority still enabled",
-     "danger"
-    ],
-    [
-     "Low Liquidity",
-     "danger"
-    ],
-    [
-     "Mutable metadata",
-     "warn"
-    ]
-   ],
-   "score": 128101,
-   "score_normalised": 81
-  },
-  "ts": "2026-11-21T14:05:14Z"
- },
  "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
   "c": {
    "lp_locked_pct": 99.99995045004754,
