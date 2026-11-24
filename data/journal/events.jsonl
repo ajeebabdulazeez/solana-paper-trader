@@ -125,3 +125,4 @@
 {"event":"close","id":53,"pnl_pct":-86.08,"pnl_sol":-0.352637,"reason":"liquidity_drop","symbol":"UCASH","ts":"2026-11-24T03:20:18Z"}
 {"chg_pct":25.11,"event":"tp1","id":54,"price_usd":0.003423,"sol_received":0.246441,"symbol":"Rings","ts":"2026-11-24T04:30:23Z"}
 {"event":"close","id":54,"pnl_pct":14.75,"pnl_sol":0.060439,"reason":"trailing_stop","symbol":"Rings","ts":"2026-11-24T05:30:24Z"}
+{"event":"open","id":55,"price_usd":0.003925,"score":2.99,"sol_in":0.379673,"symbol":"FLOAT","token":"Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr","ts":"2026-11-24T10:25:16Z"}
