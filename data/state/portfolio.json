@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.2899130012122355,
+ "cash_sol": 3.5114986726820336,
  "closed_count": 57,
  "day": {
   "date": "2026-11-24",
@@ -42,7 +42,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 69.29230805026496,
+ "last_sol_usd": 69.18521543802328,
  "positions": [
   {
    "entry_exec_usd": 0.0005020390300268836,
@@ -68,16 +68,16 @@
     "vol_h24": 322208,
     "volume_accel": 2.03
    },
-   "fees_sol": 0.003878945748673237,
+   "fees_sol": 0.007002491836461166,
    "id": 58,
-   "last_liq_usd": 63288.32,
-   "last_price_usd": 0.0005842,
-   "last_ts": "2026-11-24T19:35:17Z",
-   "last_vol_h24": 319740.5,
+   "last_liq_usd": 64528.41,
+   "last_price_usd": 0.0006071,
+   "last_ts": "2026-11-24T19:40:20Z",
+   "last_vol_h24": 323946.89,
    "missing_runs": 0,
    "opened": "2026-11-24T18:15:20Z",
    "pair": "GkHcYZeXDi2SveqNaGSg3qxrkzShDr5Dxrd482kM2hXx",
-   "peak_usd": 0.0005962,
+   "peak_usd": 0.0006071,
    "rugcheck": {
     "lp_locked_pct": 57.984211002390516,
     "risks": [],
@@ -86,13 +86,15 @@
    },
    "rulebook_version": 10,
    "sol_in": 0.3757891497346474,
-   "sol_returned": 0.0,
+   "sol_returned": 0.22158567146979793,
+   "sold_tokens": 25749.051716213322,
+   "sold_usd": 15.54655562763122,
    "suspect": null,
    "symbol": "Huss",
    "token": "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump",
    "tokens": 51498.103432426644,
-   "tokens_remaining": 51498.103432426644,
-   "tp1_done": false,
+   "tokens_remaining": 25749.051716213322,
+   "tp1_done": true,
    "trough_usd": 0.0004711
   }
  ],
