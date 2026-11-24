@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.6134672456300407,
+ "cash_sol": 3.857267065723323,
  "closed_count": 51,
  "day": {
   "date": "2026-11-24",
@@ -39,7 +39,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 72.01214223764094,
+ "last_sol_usd": 71.95785180149558,
  "positions": [
   {
    "entry_exec_usd": 0.003358691496547357,
@@ -65,16 +65,16 @@
     "vol_h24": 3183691,
     "volume_accel": 1.83
    },
-   "fees_sol": 0.004007481803127801,
+   "fees_sol": 0.007242656778470927,
    "id": 52,
-   "last_liq_usd": 205054.04,
-   "last_price_usd": 0.003704,
-   "last_ts": "2026-11-24T02:00:28Z",
-   "last_vol_h24": 3353893.35,
+   "last_liq_usd": 218304.7,
+   "last_price_usd": 0.004191,
+   "last_ts": "2026-11-24T02:05:19Z",
+   "last_vol_h24": 3404247.46,
    "missing_runs": 0,
    "opened": "2026-11-24T00:45:17Z",
    "pair": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
-   "peak_usd": 0.003823,
+   "peak_usd": 0.004191,
    "rugcheck": {
     "lp_locked_pct": 41.305007409003885,
     "risks": [],
@@ -83,13 +83,15 @@
    },
    "rulebook_version": 9,
    "sol_in": 0.40149636062556016,
-   "sol_returned": 0.0,
+   "sol_returned": 0.24379982009328208,
+   "sold_tokens": 4263.507356209094,
+   "sold_usd": 17.776107564931323,
    "suspect": null,
    "symbol": "FIONA",
    "token": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
    "tokens": 8527.014712418188,
-   "tokens_remaining": 8527.014712418188,
-   "tp1_done": false,
+   "tokens_remaining": 4263.507356209094,
+   "tp1_done": true,
    "trough_usd": 0.003244
   }
  ],
