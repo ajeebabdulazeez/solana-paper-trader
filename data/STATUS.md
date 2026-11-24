@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-24T18:15:20Z (UTC), rulebook v10. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-24T18:20:20Z (UTC), rulebook v10. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **3.7518 SOL** (started with 5.0 SOL, -24.96%)
-- Cash: 3.1541 SOL, open positions: 2, closed trades: 56
-- Watchlist: 230 tokens, entry signals this run: 1
+- Equity: **3.6703 SOL** (started with 5.0 SOL, -26.59%)
+- Cash: 3.2899 SOL, open positions: 1, closed trades: 57
+- Watchlist: 232 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 56 | 33.9% | 19.39% | -17.86% | -5.22% | -1.3119 | 0.54 |
+| All | 57 | 33.3% | 19.39% | -17.55% | -5.23% | -1.3343 | 0.54 |
 
-Max drawdown 26.24%, average hold 125.7 min, simulated fees 0.4955 SOL.
+Max drawdown 26.69%, average hold 125.6 min, simulated fees 0.5052 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 57 | ATX | 2026-11-24T16:21:02Z | 0.373 | +25.5% | yes |
-| 58 | Huss | 2026-11-24T18:15:20Z | 0.376 | +0.0% | no |
+| 58 | Huss | 2026-11-24T18:15:20Z | 0.376 | +3.0% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 57 | ATX | 2026-11-24T18:20:20Z | stop_loss | -6.02% | -0.0224 |
 | 56 | CROWD | 2026-11-24T16:35:17Z | stop_loss | -15.42% | -0.0578 |
 | 55 | FLOAT | 2026-11-24T15:20:20Z | stop_loss | -13.39% | -0.0509 |
 | 54 | Rings | 2026-11-24T05:30:24Z | trailing_stop | +14.75% | +0.0604 |
@@ -34,4 +34,3 @@ Max drawdown 26.24%, average hold 125.7 min, simulated fees 0.4955 SOL.
 | 50 | DESSA | 2026-11-23T21:05:18Z | time_stop | +4.76% | +0.0193 |
 | 49 | SIDOOR | 2026-11-23T13:25:16Z | stop_loss | -16.22% | -0.0668 |
 | 48 | FIONA | 2026-11-23T12:15:19Z | trailing_stop | +14.20% | +0.0577 |
-| 47 | NOHR | 2026-11-23T08:00:25Z | trailing_stop | +11.78% | +0.0473 |
