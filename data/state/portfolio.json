@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.315604246117358,
+ "cash_sol": 3.5299246441832937,
  "closed_count": 56,
  "day": {
   "date": "2026-11-24",
@@ -41,7 +41,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 69.44692239072256,
+ "last_sol_usd": 69.4648829431438,
  "positions": [
   {
    "entry_exec_usd": 0.00262686775815647,
@@ -67,16 +67,16 @@
     "vol_h24": 280783,
     "volume_accel": 1.5
    },
-   "fees_sol": 0.0038625385697117825,
+   "fees_sol": 0.006949575745922513,
    "id": 57,
-   "last_liq_usd": 179209.73,
-   "last_price_usd": 0.00303,
-   "last_ts": "2026-11-24T17:50:18Z",
-   "last_vol_h24": 335342.1,
+   "last_liq_usd": 182544.6,
+   "last_price_usd": 0.003141,
+   "last_ts": "2026-11-24T17:55:17Z",
+   "last_vol_h24": 338467.76,
    "missing_runs": 0,
    "opened": "2026-11-24T16:21:02Z",
    "pair": "3Y7Knabn84dpB6yy5LbCFt574E8ifTMeWkBMTPvGZCwE",
-   "peak_usd": 0.00303,
+   "peak_usd": 0.003141,
    "rugcheck": {
     "lp_locked_pct": 99.99999999988398,
     "risks": [
@@ -90,13 +90,15 @@
    },
    "rulebook_version": 10,
    "sol_in": 0.37250771394235654,
-   "sol_returned": 0.0,
+   "sol_returned": 0.21432039806593545,
+   "sold_tokens": 4833.0457976205635,
+   "sold_usd": 15.1021820400648,
    "suspect": null,
    "symbol": "ATX",
    "token": "BiLAn35QaVqQC8f8BGrE92r2n5dcDEJmqJcx1v9Apump",
    "tokens": 9666.091595241127,
-   "tokens_remaining": 9666.091595241127,
-   "tp1_done": false,
+   "tokens_remaining": 4833.0457976205635,
+   "tp1_done": true,
    "trough_usd": 0.002505
   }
  ],
