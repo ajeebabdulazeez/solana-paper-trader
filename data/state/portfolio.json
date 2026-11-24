@@ -1,6 +1,6 @@
 {
- "cash_sol": 3.417055451052954,
- "closed_count": 54,
+ "cash_sol": 3.7458738326411907,
+ "closed_count": 55,
  "day": {
   "date": "2026-11-24",
   "opens": 4,
@@ -24,7 +24,7 @@
   "9rbKkz2BDQBVgZmrHY6d7PTq2ge91gkpEyE4y9PPpump": "2026-11-19T15:15:14Z",
   "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump": "2026-11-24T02:20:18Z",
   "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump": "2026-11-17T16:20:12Z",
-  "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-22T23:00:25Z",
+  "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "2026-11-24T15:20:20Z",
   "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump": "2026-11-20T13:10:19Z",
   "D9EcoQZeAytCrF1kQFSpRNpoPhibJUvJcmRHXhubpump": "2026-11-17T12:25:10Z",
   "Dys6SYbjUsy8kksaqrXqo5L2GzgCYDiguGGcS8B5rkrv": "2026-11-17T13:05:10Z",
@@ -40,61 +40,9 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 69.7754400161845,
- "positions": [
-  {
-   "entry_exec_usd": 0.003945212677281404,
-   "entry_liq_usd": 356951.73,
-   "entry_mid_usd": 0.003925,
-   "entry_sol_usd": 70.75960679177837,
-   "features": {
-    "age_days": 26.51,
-    "boosts": 0,
-    "buy_sell_ratio_h1": 1.33,
-    "chg_h1": 7.7,
-    "chg_h24": 18.49,
-    "chg_h6": 53.14,
-    "chg_m5": -1.2,
-    "dex": "raydium",
-    "liq_to_mcap": 0.091,
-    "liq_usd": 356952,
-    "mcap": 3921611,
-    "quote": "SOL",
-    "score": 2.99,
-    "txns_h1": 1021,
-    "vol_h1": 185249,
-    "vol_h24": 802995,
-    "volume_accel": 2.25
-   },
-   "fees_sol": 0.0038983641394738635,
-   "id": 55,
-   "last_liq_usd": 335350.21,
-   "last_price_usd": 0.003477,
-   "last_ts": "2026-11-24T15:15:33Z",
-   "last_vol_h24": 803477.15,
-   "missing_runs": 0,
-   "opened": "2026-11-24T10:25:16Z",
-   "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
-   "peak_usd": 0.003975,
-   "rugcheck": {
-    "lp_locked_pct": 71.15690496806653,
-    "risks": [],
-    "score": 1,
-    "score_normalised": 1
-   },
-   "rulebook_version": 10,
-   "sol_in": 0.3796728278947727,
-   "sol_returned": 0.0,
-   "suspect": null,
-   "symbol": "FLOAT",
-   "token": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
-   "tokens": 6739.726213198451,
-   "tokens_remaining": 6739.726213198451,
-   "tp1_done": false,
-   "trough_usd": 0.003477
-  }
- ],
- "realized_pnl_sol": -1.2032717210522748,
+ "last_sol_usd": 69.63614837166105,
+ "positions": [],
+ "realized_pnl_sol": -1.2541261673588107,
  "starting_sol": 5.0,
  "trade_seq": 55
 }
