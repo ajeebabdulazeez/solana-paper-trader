@@ -1,5 +1,5 @@
 {
- "cash_sol": 3.326444901513026,
+ "cash_sol": 3.572885764414045,
  "closed_count": 53,
  "day": {
   "date": "2026-11-24",
@@ -40,7 +40,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 71.68762845999714,
+ "last_sol_usd": 71.64326188716433,
  "positions": [
   {
    "entry_exec_usd": 0.0027506861434085663,
@@ -66,16 +66,16 @@
     "vol_h24": 575340,
     "volume_accel": 2.05
    },
-   "fees_sol": 0.0040492216330441765,
+   "fees_sol": 0.007297668180285478,
    "id": 54,
-   "last_liq_usd": 169911.14,
-   "last_price_usd": 0.003125,
-   "last_ts": "2026-11-24T04:25:15Z",
-   "last_vol_h24": 584603.65,
+   "last_liq_usd": 177876.92,
+   "last_price_usd": 0.003423,
+   "last_ts": "2026-11-24T04:30:23Z",
+   "last_vol_h24": 593411.96,
    "missing_runs": 0,
    "opened": "2026-11-24T02:55:16Z",
    "pair": "8fSUYVnTy4r5fZUksjzKexLq2Tx96K3UPdYRvW5XWJ9t",
-   "peak_usd": 0.003258,
+   "peak_usd": 0.003423,
    "rugcheck": {
     "lp_locked_pct": 62.149744332062305,
     "risks": [],
@@ -84,13 +84,15 @@
    },
    "rulebook_version": 9,
    "sol_in": 0.40984432660883535,
-   "sol_returned": 0.0,
+   "sol_returned": 0.246440862901019,
+   "sold_tokens": 5253.31107696422,
+   "sold_usd": 17.888556587226926,
    "suspect": null,
    "symbol": "Rings",
    "token": "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring",
    "tokens": 10506.62215392844,
-   "tokens_remaining": 10506.62215392844,
-   "tp1_done": false,
+   "tokens_remaining": 5253.31107696422,
+   "tp1_done": true,
    "trough_usd": 0.002736
   }
  ],

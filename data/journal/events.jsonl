@@ -123,3 +123,4 @@
 {"event":"close","id":52,"pnl_pct":18.42,"pnl_sol":0.073962,"reason":"trailing_stop","symbol":"FIONA","ts":"2026-11-24T02:20:18Z"}
 {"event":"open","id":54,"price_usd":0.002736,"score":4.13,"sol_in":0.409844,"symbol":"Rings","token":"65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring","ts":"2026-11-24T02:55:16Z"}
 {"event":"close","id":53,"pnl_pct":-86.08,"pnl_sol":-0.352637,"reason":"liquidity_drop","symbol":"UCASH","ts":"2026-11-24T03:20:18Z"}
+{"chg_pct":25.11,"event":"tp1","id":54,"price_usd":0.003423,"sol_received":0.246441,"symbol":"Rings","ts":"2026-11-24T04:30:23Z"}
