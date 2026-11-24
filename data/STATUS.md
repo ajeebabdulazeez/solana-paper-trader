@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-24T02:15:19Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-24T02:20:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.1042 SOL** (started with 5.0 SOL, -17.92%)
-- Cash: 3.4476 SOL, open positions: 2, closed trades: 51
-- Watchlist: 275 tokens, entry signals this run: 0
+- Equity: **4.1048 SOL** (started with 5.0 SOL, -17.90%)
+- Cash: 3.6793 SOL, open positions: 1, closed trades: 52
+- Watchlist: 274 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 51 | 33.3% | 19.72% | -16.06% | -4.13% | -0.985 | 0.59 |
+| All | 52 | 34.6% | 19.65% | -16.06% | -3.7% | -0.9111 | 0.62 |
 
-Max drawdown 23.12%, average hold 125.7 min, simulated fees 0.4533 SOL.
+Max drawdown 23.12%, average hold 125.1 min, simulated fees 0.4637 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 52 | FIONA | 2026-11-24T00:45:17Z | 0.401 | +27.6% | yes |
-| 53 | UCASH | 2026-11-24T02:10:21Z | 0.410 | +0.3% | no |
+| 53 | UCASH | 2026-11-24T02:10:21Z | 0.410 | +5.5% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 52 | FIONA | 2026-11-24T02:20:18Z | trailing_stop | +18.42% | +0.0740 |
 | 51 | LUNO | 2026-11-23T21:25:15Z | stop_loss | -14.30% | -0.0588 |
 | 50 | DESSA | 2026-11-23T21:05:18Z | time_stop | +4.76% | +0.0193 |
 | 49 | SIDOOR | 2026-11-23T13:25:16Z | stop_loss | -16.22% | -0.0668 |
@@ -34,4 +34,3 @@ Max drawdown 23.12%, average hold 125.7 min, simulated fees 0.4533 SOL.
 | 45 | FLOAT | 2026-11-22T23:00:25Z | stop_loss | -16.49% | -0.0685 |
 | 44 | DESSA | 2026-11-22T14:45:18Z | stop_loss | -20.37% | -0.0864 |
 | 43 | Singularity | 2026-11-22T11:55:15Z | trailing_stop | +21.14% | +0.0878 |
-| 41 | DIGS | 2026-11-22T11:45:18Z | time_stop | -3.45% | -0.0141 |
