@@ -6,9 +6,14 @@ name: paper-bot
 #   - an external scheduler calling GitHub's "run workflow" API every 5 minutes (reliable)
 #   - GitHub's own timer below (best-effort: often late, sometimes skipped)
 #   - the "Run workflow" button, or a push that changes the .kick file
+#
+# PAUSED on 24 Nov 2026 at Ajeeb's request: the GitHub timer is removed and the
+# job is switched off with `if: false`, so no trigger (timer, external scheduler,
+# button or .kick) runs a cycle. To resume: delete the `if: false` line below and
+# put back under `on:`
+#   schedule:
+#     - cron: "*/5 * * * *"
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -24,6 +29,7 @@ concurrency:
 
 jobs:
   run:
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 6
     env:
