@@ -1,8 +1,8 @@
 # Paper trading status
 
-Updated 2026-11-24T03:40:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-24T03:45:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **3.7579 SOL** (started with 5.0 SOL, -24.84%)
+- Equity: **3.7576 SOL** (started with 5.0 SOL, -24.85%)
 - Cash: 3.3264 SOL, open positions: 1, closed trades: 53
 - Watchlist: 253 tokens, entry signals this run: 0
 
