@@ -1,9 +1,9 @@
 {
- "cash_sol": 3.857267065723323,
+ "cash_sol": 3.4475948349838235,
  "closed_count": 51,
  "day": {
   "date": "2026-11-24",
-  "opens": 1,
+  "opens": 2,
   "start_equity": 4.014963606255601
  },
  "last_exit": {
@@ -39,7 +39,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 71.95785180149558,
+ "last_sol_usd": 71.91450933172787,
  "positions": [
   {
    "entry_exec_usd": 0.003358691496547357,
@@ -67,10 +67,10 @@
    },
    "fees_sol": 0.007242656778470927,
    "id": 52,
-   "last_liq_usd": 218304.7,
-   "last_price_usd": 0.004191,
-   "last_ts": "2026-11-24T02:05:19Z",
-   "last_vol_h24": 3404247.46,
+   "last_liq_usd": 214106.76,
+   "last_price_usd": 0.004039,
+   "last_ts": "2026-11-24T02:10:21Z",
+   "last_vol_h24": 3453766.53,
    "missing_runs": 0,
    "opened": "2026-11-24T00:45:17Z",
    "pair": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
@@ -93,9 +93,59 @@
    "tokens_remaining": 4263.507356209094,
    "tp1_done": true,
    "trough_usd": 0.003244
+  },
+  {
+   "entry_exec_usd": 0.0013786663546469541,
+   "entry_liq_usd": 99074.71,
+   "entry_mid_usd": 0.001371,
+   "entry_sol_usd": 71.91450933172787,
+   "features": {
+    "age_days": 1.62,
+    "boosts": 100,
+    "buy_sell_ratio_h1": 2.69,
+    "chg_h1": 11.51,
+    "chg_h24": -24.67,
+    "chg_h6": 65.33,
+    "chg_m5": 8.77,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0725,
+    "liq_usd": 99075,
+    "mcap": 1365952,
+    "quote": "SOL",
+    "score": 3.24,
+    "txns_h1": 6833,
+    "vol_h1": 228374,
+    "vol_h24": 5298528,
+    "volume_accel": 1.2
+   },
+   "fees_sol": 0.004048361153697497,
+   "id": 53,
+   "last_liq_usd": 99074.71,
+   "last_price_usd": 0.001371,
+   "last_ts": "2026-11-24T02:10:21Z",
+   "last_vol_h24": 5298527.91,
+   "missing_runs": 0,
+   "opened": "2026-11-24T02:10:21Z",
+   "pair": "4h7R5JzaQ6PgNjFuD12AeUQJRQYgwz2YhPSrA6sh1Rxt",
+   "peak_usd": 0.001371,
+   "rugcheck": {
+    "lp_locked_pct": 99.99999999992652,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 9,
+   "sol_in": 0.4096722307394994,
+   "sol_returned": 0.0,
+   "symbol": "UCASH",
+   "token": "7cFiqdT46zs7ooHWLFiLSaSQKLMibtokh9dBinsspump",
+   "tokens": 21158.303788424262,
+   "tokens_remaining": 21158.303788424262,
+   "tp1_done": false,
+   "trough_usd": 0.001371
   }
  ],
  "realized_pnl_sol": -0.9850363937444002,
  "starting_sol": 5.0,
- "trade_seq": 52
+ "trade_seq": 53
 }
