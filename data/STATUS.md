@@ -1,30 +1,30 @@
 # Paper trading status
 
-Updated 2026-11-24T03:15:19Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
+Updated 2026-11-24T03:20:18Z (UTC), rulebook v9. **Simulated trades only. No real money.** Full trade ledger: [trades.csv](trades.csv).
 
-- Equity: **4.1077 SOL** (started with 5.0 SOL, -17.85%)
-- Cash: 3.2694 SOL, open positions: 2, closed trades: 52
-- Watchlist: 252 tokens, entry signals this run: 0
+- Equity: **3.7723 SOL** (started with 5.0 SOL, -24.55%)
+- Cash: 3.3264 SOL, open positions: 1, closed trades: 53
+- Watchlist: 256 tokens, entry signals this run: 0
 
 ## Closed trades
 
 | Group | Trades | Win rate | Avg win | Avg loss | Expectancy/trade | Total P&L (SOL) | Profit factor |
 |---|---|---|---|---|---|---|---|
-| All | 52 | 34.6% | 19.65% | -16.06% | -3.7% | -0.9111 | 0.62 |
+| All | 53 | 34.0% | 19.65% | -18.06% | -5.25% | -1.2637 | 0.54 |
 
-Max drawdown 23.12%, average hold 125.1 min, simulated fees 0.4637 SOL.
+Max drawdown 25.27%, average hold 124.1 min, simulated fees 0.47 SOL.
 
 ## Open positions
 
 | # | Token | Opened | SOL in | Change vs entry | TP1 hit |
 |---|---|---|---|---|---|
-| 53 | UCASH | 2026-11-24T02:10:21Z | 0.410 | -3.1% | no |
-| 54 | Rings | 2026-11-24T02:55:16Z | 0.410 | +8.7% | no |
+| 54 | Rings | 2026-11-24T02:55:16Z | 0.410 | +9.8% | no |
 
 ## Last 10 closed
 
 | # | Token | Closed | Exit | P&L % | P&L SOL |
 |---|---|---|---|---|---|
+| 53 | UCASH | 2026-11-24T03:20:18Z | liquidity_drop | -86.08% | -0.3526 |
 | 52 | FIONA | 2026-11-24T02:20:18Z | trailing_stop | +18.42% | +0.0740 |
 | 51 | LUNO | 2026-11-23T21:25:15Z | stop_loss | -14.30% | -0.0588 |
 | 50 | DESSA | 2026-11-23T21:05:18Z | time_stop | +4.76% | +0.0193 |
@@ -34,4 +34,3 @@ Max drawdown 23.12%, average hold 125.1 min, simulated fees 0.4637 SOL.
 | 46 | chud | 2026-11-23T04:55:14Z | stop_loss | -16.92% | -0.0691 |
 | 45 | FLOAT | 2026-11-22T23:00:25Z | stop_loss | -16.49% | -0.0685 |
 | 44 | DESSA | 2026-11-22T14:45:18Z | stop_loss | -20.37% | -0.0864 |
-| 43 | Singularity | 2026-11-22T11:55:15Z | trailing_stop | +21.14% | +0.0878 |
