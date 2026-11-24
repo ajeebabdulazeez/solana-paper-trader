@@ -40,7 +40,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 70.75960679177837,
+ "last_sol_usd": 70.74468085106383,
  "positions": [
   {
    "entry_exec_usd": 0.003945212677281404,
@@ -68,10 +68,10 @@
    },
    "fees_sol": 0.0038983641394738635,
    "id": 55,
-   "last_liq_usd": 356951.73,
-   "last_price_usd": 0.003925,
-   "last_ts": "2026-11-24T10:25:16Z",
-   "last_vol_h24": 802995.32,
+   "last_liq_usd": 353535.98,
+   "last_price_usd": 0.003846,
+   "last_ts": "2026-11-24T10:30:25Z",
+   "last_vol_h24": 803321.4,
    "missing_runs": 0,
    "opened": "2026-11-24T10:25:16Z",
    "pair": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
@@ -85,12 +85,13 @@
    "rulebook_version": 10,
    "sol_in": 0.3796728278947727,
    "sol_returned": 0.0,
+   "suspect": null,
    "symbol": "FLOAT",
    "token": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
    "tokens": 6739.726213198451,
    "tokens_remaining": 6739.726213198451,
    "tp1_done": false,
-   "trough_usd": 0.003925
+   "trough_usd": 0.003846
   }
  ],
  "realized_pnl_sol": -1.2032717210522748,
