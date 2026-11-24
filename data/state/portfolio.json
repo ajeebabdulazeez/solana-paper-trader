@@ -1,9 +1,9 @@
 {
- "cash_sol": 3.5299246441832937,
+ "cash_sol": 3.154135494448646,
  "closed_count": 56,
  "day": {
   "date": "2026-11-24",
-  "opens": 6,
+  "opens": 7,
   "start_equity": 4.014963606255601
  },
  "last_exit": {
@@ -41,7 +41,7 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 69.58250497017892,
+ "last_sol_usd": 69.51693612691152,
  "positions": [
   {
    "entry_exec_usd": 0.00262686775815647,
@@ -93,16 +93,71 @@
    "sol_returned": 0.21432039806593545,
    "sold_tokens": 4833.0457976205635,
    "sold_usd": 15.1021820400648,
-   "suspect": null,
+   "suspect": {
+    "liq": 140407.23,
+    "price": 0.001996,
+    "runs": 1,
+    "ts": 1795544120.601689
+   },
    "symbol": "ATX",
    "token": "BiLAn35QaVqQC8f8BGrE92r2n5dcDEJmqJcx1v9Apump",
    "tokens": 9666.091595241127,
    "tokens_remaining": 4833.0457976205635,
    "tp1_done": true,
    "trough_usd": 0.002505
+  },
+  {
+   "entry_exec_usd": 0.0005020390300268836,
+   "entry_liq_usd": 58477.57,
+   "entry_mid_usd": 0.0004991,
+   "entry_sol_usd": 69.51693612691152,
+   "features": {
+    "age_days": 8.03,
+    "boosts": 0,
+    "buy_sell_ratio_h1": 1.26,
+    "chg_h1": 6.78,
+    "chg_h24": 19.84,
+    "chg_h6": 10.38,
+    "chg_m5": 4.94,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.1228,
+    "liq_usd": 58478,
+    "mcap": 476237,
+    "quote": "SOL",
+    "score": 2.56,
+    "txns_h1": 506,
+    "vol_h1": 25807,
+    "vol_h24": 322208,
+    "volume_accel": 2.03
+   },
+   "fees_sol": 0.003878945748673237,
+   "id": 58,
+   "last_liq_usd": 58477.57,
+   "last_price_usd": 0.0004991,
+   "last_ts": "2026-11-24T18:15:20Z",
+   "last_vol_h24": 322208.29,
+   "missing_runs": 0,
+   "opened": "2026-11-24T18:15:20Z",
+   "pair": "GkHcYZeXDi2SveqNaGSg3qxrkzShDr5Dxrd482kM2hXx",
+   "peak_usd": 0.0004991,
+   "rugcheck": {
+    "lp_locked_pct": 57.984211002390516,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 10,
+   "sol_in": 0.3757891497346474,
+   "sol_returned": 0.0,
+   "symbol": "Huss",
+   "token": "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump",
+   "tokens": 51498.103432426644,
+   "tokens_remaining": 51498.103432426644,
+   "tp1_done": false,
+   "trough_usd": 0.0004991
   }
  ],
  "realized_pnl_sol": -1.3118880399402866,
  "starting_sol": 5.0,
- "trade_seq": 57
+ "trade_seq": 58
 }

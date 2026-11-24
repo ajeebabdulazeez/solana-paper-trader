@@ -131,3 +131,5 @@
 {"event":"open","id":57,"price_usd":0.002613,"score":14.59,"sol_in":0.372508,"symbol":"ATX","token":"BiLAn35QaVqQC8f8BGrE92r2n5dcDEJmqJcx1v9Apump","ts":"2026-11-24T16:21:02Z"}
 {"event":"close","id":56,"pnl_pct":-15.42,"pnl_sol":-0.057762,"reason":"stop_loss","symbol":"CROWD","ts":"2026-11-24T16:35:17Z"}
 {"chg_pct":20.21,"event":"tp1","id":57,"price_usd":0.003141,"sol_received":0.21432,"symbol":"ATX","ts":"2026-11-24T17:55:17Z"}
+{"event":"suspect_price","id":57,"last_price_usd":0.003279,"liq_usd":140407.23,"price_usd":0.001996,"symbol":"ATX","traded_usd":3183,"ts":"2026-11-24T18:15:20Z"}
+{"event":"open","id":58,"price_usd":0.0004991,"score":2.56,"sol_in":0.375789,"symbol":"Huss","token":"CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump","ts":"2026-11-24T18:15:20Z"}
