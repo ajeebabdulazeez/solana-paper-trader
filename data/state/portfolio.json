@@ -1,9 +1,9 @@
 {
- "cash_sol": 4.014963606255601,
+ "cash_sol": 3.6134672456300407,
  "closed_count": 51,
  "day": {
   "date": "2026-11-24",
-  "opens": 0,
+  "opens": 1,
   "start_equity": 4.014963606255601
  },
  "last_exit": {
@@ -39,9 +39,60 @@
   "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": "2026-11-23T21:05:18Z",
   "zcRvzm7gAfYGde8gRwaSYxNryL47SjLVUQLAf1bdoor": "2026-11-23T13:25:16Z"
  },
- "last_sol_usd": 71.93828351012536,
- "positions": [],
+ "last_sol_usd": 72.0513537142939,
+ "positions": [
+  {
+   "entry_exec_usd": 0.003358691496547357,
+   "entry_liq_usd": 194959.36,
+   "entry_mid_usd": 0.003341,
+   "entry_sol_usd": 72.0513537142939,
+   "features": {
+    "age_days": 4.16,
+    "boosts": 50,
+    "buy_sell_ratio_h1": 1.24,
+    "chg_h1": 3.26,
+    "chg_h24": 155.0,
+    "chg_h6": 35.45,
+    "chg_m5": 2.51,
+    "dex": "pumpswap",
+    "liq_to_mcap": 0.0593,
+    "liq_usd": 194959,
+    "mcap": 3287918,
+    "quote": "SOL",
+    "score": 2.27,
+    "txns_h1": 8698,
+    "vol_h1": 655593,
+    "vol_h24": 3183691,
+    "volume_accel": 1.83
+   },
+   "fees_sol": 0.004007481803127801,
+   "id": 52,
+   "last_liq_usd": 194959.36,
+   "last_price_usd": 0.003341,
+   "last_ts": "2026-11-24T00:45:17Z",
+   "last_vol_h24": 3183690.75,
+   "missing_runs": 0,
+   "opened": "2026-11-24T00:45:17Z",
+   "pair": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+   "peak_usd": 0.003341,
+   "rugcheck": {
+    "lp_locked_pct": 41.305007409003885,
+    "risks": [],
+    "score": 1,
+    "score_normalised": 1
+   },
+   "rulebook_version": 9,
+   "sol_in": 0.40149636062556016,
+   "sol_returned": 0.0,
+   "symbol": "FIONA",
+   "token": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
+   "tokens": 8527.014712418188,
+   "tokens_remaining": 8527.014712418188,
+   "tp1_done": false,
+   "trough_usd": 0.003341
+  }
+ ],
  "realized_pnl_sol": -0.9850363937444002,
  "starting_sol": 5.0,
- "trade_seq": 51
+ "trade_seq": 52
 }
